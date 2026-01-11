@@ -1,9 +1,29 @@
 ---
-import Layout from "../../layouts/WMBase.astro"; import Breadcrumbs from "../../components/Breadcrumbs.astro";
-import FAQ from "../../components/FAQ.astro"; import Picture from "../../components/Picture.astro"; import QuoteInline from "../../components/QuoteInline.astro";
-const title = "Aluminium Window Repairs Wellington | Stays & Hinges"; const description = "Stays, hinges, handles, latches, draft and rattle fixes for aluminium windows across Wellington, Porirua, Lower Hutt and Upper Hutt."; const canonical = "https://windowmaintenance.co.nz/services/window-repairs/";
+import Layout from "../../layouts/WMBase.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import FAQ from "../../components/FAQ.astro";
+import Picture from "../../components/Picture.astro";
+import QuoteInline from "../../components/QuoteInline.astro";
+
+const title = "Aluminium Window Repairs Wellington | Stays & Hinges";
+const description = "Stays, hinges, handles, latches, draft and rattle fixes for aluminium windows across Wellington, Porirua, Lower Hutt and Upper Hutt.";
+const canonical = "https://windowmaintenance.co.nz/services/window-repairs/";
+
+const faqItems = [
+  { q: "Do you replace stays and hinges in coastal areas?", a: "Yes. We carry corrosion-resistant hardware and fit stays/hinges suited to Wellington and Porirua coastal conditions." },
+  { q: "Can you fix drafts in older aluminium windows?", a: "We replace wedges/seals, service latches and re-align sashes to stop rattles and drafts." }
+];
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map((item) => ({
+    "@type": "Question",
+    "name": item.q,
+    "acceptedAnswer": { "@type": "Answer", "text": item.a }
+  }))
+};
 ---
-<Layout title={title} description={description} canonical={canonical}>
+<Layout title={title} description={description} canonical={canonical} schema={[faqSchema]}>
   <Breadcrumbs />
   <main class="mx-auto max-w-4xl px-6 py-12">
     <h1 class="text-3xl font-extrabold">Aluminium Window Repairs</h1>
@@ -31,6 +51,17 @@ const title = "Aluminium Window Repairs Wellington | Stays & Hinges"; const desc
         <Picture base="glazing-wedge" alt="" className="h-full w-full object-cover" />
       </div>
     </figure>
+    </div>
+    <div class="mt-8 space-y-3">
+      <h2 class="text-2xl font-bold">Where we work</h2>
+      <p class="text-slate-300">Wellington, Porirua, Lower Hutt, Upper Hutt, Petone and Kāpiti.</p>
+      <p class="text-slate-300">Related: <a class="text-amber-400 underline" href="/stays/">Awning stays &amp; hinges</a> • <a class="text-amber-400 underline" href="/leaks/">Draught &amp; leak repairs</a></p>
+    </div>
+    <div class="mt-8 space-y-3">
+      <h2 class="text-2xl font-bold">Window repair FAQs</h2>
+      <ul class="list-disc space-y-2 pl-5 text-slate-300">
+        {faqItems.map(item => <li><strong>{item.q}</strong><br />{item.a}</li>)}
+      </ul>
     </div>
   </main>
   <QuoteInline title="Get a quote for window repairs" />

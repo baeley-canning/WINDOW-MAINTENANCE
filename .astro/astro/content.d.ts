@@ -176,6 +176,13 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] };
+"wellington-sliding-door-weather-guide.md": {
+	id: "wellington-sliding-door-weather-guide.md";
+  slug: "wellington-sliding-door-weather-guide";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
 "window-stays-replacement-guide.md": {
 	id: "window-stays-replacement-guide.md";
   slug: "window-stays-replacement-guide";

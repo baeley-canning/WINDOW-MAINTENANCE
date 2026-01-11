@@ -1,8 +1,21 @@
 ---
 import Layout from "../layouts/WMBase.astro"; import Breadcrumbs from "../components/Breadcrumbs.astro"; import Picture from "../components/Picture.astro"; import QuoteInline from "../components/QuoteInline.astro"; import FAQ from "../components/FAQ.astro";
 const title = "Security Stays Wellington | Window Restrictors"; const description = "Window security stays/restrictors supplied and fitted across Wellington, Porirua and the Hutt to improve safety and security while keeping ventilation."; const canonical = "https://windowmaintenance.co.nz/security/";
+const faqItems = [
+  { q: "Do you fit restrictors for rentals and child safety?", a: "Yes. We fit restrictors/security stays that limit opening for child safety and ground-floor security while keeping ventilation." },
+  { q: "Do you match finishes?", a: "We match finishes to your aluminium joinery and can adjust/replace later if needed." }
+];
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map((item) => ({
+    "@type": "Question",
+    "name": item.q,
+    "acceptedAnswer": { "@type": "Answer", "text": item.a }
+  }))
+};
 ---
-<Layout title={title} description={description} canonical={canonical}>
+<Layout title={title} description={description} canonical={canonical} schema={[faqSchema]}>
   <Breadcrumbs />
   <main class="mx-auto max-w-4xl px-6 py-12">
     <h1 class="text-3xl font-extrabold">Security Stays</h1>
@@ -16,6 +29,17 @@ const title = "Security Stays Wellington | Window Restrictors"; const descriptio
         <div class="ratio-4-3 card-frame"><Picture base="sash-handles" alt="Handles and latches serviced" className="h-full w-full object-cover" /></div>
         <figcaption class="mt-2 text-sm text-slate-400">Handles & latches serviced</figcaption>
       </figure>
+    </div>
+    <div class="mt-8 space-y-3">
+      <h2 class="text-2xl font-bold">Where we work</h2>
+      <p class="text-slate-300">Wellington, Porirua, Lower Hutt, Upper Hutt, Petone and Kāpiti.</p>
+      <p class="text-slate-300">Related: <a class="text-amber-400 underline" href="/stays/">Awning stays &amp; hinges</a> • <a class="text-amber-400 underline" href="/services/window-repairs/">Window repairs</a></p>
+    </div>
+    <div class="mt-8 space-y-3">
+      <h2 class="text-2xl font-bold">Security stay FAQs</h2>
+      <ul class="list-disc space-y-2 pl-5 text-slate-300">
+        {faqItems.map(item => <li><strong>{item.q}</strong><br />{item.a}</li>)}
+      </ul>
     </div>
   </main>
   <QuoteInline title="Get a quote for security stays" />

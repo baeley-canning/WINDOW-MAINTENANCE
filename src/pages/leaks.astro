@@ -1,9 +1,29 @@
 ---
-import Layout from "../layouts/WMBase.astro"; import Breadcrumbs from "../components/Breadcrumbs.astro";
-import Picture from "../components/Picture.astro"; import QuoteInline from "../components/QuoteInline.astro"; import FAQ from "../components/FAQ.astro";
-const title = "Draught & Leak Repairs Wellington | Seals & Alignment"; const description = "Seal and wedge replacement, latch/handle servicing and sash realignment across Wellington, Porirua and the Hutt Valley to stop draughts and leaks."; const canonical = "https://windowmaintenance.co.nz/leaks/";
+import Layout from "../layouts/WMBase.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import Picture from "../components/Picture.astro";
+import QuoteInline from "../components/QuoteInline.astro";
+import FAQ from "../components/FAQ.astro";
+
+const title = "Draught & Leak Repairs Wellington | Seals & Alignment";
+const description = "Seal and wedge replacement, latch/handle servicing and sash realignment across Wellington, Porirua and the Hutt Valley to stop draughts and leaks.";
+const canonical = "https://windowmaintenance.co.nz/leaks/";
+
+const faqItems = [
+  { q: "Do you reseal mitred corners and sills?", a: "Yes. We open the joinery, back-seal accessible mitres and re-seal the sill, keeping drainage clear for Wellington weather." },
+  { q: "Can you help in coastal Porirua or Petone?", a: "We carry sealants and wedges suited to coastal aluminium joinery and clear weep paths to reduce water tracking." }
+];
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map((item) => ({
+    "@type": "Question",
+    "name": item.q,
+    "acceptedAnswer": { "@type": "Answer", "text": item.a }
+  }))
+};
 ---
-<Layout title={title} description={description} canonical={canonical}>
+<Layout title={title} description={description} canonical={canonical} schema={[faqSchema]}>
   <Breadcrumbs />
   <main class="mx-auto max-w-4xl px-6 py-12">
     <h1 class="text-3xl font-extrabold">Draught & Leak Repairs</h1>
@@ -13,10 +33,21 @@ const title = "Draught & Leak Repairs Wellington | Seals & Alignment"; const des
         <div class="ratio-4-3 card-frame"><Picture base="glazing-wedge" alt="New glazing wedge / rubber seal installed" className="h-full w-full object-cover" /></div>
         <figcaption class="mt-2 text-sm text-slate-400">Glazing wedges & seals</figcaption>
       </figure>
-      <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
-        <div class="ratio-4-3 card-frame"><Picture base="hinge" alt="Window hinge adjusted for correct seal" className="h-full w-full object-cover" /></div>
-        <figcaption class="mt-2 text-sm text-slate-400">Hinge and latch adjustment</figcaption>
-      </figure>
+    <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
+      <div class="ratio-4-3 card-frame"><Picture base="hinge" alt="Window hinge adjusted for correct seal" className="h-full w-full object-cover" /></div>
+      <figcaption class="mt-2 text-sm text-slate-400">Hinge and latch adjustment</figcaption>
+    </figure>
+    </div>
+    <div class="mt-8 space-y-3">
+      <h2 class="text-2xl font-bold">Where we work</h2>
+      <p class="text-slate-300">Wellington, Porirua, Lower Hutt, Upper Hutt, Petone and Kāpiti.</p>
+      <p class="text-slate-300">Related: <a class="text-amber-400 underline" href="/services/mitre-reseal/">Mitre &amp; sill reseal</a> • <a class="text-amber-400 underline" href="/services/window-repairs/">Window repairs</a></p>
+    </div>
+    <div class="mt-8 space-y-3">
+      <h2 class="text-2xl font-bold">Leak repair FAQs</h2>
+      <ul class="list-disc space-y-2 pl-5 text-slate-300">
+        {faqItems.map(item => <li><strong>{item.q}</strong><br />{item.a}</li>)}
+      </ul>
     </div>
   </main>
   <QuoteInline title="Get a quote for draught & leak repairs" />

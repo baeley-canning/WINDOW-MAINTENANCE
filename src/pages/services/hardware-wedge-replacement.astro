@@ -2,8 +2,21 @@
 import Layout from "../../layouts/WMBase.astro"; import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import FAQ from "../../components/FAQ.astro"; import Picture from "../../components/Picture.astro"; import QuoteInline from "../../components/QuoteInline.astro";
 const title = "Hardware & Wedge Replacement Wellington"; const description = "Handles, locks, restrictors, safety stays and rubber wedges/seals supplied and fitted across Wellington, Porirua and the Hutt Valley."; const canonical = "https://windowmaintenance.co.nz/services/hardware-wedge-replacement/";
+const faqItems = [
+  { q: "Do you match finishes for existing joinery?", a: "Yes. We carry common finishes and source compatible handles, locks and wedges to suit your aluminium frames." },
+  { q: "Can you supply safety stays and restrictors?", a: "Yes. We fit safety stays/restrictors along with locks and wedges to improve security and sealing." }
+];
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map((item) => ({
+    "@type": "Question",
+    "name": item.q,
+    "acceptedAnswer": { "@type": "Answer", "text": item.a }
+  }))
+};
 ---
-<Layout title={title} description={description} canonical={canonical}>
+<Layout title={title} description={description} canonical={canonical} schema={[faqSchema]}>
   <Breadcrumbs />
   <main class="mx-auto max-w-4xl px-6 py-12">
     <h1 class="text-3xl font-extrabold">Hardware & Wedge Replacement</h1>
@@ -26,6 +39,17 @@ const title = "Hardware & Wedge Replacement Wellington"; const description = "Ha
         <Picture base="glazing-wedge" alt="Glazing wedge and rubber seal profiles" className="h-full w-full object-cover" />
       </div>
     </figure>
+    </div>
+    <div class="mt-8 space-y-3">
+      <h2 class="text-2xl font-bold">Where we work</h2>
+      <p class="text-slate-300">Wellington, Porirua, Lower Hutt, Upper Hutt, Petone and Kāpiti.</p>
+      <p class="text-slate-300">Related: <a class="text-amber-400 underline" href="/services/window-repairs/">Window repairs</a> • <a class="text-amber-400 underline" href="/security/">Security stays</a></p>
+    </div>
+    <div class="mt-8 space-y-3">
+      <h2 class="text-2xl font-bold">Hardware & wedges FAQs</h2>
+      <ul class="list-disc space-y-2 pl-5 text-slate-300">
+        {faqItems.map(item => <li><strong>{item.q}</strong><br />{item.a}</li>)}
+      </ul>
     </div>
   </main>
   <QuoteInline title="Get a quote for hardware & wedges" />

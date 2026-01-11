@@ -1,9 +1,29 @@
 ---
-import Layout from "../../layouts/WMBase.astro"; import Breadcrumbs from "../../components/Breadcrumbs.astro";
-import FAQ from "../../components/FAQ.astro"; import Picture from "../../components/Picture.astro"; import QuoteInline from "../../components/QuoteInline.astro";
-const title = "Sliding Door Repairs Wellington | Rollers & Tracks"; const description = "Roller replacement, track refurbishment, alignment and lock fixes for sliding and ranchslider doors in Wellington, Porirua and the Hutt Valley."; const canonical = "https://windowmaintenance.co.nz/services/sliding-door-repairs/";
+import Layout from "../../layouts/WMBase.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import FAQ from "../../components/FAQ.astro";
+import Picture from "../../components/Picture.astro";
+import QuoteInline from "../../components/QuoteInline.astro";
+
+const title = "Sliding Door Repairs Wellington | Rollers & Tracks";
+const description = "Roller replacement, track refurbishment, alignment and lock fixes for sliding and ranchslider doors in Wellington, Porirua and the Hutt Valley.";
+const canonical = "https://windowmaintenance.co.nz/services/sliding-door-repairs/";
+
+const faqItems = [
+  { q: "Do you service Porirua and the Hutt?", a: "Yes. We’re on the road in Porirua, Lower Hutt and Upper Hutt every week and can group nearby jobs to keep pricing sharp." },
+  { q: "Can you fix water tracking at the sill?", a: "We clear weep holes, restore damaged tracks, and reseal accessible beads so water drains properly during Wellington southerlies." }
+];
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map((item) => ({
+    "@type": "Question",
+    "name": item.q,
+    "acceptedAnswer": { "@type": "Answer", "text": item.a }
+  }))
+};
 ---
-<Layout title={title} description={description} canonical={canonical}>
+<Layout title={title} description={description} canonical={canonical} schema={[faqSchema]}>
   <Breadcrumbs />
   <main class="mx-auto max-w-4xl px-6 py-12">
     <h1 class="text-3xl font-extrabold">Sliding / Ranchslider Door Repairs</h1>
@@ -26,6 +46,17 @@ const title = "Sliding Door Repairs Wellington | Rollers & Tracks"; const descri
         <Picture base="euro-lock-cylinder" alt="Euro profile lock cylinder for sliding door" className="h-full w-full object-cover" />
       </div>
     </figure>
+    </div>
+    <div class="mt-8 space-y-3">
+      <h2 class="text-2xl font-bold">Where we work</h2>
+      <p class="text-slate-300">Wellington, Porirua, Lower Hutt, Upper Hutt, Petone and Kāpiti. Same-week bookings whenever possible.</p>
+      <p class="text-slate-300">Related services: <a class="text-amber-400 underline" href="/services/window-repairs/">Window repairs</a> • <a class="text-amber-400 underline" href="/services/mitre-reseal/">Mitre &amp; sill reseal</a></p>
+    </div>
+    <div class="mt-8 space-y-3">
+      <h2 class="text-2xl font-bold">Sliding door FAQs</h2>
+      <ul class="list-disc space-y-2 pl-5 text-slate-300">
+        {faqItems.map(item => <li><strong>{item.q}</strong><br />{item.a}</li>)}
+      </ul>
     </div>
   </main>
   <QuoteInline title="Get a quote for sliding/ranchslider repairs" />

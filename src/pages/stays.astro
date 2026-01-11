@@ -1,8 +1,21 @@
 ---
 import Layout from "../layouts/WMBase.astro"; import Breadcrumbs from "../components/Breadcrumbs.astro"; import Picture from "../components/Picture.astro"; import QuoteInline from "../components/QuoteInline.astro"; import FAQ from "../components/FAQ.astro";
 const title = "Awning Stays & Hinges Wellington | Replacement & Service"; const description = "Awning stays, restrictors and hinges replaced and adjusted across Wellington, Porirua and the Hutt Valley for smooth, secure window operation."; const canonical = "https://windowmaintenance.co.nz/stays/";
+const faqItems = [
+  { q: "Do you work on storm-bent awning stays?", a: "Yes. We replace bent stays, re-align the sash and test seals so the window holds position and seals properly." },
+  { q: "Can you fit restrictors for child safety?", a: "Yes. We install restrictors/security stays and match finishes to your aluminium joinery." }
+];
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map((item) => ({
+    "@type": "Question",
+    "name": item.q,
+    "acceptedAnswer": { "@type": "Answer", "text": item.a }
+  }))
+};
 ---
-<Layout title={title} description={description} canonical={canonical}>
+<Layout title={title} description={description} canonical={canonical} schema={[faqSchema]}>
   <Breadcrumbs />
   <main class="mx-auto max-w-4xl px-6 py-12">
     <h1 class="text-3xl font-extrabold">Stays & Hinges</h1>
@@ -21,6 +34,17 @@ const title = "Awning Stays & Hinges Wellington | Replacement & Service"; const 
       <img src="/img/window-stay-replacement.jpg" alt="New awning stay installed next to the old weather-bent stay" class="w-full rounded-xl object-cover" />
       <figcaption class="mt-2 text-sm text-slate-400">Storm repair in Wellington — bent stays removed, new awning stays fitted and sash re-aligned. <a class="text-amber-400 underline" href="/blog/awning-stay-repair-storm/">Read the job recap.</a></figcaption>
     </figure>
+    <div class="mt-8 space-y-3">
+      <h2 class="text-2xl font-bold">Where we work</h2>
+      <p class="text-slate-300">Wellington, Porirua, Lower Hutt, Upper Hutt, Petone and Kāpiti.</p>
+      <p class="text-slate-300">Related: <a class="text-amber-400 underline" href="/security/">Security stays</a> • <a class="text-amber-400 underline" href="/services/window-repairs/">Window repairs</a></p>
+    </div>
+    <div class="mt-8 space-y-3">
+      <h2 class="text-2xl font-bold">Stays &amp; hinges FAQs</h2>
+      <ul class="list-disc space-y-2 pl-5 text-slate-300">
+        {faqItems.map(item => <li><strong>{item.q}</strong><br />{item.a}</li>)}
+      </ul>
+    </div>
   </main>
   <QuoteInline title="Get a quote for stays & hinges" />
   <FAQ items={[
