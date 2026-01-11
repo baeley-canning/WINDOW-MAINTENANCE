@@ -24,7 +24,7 @@ jobs:
           password: ${{ secrets.CPANEL_FTP_PASS }}
           protocol: ftps
           port: 21
-          server-dir: ${{ secrets.CPANEL_FTP_PATH }}
+          server-dir: ${{ secrets.CPANEL_FTP_PATH || './' }}
           local-dir: dist/
           exclude: |
             **/.git*
