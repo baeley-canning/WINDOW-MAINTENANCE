@@ -22,6 +22,8 @@ jobs:
           server: ${{ secrets.CPANEL_FTP_HOST }}
           username: ${{ secrets.CPANEL_FTP_USER }}
           password: ${{ secrets.CPANEL_FTP_PASS }}
+          protocol: ftps
+          port: 21
           server-dir: ${{ secrets.CPANEL_FTP_PATH }}
           local-dir: dist/
           exclude: |
