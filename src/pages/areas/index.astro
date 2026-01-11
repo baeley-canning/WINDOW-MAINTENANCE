@@ -1,0 +1,19 @@
+---
+import Layout from "../../layouts/WMBase.astro"; import Breadcrumbs from "../../components/Breadcrumbs.astro";
+const title = "Service Areas | Wellington Region"; const description = "We repair aluminium windows and sliding doors across Central Wellington, Porirua, Lower Hutt, Upper Hutt and Petone.";
+const canonical = "https://windowmaintenance.co.nz/areas/";
+---
+<Layout title={title} description={description} canonical={canonical}>
+  <Breadcrumbs />
+  <section class="mx-auto max-w-6xl px-6 py-12">
+    <h1 class="text-3xl font-extrabold">Service Areas</h1>
+    <div class="mt-8 grid gap-6 sm:grid-cols-2 md:grid-cols-3">
+      <a class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 hover:bg-[var(--brand-surface)]" href="/areas/central-wellington/">Central Wellington</a>
+      <a class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 hover:bg-[var(--brand-surface)]" href="/areas/porirua/">Porirua</a>
+      <a class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 hover:bg-[var(--brand-surface)]" href="/areas/lower-hutt/">Lower Hutt</a>
+      <a class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 hover:bg-[var(--brand-surface)]" href="/areas/upper-hutt/">Upper Hutt</a>
+      <a class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 hover:bg-[var(--brand-surface)]" href="/areas/petone/">Petone</a>
+      <a class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 hover:bg-[var(--brand-surface)]" href="/areas/kapiti/">Kāpiti</a>
+    </div>
+  </section>
+</Layout>

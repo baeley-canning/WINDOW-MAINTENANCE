@@ -1,0 +1,33 @@
+@tailwind base; @tailwind components; @tailwind utilities;
+:root {
+  color-scheme: dark;
+  --brand-bg: #0b1220;        /* deep navy */
+  --brand-surface: #0f172a;   /* slate surface */
+  --brand-text: #e5e7eb;      /* slate-200 */
+  --brand-muted: #94a3b8;     /* slate-400 */
+  --brand-accent: #f59e0b;    /* amber-500 */
+  --brand-accent-hover: #fbbf24; /* amber-400 */
+  --brand-border: rgba(255,255,255,.08);
+}
+html, body { height: 100%; }
+a { text-underline-offset: 3px; }
+img { max-width: 100%; height: auto; }
+figure { margin: 0; }
+figcaption { font-size:.85rem; color: rgb(203 213 225); margin-top:.25rem; }
+/* Uniform image card helpers */
+.ratio-4-3 { aspect-ratio: 4 / 3; }
+.card-frame { overflow: hidden; border-radius: 0.75rem; }
+
+/* Buttons */
+.btn { @apply inline-flex items-center justify-center rounded-xl px-6 py-3 font-semibold transition; }
+.btn-primary { background: var(--brand-accent); color: #111827; }
+.btn-primary:hover { background: var(--brand-accent-hover); }
+.btn-secondary { border: 1px solid var(--brand-accent); color: var(--brand-accent); background: transparent; }
+.btn-secondary:hover { background: var(--brand-accent); color: #111827; }
+.btn-outline { border: 1px solid var(--brand-border); color: var(--brand-text); }
+.btn-outline:hover { background: rgba(255,255,255,.06); }
+
+/* Tooltip/expand for service cards: mobile = tap to open, desktop = hover */
+details .explain { display: none; }
+details[open] .explain { display: block; }
+.card-info { position:absolute; top:0.5rem; right:0.5rem; font-size:.75rem; }

@@ -1,0 +1,7 @@
+---
+const { base, alt, className = "", loading = "lazy" } = Astro.props;
+---
+<picture>
+  <source srcset={`/img/${base}.webp`} type="image/webp" />
+  <img src={`/img/${base}.jpg`} alt={alt} loading={loading} class={className} />
+</picture>

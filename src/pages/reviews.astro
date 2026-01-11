@@ -1,0 +1,33 @@
+---
+import Layout from "../layouts/WMBase.astro"; import Breadcrumbs from "../components/Breadcrumbs.astro";
+const title = "Reviews"; const description = "Recent customer reviews for aluminium window and sliding door repairs in Wellington.";
+const canonical = "https://windowmaintenance.co.nz/reviews/";
+---
+<Layout title={title} description={description} canonical={canonical}>
+  <Breadcrumbs />
+  <section class="mx-auto max-w-4xl px-6 py-12">
+    <h1 class="text-3xl font-extrabold">Reviews</h1>
+    <ul class="mt-6 space-y-4">
+      <li class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
+        <div class="font-semibold">Matt K.</div>
+        <p class="text-slate-300">“Door slides like new. Prompt and professional.”</p>
+      </li>
+      <li class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
+        <div class="font-semibold">Sarah L.</div>
+        <p class="text-slate-300">“Quick to respond and very tidy work. Our windows open and close perfectly now.”</p>
+      </li>
+      <li class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
+        <div class="font-semibold">James P.</div>
+        <p class="text-slate-300">“Turned up on time, explained everything clearly and fixed the problem on the spot.”</p>
+      </li>
+      <li class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
+        <div class="font-semibold">Aroha T.</div>
+        <p class="text-slate-300">“Very happy with the result. Ranchslider is smooth again and no more drafts.”</p>
+      </li>
+      <li class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
+        <div class="font-semibold">Daniel R.</div>
+        <p class="text-slate-300">“Professional service from start to finish. Would happily recommend to friends and whānau.”</p>
+      </li>
+    </ul>
+  </section>
+</Layout>

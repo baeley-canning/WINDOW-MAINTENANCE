@@ -1,0 +1,32 @@
+---
+import Layout from "../../layouts/WMBase.astro"; import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import FAQ from "../../components/FAQ.astro"; import Picture from "../../components/Picture.astro"; import QuoteInline from "../../components/QuoteInline.astro";
+const title = "Hardware & Wedge Replacement"; const description = "Supply and fit handles, locks, restrictors, safety stays and rubber wedges/seals for aluminium windows and doors."; const canonical = "https://windowmaintenance.co.nz/services/hardware-wedge-replacement/";
+---
+<Layout title={title} description={description} canonical={canonical}>
+  <Breadcrumbs />
+  <main class="mx-auto max-w-4xl px-6 py-12">
+    <h1 class="text-3xl font-extrabold">Hardware & Wedge Replacement</h1>
+    <p class="mt-4 text-slate-300">Supply and fit handles, locks, restrictors, safety stays and rubber wedges/seals for aluminium windows and doors.</p>
+    <h2 class="mt-10 text-2xl font-bold">Common parts we replace</h2>
+    <div class="mt-4 grid gap-4 sm:grid-cols-2">
+
+    <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
+      <div class="ratio-4-3 card-frame">
+        <Picture base="euro-lock-cylinder" alt="Euro lock cylinder for aluminium doors" className="h-full w-full object-cover" />
+      </div>
+    </figure>
+    <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
+      <div class="ratio-4-3 card-frame">
+        <Picture base="sash-handles" alt="Aluminium sash window handles" className="h-full w-full object-cover" />
+      </div>
+    </figure>
+    <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
+      <div class="ratio-4-3 card-frame">
+        <Picture base="glazing-wedge" alt="Glazing wedge and rubber seal profiles" className="h-full w-full object-cover" />
+      </div>
+    </figure>
+    </div>
+  </main>
+  <QuoteInline title="Get a quote for hardware & wedges" />
+</Layout>

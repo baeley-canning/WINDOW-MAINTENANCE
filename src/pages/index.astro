@@ -1,0 +1,192 @@
+---
+import Layout from "../layouts/WMBase.astro";
+import ContactCTA from "../components/ContactCTA.astro";
+import Picture from "../components/Picture.astro";
+import FAQ from "../components/FAQ.astro";
+const title = "Aluminium Window & Sliding Door Repairs in Wellington Region";
+const description = "Aluminium window repairs, sliding door roller & track fixes, and hardware/wedge replacements across Central Wellington, Porirua, Lower Hutt, Upper Hutt and Petone.";
+const canonical = "https://windowmaintenance.co.nz/";
+const localBusiness = {"@context":"https://schema.org","@type":"LocalBusiness","name":"Window Maintenance","url":"https://windowmaintenance.co.nz","telephone":"+6421638205","email":"mailto:baeley@windowmaintenance.co.nz","address":{"@type":"PostalAddress","addressLocality":"Wellington","addressRegion":"WGN","addressCountry":"NZ"},"areaServed":["Central Wellington","Porirua","Lower Hutt","Upper Hutt","Petone","Kapiti"]};
+const website = {"@context":"https://schema.org","@type":"WebSite","url":"https://windowmaintenance.co.nz","potentialAction":{"@type":"SearchAction","target":"https://windowmaintenance.co.nz/search?q={query}","query-input":"required name=query"}};
+const services = [
+  { href: "/services/sliding-door-repairs/", title: "Sliding/Ranchslider Door Repairs", copy: "Rollers replaced, tracks resurfaced and panels re-aligned so they glide with one hand." },
+  { href: "/services/window-repairs/", title: "Aluminium Window Repairs", copy: "Stays, hinges, handles and latches serviced or replaced to stop rattles and drafts." },
+  { href: "/services/mitre-reseal/", title: "Mitre & Sill Reseal (Leaks)", copy: "Stop leaks at mitred corners and sills with a proper in-frame reseal." },
+  { href: "/stays/", title: "Awning Stays & Hinges", copy: "Storm-bent stays swapped for new hardware, restrictors added for safety." },
+  { href: "/leaks/", title: "Draughts & Leaks", copy: "Glazing wedges, seals and sash alignment fixes for quieter, drier rooms." },
+  { href: "/security/", title: "Security Stays", copy: "Restrictors fitted to limit opening for child safety and ground-floor peace of mind." },
+  { href: "/services/hardware-wedge-replacement/", title: "Hardware & Wedges", copy: "Handles, locks, wedges and seals matched to existing aluminium joinery." },
+];
+const faqs = [
+  { q: "Do you work across the whole Wellington region?", a: "Yes. We cover Central Wellington, the Hutt Valley, Porirua, Petone and Kāpiti every week." },
+  { q: "How fast can you quote?", a: "Send photos or describe the issue and we usually reply the same day. Emergency call-outs are available for stuck sliders." },
+  { q: "Can you source older aluminium parts?", a: "We stock common profiles and work with national suppliers to match out-of-production rollers, wedges and handles." },
+  { q: "What happens if glass breaks while you’re working on it?", a: "Most glass we work on is older and can have hidden edge damage or movement in the frame. We take care, but sometimes a pane can crack during normal repair or adjustment. If glass breaks during normal work on existing/aged glass, replacement glass and reglazing are charged at standard rates. If we clearly damage a sound pane through a mistake on our part, we’ll discuss a fair way forward. Nothing here affects your rights under New Zealand consumer law." },
+];
+---
+<Layout title={title} description={description} canonical={canonical} schema={[localBusiness, website]}>
+  <section class="bg-gradient-to-b from-[#0a2540] via-[#0b1220] to-[#0a2540]">
+    <div class="mx-auto max-w-6xl px-6 py-16 lg:py-24">
+      <div class="flex flex-wrap items-center">
+        <div class="w-full lg:w-1/2">
+          <p class="text-sm font-semibold uppercase tracking-widest text-amber-400">Wellington aluminium joinery specialists</p>
+          <h1 class="mt-4 text-4xl font-bold leading-tight text-white md:text-5xl">
+            Sliding door &amp; aluminium window repairs done right.
+          </h1>
+          <p class="mt-4 text-lg text-slate-300">Rollers replaced, drafts sealed and hardware serviced across Wellington, Lower Hutt, Upper Hutt, Porirua and Kāpiti.</p>
+          <div class="mt-6 flex flex-wrap items-center gap-4">
+            <a href="tel:+6421638205" id="cta-call-home" data-cta="call" class="btn btn-primary">Call 021 638 205</a>
+            <a href="/contact/" class="btn btn-secondary">Get a fast quote</a>
+          </div>
+          <ul class="mt-6 grid gap-2 text-slate-300 md:grid-cols-2">
+            <li class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-amber-400"></span>Sliding door roller &amp; track repairs</li>
+            <li class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-amber-400"></span>Awning stays, hinges &amp; restrictors</li>
+            <li class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-amber-400"></span>Handles, locks, wedges &amp; seals</li>
+            <li class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-amber-400"></span>Draught/leak diagnosis &amp; fixes</li>
+          </ul>
+        </div>
+        <div class="mt-10 w-full lg:mt-0 lg:w-1/2">
+          <img src="/img/hero-nextly.png" alt="Window Maintenance team on site" class="w-full rounded-2xl object-cover shadow-2xl" loading="lazy" />
+        </div>
+      </div>
+      <div class="mt-12 flex flex-wrap items-center gap-6 text-sm text-slate-400">
+        <span>Trusted locally by property managers, builders &amp; homeowners</span>
+        <span class="h-px flex-1 bg-slate-700"></span>
+        <span>Same-day replies • Tidy workmanship • Fully insured</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-t border-white/5 bg-[var(--brand-bg)]">
+    <div class="mx-auto max-w-6xl px-6 py-16">
+      <div class="md:flex md:items-center md:justify-between">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-amber-400">What we fix daily</p>
+          <h2 class="mt-2 text-3xl font-bold text-white">Parts &amp; hardware carried on the van</h2>
+        </div>
+        <a href="/gallery/" class="mt-4 inline-flex items-center text-sm font-semibold text-amber-300 md:mt-0">See more work &rarr;</a>
+      </div>
+      <div class="mt-8 grid gap-6 sm:grid-cols-2 md:grid-cols-3">
+        <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
+          <div class="ratio-4-3 card-frame">
+            <Picture base="sliding-door-roller" alt="Sliding door roller carriage with brass wheel" className="h-full w-full object-cover" />
+          </div>
+          <figcaption>Sliding door rollers</figcaption>
+        </figure>
+        <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
+          <div class="ratio-4-3 card-frame">
+            <Picture base="ranchslider-handle-lockset" alt="Ranchslider handle and lock set" className="h-full w-full object-cover" />
+          </div>
+          <figcaption>Ranchslider handles &amp; locks</figcaption>
+        </figure>
+        <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
+          <div class="ratio-4-3 card-frame">
+            <Picture base="security-stays" alt="Sash window security stays / restrictors" className="h-full w-full object-cover" />
+          </div>
+          <figcaption>Security stays</figcaption>
+        </figure>
+        <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
+          <div class="ratio-4-3 card-frame">
+            <Picture base="sash-handles" alt="Aluminium sash window handle pair" className="h-full w-full object-cover" />
+          </div>
+          <figcaption>Sash handles</figcaption>
+        </figure>
+        <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
+          <div class="ratio-4-3 card-frame">
+            <Picture base="hinge" alt="Aluminium window hinge replacement" className="h-full w-full object-cover" />
+          </div>
+          <figcaption>Window hinges</figcaption>
+        </figure>
+        <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
+          <div class="ratio-4-3 card-frame">
+            <Picture base="glazing-wedge" alt="Glazing wedge / rubber seal profile" className="h-full w-full object-cover" />
+          </div>
+          <figcaption>Rubber wedges &amp; seals</figcaption>
+        </figure>
+        <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
+          <img src="/img/window-stay-replacement.jpg" alt="New awning stay installed next to bent stay" class="h-full w-full rounded-xl object-cover" />
+          <figcaption>Awning stays replaced after storm damage</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-t border-white/5 bg-[var(--brand-bg)]">
+    <div class="mx-auto max-w-6xl px-6 py-16">
+      <div class="md:flex md:items-center md:justify-between">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-amber-400">Services</p>
+          <h2 class="mt-2 text-3xl font-bold">One team for every aluminium window &amp; door issue</h2>
+        </div>
+        <a href="/services/" class="mt-4 inline-flex items-center text-sm font-semibold text-amber-300 md:mt-0">View full services &rarr;</a>
+      </div>
+      <div class="mt-8 grid gap-5 md:grid-cols-2">
+        {services.map(service => (
+          <a href={service.href} class="group relative overflow-hidden rounded-2xl bg-[var(--brand-surface)] p-6 ring-1 ring-white/10 transition hover:bg-[var(--brand-surface)]">
+            <div class="text-sm font-semibold uppercase tracking-[0.3em] text-amber-400">{service.title}</div>
+            <p class="mt-3 text-sm text-slate-300">{service.copy}</p>
+            <span class="mt-4 inline-flex items-center text-sm font-semibold text-amber-300">Learn more &rarr;</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="border-t border-white/5">
+    <div class="mx-auto max-w-6xl px-6 py-16 md:flex md:items-center md:gap-10">
+      <div class="md:w-1/2">
+        <img src="/img/window-stay-replacement.jpg" alt="Window stay replacement case study" class="w-full rounded-2xl object-cover" />
+      </div>
+      <div class="mt-8 md:mt-0 md:w-1/2">
+        <p class="text-sm font-semibold uppercase tracking-[0.3em] text-amber-400">Latest job</p>
+        <h2 class="mt-2 text-3xl font-bold">Storm-bent awning stays replaced the same week</h2>
+        <p class="mt-4 text-slate-300">We removed bent stays, fitted new hardware, re-aligned the sash and tested seals — leaving the window smooth, quiet and leak-free.</p>
+        <ul class="mt-4 list-disc space-y-1 pl-5 text-slate-300">
+          <li>Awning stays &amp; restrictors replaced</li>
+          <li>Hinges, handles &amp; locks serviced</li>
+          <li>Draught/leak diagnosis &amp; remedy</li>
+        </ul>
+        <a href="/blog/awning-stay-repair-storm/" class="mt-5 inline-flex items-center text-sm font-semibold text-amber-300">Read the job recap &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-t border-white/5 bg-[var(--brand-bg)]">
+    <div class="mx-auto max-w-6xl px-6 py-16">
+      <div class="grid gap-6 md:grid-cols-2">
+        <div class="rounded-2xl bg-[var(--brand-surface)] p-6 ring-1 ring-white/10">
+          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-amber-400">Testimonial</p>
+          <p class="mt-3 text-lg text-slate-100">“Sliding door now glides with one finger, and they left the place spotless. Quick reply, fair pricing.”</p>
+          <p class="mt-4 text-sm text-slate-400">Sarah — Seatoun</p>
+        </div>
+        <div class="rounded-2xl bg-[var(--brand-surface)] p-6 ring-1 ring-white/10">
+          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-amber-400">Property manager feedback</p>
+          <p class="mt-3 text-lg text-slate-100">“Reliable, communicative and tidy. They handle all aluminium repairs for our Wellington portfolio.”</p>
+          <p class="mt-4 text-sm text-slate-400">Oasis Properties</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-t border-white/5">
+    <div class="mx-auto max-w-6xl px-6 py-16">
+      <div class="md:flex md:items-center md:justify-between">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-amber-400">Service areas</p>
+          <h2 class="mt-2 text-3xl font-bold">Every suburb, one team</h2>
+          <p class="mt-3 text-slate-300">Central Wellington • Lower Hutt • Upper Hutt • Porirua • Petone • Kāpiti</p>
+        </div>
+        <a href="/areas/" class="mt-4 inline-flex items-center text-sm font-semibold text-amber-300 md:mt-0">See full coverage &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-t border-white/5 bg-[var(--brand-bg)]">
+    <div class="mx-auto max-w-4xl px-6 py-16">
+      <p class="text-sm font-semibold uppercase tracking-[0.3em] text-amber-400">FAQ</p>
+      <FAQ heading="Questions we’re asked most" items={faqs} />
+    </div>
+  </section>
+
+  <ContactCTA />
+</Layout>

@@ -1,0 +1,11 @@
+---
+const segments = Astro.url.pathname.replace(/\/+$/,'').split('/').filter(Boolean);
+let acc = '';
+const crumbs = segments.map((seg) => { acc += '/' + seg; return { label: seg.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase()), href: acc + '/' }; });
+---
+<nav aria-label="Breadcrumb" class="mx-auto max-w-6xl px-6 py-4 text-sm">
+  <ol class="flex gap-2 text-slate-400">
+    <li><a href="/" class="hover:text-amber-400">Home</a></li>
+    {crumbs.map(c => (<li class="flex items-center gap-2">/ <a href={c.href} class="hover:text-amber-400">{c.label}</a></li>))}
+  </ol>
+</nav>

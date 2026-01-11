@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+.card {
+  @apply rounded-xl bg-slate-900/60 p-4 ring-1 ring-white/10;
+}
+
+.btn {
+  @apply inline-flex items-center justify-center rounded-lg px-4 py-2 font-medium transition-colors;
+}
+.btn-primary {
+  @apply bg-amber-500 text-slate-900 hover:bg-amber-400;
+}
+.btn-outline {
+  @apply border border-slate-600 hover:bg-slate-900/40;
+}
+

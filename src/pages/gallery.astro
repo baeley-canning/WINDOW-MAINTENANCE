@@ -1,0 +1,51 @@
+---
+import Layout from "../layouts/WMBase.astro"; import Breadcrumbs from "../components/Breadcrumbs.astro"; import Picture from "../components/Picture.astro";
+const title = "Gallery"; const description = "Parts and on-site work around Wellington."; const canonical = "https://windowmaintenance.co.nz/gallery/";
+const images = [
+  { base: "project-balustrade", alt: "Aluminium balustrade project" },
+  { base: "sliding-door-roller", alt: "Sliding door roller replacement" },
+  { base: "ranchslider-handle-lockset", alt: "Ranchslider handle and lockset" },
+  { base: "security-stays", alt: "Window security stays (restrictors)" },
+  { base: "sash-handles", alt: "Aluminium sash handles" },
+  { base: "hinge", alt: "New window hinge" },
+  { base: "euro-lock-cylinder", alt: "Euro profile lock cylinder" },
+  { base: "glazing-wedge", alt: "Glazing wedge and seal profiles" },
+];
+---
+<Layout title={title} description={description} canonical={canonical}>
+  <Breadcrumbs />
+  <section class="mx-auto max-w-6xl px-6 py-12">
+    <h1 class="text-3xl font-extrabold">Gallery</h1>
+    <div class="mt-8 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+      {images.map((it) => (
+        <figure class="rounded-xl bg-[var(--brand-surface)] p-3 ring-1 ring-white/10">
+          <div class="ratio-4-3 card-frame"><Picture base={it.base} alt={it.alt} className="h-full w-full object-cover" /></div>
+        </figure>
+      ))}
+      <figure class="rounded-xl bg-[var(--brand-surface)] p-3 ring-1 ring-white/10">
+        <div class="ratio-4-3 card-frame">
+          <img src="/img/window-stay-replacement.jpg" alt="Replaced awning stay (new vs old)" class="h-full w-full object-cover" />
+        </div>
+        <figcaption class="text-slate-400">New awning stay installed after storm damage.</figcaption>
+      </figure>
+      <figure class="rounded-xl bg-[var(--brand-surface)] p-3 ring-1 ring-white/10">
+        <div class="ratio-4-3 card-frame">
+          <img src="/img/mitre-reseal-before.jpg" alt="Leaking aluminium frame mitre opened for reseal" class="h-full w-full object-cover" />
+        </div>
+        <figcaption class="text-slate-400">Mitre/sill leak opened for proper reseal.</figcaption>
+      </figure>
+      <figure class="rounded-xl bg-[var(--brand-surface)] p-3 ring-1 ring-white/10">
+        <div class="ratio-4-3 card-frame">
+          <img src="/img/mitre-reseal-small-joint.jpg" alt="Mitre reseal inside aluminium joinery" class="h-full w-full object-cover" />
+        </div>
+        <figcaption class="text-slate-400">Resealing inside the aluminium frame.</figcaption>
+      </figure>
+      <figure class="rounded-xl bg-[var(--brand-surface)] p-3 ring-1 ring-white/10">
+        <div class="ratio-4-3 card-frame">
+          <img src="/img/drainage-cover-3dprint.jpg" alt="3D printed drainage cover fitted to a sash window" class="h-full w-full object-cover" />
+        </div>
+        <figcaption class="text-slate-400">3D-printed drainage cover for high-wind zones.</figcaption>
+      </figure>
+    </div>
+  </section>
+</Layout>

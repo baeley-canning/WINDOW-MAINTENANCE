@@ -1,0 +1,25 @@
+---
+import Layout from "../../layouts/WMBase.astro";
+import { getCollection } from "astro:content";
+const posts = await getCollection("blog");
+posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const title = "Blog";
+const description = "Tips and guides for aluminium window and sliding door maintenance in Wellington.";
+const canonical = "https://windowmaintenance.co.nz/blog/";
+---
+<Layout title={title} description={description} canonical={canonical}>
+  <main class="mx-auto max-w-4xl px-6 py-12">
+    <h1 class="text-3xl font-extrabold">Blog</h1>
+    <ul class="mt-6 space-y-6">
+      {posts.map((post) => (
+        <li class="rounded-xl bg-[var(--brand-surface)] p-6 ring-1 ring-white/10">
+          <a href={`/blog/${post.slug}/`} class="block hover:text-amber-400">
+            <h2 class="text-xl font-semibold">{post.data.title}</h2>
+            <div class="mt-1 text-xs text-slate-400">{new Date(post.data.pubDate).toLocaleDateString()}</div>
+            {post.data.description && <p class="mt-2 text-slate-300">{post.data.description}</p>}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </main>
+</Layout>

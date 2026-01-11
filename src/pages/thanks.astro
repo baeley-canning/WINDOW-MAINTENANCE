@@ -1,0 +1,18 @@
+---
+import Layout from "../layouts/WMBase.astro";
+const title = "Thanks!";
+const description = "Thanks for your message — we’ll get back to you shortly.";
+const canonical = "https://windowmaintenance.co.nz/thanks/";
+---
+<Layout title={title} description={description} canonical={canonical}>
+  <section class="mx-auto max-w-3xl px-6 py-20 text-center">
+    <h1 class="text-4xl font-extrabold">Thanks — message received.</h1>
+    <p class="mt-2 text-slate-300">We’ll reply as soon as possible. If it’s urgent, call <a class="text-amber-400" id="cta-call-thanks" data-cta="call" href="tel:+6421638205">021 638 205</a>.</p>
+    <a class="mt-6 inline-block btn btn-primary" href="/">Back to home</a>
+    <script>
+      if (window && window.dataLayer) {
+        window.dataLayer.push({ event: 'lead_submit', source: 'thanks_page' });
+      }
+    </script>
+  </section>
+</Layout>

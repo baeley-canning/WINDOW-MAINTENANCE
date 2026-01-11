@@ -1,0 +1,30 @@
+---
+import Layout from "../layouts/WMBase.astro"; import Breadcrumbs from "../components/Breadcrumbs.astro"; import Picture from "../components/Picture.astro"; import QuoteInline from "../components/QuoteInline.astro"; import FAQ from "../components/FAQ.astro";
+const title = "Stays & Hinges"; const description = "Awning stays, restrictors and hinges replaced and adjusted. Smooth, secure window operation across Wellington."; const canonical = "https://windowmaintenance.co.nz/stays/";
+---
+<Layout title={title} description={description} canonical={canonical}>
+  <Breadcrumbs />
+  <main class="mx-auto max-w-4xl px-6 py-12">
+    <h1 class="text-3xl font-extrabold">Stays & Hinges</h1>
+    <p class="mt-4 text-slate-300">We replace bent or worn awning stays and service hinges so windows open, hold position and seal properly.</p>
+    <div class="mt-6 grid gap-4 sm:grid-cols-2">
+      <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
+        <div class="ratio-4-3 card-frame"><Picture base="hinge" alt="New window hinge fitted" className="h-full w-full object-cover" /></div>
+        <figcaption class="mt-2 text-sm text-slate-400">Hinges serviced & replaced</figcaption>
+      </figure>
+      <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
+        <div class="ratio-4-3 card-frame"><Picture base="security-stays" alt="Window security stays / restrictors" className="h-full w-full object-cover" /></div>
+        <figcaption class="mt-2 text-sm text-slate-400">Awning stays & restrictors</figcaption>
+      </figure>
+    </div>
+    <figure class="mt-6 rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
+      <img src="/img/window-stay-replacement.jpg" alt="New awning stay installed next to the old weather-bent stay" class="w-full rounded-xl object-cover" />
+      <figcaption class="mt-2 text-sm text-slate-400">Storm repair in Wellington — bent stays removed, new awning stays fitted and sash re-aligned. <a class="text-amber-400 underline" href="/blog/awning-stay-repair-storm/">Read the job recap.</a></figcaption>
+    </figure>
+  </main>
+  <QuoteInline title="Get a quote for stays & hinges" />
+  <FAQ items={[
+    { q: 'Are awning stays the same as hinges?', a: 'Many people call them window hinges, but awning stays both support and control the opening. We replace stays and service hinges so windows open, hold position and seal.' },
+    { q: 'Can you match my existing hardware?', a: 'Yes. We carry common sizes/finishes on the van and source compatible parts for older aluminium joinery.' }
+  ]} />
+</Layout>

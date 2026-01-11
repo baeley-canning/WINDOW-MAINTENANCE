@@ -1,0 +1,133 @@
+---
+import "../styles/global.css";
+import StickyBar from "../components/StickyBar.astro";
+const { title, description, canonical, ogImage = "/img/og-cover.jpg", schema } = Astro.props;
+const siteName = "Window Maintenance";
+const schemas = Array.isArray(schema) ? schema : (schema ? [schema] : []);
+const baseSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: siteName,
+  url: "https://windowmaintenance.co.nz",
+  telephone: "+6421638205",
+  email: "mailto:baeley@windowmaintenance.co.nz",
+  image: "/img/og-cover.jpg",
+  address: { "@type": "PostalAddress", addressLocality: "Wellington", addressRegion: "WGN", addressCountry: "NZ" },
+};
+const providedTypes = new Set(schemas.map((s:any) => s && s["@type"]).filter(Boolean));
+const allSchemas = providedTypes.has("LocalBusiness") ? schemas : [...schemas, baseSchema];
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} &mdash; {siteName}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#0f172a" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="msapplication-TileColor" content="#0f172a" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    {allSchemas.map((s) => (
+      <script type="application/ld+json" set:html={JSON.stringify(s)}></script>
+    ))}
+    <!-- Google tag (gtag.js) - GA4 manual install -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-69S1NYW3V6"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-69S1NYW3V6');
+      // Google Ads destination (global site tag)
+      gtag('config', 'AW-16889477810');
+    </script>
+  </head>
+  <body class="min-h-screen selection:bg-amber-500/30 bg-[var(--brand-bg)] text-[var(--brand-text)]">
+    <header class="border-b bg-[var(--brand-bg)]/60 backdrop-blur border-[color:var(--brand-border)]">
+      <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+        <a href="/" class="font-extrabold tracking-tight">Window Maintenance</a>
+        <nav class="hidden gap-6 md:flex">
+          <a href="/services/" class="hover:text-amber-400">Services</a>
+          <a href="/areas/" class="hover:text-amber-400">Areas</a>
+          <a href="/gallery/" class="hover:text-amber-400">Gallery</a>
+          <a href="/blog/" class="hover:text-amber-400">Blog</a>
+          <a href="/reviews/" class="hover:text-amber-400">Reviews</a>
+          <a href="/contact/" class="hover:text-amber-400">Contact</a>
+        </nav>
+        <a
+          href="tel:+6421638205"
+          id="cta-call-header"
+          data-cta="call"
+          class="btn btn-primary"
+          >Call 021 638 205</a>
+      </div>
+    </header>
+    <main><slot /></main>
+    <footer class="mt-20 border-t bg-[var(--brand-bg)]/80 border-[color:var(--brand-border)]">
+      <div class="mx-auto grid max-w-6xl gap-6 px-6 py-10 md:grid-cols-3">
+        <div>
+          <div class="font-bold">Window Maintenance</div>
+          <div class="mt-2 text-sm text-slate-300">
+            Aluminium window & sliding door repairs across the Wellington region.
+          </div>
+        </div>
+        <div class="text-sm">
+          <div class="font-semibold">Contact</div>
+          <div class="mt-1">
+            <a class="hover:text-amber-400" href="tel:+6421638205">021 638 205</a>
+          </div>
+          <div class="mt-1">
+            <a class="hover:text-amber-400" href="mailto:baeley@windowmaintenance.co.nz">baeley@windowmaintenance.co.nz</a>
+          </div>
+        </div>
+        <div class="text-sm">
+          <div class="font-semibold">Areas</div>
+          <ul class="mt-1 space-y-1">
+            <li>
+              <a class="hover:text-amber-400" href="/areas/central-wellington/">Central Wellington</a>
+            </li>
+            <li><a class="hover:text-amber-400" href="/areas/porirua/">Porirua</a></li>
+            <li><a class="hover:text-amber-400" href="/areas/lower-hutt/">Lower Hutt</a></li>
+            <li><a class="hover:text-amber-400" href="/areas/upper-hutt/">Upper Hutt</a></li>
+            <li><a class="hover:text-amber-400" href="/areas/petone/">Petone</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-white/5 py-4 text-center text-xs text-slate-400">
+        &copy; {new Date().getFullYear()} Window Maintenance &mdash; Wellington, NZ
+      </div>
+    </footer>
+    <StickyBar />
+    <script>
+      // Minimal analytics events for call clicks
+      (function(){
+        try {
+          document.addEventListener('click', function(e){
+            const a = e.target && (e.target.closest && e.target.closest('a[data-cta="call"]'));
+            if (!a) return;
+            if (window && window.dataLayer) {
+              window.dataLayer.push({ event: 'call_click', href: a.getAttribute('href'), id: a.id || null, path: location.pathname });
+            }
+          }, true);
+        } catch(_) {}
+      })();
+    </script>
+  </body>
+  
+</html>
