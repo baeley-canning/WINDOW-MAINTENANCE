@@ -26,6 +26,8 @@ jobs:
           port: 21
           server-dir: ${{ secrets.CPANEL_FTP_PATH }}
           local-dir: dist/
+          dangerous-clean-slate: true
+          state-name: .ftp-deploy-sync-state.json
           exclude: |
             **/.git*
             **/.github/**
