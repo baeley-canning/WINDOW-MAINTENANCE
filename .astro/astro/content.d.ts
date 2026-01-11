@@ -169,6 +169,13 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] };
+"sliding-door-repair-costs-wellington.md": {
+	id: "sliding-door-repair-costs-wellington.md";
+  slug: "sliding-door-repair-costs-wellington";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
 "sliding-door-sticking.md": {
 	id: "sliding-door-sticking.md";
   slug: "sliding-door-sticking";

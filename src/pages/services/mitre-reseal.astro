@@ -5,8 +5,30 @@ import QuoteInline from "../../components/QuoteInline.astro";
 const title = "Leaking aluminium sliders & windows — mitre & sill reseal (Wellington)";
 const description = "We fix leaking aluminium sliding doors & windows by resealing sills and mitred frame corners properly — not just silicone. Wellington-wide same-week bookings.";
 const canonical = "https://windowmaintenance.co.nz/services/mitre-reseal/";
+const howTo = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Mitre and sill reseal for leaking aluminium sliders",
+  "description": "Professional reseal of aluminium sliding doors and windows in Wellington, focusing on mitred frame corners and sill drainage.",
+  "step": [
+    { "@type": "HowToStep", "name": "Remove sash", "text": "Remove the slider sash where needed to expose the sill and mitred joints." },
+    { "@type": "HowToStep", "name": "Strip failed sealant", "text": "Remove loose or failed sealant from sill and mitre joints, keeping drainage paths visible." },
+    { "@type": "HowToStep", "name": "Prep surfaces", "text": "Mechanically clean and sand to bright aluminium, then solvent clean with a two-cloth method." },
+    { "@type": "HowToStep", "name": "Back-seal mitres", "text": "Apply neutral-cure, aluminium-safe sealant deep into accessible mitres." },
+    { "@type": "HowToStep", "name": "External bead & drainage", "text": "Reassemble and apply a continuous bead along the sill and mitred corners while keeping weep/track drainage open." },
+    { "@type": "HowToStep", "name": "Hose-test & document", "text": "Gentle hose-test to confirm and provide before/after photos." }
+  ],
+  "supply": [
+    { "@type": "HowToSupply", "name": "Neutral-cure aluminium-safe sealant" },
+    { "@type": "HowToSupply", "name": "Cleaning solvents and abrasives" }
+  ],
+  "tool": [
+    { "@type": "HowToTool", "name": "Scrapers and abrasives" },
+    { "@type": "HowToTool", "name": "Sealant applicator" }
+  ]
+};
 ---
-<Layout title={title} description={description} canonical={canonical}>
+<Layout title={title} description={description} canonical={canonical} schema={[howTo]}>
   <Breadcrumbs />
   <main class="mx-auto max-w-4xl px-6 py-12">
     <h1 class="text-3xl font-extrabold">Leaking aluminium sliders & windows fixed — proper mitre & sill reseal</h1>
