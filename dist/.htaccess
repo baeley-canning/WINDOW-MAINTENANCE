@@ -1,5 +1,6 @@
 # Minimal htaccess for cPanel (no headers to avoid syntax issues)
 Options -Indexes
+DirectoryIndex index.html
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteCond %{HTTP_HOST} ^www\.windowmaintenance\.co\.nz$ [NC]
