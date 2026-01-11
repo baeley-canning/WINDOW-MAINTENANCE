@@ -26,14 +26,30 @@ const articleSchema = {
 };
 ---
 <Layout title={title} description={description} canonical={canonical} schema={[articleSchema]}>
-  <main class="mx-auto max-w-3xl px-6 py-12">
-    <nav class="text-sm text-slate-400"><a href="/blog/" class="hover:text-amber-400">&larr; Back to blog</a></nav>
-    <article class="prose prose-invert prose-slate max-w-none">
+  <main class="mx-auto max-w-5xl px-6 py-12">
+    <nav class="text-sm text-slate-400">
+      <a href="/blog/" class="hover:text-amber-400">&larr; Back to blog</a>
+    </nav>
+    <article class="mt-4 rounded-2xl bg-[var(--brand-surface)] px-6 py-8 ring-1 ring-white/10 shadow-xl">
       <header class="mb-6">
-        <h1 class="mb-2 text-3xl font-extrabold">{post.data.title}</h1>
-        <div class="text-xs text-slate-400">{new Date(post.data.pubDate).toLocaleDateString()}</div>
+        <p class="text-xs font-semibold uppercase tracking-[0.3em] text-amber-400">Window Maintenance — Wellington</p>
+        <h1 class="mt-2 text-3xl font-extrabold leading-tight md:text-4xl">{post.data.title}</h1>
+        <div class="mt-2 text-xs text-slate-400">{new Date(post.data.pubDate).toLocaleDateString()}</div>
       </header>
-      <Content />
+      <div class="prose prose-lg prose-invert prose-slate max-w-none leading-relaxed">
+        <Content />
+      </div>
+      <div class="mt-10 grid gap-4 rounded-xl bg-[var(--brand-bg)] px-4 py-5 ring-1 ring-white/10 md:grid-cols-3 md:items-center">
+        <div class="md:col-span-2">
+          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-amber-400">Need this fixed?</p>
+          <p class="mt-1 text-sm text-slate-200">Sliding / ranchslider door repairs across Wellington, Porirua, Lower Hutt, Upper Hutt, Petone and Kāpiti. Same-week bookings where possible.</p>
+        </div>
+        <div class="flex flex-wrap gap-3 md:justify-end">
+          <a class="btn btn-primary" href="tel:+6421638205">Call 021 638 205</a>
+          <a class="btn btn-secondary" href="/services/sliding-door-repairs/">Sliding door repairs</a>
+          <a class="btn btn-secondary" href="/contact/">Get a fast quote</a>
+        </div>
+      </div>
     </article>
   </main>
 </Layout>
