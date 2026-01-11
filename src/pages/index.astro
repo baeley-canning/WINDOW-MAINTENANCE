@@ -25,8 +25,17 @@ const faqs = [
   { q: "Do you service Porirua and the Hutt Valley?", a: "Yes. We’re in Porirua, Lower Hutt and Upper Hutt every week and can group nearby jobs to keep pricing sharp." },
   { q: "Can you fix leaks at the sill or mitred corners?", a: "Yes. We open the joinery, back-seal the mitres, re-seal the sill and keep drainage paths clear. See our mitre & sill reseal service for details." }
 ];
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map((item) => ({
+    "@type": "Question",
+    "name": item.q,
+    "acceptedAnswer": { "@type": "Answer", "text": item.a }
+  }))
+};
 ---
-<Layout title={title} description={description} canonical={canonical} schema={[localBusiness, website]}>
+<Layout title={title} description={description} canonical={canonical} schema={[localBusiness, website, faqSchema]}>
   <section class="bg-gradient-to-b from-[#0a2540] via-[#0b1220] to-[#0a2540]">
     <div class="mx-auto max-w-6xl px-6 py-16 lg:py-24">
       <div class="flex flex-wrap items-center">
