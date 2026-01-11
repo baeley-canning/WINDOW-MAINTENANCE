@@ -1,20 +1,11 @@
-# Canonical and basic hardening for Apache on cPanel
-
-# Disable directory listing
+# Minimal htaccess for cPanel (no headers to avoid syntax issues)
 Options -Indexes
-
 <IfModule mod_rewrite.c>
   RewriteEngine On
-
-  # Force apex (non-www)
   RewriteCond %{HTTP_HOST} ^www\.windowmaintenance\.co\.nz$ [NC]
   RewriteRule ^(.*)$ https://windowmaintenance.co.nz/$1 [R=301,L]
-
-  # Remove index.html from URLs
   RewriteCond %{THE_REQUEST} \s/+(.*)/index\.html [NC]
   RewriteRule ^ %1 [R=301,L]
-
-  # Redirect legacy .html and short routes used in ads
   RewriteRule ^services/ranchslider-repairs\.html$ /services/sliding-door-repairs/ [R=301,L]
   RewriteRule ^services/hardware-repairs\.html$ /services/hardware-wedge-replacement/ [R=301,L]
   RewriteRule ^services/security-screens\.html$ /services/ [R=301,L]
@@ -26,18 +17,5 @@ Options -Indexes
   RewriteRule ^leaks/?$ /leaks/ [R=301,L]
   RewriteRule ^security/?$ /security/ [R=301,L]
   RewriteRule ^services/mitre-reseal\.html$ /services/mitre-reseal/ [R=301,L]
-
-  # Make /sitemap and /sitemap.xml resolve to sitemap-index.xml for GSC
   RewriteRule ^sitemap(\.xml)?$ sitemap-index.xml [L]
-</IfModule>
-
-# Security headers (compatible with GA4 & Google Ads)
-<IfModule mod_headers.c>
-  # Only send HSTS on HTTPS
-  Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" env=HTTPS
-  Header set X-Content-Type-Options "nosniff"
-  Header set Referrer-Policy "strict-origin-when-cross-origin"
-  Header set Permissions-Policy "geolocation=(), camera=(), microphone=()"
-  Header set X-Frame-Options "SAMEORIGIN"
-  Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; form-action 'self' https://formspree.io; frame-ancestors 'self'; base-uri 'self'"
 </IfModule>
