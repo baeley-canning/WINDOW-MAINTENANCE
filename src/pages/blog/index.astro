@@ -10,6 +10,16 @@ const canonical = "https://windowmaintenance.co.nz/blog/";
 <Layout title={title} description={description} canonical={canonical}>
   <main class="mx-auto max-w-4xl px-6 py-12">
     <h1 class="text-3xl font-extrabold">Blog</h1>
+    <section class="mt-4 grid gap-4 rounded-2xl bg-[var(--brand-surface)] p-5 ring-1 ring-white/10 text-sm text-slate-200">
+      <div class="text-xs font-semibold uppercase tracking-[0.3em] text-amber-400">Top services</div>
+      <div class="flex flex-wrap gap-3">
+        <a class="btn btn-secondary" href="/services/sliding-door-repairs/">Sliding door repairs</a>
+        <a class="btn btn-secondary" href="/services/mitre-reseal/">Mitre &amp; sill reseal</a>
+        <a class="btn btn-secondary" href="/leaks/">Draught &amp; leak fixes</a>
+        <a class="btn btn-secondary" href="/services/window-repairs/">Window repairs</a>
+        <a class="btn btn-secondary" href="/stays/">Awning stays &amp; hinges</a>
+      </div>
+    </section>
     <ul class="mt-6 space-y-6">
       {posts.map((post) => (
         <li class="rounded-xl bg-[var(--brand-surface)] p-6 ring-1 ring-white/10">

@@ -15,7 +15,7 @@ const description = post.data.description ?? "";
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  headline: title,
+  headline: title.substring(0, 110),
   description,
   datePublished: post.data.pubDate,
   dateModified: post.data.pubDate,
