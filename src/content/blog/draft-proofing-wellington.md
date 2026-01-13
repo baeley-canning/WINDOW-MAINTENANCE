@@ -1,6 +1,6 @@
 ---
-title: Draft-Proofing Aluminium Windows in Wellington’s Climate
-description: Simple upgrades that cut drafts and rattles in older aluminium joinery.
+title: Draft-proofing aluminium windows in Wellington's climate
+description: "Practical upgrades that cut drafts and rattles in older aluminium joinery -- wedges, seals, latches and sash alignment across Wellington."
 pubDate: 2024-10-15
 ---
 
@@ -17,4 +17,3 @@ Our solutions:
 - Re-align sashes and replace worn hinges
 
 Small changes make a big comfort difference, especially in Wellington’s southerly.
-

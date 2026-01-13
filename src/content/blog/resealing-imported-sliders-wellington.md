@@ -1,6 +1,6 @@
 ---
-title: Resealing Leaking Aluminium Sliders in Wellington — What Went Wrong and How We Fixed It
-description: Resealing leaking aluminium sliders in Wellington. Why they leaked, the NZ context, and our in‑frame reseal method to stop leaks.
+title: "Resealing leaking aluminium sliders in Wellington: what went wrong"
+description: "Why aluminium sliders leaked in Wellington, the NZ context, and our in-frame reseal method to stop leaks at mitred corners and sills."
 pubDate: 2025-11-10
 ---
 

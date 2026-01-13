@@ -1,6 +1,6 @@
 ---
-title: "Fix a Sticking Sliding Door: What Usually Goes Wrong"
-description: Common causes of stiff or dragging ranchslider doors in Wellington homes, and how we fix them.
+title: "Fix a sticking sliding door: what usually goes wrong"
+description: "Why sliding doors stick in Wellington homes: worn rollers, damaged tracks, misalignment and latch issues -- and how we restore smooth, quiet glide."
 pubDate: 2024-10-01
 ---
 

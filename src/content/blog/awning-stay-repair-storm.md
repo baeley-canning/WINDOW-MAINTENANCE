@@ -1,6 +1,6 @@
 ---
-title: Awning Stay Replacement After Wellington Storm
-description: Bent awning stays replaced, sash re-aligned and seals tested — no more draughts or leaks.
+title: Awning stay replacement after Wellington storm repair
+description: "Storm-bent awning stays replaced, sash re-aligned and seals tested so the window holds position and stops drafts or leaks."
 pubDate: 2025-11-06
 ---
 
@@ -16,4 +16,3 @@ They told us we were the only ones who replied, and left a glowing review after 
 Serving the Wellington region with fast quotes and tidy workmanship.
 
 ![New awning stay with old damaged stay visible](\/img\/window-stay-replacement.jpg)
-

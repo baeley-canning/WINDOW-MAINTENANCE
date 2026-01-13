@@ -1,6 +1,6 @@
 ---
-title: Sliding Door Repairs in Wellington Weather — What Fails and How We Fix It
-description: Wellington wind and salt air are rough on sliding doors. Common failures, what we see in Porirua and the Hutt, and how we restore smooth, sealed doors.
+title: "Sliding door repairs in Wellington weather: what fails"
+description: "Wellington wind and salt air are rough on sliding doors. Common failures in Porirua and the Hutt, and how we restore smooth, sealed doors."
 pubDate: 2025-12-26
 ---
 

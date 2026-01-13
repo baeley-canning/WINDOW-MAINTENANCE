@@ -1,6 +1,6 @@
 ---
-title: "Sliding Door Repair Costs in Wellington: rollers, tracks and locks"
-description: Typical pricing bands we see in Wellington for sliding door repairs — rollers, tracks, alignment and lock fixes — and when a reseal is needed.
+title: "Sliding door repair costs Wellington: rollers & tracks"
+description: "Typical pricing bands in Wellington for sliding door repairs -- rollers, tracks, alignment and lock fixes -- and when a reseal is needed."
 pubDate: 2026-01-12
 ---
 

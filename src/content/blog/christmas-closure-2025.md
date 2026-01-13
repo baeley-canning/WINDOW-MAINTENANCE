@@ -1,6 +1,6 @@
 ---
-title: Christmas & New Year closure — Window Maintenance (Dec 20 to Jan 6)
-description: We are closed 20 Dec to 6 Jan. Leave a message for aluminium window and slider repairs in Wellington and we will reply on our return.
+title: Christmas & New Year closure | Window Maintenance
+description: "We are closed 20 Dec to 6 Jan. Leave a message for aluminium window and slider repairs in Wellington and we will reply on our return."
 pubDate: 2025-12-19
 ---
 
