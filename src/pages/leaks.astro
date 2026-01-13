@@ -49,6 +49,13 @@ const faqSchema = {
         {faqItems.map(item => <li><strong>{item.q}</strong><br />{item.a}</li>)}
       </ul>
     </div>
+    <div class="mt-8 space-y-3">
+      <h2 class="text-2xl font-bold">Helpful guides</h2>
+      <ul class="list-disc space-y-2 pl-5 text-slate-300">
+        <li><a class="text-amber-400 underline" href="/blog/draft-proofing-wellington/">Draft-proofing aluminium windows in Wellington</a></li>
+        <li><a class="text-amber-400 underline" href="/blog/resealing-imported-sliders-wellington/">Why aluminium sliders leak and how we reseal them</a></li>
+      </ul>
+    </div>
   </main>
   <QuoteInline title="Get a quote for draught & leak repairs" />
   <FAQ items={[
