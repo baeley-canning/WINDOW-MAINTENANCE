@@ -3,6 +3,7 @@ Options -Indexes
 DirectoryIndex index.html
 <IfModule mod_rewrite.c>
   RewriteEngine On
+  RewriteCond %{HTTPS} off [OR]
   RewriteCond %{HTTP_HOST} ^www\.windowmaintenance\.co\.nz$ [NC]
   RewriteRule ^(.*)$ https://windowmaintenance.co.nz/$1 [R=301,L]
   RewriteCond %{THE_REQUEST} \s/+(.*)/index\.html [NC]
