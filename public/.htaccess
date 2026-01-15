@@ -15,9 +15,8 @@ DirectoryIndex index.html
   RewriteRule ^sliders/?$ /services/sliding-door-repairs/ [R=301,L]
   RewriteRule ^windows/?$ /services/window-repairs/ [R=301,L]
   RewriteRule ^hardware/?$ /services/hardware-wedge-replacement/ [R=301,L]
-  RewriteRule ^stays/?$ /stays/ [R=301,L]
-  RewriteRule ^leaks/?$ /leaks/ [R=301,L]
-  RewriteRule ^security/?$ /security/ [R=301,L]
+  RewriteCond %{REQUEST_URI} !/$
+  RewriteRule ^(stays|leaks|security)$ /$1/ [R=301,L]
   RewriteRule ^services/mitre-reseal\.html$ /services/mitre-reseal/ [R=301,L]
   RewriteRule ^sitemap(\.xml)?$ sitemap-index.xml [L]
 </IfModule>
