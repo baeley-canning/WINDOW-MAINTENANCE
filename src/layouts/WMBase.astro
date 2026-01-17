@@ -11,6 +11,7 @@ const baseSchema = {
   url: "https://windowmaintenance.co.nz",
   telephone: "+6421638205",
   email: "mailto:baeley@windowmaintenance.co.nz",
+  sameAs: ["https://www.facebook.com/WindowMaintenanceNZ/"],
   image: "/img/og-cover.jpg",
   address: { "@type": "PostalAddress", addressLocality: "Wellington", addressRegion: "WGN", addressCountry: "NZ" },
 };
@@ -95,6 +96,9 @@ const allSchemas = providedTypes.has("LocalBusiness") ? schemas : [...schemas, b
           </div>
           <div class="mt-1">
             <a class="hover:text-amber-400" href="mailto:baeley@windowmaintenance.co.nz">baeley@windowmaintenance.co.nz</a>
+          </div>
+          <div class="mt-1">
+            <a class="hover:text-amber-400" href="https://www.facebook.com/WindowMaintenanceNZ/">Facebook</a>
           </div>
           <div class="mt-1 text-slate-400">Wellington region</div>
           <div class="text-slate-400">NZBN: 9429052805455</div>
