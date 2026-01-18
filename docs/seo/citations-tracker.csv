@@ -2,7 +2,7 @@ priority,site,type,login_required,login_email,address_required,profile_url,targe
 1,Google Business Profile,Core citation,yes,baeley@windowmaintenance.co.nz,no,https://share.google/61lZ3iDyslYdNlxzS,https://windowmaintenance.co.nz/,existing,Verify categories and service area
 1,Bing Places,Core citation,yes,baeley@windowmaintenance.co.nz,no,,https://windowmaintenance.co.nz/,existing,Listed on Bing Places
 1,Apple Business Connect,Core citation,yes,baeley@windowmaintenance.co.nz,no,,https://windowmaintenance.co.nz/,todo,
-1,Yellow NZ,Core citation,yes,baeley@windowmaintenance.co.nz,maybe,,https://windowmaintenance.co.nz/,todo,
+1,Yellow NZ,Core citation,yes,baeley@windowmaintenance.co.nz,maybe,,https://windowmaintenance.co.nz/,blocked,Site no longer works
 1,Finda,Core citation,yes,baeley@windowmaintenance.co.nz,maybe,https://www.finda.co.nz/business/listing/4s7twj/window-maintenance/,https://windowmaintenance.co.nz/,existing,Public listing provided
 1,Neighbourly,Core citation,yes,baeley@windowmaintenance.co.nz,no,,https://windowmaintenance.co.nz/,todo,
 1,Localist,Core citation,yes,baeley@windowmaintenance.co.nz,maybe,https://localist.co.nz/l/228501-window-maintenance,https://windowmaintenance.co.nz/,existing,Public listing provided
