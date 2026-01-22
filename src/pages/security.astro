@@ -1,8 +1,9 @@
 ---
 import Layout from "../layouts/WMBase.astro"; import Breadcrumbs from "../components/Breadcrumbs.astro"; import Picture from "../components/Picture.astro"; import QuoteInline from "../components/QuoteInline.astro"; import FAQ from "../components/FAQ.astro";
-const title = "Security Stays Wellington | Aluminium window restrictors"; const description = "Window security stays/restrictors supplied and fitted across Wellington, Porirua and the Hutt to improve safety and security while keeping ventilation."; const canonical = "https://windowmaintenance.co.nz/security/";
+const title = "Security Stays Wellington | In-frame & hidden restrictors"; const description = "In-frame (hidden) security stays and window restrictors fitted across Wellington and the Hutt Valley for safe ventilation without visible holes."; const canonical = "https://windowmaintenance.co.nz/security/";
 const faqItems = [
   { q: "Do you fit restrictors for rentals and child safety?", a: "Yes. We fit restrictors/security stays that limit opening for child safety and ground-floor security while keeping ventilation." },
+  { q: "Are in-frame (hidden) security stays better than face-mounted?", a: "When the aluminium profile allows, in-frame stays sit inside the joinery for a cleaner finish and no visible holes if removed later." },
   { q: "Do you match finishes?", a: "We match finishes to your aluminium joinery and can adjust/replace later if needed." }
 ];
 const faqSchema = {
@@ -19,16 +20,35 @@ const faqSchema = {
   <Breadcrumbs />
   <main class="mx-auto max-w-4xl px-6 py-12">
     <h1 class="text-3xl font-extrabold">Security Stays</h1>
-    <p class="mt-4 text-slate-300">We install security stays/restrictors to limit opening for child safety and ground‑floor security while keeping airflow across Wellington, Porirua, Lower Hutt, Upper Hutt, Petone and Kāpiti.</p>
-    <div class="mt-6 grid gap-4 sm:grid-cols-2">
+    <p class="mt-4 text-slate-300">We install security stays/restrictors to limit opening for child safety and ground-floor security while keeping airflow across Wellington, Porirua, Lower Hutt, Upper Hutt, Petone and Kāpiti.</p>
+    <p class="mt-3 text-slate-300">Where the aluminium profile allows, we fit in-frame (hidden) security stays. They sit inside the joinery, look cleaner, and if removed later the holes are hidden. Face-mounted stays can leave visible holes that need to be plugged or pop riveted.</p>
+    <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
         <div class="ratio-4-3 card-frame"><Picture base="security-stays" alt="Security stays fitted to window" className="h-full w-full object-cover" /></div>
         <figcaption class="mt-2 text-sm text-slate-400">Security stays / restrictors</figcaption>
       </figure>
       <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
+        <img src="/img/security-stay-installed.jpg" alt="In-frame security stay installed in aluminium window" class="h-full w-full rounded-xl object-cover" loading="lazy" />
+        <figcaption class="mt-2 text-sm text-slate-400">In-frame security stay installed</figcaption>
+      </figure>
+      <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
+        <img src="/img/security-stay-stock.webp" alt="Hidden security stay hardware on white background" class="h-full w-full rounded-xl object-cover" loading="lazy" />
+        <figcaption class="mt-2 text-sm text-slate-400">Hidden stay hardware (stock)</figcaption>
+      </figure>
+      <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
         <div class="ratio-4-3 card-frame"><Picture base="sash-handles" alt="Handles and latches serviced" className="h-full w-full object-cover" /></div>
         <figcaption class="mt-2 text-sm text-slate-400">Handles & latches serviced</figcaption>
       </figure>
+    </div>
+    <div class="mt-8 space-y-3">
+      <h2 class="text-2xl font-bold">Hidden vs face-mounted security stays</h2>
+      <ul class="list-disc space-y-2 pl-5 text-slate-300">
+        <li>In-frame/hidden stays sit inside the aluminium joinery for a cleaner look.</li>
+        <li>If removed later, the fixings are hidden inside the frame rather than on the face.</li>
+        <li>Face-mounted stays can leave visible holes that need to be plugged or pop riveted.</li>
+        <li>Some profiles only suit face-mounting, so we check what your joinery allows.</li>
+      </ul>
+      <p class="text-slate-300">Guide: <a class="text-amber-400 underline" href="/blog/inframe-security-stays-wellington/">In-frame security stays vs face-mounted stays</a></p>
     </div>
     <div class="mt-8 space-y-3">
       <h2 class="text-2xl font-bold">Where we work</h2>

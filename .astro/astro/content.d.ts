@@ -162,6 +162,13 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] };
+"inframe-security-stays-wellington.md": {
+	id: "inframe-security-stays-wellington.md";
+  slug: "inframe-security-stays-wellington";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
 "resealing-imported-sliders-wellington.md": {
 	id: "resealing-imported-sliders-wellington.md";
   slug: "resealing-imported-sliders-wellington";
