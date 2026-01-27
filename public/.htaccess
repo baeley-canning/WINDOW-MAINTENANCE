@@ -12,6 +12,7 @@ DirectoryIndex index.html
   RewriteRule ^services/hardware-repairs\.html$ /services/hardware-wedge-replacement/ [R=301,L]
   RewriteRule ^services/security-screens\.html$ /services/ [R=301,L]
   RewriteRule ^services/leak-repair\.html$ /services/mitre-reseal/ [R=301,L]
+  RewriteRule ^services/joinery-repairs\.html$ /services/joinery-repairs/ [R=301,L]
   RewriteRule ^sliders/?$ /services/sliding-door-repairs/ [R=301,L]
   RewriteRule ^windows/?$ /services/window-repairs/ [R=301,L]
   RewriteRule ^hardware/?$ /services/hardware-wedge-replacement/ [R=301,L]

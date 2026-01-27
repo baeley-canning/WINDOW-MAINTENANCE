@@ -1,0 +1,62 @@
+---
+import Layout from "../../layouts/WMBase.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import QuoteInline from "../../components/QuoteInline.astro";
+import FAQ from "../../components/FAQ.astro";
+
+const title = "Aluminium Joinery Repairs Wellington | Window & Door Repairs";
+const description = "Aluminium joinery repairs across Wellington: window handles, locks, stays, rollers, seals and sill/mitre fixes for single & double glazing.";
+const canonical = "https://windowmaintenance.co.nz/services/joinery-repairs/";
+
+const faqItems = [
+  { q: "What does aluminium joinery repair include?", a: "Handles, locks, stays, hinges, rollers, wedges/seals, alignment and leak fixes on aluminium windows and doors." },
+  { q: "Do you work on single and double glazed joinery?", a: "Yes. We service both single- and double-glazed aluminium joinery across Wellington and the Hutt Valley." },
+  { q: "Do you service Wellington and Porirua?", a: "Yes. We cover Wellington, Porirua, Lower Hutt, Upper Hutt, Petone and Kāpiti." }
+];
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map((item) => ({
+    "@type": "Question",
+    "name": item.q,
+    "acceptedAnswer": { "@type": "Answer", "text": item.a }
+  }))
+};
+---
+<Layout title={title} description={description} canonical={canonical} schema={[faqSchema]}>
+  <Breadcrumbs />
+  <main class="mx-auto max-w-4xl px-6 py-12">
+    <h1 class="text-3xl font-extrabold">Aluminium Joinery Repairs</h1>
+    <p class="mt-4 text-slate-300">We repair aluminium joinery across Wellington: window handles, door handles, window locks (including Yale), stays, hinges, rollers, wedges/seals and leak fixes for single and double-glazed windows and doors.</p>
+
+    <div class="mt-8 space-y-3">
+      <h2 class="text-2xl font-bold">Common joinery repairs</h2>
+      <ul class="list-disc space-y-2 pl-5 text-slate-300">
+        <li>Window handle and door handle replacement</li>
+        <li>Window lock and latch alignment (including Yale window locks)</li>
+        <li>Sliding door rollers and track refurbishment</li>
+        <li>Awning stays, hinges and restrictors</li>
+        <li>Glazing wedges/seals and draught/leak fixes</li>
+        <li>Mitre &amp; sill reseals for leaking joinery</li>
+      </ul>
+    </div>
+
+    <div class="mt-8 space-y-3">
+      <h2 class="text-2xl font-bold">Where we work</h2>
+      <p class="text-slate-300">Wellington, Porirua, Lower Hutt, Upper Hutt, Petone and Kāpiti.</p>
+      <p class="text-slate-300">Related services: <a class="text-amber-400 underline" href="/services/window-repairs/">Window repairs</a> • <a class="text-amber-400 underline" href="/services/sliding-door-repairs/">Sliding door repairs</a> • <a class="text-amber-400 underline" href="/services/hardware-wedge-replacement/">Hardware &amp; wedges</a></p>
+    </div>
+
+    <div class="mt-8 space-y-3">
+      <h2 class="text-2xl font-bold">Joinery repair FAQs</h2>
+      <ul class="list-disc space-y-2 pl-5 text-slate-300">
+        {faqItems.map(item => <li><strong>{item.q}</strong><br />{item.a}</li>)}
+      </ul>
+    </div>
+  </main>
+  <QuoteInline title="Get a quote for aluminium joinery repairs" />
+  <FAQ items={[
+    { q: "Do you replace old joinery hardware?", a: "Yes. We source compatible handles, locks, rollers and wedges for older aluminium joinery." },
+    { q: "Can you fix a leaking aluminium window?", a: "Yes. We diagnose the leak path and reseal or replace wedges/seals as needed." }
+  ]} />
+</Layout>
