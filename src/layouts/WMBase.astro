@@ -122,7 +122,7 @@ const allSchemas = providedTypes.has("LocalBusiness") ? schemas : [...schemas, b
     </footer>
     <StickyBar />
     <script>
-      // Minimal analytics events for call clicks
+      // Track call clicks and send Ads conversion
       (function(){
         try {
           document.addEventListener('click', function(e){
@@ -130,6 +130,9 @@ const allSchemas = providedTypes.has("LocalBusiness") ? schemas : [...schemas, b
             if (!a) return;
             if (window && window.dataLayer) {
               window.dataLayer.push({ event: 'call_click', href: a.getAttribute('href'), id: a.id || null, path: location.pathname });
+            }
+            if (window && window.gtag) {
+              gtag('event','conversion',{'send_to':'AW-16889477810/q6GQCNa6kfMbELL1w_U-','value':1.0,'currency':'NZD'});
             }
           }, true);
         } catch(_) {}
