@@ -1,1 +1,0 @@
-(function(){try{document.addEventListener("click",function(t){const a=t.target&&t.target.closest&&t.target.closest('a[data-cta="call"]');a&&window&&window.dataLayer&&window.dataLayer.push({event:"call_click",href:a.getAttribute("href"),id:a.id||null,path:location.pathname})},!0)}catch{}})();
