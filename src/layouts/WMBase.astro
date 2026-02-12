@@ -72,6 +72,22 @@ const allSchemas = providedTypes.has("LocalBusiness") ? schemas : [...schemas, b
         });
         return false;
       }
+
+      function gtag_report_form_conversion(form) {
+        try {
+          var emailInput = form && form.querySelector && form.querySelector('input[name="email"]');
+          var phoneInput = form && form.querySelector && form.querySelector('input[name="phone"]');
+          var email = emailInput && emailInput.value ? emailInput.value.trim() : '';
+          var phone = phoneInput && phoneInput.value ? phoneInput.value.trim() : '';
+          if (email || phone) {
+            gtag('set', 'user_data', {
+              email: email || undefined,
+              phone_number: phone || undefined
+            });
+          }
+        } catch (e) {}
+        return gtag_report_conversion();
+      }
     </script>
     <script src="https://analytics.ahrefs.com/analytics.js" data-key="1qYp7UMQiOWTjRN9OG1kOQ" async></script>
   </head>
