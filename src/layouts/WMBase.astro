@@ -55,6 +55,23 @@ const allSchemas = providedTypes.has("LocalBusiness") ? schemas : [...schemas, b
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-69S1NYW3V6');
+      gtag('config', 'AW-16889477810');
+    </script>
+    <script>
+      function gtag_report_conversion(url) {
+        var callback = function () {
+          if (typeof(url) != 'undefined') {
+            window.location = url;
+          }
+        };
+        gtag('event', 'conversion', {
+          'send_to': 'AW-16889477810/q6GQCNa6kfMbELL1w_U-',
+          'value': 1.0,
+          'currency': 'NZD',
+          'event_callback': callback
+        });
+        return false;
+      }
     </script>
     <script src="https://analytics.ahrefs.com/analytics.js" data-key="1qYp7UMQiOWTjRN9OG1kOQ" async></script>
   </head>
