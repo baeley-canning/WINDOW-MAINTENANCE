@@ -11,7 +11,7 @@ const canonical = "https://windowmaintenance.co.nz/contact/";
     <h1 class="text-3xl font-extrabold">Contact & Quotes</h1>
     <p class="mt-2 text-slate-300">Same-day replies during business hours. Free quotes in Wellington, Porirua, Lower Hutt, Upper Hutt, Petone and Kāpiti.</p>
     <p class="mt-3 text-sm text-slate-300">Holiday closure: We are closed 20 Dec to 6 Jan. You can still book and we will reply when we return.</p>
-    <form action="https://formspree.io/f/xpwqlqjb" method="POST" class="mt-6 space-y-4 rounded-2xl bg-[var(--brand-surface)] p-6 ring-1 ring-white/10" onsubmit="if(window && window.dataLayer){window.dataLayer.push({event:'lead_submit', source:'contact_form', path: location.pathname});} if(window && window.gtag){gtag('event','conversion',{'send_to':'AW-16889477810/q6GQCNa6kfMbELL1w_U-','value':1.0,'currency':'NZD'});}">
+    <form action="https://formspree.io/f/xpwqlqjb" method="POST" class="mt-6 space-y-4 rounded-2xl bg-[var(--brand-surface)] p-6 ring-1 ring-white/10" onsubmit="if(window && window.dataLayer){window.dataLayer.push({event:'lead_submit', source:'contact_form', path: location.pathname});} if(window && window.gtag){gtag('event','contact_submit',{'event_category':'form','event_label':'contact_form'});}">
       <input type="hidden" name="_subject" value="Website enquiry &mdash; Window Maintenance" />
       <input type="hidden" name="_redirect" value="/thanks/" />
       <input type="text" name="_honeypot" style="display:none" tabindex="-1" autocomplete="off" />
@@ -22,7 +22,7 @@ const canonical = "https://windowmaintenance.co.nz/contact/";
       <label class="block"><span class="text-sm">What needs fixing?</span><textarea name="message" rows="5" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10"></textarea></label>
       <div class="flex gap-3">
         <button class="btn btn-primary" type="submit">Send</button>
-        <a class="btn btn-outline" href="mailto:baeley@windowmaintenance.co.nz">or email us</a>
+        <a class="btn btn-outline" href="mailto:baeley@windowmaintenance.co.nz" onclick="if(window && window.gtag){gtag('event','email_click',{'event_category':'contact','event_label':'mailto'});}">or email us</a>
       </div>
     </form>
     <p class="mt-3 text-xs text-slate-400">After you submit, you’ll land on our <a class="text-amber-400" href="/thanks/">thank-you page</a> so you know it sent.</p>
