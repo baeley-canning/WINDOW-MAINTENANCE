@@ -58,7 +58,23 @@ const faqSchema = {
           </ul>
         </div>
         <div class="mt-10 w-full lg:mt-0 lg:w-1/2">
-          <img src="/img/window-stay-replacement.jpg" alt="Awning stay replacement on site in Wellington" class="w-full rounded-2xl object-cover shadow-2xl" loading="lazy" />
+          <picture>
+            <source
+              type="image/webp"
+              srcset="/img/window-stay-replacement-480.webp 480w, /img/window-stay-replacement-768.webp 768w"
+              sizes="(min-width: 1024px) 50vw, 100vw"
+            />
+            <img
+              src="/img/window-stay-replacement-768.webp"
+              alt="Awning stay replacement on site in Wellington"
+              class="w-full rounded-2xl object-cover shadow-2xl"
+              width="768"
+              height="1024"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+            />
+          </picture>
         </div>
       </div>
       <div class="mt-12 flex flex-wrap items-center gap-6 text-sm text-slate-400">
@@ -116,7 +132,22 @@ const faqSchema = {
           <figcaption>Rubber wedges &amp; seals</figcaption>
         </figure>
         <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
-          <img src="/img/window-stay-replacement.jpg" alt="New awning stay installed next to bent stay" class="h-full w-full rounded-xl object-cover" />
+          <picture>
+            <source
+              type="image/webp"
+              srcset="/img/window-stay-replacement-480.webp 480w, /img/window-stay-replacement-768.webp 768w"
+              sizes="(min-width: 768px) 33vw, 100vw"
+            />
+            <img
+              src="/img/window-stay-replacement-480.webp"
+              alt="New awning stay installed next to bent stay"
+              class="h-full w-full rounded-xl object-cover"
+              width="768"
+              height="1024"
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
           <figcaption>Awning stays replaced after storm damage</figcaption>
         </figure>
       </div>
@@ -166,7 +197,22 @@ const faqSchema = {
   <section class="border-t border-white/5">
     <div class="mx-auto max-w-6xl px-6 py-16 md:flex md:items-center md:gap-10">
       <div class="md:w-1/2">
-        <img src="/img/window-stay-replacement.jpg" alt="Window stay replacement case study" class="w-full rounded-2xl object-cover" />
+        <picture>
+          <source
+            type="image/webp"
+            srcset="/img/window-stay-replacement-480.webp 480w, /img/window-stay-replacement-768.webp 768w"
+            sizes="(min-width: 768px) 50vw, 100vw"
+          />
+          <img
+            src="/img/window-stay-replacement-768.webp"
+            alt="Window stay replacement case study"
+            class="w-full rounded-2xl object-cover"
+            width="768"
+            height="1024"
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
       </div>
       <div class="mt-8 md:mt-0 md:w-1/2">
         <p class="text-sm font-semibold uppercase tracking-[0.3em] text-amber-400">Latest job</p>
