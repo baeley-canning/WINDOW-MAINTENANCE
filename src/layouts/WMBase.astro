@@ -1,7 +1,7 @@
 ---
 import "../styles/global.css";
 import StickyBar from "../components/StickyBar.astro";
-const { title, description, canonical, ogImage = "/img/og-cover.jpg", schema } = Astro.props;
+const { title, description, canonical, ogImage = "/img/og-cover.jpg", schema, noindex = false } = Astro.props;
 const siteName = "Window Maintenance";
 const schemas = Array.isArray(schema) ? schema : (schema ? [schema] : []);
 const baseSchema = {
@@ -24,6 +24,7 @@ const allSchemas = providedTypes.has("LocalBusiness") ? schemas : [...schemas, b
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonical} />
     <meta name="theme-color" content="#0f172a" />
     <link rel="icon" href="/favicon.ico" />
