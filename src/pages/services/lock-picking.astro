@@ -5,8 +5,8 @@ import QuoteInline from "../../components/QuoteInline.astro";
 import FAQ from "../../components/FAQ.astro";
 import Picture from "../../components/Picture.astro";
 
-const title = "Lock Picking & Lockout Entry Wellington | Non-Destructive";
-const description = "Locked out in Wellington? Non-destructive lock picking and lockout entry, with cylinder servicing/replacement and fast regional call-outs.";
+const title = "Lock Picking Wellington | Lockout Entry & Cylinder Replacement";
+const description = "Locked out in Wellington, Porirua, Lower Hutt, Upper Hutt, Petone or Kapiti? Non-destructive lock picking, lockout entry and cylinder replacement.";
 const canonical = "https://windowmaintenance.co.nz/services/lock-picking/";
 
 const faqItems = [
@@ -24,12 +24,35 @@ const faqSchema = {
     "acceptedAnswer": { "@type": "Answer", "text": item.a }
   }))
 };
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Lock Picking & Lockout Entry Wellington",
+  "serviceType": "Lock picking and lockout entry",
+  "description": "Non-destructive lock picking, lockout entry and cylinder replacement across Wellington region suburbs.",
+  "url": canonical,
+  "areaServed": [
+    { "@type": "Place", "name": "Wellington" },
+    { "@type": "Place", "name": "Porirua" },
+    { "@type": "Place", "name": "Lower Hutt" },
+    { "@type": "Place", "name": "Upper Hutt" },
+    { "@type": "Place", "name": "Petone" },
+    { "@type": "Place", "name": "Kapiti" }
+  ],
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "Window Maintenance",
+    "url": "https://windowmaintenance.co.nz",
+    "telephone": "+6421638205"
+  }
+};
 ---
 
-<Layout title={title} description={description} canonical={canonical} schema={[faqSchema]}>
+<Layout title={title} description={description} canonical={canonical} schema={[faqSchema, serviceSchema]}>
   <Breadcrumbs />
   <main class="mx-auto max-w-4xl px-6 py-12">
-    <h1 class="text-3xl font-extrabold">Lock Picking &amp; Lockout Entry</h1>
+    <h1 class="text-3xl font-extrabold">Lock Picking Wellington &amp; Lockout Entry</h1>
     <p class="mt-4 text-slate-300">Locked out of your home? We provide lock picking and lockout entry across Wellington with a non-destructive approach where possible, followed by cylinder servicing or replacement if required.</p>
 
     <h2 class="mt-10 text-2xl font-bold">What this service includes</h2>
@@ -55,7 +78,16 @@ const faqSchema = {
     <div class="mt-8 space-y-3">
       <h2 class="text-2xl font-bold">Where we work</h2>
       <p class="text-slate-300">Wellington, Porirua, Lower Hutt, Upper Hutt, Petone and Kāpiti.</p>
+      <p class="text-slate-300">Lock picking suburbs we commonly attend include Wellington CBD, Te Aro, Newtown, Karori, Miramar, Johnsonville, Porirua, Lower Hutt, Upper Hutt, Petone and Kāpiti.</p>
       <p class="text-slate-300">Related: <a class="text-amber-400 underline" href="/services/hardware-wedge-replacement/">Hardware &amp; lock replacement</a> • <a class="text-amber-400 underline" href="/services/joinery-repairs/">Aluminium joinery repairs</a></p>
+      <ul class="list-disc space-y-1 pl-5 text-slate-300">
+        <li><a class="text-amber-400 underline" href="/areas/central-wellington/">Lock picking in Wellington</a></li>
+        <li><a class="text-amber-400 underline" href="/areas/porirua/">Lock picking in Porirua</a></li>
+        <li><a class="text-amber-400 underline" href="/areas/lower-hutt/">Lock picking in Lower Hutt</a></li>
+        <li><a class="text-amber-400 underline" href="/areas/upper-hutt/">Lock picking in Upper Hutt</a></li>
+        <li><a class="text-amber-400 underline" href="/areas/petone/">Lock picking in Petone</a></li>
+        <li><a class="text-amber-400 underline" href="/areas/kapiti/">Lock picking in Kāpiti</a></li>
+      </ul>
     </div>
   </main>
 
