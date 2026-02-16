@@ -5,12 +5,12 @@ import QuoteInline from "../../components/QuoteInline.astro";
 import FAQ from "../../components/FAQ.astro";
 import Picture from "../../components/Picture.astro";
 
-const title = "Front Door Lock Picking Wellington | Non-Destructive Entry";
-const description = "Locked out in Wellington? Non-destructive front door lock picking, cylinder servicing and replacement, with fast call-out coverage across the region.";
-const canonical = "https://windowmaintenance.co.nz/services/front-door-lock-picking/";
+const title = "Lock Picking & Lockout Entry Wellington | Non-Destructive";
+const description = "Locked out in Wellington? Non-destructive lock picking and lockout entry, with cylinder servicing/replacement and fast regional call-outs.";
+const canonical = "https://windowmaintenance.co.nz/services/lock-picking/";
 
 const faqItems = [
-  { q: "Can you pick any front door lock?", a: "We pick compatible pin-tumbler style cylinders where non-destructive entry is possible. If a lock is damaged or unsuitable for picking, we can replace the cylinder." },
+  { q: "Can you pick any residential lock?", a: "We pick compatible pin-tumbler style cylinders where non-destructive entry is possible. If a lock is damaged or unsuitable for picking, we can replace the cylinder." },
   { q: "Do you need proof before opening a door?", a: "Yes. We only provide entry when we can verify occupancy/authority for the property." },
   { q: "Do you service Wellington and the Hutt Valley?", a: "Yes. We cover Wellington, Porirua, Lower Hutt, Upper Hutt, Petone and Kāpiti." }
 ];
@@ -29,12 +29,12 @@ const faqSchema = {
 <Layout title={title} description={description} canonical={canonical} schema={[faqSchema]}>
   <Breadcrumbs />
   <main class="mx-auto max-w-4xl px-6 py-12">
-    <h1 class="text-3xl font-extrabold">Front Door Lock Picking</h1>
-    <p class="mt-4 text-slate-300">Locked out of your home? We provide front door lock picking across Wellington with a non-destructive approach where possible, followed by cylinder servicing or replacement if required.</p>
+    <h1 class="text-3xl font-extrabold">Lock Picking &amp; Lockout Entry</h1>
+    <p class="mt-4 text-slate-300">Locked out of your home? We provide lock picking and lockout entry across Wellington with a non-destructive approach where possible, followed by cylinder servicing or replacement if required.</p>
 
     <h2 class="mt-10 text-2xl font-bold">What this service includes</h2>
     <ul class="mt-4 list-disc space-y-2 pl-5 text-slate-300">
-      <li>Non-destructive entry for compatible front door cylinders</li>
+      <li>Non-destructive entry for compatible residential cylinders</li>
       <li>Cylinder checks and lock function testing after entry</li>
       <li>Cylinder replacement when locks are worn, damaged or seized</li>
       <li>Door handle/lockset adjustments where alignment is causing issues</li>
@@ -42,9 +42,9 @@ const faqSchema = {
 
     <figure class="mt-6 rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
       <div class="ratio-4-3 card-frame">
-        <Picture base="euro-lock-cylinder" alt="Front door euro lock cylinder replacement hardware" className="h-full w-full object-cover" />
+        <Picture base="euro-lock-cylinder" alt="Euro lock cylinder replacement hardware" className="h-full w-full object-cover" />
       </div>
-      <figcaption class="mt-2 text-sm text-slate-400">We carry common front door cylinders and lock hardware for on-site replacement if needed.</figcaption>
+      <figcaption class="mt-2 text-sm text-slate-400">We carry common cylinders and lock hardware for on-site replacement if needed.</figcaption>
     </figure>
 
     <div class="mt-8 space-y-3">
@@ -59,6 +59,6 @@ const faqSchema = {
     </div>
   </main>
 
-  <QuoteInline title="Need urgent front door lock entry?" />
-  <FAQ heading="Front door lock picking FAQs" items={faqItems} />
+  <QuoteInline title="Need urgent lockout entry?" />
+  <FAQ heading="Lock picking FAQs" items={faqItems} />
 </Layout>
