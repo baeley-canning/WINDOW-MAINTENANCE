@@ -1,7 +1,7 @@
 ---
 import Layout from "../../layouts/WMBase.astro";
 import { getCollection } from "astro:content";
-const posts = await getCollection("blog");
+const posts = (await getCollection("blog")).filter((post) => post.data.listed !== false);
 posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 const title = "Window Maintenance Blog | Wellington window & door repairs";
 const description = "Guides and job recaps for aluminium window repairs, sliding door rollers, track fixes and leak reseals in Wellington, Porirua and the Hutt Valley.";

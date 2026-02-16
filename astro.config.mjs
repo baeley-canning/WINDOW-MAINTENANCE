@@ -6,7 +6,9 @@ export default defineConfig({
   integrations: [
     tailwind(),
     sitemap({
-      filter: (page) => !page.endsWith("/thanks/"),
+      filter: (page) =>
+        !page.endsWith("/thanks/") &&
+        !page.endsWith("/blog/christmas-closure-2025/"),
     }),
   ],
 });

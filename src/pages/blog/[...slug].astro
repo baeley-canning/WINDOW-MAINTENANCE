@@ -25,7 +25,7 @@ const articleSchema = {
   image: "/img/og-cover.jpg"
 };
 ---
-<Layout title={title} description={description} canonical={canonical} schema={[articleSchema]}>
+<Layout title={title} description={description} canonical={canonical} schema={[articleSchema]} noindex={post.data.noindex === true}>
   <main class="mx-auto max-w-5xl px-6 py-12">
     <nav class="text-sm text-slate-400">
       <a href="/blog/" class="hover:text-amber-400">&larr; Back to blog</a>
