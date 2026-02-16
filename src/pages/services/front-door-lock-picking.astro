@@ -1,0 +1,64 @@
+---
+import Layout from "../../layouts/WMBase.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import QuoteInline from "../../components/QuoteInline.astro";
+import FAQ from "../../components/FAQ.astro";
+import Picture from "../../components/Picture.astro";
+
+const title = "Front Door Lock Picking Wellington | Non-Destructive Entry";
+const description = "Locked out in Wellington? Non-destructive front door lock picking, cylinder servicing and replacement, with fast call-out coverage across the region.";
+const canonical = "https://windowmaintenance.co.nz/services/front-door-lock-picking/";
+
+const faqItems = [
+  { q: "Can you pick any front door lock?", a: "We pick compatible pin-tumbler style cylinders where non-destructive entry is possible. If a lock is damaged or unsuitable for picking, we can replace the cylinder." },
+  { q: "Do you need proof before opening a door?", a: "Yes. We only provide entry when we can verify occupancy/authority for the property." },
+  { q: "Do you service Wellington and the Hutt Valley?", a: "Yes. We cover Wellington, Porirua, Lower Hutt, Upper Hutt, Petone and Kāpiti." }
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map((item) => ({
+    "@type": "Question",
+    "name": item.q,
+    "acceptedAnswer": { "@type": "Answer", "text": item.a }
+  }))
+};
+---
+
+<Layout title={title} description={description} canonical={canonical} schema={[faqSchema]}>
+  <Breadcrumbs />
+  <main class="mx-auto max-w-4xl px-6 py-12">
+    <h1 class="text-3xl font-extrabold">Front Door Lock Picking</h1>
+    <p class="mt-4 text-slate-300">Locked out of your home? We provide front door lock picking across Wellington with a non-destructive approach where possible, followed by cylinder servicing or replacement if required.</p>
+
+    <h2 class="mt-10 text-2xl font-bold">What this service includes</h2>
+    <ul class="mt-4 list-disc space-y-2 pl-5 text-slate-300">
+      <li>Non-destructive entry for compatible front door cylinders</li>
+      <li>Cylinder checks and lock function testing after entry</li>
+      <li>Cylinder replacement when locks are worn, damaged or seized</li>
+      <li>Door handle/lockset adjustments where alignment is causing issues</li>
+    </ul>
+
+    <figure class="mt-6 rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
+      <div class="ratio-4-3 card-frame">
+        <Picture base="euro-lock-cylinder" alt="Front door euro lock cylinder replacement hardware" className="h-full w-full object-cover" />
+      </div>
+      <figcaption class="mt-2 text-sm text-slate-400">We carry common front door cylinders and lock hardware for on-site replacement if needed.</figcaption>
+    </figure>
+
+    <div class="mt-8 space-y-3">
+      <h2 class="text-2xl font-bold">Important access policy</h2>
+      <p class="text-slate-300">For security and legal compliance, we only open doors when occupancy/authority can be verified.</p>
+    </div>
+
+    <div class="mt-8 space-y-3">
+      <h2 class="text-2xl font-bold">Where we work</h2>
+      <p class="text-slate-300">Wellington, Porirua, Lower Hutt, Upper Hutt, Petone and Kāpiti.</p>
+      <p class="text-slate-300">Related: <a class="text-amber-400 underline" href="/services/hardware-wedge-replacement/">Hardware &amp; lock replacement</a> • <a class="text-amber-400 underline" href="/services/joinery-repairs/">Aluminium joinery repairs</a></p>
+    </div>
+  </main>
+
+  <QuoteInline title="Need urgent front door lock entry?" />
+  <FAQ heading="Front door lock picking FAQs" items={faqItems} />
+</Layout>
