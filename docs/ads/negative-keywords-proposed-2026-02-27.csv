@@ -1,0 +1,27 @@
+Keyword,Match type,Scope,Notes
+window replacement program,Phrase,Campaign,Low intent for repair service
+government window replacement program,Phrase,Campaign,Irrelevant lead intent
+for seniors,Phrase,Campaign,Program-seeker traffic
+wooden,Phrase,Campaign,Exclude timber jobs if not serviced
+timber,Phrase,Campaign,Exclude timber jobs if not serviced
+window replacement,Phrase,Ad group,Use where replacement not offered
+new windows and doors,Phrase,Campaign,New install shoppers
+house window replacement,Phrase,Campaign,Replacement intent
+cheap window replacement,Phrase,Campaign,Price-only replacement intent
+bathroom window replacement,Phrase,Campaign,Replacement intent
+window replacement near me,Phrase,Campaign,Replacement intent
+how to fix broken window,Phrase,Campaign,DIY intent
+how much does it cost to replace,Phrase,Campaign,Price/DIY info intent
+fly screen,Phrase,Campaign,Out-of-scope unless offered
+flyscreen,Phrase,Campaign,Out-of-scope unless offered
+insect screen,Phrase,Campaign,Out-of-scope unless offered
+mosquito screen,Phrase,Campaign,Out-of-scope unless offered
+auckland,Phrase,Campaign,Out-of-area
+tauranga,Phrase,Campaign,Out-of-area
+hamilton,Phrase,Campaign,Out-of-area
+christchurch,Phrase,Campaign,Out-of-area
+dunedin,Phrase,Campaign,Out-of-area
+exceed,Phrase,Campaign,Use only if not running competitor campaign
+first windows,Phrase,Campaign,Use only if not running competitor campaign
+metro windows,Phrase,Campaign,Use only if not running competitor campaign
+nu look,Phrase,Campaign,Use only if not running competitor campaign
