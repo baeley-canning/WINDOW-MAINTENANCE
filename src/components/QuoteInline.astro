@@ -5,7 +5,7 @@ const path = Astro.url?.pathname || '';
 ---
 <section class="mt-10 rounded-2xl bg-[var(--brand-surface)] p-6 ring-1 ring-white/10">
   <h2 class="text-xl font-bold">{title}</h2>
-  <form action={action} method="POST" class="mt-4 grid gap-3 sm:grid-cols-2" onsubmit="try{sessionStorage.setItem('wm_form_submit','1');}catch(e){} if(window && window.dataLayer){window.dataLayer.push({event:'lead_submit', source:'inline_form', path: location.pathname});} if(window && window.gtag_report_form_conversion){gtag_report_form_conversion(this);} else if(window && window.gtag_report_conversion){gtag_report_conversion();}">
+  <form action={action} method="POST" class="mt-4 grid gap-3 sm:grid-cols-2" onsubmit="if(window && window.dataLayer){window.dataLayer.push({event:'lead_submit', source:'inline_form', path: location.pathname});}">
     <input type="hidden" name="_subject" value="Website enquiry — Window Maintenance" />
     <input type="hidden" name="_redirect" value="/thanks/" />
     <input type="hidden" name="source_page" value={path} />
@@ -23,7 +23,7 @@ const path = Astro.url?.pathname || '';
       <textarea name="message" rows="3" class="w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10"></textarea>
     </label>
     <div class="sm:col-span-2 flex gap-3">
-      <button class="btn btn-primary" type="submit">Get quote</button>
+      <button class="btn btn-primary" type="submit" onclick="if(window && window.gtag_report_conversion){gtag_report_conversion();}">Get quote</button>
       <a class="btn btn-outline" href="tel:+6421638205" data-cta="call">Call 021 638 205</a>
     </div>
   </form>
