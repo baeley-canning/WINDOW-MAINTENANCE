@@ -9,15 +9,21 @@ const canonical = "https://windowmaintenance.co.nz/thanks/";
     <h1 class="text-4xl font-extrabold">Thanks — message received.</h1>
     <p class="mt-2 text-slate-300">We’ll reply as soon as possible. If it’s urgent, call <a class="text-amber-400" id="cta-call-thanks" data-cta="call" href="tel:+6421638205">021 638 205</a>.</p>
     <a class="mt-6 inline-block btn btn-primary" href="/">Back to home</a>
-    <script>
+    <script is:inline>
       if (window && window.dataLayer) {
         window.dataLayer.push({ event: 'lead_submit', source: 'thanks_page' });
       }
       try {
         const ref = document.referrer || "";
-        const fromFormFlow =
+        let fromFormFlow =
           ref.includes("windowmaintenance.co.nz/contact") ||
           ref.includes("formspree.io");
+        try {
+          if (sessionStorage.getItem("wm_form_submit") === "1") {
+            fromFormFlow = true;
+          }
+          sessionStorage.removeItem("wm_form_submit");
+        } catch (_) {}
         if (fromFormFlow && window && window.gtag) {
           window.gtag("event", "conversion", {
             send_to: "AW-16889477810/q6GQCNa6kfMbELL1w_U-",
