@@ -10,7 +10,7 @@ $method = strtoupper((string)($_SERVER['REQUEST_METHOD'] ?? 'GET'));
 if ($method === 'GET') {
     $jobs = [];
     $result = $db->query(
-        "SELECT id, job_date, job_time, customer_name, phone, address, summary, status, is_deleted, updated_at
+        "SELECT id, job_date, job_time, customer_name, phone, address, lat, lng, summary, status, is_deleted, updated_at
          FROM portal_jobs
          ORDER BY job_date ASC, job_time ASC, customer_name ASC"
     );
@@ -61,6 +61,8 @@ $time = trim((string)($job['time'] ?? ''));
 $customer = trim((string)($job['customer'] ?? ''));
 $phone = trim((string)($job['phone'] ?? ''));
 $address = trim((string)($job['address'] ?? ''));
+$lat = portal_parse_coord($job['lat'] ?? null, -90.0, 90.0);
+$lng = portal_parse_coord($job['lng'] ?? null, -180.0, 180.0);
 $summary = trim((string)($job['summary'] ?? ''));
 $status = portal_normalize_status(trim((string)($job['status'] ?? 'Booked')));
 $deleted = !empty($job['deleted']) ? 1 : 0;
@@ -95,17 +97,29 @@ if (strlen($address) > 255) {
     json_response(['ok' => false, 'error' => 'Address is too long'], 422);
 }
 
+$latStr = $lat === null ? '' : number_format($lat, 7, '.', '');
+$lngStr = $lng === null ? '' : number_format($lng, 7, '.', '');
+if ($latStr === '' || $lngStr === '') {
+    $geo = portal_geocode_search_nz($db, $address, 1, true);
+    if (!empty($geo)) {
+        $latStr = number_format((float)$geo[0]['lat'], 7, '.', '');
+        $lngStr = number_format((float)$geo[0]['lng'], 7, '.', '');
+    }
+}
+
 $stmt = $db->prepare(
     "INSERT INTO portal_jobs
-      (id, job_date, job_time, customer_name, phone, address, summary, status, is_deleted, updated_at, created_at)
+      (id, job_date, job_time, customer_name, phone, address, lat, lng, summary, status, is_deleted, updated_at, created_at)
      VALUES
-      (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())
+      (?, ?, ?, ?, ?, ?, NULLIF(?, ''), NULLIF(?, ''), ?, ?, ?, NOW(), NOW())
      ON DUPLICATE KEY UPDATE
       job_date = VALUES(job_date),
       job_time = VALUES(job_time),
       customer_name = VALUES(customer_name),
       phone = VALUES(phone),
       address = VALUES(address),
+      lat = VALUES(lat),
+      lng = VALUES(lng),
       summary = VALUES(summary),
       status = VALUES(status),
       is_deleted = VALUES(is_deleted),
@@ -117,13 +131,15 @@ if (!$stmt) {
 }
 
 $stmt->bind_param(
-    'ssssssssi',
+    'ssssssssssi',
     $id,
     $date,
     $time,
     $customer,
     $phone,
     $address,
+    $latStr,
+    $lngStr,
     $summary,
     $status,
     $deleted

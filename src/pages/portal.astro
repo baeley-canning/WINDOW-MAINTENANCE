@@ -7,6 +7,8 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
 ---
 
 <Layout title={title} description={description} canonical={canonical} noindex={true}>
+  <link rel="stylesheet" href="/vendor/leaflet/leaflet.css" />
+  <script is:inline src="/vendor/leaflet/leaflet.js"></script>
   <section class="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10">
     <div id="portal-login" class="mx-auto max-w-md rounded-2xl bg-[var(--brand-surface)] p-6 ring-1 ring-white/10">
       <h1 class="text-2xl font-extrabold">Job Portal Login</h1>
@@ -84,6 +86,8 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
               <button id="heatmap-copy-line" type="button" class="btn btn-outline px-2 py-1 text-xs">Copy line</button>
             </div>
             <div id="heatmap-grid" class="mt-3 grid gap-2 sm:grid-cols-2"></div>
+            <div id="jobs-map" class="mt-3 h-[360px] w-full rounded-xl ring-1 ring-white/10"></div>
+            <p id="map-summary" class="mt-2 text-xs text-slate-400">Map loads from saved job addresses.</p>
           </div>
         </div>
 
@@ -108,7 +112,9 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
             </label>
             <label class="block">
               <span class="text-sm">Address</span>
-              <input id="job-address" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10" required />
+              <input id="job-address" list="address-suggestions" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10" required />
+              <datalist id="address-suggestions"></datalist>
+              <span id="address-hint" class="mt-1 block text-xs text-slate-400">Start typing address (suburb/street) for suggestions.</span>
             </label>
             <label class="block">
               <span class="text-sm">Short job description</span>
@@ -163,6 +169,8 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         inputCustomer: document.getElementById("job-customer"),
         inputPhone: document.getElementById("job-phone"),
         inputAddress: document.getElementById("job-address"),
+        addressSuggestions: document.getElementById("address-suggestions"),
+        addressHint: document.getElementById("address-hint"),
         inputSummary: document.getElementById("job-summary"),
         inputStatus: document.getElementById("job-status"),
         jobClear: document.getElementById("job-clear"),
@@ -171,7 +179,9 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         heatmapSummary: document.getElementById("heatmap-summary"),
         heatmapLine: document.getElementById("heatmap-line"),
         heatmapCopyLine: document.getElementById("heatmap-copy-line"),
-        heatmapGrid: document.getElementById("heatmap-grid")
+        heatmapGrid: document.getElementById("heatmap-grid"),
+        mapWrap: document.getElementById("jobs-map"),
+        mapSummary: document.getElementById("map-summary")
       };
 
       const today = new Date();
@@ -181,10 +191,22 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         month: new Date(today.getFullYear(), today.getMonth(), 1),
         heatmapMonth: dateKey(today).slice(0, 7),
         heatmapDay: String(today.getDate()).padStart(2, "0"),
+        map: null,
+        mapLayer: null,
+        mapReady: false,
+        geocodeInFlight: {},
+        geocodeLookup: {},
+        suggestionTimer: null,
+        pendingLat: null,
+        pendingLng: null,
+        suggestionLookup: {},
         editId: null,
         pollTimer: null,
         saveInFlight: false
       };
+
+      const MAP_DEFAULT_CENTER = [-41.2865, 174.7762];
+      const MAP_DEFAULT_ZOOM = 10;
 
       const AREA_KEYWORDS = [
         { area: "Wellington South", terms: ["wellington south", "newtown", "berhampore", "island bay", "lyall bay", "brooklyn", "kilbirnie", "miramar", "seatoun", "strathmore"] },
@@ -241,6 +263,51 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
           .replace(/'/g, "&#39;");
       }
 
+      function hasCoords(job) {
+        return (
+          typeof job.lat === "number" &&
+          typeof job.lng === "number" &&
+          Number.isFinite(job.lat) &&
+          Number.isFinite(job.lng)
+        );
+      }
+
+      function initMap() {
+        if (state.map || !el.mapWrap || !window.L) return;
+
+        state.map = window.L.map(el.mapWrap, {
+          zoomControl: true,
+          preferCanvas: true
+        }).setView(MAP_DEFAULT_CENTER, MAP_DEFAULT_ZOOM);
+
+        window.L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          maxZoom: 19,
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap</a> contributors'
+        }).addTo(state.map);
+
+        state.mapLayer = window.L.layerGroup().addTo(state.map);
+        state.mapReady = true;
+      }
+
+      function refreshMapLayout() {
+        if (!state.map) return;
+        setTimeout(function () {
+          try {
+            state.map.invalidateSize();
+          } catch (_) {}
+        }, 80);
+      }
+
+      function pickCircleColor(ratio) {
+        if (ratio >= 0.66) {
+          return { stroke: "#ef4444", fill: "#ef4444" }; // red
+        }
+        if (ratio >= 0.33) {
+          return { stroke: "#f59e0b", fill: "#f59e0b" }; // yellow
+        }
+        return { stroke: "#22c55e", fill: "#22c55e" }; // green
+      }
+
       function setPortalStatus(message, isError) {
         el.portalStatus.textContent = message;
         el.portalStatus.classList.toggle("text-red-300", Boolean(isError));
@@ -256,6 +323,8 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
       function showApp() {
         el.loginWrap.classList.add("hidden");
         el.appWrap.classList.remove("hidden");
+        initMap();
+        refreshMapLayout();
       }
 
       function clearLoginError() {
@@ -354,6 +423,206 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         }
       }
 
+      function getHeatmapFilteredJobs() {
+        const monthValue = state.heatmapMonth;
+        const dayValue = state.heatmapDay;
+        const dateFilter = monthValue + "-" + dayValue;
+
+        return state.jobs.filter(function (job) {
+          if (job.deleted) return false;
+          if (!job.date.startsWith(monthValue + "-")) return false;
+          if (dayValue && job.date !== dateFilter) return false;
+          return true;
+        });
+      }
+
+      function buildAreaClusters(jobs) {
+        const clusters = {};
+        for (const area of AREA_ORDER) {
+          clusters[area] = { count: 0, latSum: 0, lngSum: 0, mapped: 0 };
+        }
+
+        for (const job of jobs) {
+          const area = classifyArea(job.address);
+          clusters[area].count += 1;
+          if (hasCoords(job)) {
+            clusters[area].latSum += job.lat;
+            clusters[area].lngSum += job.lng;
+            clusters[area].mapped += 1;
+          }
+        }
+
+        return clusters;
+      }
+
+      async function geocodeAddressOnce(address) {
+        const query = String(address || "").trim();
+        if (query.length < 5) return null;
+        const key = query.toLowerCase();
+        if (Object.prototype.hasOwnProperty.call(state.geocodeLookup, key)) {
+          return state.geocodeLookup[key];
+        }
+        if (state.geocodeInFlight[key]) return null;
+        state.geocodeInFlight[key] = true;
+        try {
+          const data = await apiRequest("address.php?mode=geocode&q=" + encodeURIComponent(query));
+          if (!data.found || !data.item) {
+            state.geocodeLookup[key] = null;
+            return null;
+          }
+          const lat = Number(data.item.lat);
+          const lng = Number(data.item.lng);
+          if (!Number.isFinite(lat) || !Number.isFinite(lng)) {
+            state.geocodeLookup[key] = null;
+            return null;
+          }
+          state.geocodeLookup[key] = { lat: lat, lng: lng };
+          return state.geocodeLookup[key];
+        } catch (_) {
+          state.geocodeLookup[key] = null;
+          return null;
+        } finally {
+          delete state.geocodeInFlight[key];
+        }
+      }
+
+      async function persistJobCoords(job, lat, lng) {
+        const patch = {
+          id: job.id,
+          date: job.date,
+          time: job.time,
+          customer: job.customer,
+          phone: job.phone,
+          address: job.address,
+          summary: job.summary,
+          status: job.status || "Booked",
+          deleted: Boolean(job.deleted),
+          lat: lat,
+          lng: lng
+        };
+        try {
+          await apiRequest("jobs.php", { method: "POST", body: { job: patch } });
+        } catch (_) {}
+      }
+
+      async function fillMissingCoords(jobs) {
+        const missing = jobs.filter(function (job) {
+          return !job.deleted && !hasCoords(job) && String(job.address || "").trim().length >= 5;
+        }).slice(0, 2);
+
+        for (const job of missing) {
+          const geo = await geocodeAddressOnce(job.address);
+          if (!geo) continue;
+          job.lat = geo.lat;
+          job.lng = geo.lng;
+          persistJobCoords(job, geo.lat, geo.lng);
+        }
+      }
+
+      function renderMap(jobs, clustersByArea) {
+        if (!state.mapReady || !state.mapLayer) return;
+
+        state.mapLayer.clearLayers();
+
+        const mappedJobs = jobs.filter(hasCoords);
+        if (!mappedJobs.length) {
+          el.mapSummary.textContent = "No mapped addresses yet for this filter. Save or edit jobs and coordinates will auto-fill.";
+          state.map.setView(MAP_DEFAULT_CENTER, MAP_DEFAULT_ZOOM);
+          fillMissingCoords(jobs);
+          return;
+        }
+
+        let bounds = null;
+        for (const job of mappedJobs) {
+          const marker = window.L.circleMarker([job.lat, job.lng], {
+            radius: 4,
+            color: "#e2e8f0",
+            weight: 1,
+            fillColor: "#e2e8f0",
+            fillOpacity: 0.85
+          });
+          marker.bindPopup(
+            "<strong>" + safeText(job.customer) + "</strong><br>" +
+            safeText(job.date) + " " + safeText(job.time) + "<br>" +
+            safeText(job.address)
+          );
+          marker.addTo(state.mapLayer);
+          const ll = window.L.latLng(job.lat, job.lng);
+          bounds = bounds ? bounds.extend(ll) : window.L.latLngBounds([ll]);
+        }
+
+        const maxCount = Math.max.apply(null, Object.keys(clustersByArea).map(function (key) {
+          return clustersByArea[key].count;
+        }).concat([0]));
+
+        for (const area of AREA_ORDER) {
+          const cluster = clustersByArea[area];
+          if (!cluster || cluster.count <= 0 || cluster.mapped <= 0) continue;
+          const centerLat = cluster.latSum / cluster.mapped;
+          const centerLng = cluster.lngSum / cluster.mapped;
+          const ratio = maxCount > 0 ? cluster.count / maxCount : 0;
+          const color = pickCircleColor(ratio);
+          const circle = window.L.circle([centerLat, centerLng], {
+            radius: 700 + cluster.count * 220,
+            color: color.stroke,
+            weight: 2,
+            fillColor: color.fill,
+            fillOpacity: 0.28
+          });
+          circle.bindTooltip(area + ": " + cluster.count + " job" + (cluster.count === 1 ? "" : "s"), {
+            direction: "top",
+            offset: [0, -4]
+          });
+          circle.addTo(state.mapLayer);
+          const ll = window.L.latLng(centerLat, centerLng);
+          bounds = bounds ? bounds.extend(ll) : window.L.latLngBounds([ll]);
+        }
+
+        if (bounds) {
+          state.map.fitBounds(bounds.pad(0.2));
+        }
+
+        const mappedCount = mappedJobs.length;
+        el.mapSummary.textContent = mappedCount + " mapped job" + (mappedCount === 1 ? "" : "s") + " shown.";
+        fillMissingCoords(jobs);
+      }
+
+      async function loadAddressSuggestions(query) {
+        const q = String(query || "").trim();
+        if (q.length < 3) {
+          state.suggestionLookup = {};
+          el.addressSuggestions.innerHTML = "";
+          el.addressHint.textContent = "Start typing address (suburb/street) for suggestions.";
+          return;
+        }
+
+        try {
+          const data = await apiRequest("address.php?mode=suggest&q=" + encodeURIComponent(q));
+          const items = Array.isArray(data.items) ? data.items : [];
+          state.suggestionLookup = {};
+          el.addressSuggestions.innerHTML = "";
+
+          for (const item of items) {
+            const label = String(item && item.label ? item.label : "").trim();
+            const lat = Number(item && item.lat);
+            const lng = Number(item && item.lng);
+            if (!label || !Number.isFinite(lat) || !Number.isFinite(lng)) continue;
+            state.suggestionLookup[label] = { lat: lat, lng: lng };
+            const opt = document.createElement("option");
+            opt.value = label;
+            el.addressSuggestions.appendChild(opt);
+          }
+
+          if (items.length) {
+            el.addressHint.textContent = "Pick a suggested address for faster map pinning.";
+          } else {
+            el.addressHint.textContent = "No close suggestions found yet. You can still save manually.";
+          }
+        } catch (_) {
+          el.addressHint.textContent = "Address suggestions unavailable right now.";
+        }
+      }
+
       function renderHeatmap() {
         if (!el.heatmapMonth || !el.heatmapDay || !el.heatmapGrid) return;
 
@@ -372,21 +641,10 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         const monthValue = state.heatmapMonth;
         const dayValue = state.heatmapDay;
         const monthLabel = formatMonthLabel(monthValue);
-        const dateFilter = monthValue + "-" + dayValue;
-
-        const filtered = state.jobs.filter(function (job) {
-          if (job.deleted) return false;
-          if (!job.date.startsWith(monthValue + "-")) return false;
-          if (dayValue && job.date !== dateFilter) return false;
-          return true;
-        });
-
+        const filtered = getHeatmapFilteredJobs();
+        const clusters = buildAreaClusters(filtered);
         const counts = {};
-        for (const area of AREA_ORDER) counts[area] = 0;
-        for (const job of filtered) {
-          const area = classifyArea(job.address);
-          counts[area] = (counts[area] || 0) + 1;
-        }
+        for (const area of AREA_ORDER) counts[area] = clusters[area].count;
 
         const entries = Object.entries(counts).sort(function (a, b) {
           if (b[1] === a[1]) return a[0].localeCompare(b[0]);
@@ -427,6 +685,8 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
             '<p class="mt-1 text-xs">' + count + " job" + (count === 1 ? "" : "s") + "</p>";
           el.heatmapGrid.appendChild(card);
         }
+
+        renderMap(filtered, clusters);
       }
 
       function renderCalendar() {
@@ -516,14 +776,19 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
 
       function clearForm() {
         state.editId = null;
+        state.pendingLat = null;
+        state.pendingLng = null;
         el.formTitle.textContent = "Add Job";
         el.jobForm.reset();
         el.inputDate.value = state.selectedDate;
         el.inputStatus.value = "Booked";
+        el.addressHint.textContent = "Start typing address (suburb/street) for suggestions.";
       }
 
       function fillForm(job) {
         state.editId = job.id;
+        state.pendingLat = hasCoords(job) ? job.lat : null;
+        state.pendingLng = hasCoords(job) ? job.lng : null;
         el.formTitle.textContent = "Edit Job";
         el.inputDate.value = job.date;
         el.inputTime.value = job.time;
@@ -532,9 +797,14 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         el.inputAddress.value = job.address;
         el.inputSummary.value = job.summary;
         el.inputStatus.value = job.status || "Booked";
+        el.addressHint.textContent = hasCoords(job)
+          ? "Saved map location found for this address."
+          : "No saved map location yet. Pick a suggestion or save to auto-map.";
       }
 
       function normalizeJob(job) {
+        const lat = job && job.lat !== null && job.lat !== undefined && job.lat !== "" ? Number(job.lat) : null;
+        const lng = job && job.lng !== null && job.lng !== undefined && job.lng !== "" ? Number(job.lng) : null;
         return {
           id: String(job && job.id ? job.id : ""),
           date: String(job && job.date ? job.date : ""),
@@ -542,6 +812,8 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
           customer: String(job && job.customer ? job.customer : ""),
           phone: String(job && job.phone ? job.phone : ""),
           address: String(job && job.address ? job.address : ""),
+          lat: Number.isFinite(lat) ? lat : null,
+          lng: Number.isFinite(lng) ? lng : null,
           summary: String(job && job.summary ? job.summary : ""),
           status: String(job && job.status ? job.status : "Booked"),
           deleted: Boolean(job && job.deleted)
@@ -575,6 +847,8 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
           customer: el.inputCustomer.value.trim(),
           phone: el.inputPhone.value.trim(),
           address: el.inputAddress.value.trim(),
+          lat: state.pendingLat,
+          lng: state.pendingLng,
           summary: el.inputSummary.value.trim(),
           status: el.inputStatus.value,
           deleted: false
@@ -712,6 +986,34 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
 
         el.jobClear.addEventListener("click", function () {
           clearForm();
+        });
+
+        el.inputAddress.addEventListener("input", function () {
+          state.pendingLat = null;
+          state.pendingLng = null;
+          const value = el.inputAddress.value || "";
+          if (state.suggestionTimer) {
+            clearTimeout(state.suggestionTimer);
+            state.suggestionTimer = null;
+          }
+          state.suggestionTimer = setTimeout(function () {
+            loadAddressSuggestions(value);
+          }, 280);
+        });
+
+        el.inputAddress.addEventListener("change", function () {
+          const selected = String(el.inputAddress.value || "").trim();
+          const match = state.suggestionLookup[selected];
+          if (match) {
+            state.pendingLat = Number(match.lat);
+            state.pendingLng = Number(match.lng);
+            state.geocodeLookup[selected.toLowerCase()] = { lat: state.pendingLat, lng: state.pendingLng };
+            el.addressHint.textContent = "Address pinned on map from suggestion.";
+            return;
+          }
+          state.pendingLat = null;
+          state.pendingLng = null;
+          el.addressHint.textContent = "Address saved. Map pin will be resolved automatically.";
         });
 
         el.jobList.addEventListener("click", function (e) {

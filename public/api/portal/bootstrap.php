@@ -137,6 +137,49 @@ SQL;
             'details' => $db->error,
         ], 500);
     }
+
+    // Backward-compatible schema updates for map/geocode support.
+    if (
+        !$db->query("ALTER TABLE portal_jobs ADD COLUMN lat DECIMAL(10,7) NULL AFTER address")
+        && (int)$db->errno !== 1060
+    ) {
+        json_response([
+            'ok' => false,
+            'error' => 'Failed to add portal_jobs.lat column',
+            'details' => $db->error,
+        ], 500);
+    }
+
+    if (
+        !$db->query("ALTER TABLE portal_jobs ADD COLUMN lng DECIMAL(10,7) NULL AFTER lat")
+        && (int)$db->errno !== 1060
+    ) {
+        json_response([
+            'ok' => false,
+            'error' => 'Failed to add portal_jobs.lng column',
+            'details' => $db->error,
+        ], 500);
+    }
+
+    $geoSql = <<<SQL
+CREATE TABLE IF NOT EXISTS portal_geocode_cache (
+  query_hash CHAR(40) NOT NULL PRIMARY KEY,
+  query_text VARCHAR(255) NOT NULL,
+  label VARCHAR(255) NOT NULL,
+  lat DECIMAL(10,7) NULL,
+  lng DECIMAL(10,7) NULL,
+  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  KEY idx_updated_at (updated_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+SQL;
+
+    if (!$db->query($geoSql)) {
+        json_response([
+            'ok' => false,
+            'error' => 'Failed to prepare portal_geocode_cache table',
+            'details' => $db->error,
+        ], 500);
+    }
 }
 
 function portal_normalize_status(string $status): string
@@ -165,6 +208,9 @@ function portal_is_valid_time(string $time): bool
 
 function portal_job_from_row(array $row): array
 {
+    $lat = isset($row['lat']) && $row['lat'] !== null ? (float)$row['lat'] : null;
+    $lng = isset($row['lng']) && $row['lng'] !== null ? (float)$row['lng'] : null;
+
     return [
         'id' => (string)$row['id'],
         'date' => (string)$row['job_date'],
@@ -172,9 +218,150 @@ function portal_job_from_row(array $row): array
         'customer' => (string)$row['customer_name'],
         'phone' => (string)$row['phone'],
         'address' => (string)$row['address'],
+        'lat' => $lat,
+        'lng' => $lng,
         'summary' => (string)$row['summary'],
         'status' => (string)$row['status'],
         'deleted' => ((int)$row['is_deleted']) === 1,
         'updatedAt' => (string)$row['updated_at'],
     ];
+}
+
+function portal_parse_coord(mixed $value, float $min, float $max): ?float
+{
+    if ($value === null) {
+        return null;
+    }
+    if (is_string($value) && trim($value) === '') {
+        return null;
+    }
+    if (!is_numeric($value)) {
+        return null;
+    }
+
+    $coord = (float)$value;
+    if ($coord < $min || $coord > $max) {
+        return null;
+    }
+    return round($coord, 7);
+}
+
+function portal_http_get_json(string $url): ?array
+{
+    $userAgent = 'WindowMaintenancePortal/1.0 (+https://windowmaintenance.co.nz)';
+
+    if (function_exists('curl_init')) {
+        $ch = curl_init($url);
+        if ($ch === false) {
+            return null;
+        }
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_CONNECTTIMEOUT => 4,
+            CURLOPT_TIMEOUT => 8,
+            CURLOPT_USERAGENT => $userAgent,
+            CURLOPT_HTTPHEADER => ['Accept: application/json'],
+        ]);
+        $raw = curl_exec($ch);
+        $code = (int)curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+        curl_close($ch);
+        if (!is_string($raw) || $code < 200 || $code >= 300) {
+            return null;
+        }
+        $decoded = json_decode($raw, true);
+        return is_array($decoded) ? $decoded : null;
+    }
+
+    $context = stream_context_create([
+        'http' => [
+            'timeout' => 8,
+            'header' => "Accept: application/json\r\nUser-Agent: " . $userAgent . "\r\n",
+        ],
+    ]);
+    $raw = @file_get_contents($url, false, $context);
+    if (!is_string($raw) || trim($raw) === '') {
+        return null;
+    }
+    $decoded = json_decode($raw, true);
+    return is_array($decoded) ? $decoded : null;
+}
+
+function portal_geocode_search_nz(mysqli $db, string $query, int $limit = 6, bool $cacheFirst = false): array
+{
+    $query = trim($query);
+    if ($query === '') {
+        return [];
+    }
+
+    $queryHash = sha1(strtolower($query));
+    if ($cacheFirst) {
+        $stmt = $db->prepare("SELECT label, lat, lng FROM portal_geocode_cache WHERE query_hash = ? LIMIT 1");
+        if ($stmt) {
+            $stmt->bind_param('s', $queryHash);
+            $stmt->execute();
+            $stmt->bind_result($label, $lat, $lng);
+            if ($stmt->fetch()) {
+                $stmt->close();
+                return [[
+                    'label' => (string)$label,
+                    'lat' => (float)$lat,
+                    'lng' => (float)$lng,
+                ]];
+            }
+            $stmt->close();
+        }
+    }
+
+    $q = $query;
+    if (stripos($q, 'new zealand') === false) {
+        $q .= ', New Zealand';
+    }
+    $url = 'https://nominatim.openstreetmap.org/search?format=jsonv2&addressdetails=0&countrycodes=nz&limit='
+        . max(1, min(10, $limit)) . '&q=' . rawurlencode($q);
+
+    $rows = portal_http_get_json($url);
+    if (!is_array($rows)) {
+        return [];
+    }
+
+    $results = [];
+    foreach ($rows as $row) {
+        if (!is_array($row)) {
+            continue;
+        }
+        $lat = portal_parse_coord($row['lat'] ?? null, -90.0, 90.0);
+        $lng = portal_parse_coord($row['lon'] ?? null, -180.0, 180.0);
+        $label = trim((string)($row['display_name'] ?? ''));
+        if ($lat === null || $lng === null || $label === '') {
+            continue;
+        }
+        $results[] = [
+            'label' => $label,
+            'lat' => $lat,
+            'lng' => $lng,
+        ];
+    }
+
+    if (!empty($results) && $cacheFirst) {
+        $top = $results[0];
+        $latStr = number_format((float)$top['lat'], 7, '.', '');
+        $lngStr = number_format((float)$top['lng'], 7, '.', '');
+        $stmt = $db->prepare(
+            "INSERT INTO portal_geocode_cache (query_hash, query_text, label, lat, lng, updated_at)
+             VALUES (?, ?, ?, NULLIF(?, ''), NULLIF(?, ''), NOW())
+             ON DUPLICATE KEY UPDATE
+               query_text = VALUES(query_text),
+               label = VALUES(label),
+               lat = VALUES(lat),
+               lng = VALUES(lng),
+               updated_at = NOW()"
+        );
+        if ($stmt) {
+            $stmt->bind_param('sssss', $queryHash, $query, $top['label'], $latStr, $lngStr);
+            $stmt->execute();
+            $stmt->close();
+        }
+    }
+
+    return $results;
 }
