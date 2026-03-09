@@ -8,7 +8,8 @@ export default defineConfig({
     sitemap({
       filter: (page) =>
         !page.endsWith("/thanks/") &&
-        !page.endsWith("/blog/christmas-closure-2025/"),
+        !page.endsWith("/blog/christmas-closure-2025/") &&
+        !page.endsWith("/portal/"),
     }),
   ],
 });

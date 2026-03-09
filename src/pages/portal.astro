@@ -1,0 +1,442 @@
+---
+import Layout from "../layouts/WMBase.astro";
+
+const title = "Job Portal | Window Maintenance";
+const description = "Private job calendar and schedule portal for Window Maintenance.";
+const canonical = "https://windowmaintenance.co.nz/portal/";
+---
+
+<Layout title={title} description={description} canonical={canonical} noindex={true}>
+  <section class="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10">
+    <div id="portal-login" class="mx-auto max-w-md rounded-2xl bg-[var(--brand-surface)] p-6 ring-1 ring-white/10">
+      <h1 class="text-2xl font-extrabold">Job Portal Login</h1>
+      <p class="mt-2 text-sm text-slate-300">Private scheduling portal for day-to-day bookings.</p>
+      <form id="login-form" class="mt-5 space-y-4">
+        <label class="block">
+          <span class="text-sm">Username</span>
+          <input id="login-user" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10" autocomplete="username" required />
+        </label>
+        <label class="block">
+          <span class="text-sm">Password</span>
+          <input id="login-pass" type="password" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10" autocomplete="current-password" required />
+        </label>
+        <p id="login-error" class="hidden text-sm text-red-300">Incorrect username or password.</p>
+        <button class="btn btn-primary w-full" type="submit">Sign in</button>
+      </form>
+    </div>
+
+    <div id="portal-app" class="hidden">
+      <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h1 class="text-2xl font-extrabold sm:text-3xl">Job Calendar Portal</h1>
+          <p class="mt-1 text-sm text-slate-300">Add jobs, view daily run sheets, call customers, and open maps in one tap.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button id="today-btn" class="btn btn-outline px-4 py-2 text-sm">Today</button>
+          <button id="logout-btn" class="btn btn-secondary px-4 py-2 text-sm">Logout</button>
+        </div>
+      </div>
+
+      <div class="grid gap-4 lg:grid-cols-3">
+        <div class="space-y-4 lg:col-span-2">
+          <div class="rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 sm:p-5">
+            <div class="mb-4 flex items-center justify-between">
+              <button id="month-prev" class="btn btn-outline px-3 py-2 text-sm" type="button">&larr; Prev</button>
+              <h2 id="month-label" class="text-lg font-bold"></h2>
+              <button id="month-next" class="btn btn-outline px-3 py-2 text-sm" type="button">Next &rarr;</button>
+            </div>
+            <div class="grid grid-cols-7 gap-1 text-center text-xs uppercase tracking-wide text-slate-400 sm:gap-2">
+              <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+            </div>
+            <div id="calendar-grid" class="mt-2 grid grid-cols-7 gap-1 sm:gap-2"></div>
+          </div>
+
+          <div class="rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 sm:p-5">
+            <div class="mb-3 flex items-center justify-between">
+              <h2 id="day-title" class="text-lg font-bold">Jobs</h2>
+              <span id="day-count" class="rounded-full bg-white/10 px-3 py-1 text-xs text-slate-300">0 jobs</span>
+            </div>
+            <div id="job-list" class="space-y-3"></div>
+            <p id="job-empty" class="text-sm text-slate-400">No jobs for this day.</p>
+          </div>
+        </div>
+
+        <div class="rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 sm:p-5">
+          <h2 id="form-title" class="text-lg font-bold">Add Job</h2>
+          <form id="job-form" class="mt-4 space-y-3">
+            <label class="block">
+              <span class="text-sm">Date</span>
+              <input id="job-date" type="date" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10" required />
+            </label>
+            <label class="block">
+              <span class="text-sm">Time</span>
+              <input id="job-time" type="time" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10" required />
+            </label>
+            <label class="block">
+              <span class="text-sm">Customer name</span>
+              <input id="job-customer" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10" required />
+            </label>
+            <label class="block">
+              <span class="text-sm">Phone number</span>
+              <input id="job-phone" type="tel" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10" required />
+            </label>
+            <label class="block">
+              <span class="text-sm">Address</span>
+              <input id="job-address" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10" required />
+            </label>
+            <label class="block">
+              <span class="text-sm">Short job description</span>
+              <textarea id="job-summary" rows="3" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10" required></textarea>
+            </label>
+            <label class="block">
+              <span class="text-sm">Status</span>
+              <select id="job-status" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10">
+                <option value="Booked">Booked</option>
+                <option value="In progress">In progress</option>
+                <option value="Done">Done</option>
+              </select>
+            </label>
+            <div class="flex flex-wrap gap-2 pt-1">
+              <button id="job-save" class="btn btn-primary flex-1" type="submit">Save job</button>
+              <button id="job-clear" class="btn btn-outline" type="button">Clear</button>
+            </div>
+          </form>
+          <p class="mt-3 text-xs text-slate-400">Tip: tap customer phone to call, or address to open Google Maps.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline>
+    (function () {
+      const AUTH_KEY = "wm_portal_auth_v1";
+      const JOBS_KEY = "wm_portal_jobs_v1";
+      const PORTAL_USER = "wmadmin";
+      const PORTAL_PASS = "wmportal2026";
+
+      const el = {
+        loginWrap: document.getElementById("portal-login"),
+        appWrap: document.getElementById("portal-app"),
+        loginForm: document.getElementById("login-form"),
+        loginUser: document.getElementById("login-user"),
+        loginPass: document.getElementById("login-pass"),
+        loginError: document.getElementById("login-error"),
+        logoutBtn: document.getElementById("logout-btn"),
+        todayBtn: document.getElementById("today-btn"),
+        monthPrev: document.getElementById("month-prev"),
+        monthNext: document.getElementById("month-next"),
+        monthLabel: document.getElementById("month-label"),
+        calendarGrid: document.getElementById("calendar-grid"),
+        dayTitle: document.getElementById("day-title"),
+        dayCount: document.getElementById("day-count"),
+        jobList: document.getElementById("job-list"),
+        jobEmpty: document.getElementById("job-empty"),
+        jobForm: document.getElementById("job-form"),
+        formTitle: document.getElementById("form-title"),
+        inputDate: document.getElementById("job-date"),
+        inputTime: document.getElementById("job-time"),
+        inputCustomer: document.getElementById("job-customer"),
+        inputPhone: document.getElementById("job-phone"),
+        inputAddress: document.getElementById("job-address"),
+        inputSummary: document.getElementById("job-summary"),
+        inputStatus: document.getElementById("job-status"),
+        jobClear: document.getElementById("job-clear")
+      };
+
+      const today = new Date();
+      const state = {
+        jobs: [],
+        selectedDate: dateKey(today),
+        month: new Date(today.getFullYear(), today.getMonth(), 1),
+        editId: null
+      };
+
+      function dateKey(d) {
+        const y = d.getFullYear();
+        const m = String(d.getMonth() + 1).padStart(2, "0");
+        const day = String(d.getDate()).padStart(2, "0");
+        return y + "-" + m + "-" + day;
+      }
+
+      function parseDate(str) {
+        const parts = String(str || "").split("-");
+        if (parts.length !== 3) return new Date();
+        return new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+      }
+
+      function formatLongDate(str) {
+        const d = parseDate(str);
+        return d.toLocaleDateString("en-NZ", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+      }
+
+      function safeText(v) {
+        return String(v || "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/\"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+
+      function loadJobs() {
+        try {
+          const raw = localStorage.getItem(JOBS_KEY);
+          state.jobs = raw ? JSON.parse(raw) : [];
+          if (!Array.isArray(state.jobs)) state.jobs = [];
+        } catch (_) {
+          state.jobs = [];
+        }
+      }
+
+      function saveJobs() {
+        localStorage.setItem(JOBS_KEY, JSON.stringify(state.jobs));
+      }
+
+      function isLoggedIn() {
+        return localStorage.getItem(AUTH_KEY) === "1";
+      }
+
+      function setLoggedIn(v) {
+        if (v) localStorage.setItem(AUTH_KEY, "1");
+        else localStorage.removeItem(AUTH_KEY);
+      }
+
+      function showLogin() {
+        el.loginWrap.classList.remove("hidden");
+        el.appWrap.classList.add("hidden");
+      }
+
+      function showApp() {
+        el.loginWrap.classList.add("hidden");
+        el.appWrap.classList.remove("hidden");
+      }
+
+      function jobsOn(dateStr) {
+        return state.jobs
+          .filter((j) => j.date === dateStr)
+          .sort((a, b) => String(a.time).localeCompare(String(b.time)));
+      }
+
+      function renderCalendar() {
+        const year = state.month.getFullYear();
+        const month = state.month.getMonth();
+        const firstDay = new Date(year, month, 1);
+        const start = new Date(firstDay);
+        start.setDate(firstDay.getDate() - firstDay.getDay());
+
+        el.monthLabel.textContent = state.month.toLocaleDateString("en-NZ", { month: "long", year: "numeric" });
+        el.calendarGrid.innerHTML = "";
+
+        const counts = {};
+        for (const j of state.jobs) counts[j.date] = (counts[j.date] || 0) + 1;
+
+        for (let i = 0; i < 42; i += 1) {
+          const d = new Date(start);
+          d.setDate(start.getDate() + i);
+          const key = dateKey(d);
+          const isCurrentMonth = d.getMonth() === month;
+          const isSelected = key === state.selectedDate;
+          const isToday = key === dateKey(new Date());
+          const count = counts[key] || 0;
+
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.dataset.date = key;
+          btn.className =
+            "relative min-h-[74px] rounded-lg border px-2 py-1 text-left transition " +
+            (isCurrentMonth ? "border-white/10 bg-[var(--brand-bg)]" : "border-white/5 bg-[var(--brand-bg)]/50 text-slate-500") +
+            (isSelected ? " ring-2 ring-amber-400" : " hover:border-amber-400/40");
+
+          const day = document.createElement("div");
+          day.className = "text-sm font-semibold " + (isToday ? "text-amber-300" : "");
+          day.textContent = String(d.getDate());
+          btn.appendChild(day);
+
+          if (count > 0) {
+            const badge = document.createElement("div");
+            badge.className = "mt-2 inline-flex rounded-full bg-amber-500/20 px-2 py-0.5 text-xs text-amber-300";
+            badge.textContent = count + " job" + (count > 1 ? "s" : "");
+            btn.appendChild(badge);
+          }
+
+          el.calendarGrid.appendChild(btn);
+        }
+      }
+
+      function renderDay() {
+        const jobs = jobsOn(state.selectedDate);
+        el.dayTitle.textContent = "Jobs for " + formatLongDate(state.selectedDate);
+        el.dayCount.textContent = jobs.length + " job" + (jobs.length === 1 ? "" : "s");
+
+        el.jobList.innerHTML = "";
+        if (!jobs.length) {
+          el.jobEmpty.classList.remove("hidden");
+          return;
+        }
+        el.jobEmpty.classList.add("hidden");
+
+        for (const j of jobs) {
+          const card = document.createElement("article");
+          card.className = "rounded-xl bg-[var(--brand-bg)] p-4 ring-1 ring-white/10";
+          card.innerHTML =
+            '<div class="flex items-start justify-between gap-2">' +
+              '<div>' +
+                '<h3 class="font-semibold">' + safeText(j.customer) + '</h3>' +
+                '<p class="text-xs text-slate-400">' + safeText(j.time) + " • " + safeText(j.status || "Booked") + "</p>" +
+              "</div>" +
+              '<div class="flex gap-2">' +
+                '<button type="button" data-action="edit" data-id="' + safeText(j.id) + '" class="btn btn-outline px-3 py-1 text-xs">Edit</button>' +
+                '<button type="button" data-action="delete" data-id="' + safeText(j.id) + '" class="btn btn-outline px-3 py-1 text-xs">Delete</button>' +
+              "</div>" +
+            "</div>" +
+            '<p class="mt-2 text-sm text-slate-200">' + safeText(j.summary) + "</p>" +
+            '<div class="mt-3 flex flex-wrap gap-2">' +
+              '<a class="btn btn-primary px-3 py-1 text-xs" href="tel:' + safeText(j.phone) + '">Call</a>' +
+              '<a class="btn btn-secondary px-3 py-1 text-xs" target="_blank" rel="noreferrer" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(j.address) + '">Maps</a>' +
+            "</div>" +
+            '<p class="mt-2 text-xs text-slate-400">' + safeText(j.address) + "</p>";
+          el.jobList.appendChild(card);
+        }
+      }
+
+      function clearForm() {
+        state.editId = null;
+        el.formTitle.textContent = "Add Job";
+        el.jobForm.reset();
+        el.inputDate.value = state.selectedDate;
+        el.inputStatus.value = "Booked";
+      }
+
+      function fillForm(job) {
+        state.editId = job.id;
+        el.formTitle.textContent = "Edit Job";
+        el.inputDate.value = job.date;
+        el.inputTime.value = job.time;
+        el.inputCustomer.value = job.customer;
+        el.inputPhone.value = job.phone;
+        el.inputAddress.value = job.address;
+        el.inputSummary.value = job.summary;
+        el.inputStatus.value = job.status || "Booked";
+      }
+
+      function saveFormJob() {
+        const job = {
+          id: state.editId || String(Date.now()),
+          date: el.inputDate.value,
+          time: el.inputTime.value,
+          customer: el.inputCustomer.value.trim(),
+          phone: el.inputPhone.value.trim(),
+          address: el.inputAddress.value.trim(),
+          summary: el.inputSummary.value.trim(),
+          status: el.inputStatus.value
+        };
+
+        if (!job.date || !job.time || !job.customer || !job.phone || !job.address || !job.summary) return;
+
+        const idx = state.jobs.findIndex((x) => x.id === job.id);
+        if (idx >= 0) state.jobs[idx] = job;
+        else state.jobs.push(job);
+
+        saveJobs();
+        state.selectedDate = job.date;
+        state.month = new Date(parseDate(job.date).getFullYear(), parseDate(job.date).getMonth(), 1);
+        clearForm();
+        renderCalendar();
+        renderDay();
+      }
+
+      function bindEvents() {
+        el.loginForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+          const u = (el.loginUser.value || "").trim();
+          const p = (el.loginPass.value || "").trim();
+          if (u === PORTAL_USER && p === PORTAL_PASS) {
+            setLoggedIn(true);
+            el.loginError.classList.add("hidden");
+            showApp();
+            renderCalendar();
+            renderDay();
+            clearForm();
+            return;
+          }
+          el.loginError.classList.remove("hidden");
+        });
+
+        el.logoutBtn.addEventListener("click", function () {
+          setLoggedIn(false);
+          showLogin();
+        });
+
+        el.todayBtn.addEventListener("click", function () {
+          const d = new Date();
+          state.selectedDate = dateKey(d);
+          state.month = new Date(d.getFullYear(), d.getMonth(), 1);
+          renderCalendar();
+          renderDay();
+          clearForm();
+        });
+
+        el.monthPrev.addEventListener("click", function () {
+          state.month = new Date(state.month.getFullYear(), state.month.getMonth() - 1, 1);
+          renderCalendar();
+        });
+
+        el.monthNext.addEventListener("click", function () {
+          state.month = new Date(state.month.getFullYear(), state.month.getMonth() + 1, 1);
+          renderCalendar();
+        });
+
+        el.calendarGrid.addEventListener("click", function (e) {
+          const btn = e.target && e.target.closest && e.target.closest("button[data-date]");
+          if (!btn) return;
+          state.selectedDate = btn.dataset.date;
+          renderCalendar();
+          renderDay();
+          clearForm();
+        });
+
+        el.jobForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+          saveFormJob();
+        });
+
+        el.jobClear.addEventListener("click", function () {
+          clearForm();
+        });
+
+        el.jobList.addEventListener("click", function (e) {
+          const btn = e.target && e.target.closest && e.target.closest("button[data-action][data-id]");
+          if (!btn) return;
+          const id = btn.dataset.id;
+          const action = btn.dataset.action;
+          const job = state.jobs.find((x) => x.id === id);
+          if (!job) return;
+          if (action === "edit") {
+            fillForm(job);
+            return;
+          }
+          if (action === "delete") {
+            if (!window.confirm("Delete this job?")) return;
+            state.jobs = state.jobs.filter((x) => x.id !== id);
+            saveJobs();
+            renderCalendar();
+            renderDay();
+            clearForm();
+          }
+        });
+      }
+
+      loadJobs();
+      bindEvents();
+      if (isLoggedIn()) {
+        showApp();
+        renderCalendar();
+        renderDay();
+        clearForm();
+      } else {
+        showLogin();
+      }
+    })();
+  </script>
+</Layout>
+
