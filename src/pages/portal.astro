@@ -30,6 +30,7 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         <div>
           <h1 class="text-2xl font-extrabold sm:text-3xl">Job Calendar Portal</h1>
           <p class="mt-1 text-sm text-slate-300">Add jobs, view daily run sheets, call customers, and open maps in one tap.</p>
+          <p id="sync-pill" class="mt-1 text-xs text-slate-400">Local mode</p>
         </div>
         <div class="flex items-center gap-2">
           <button id="today-btn" class="btn btn-outline px-4 py-2 text-sm">Today</button>
@@ -61,47 +62,70 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
           </div>
         </div>
 
-        <div class="rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 sm:p-5">
-          <h2 id="form-title" class="text-lg font-bold">Add Job</h2>
-          <form id="job-form" class="mt-4 space-y-3">
-            <label class="block">
-              <span class="text-sm">Date</span>
-              <input id="job-date" type="date" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10" required />
-            </label>
-            <label class="block">
-              <span class="text-sm">Time</span>
-              <input id="job-time" type="time" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10" required />
-            </label>
-            <label class="block">
-              <span class="text-sm">Customer name</span>
-              <input id="job-customer" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10" required />
-            </label>
-            <label class="block">
-              <span class="text-sm">Phone number</span>
-              <input id="job-phone" type="tel" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10" required />
-            </label>
-            <label class="block">
-              <span class="text-sm">Address</span>
-              <input id="job-address" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10" required />
-            </label>
-            <label class="block">
-              <span class="text-sm">Short job description</span>
-              <textarea id="job-summary" rows="3" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10" required></textarea>
-            </label>
-            <label class="block">
-              <span class="text-sm">Status</span>
-              <select id="job-status" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10">
-                <option value="Booked">Booked</option>
-                <option value="In progress">In progress</option>
-                <option value="Done">Done</option>
-              </select>
-            </label>
-            <div class="flex flex-wrap gap-2 pt-1">
-              <button id="job-save" class="btn btn-primary flex-1" type="submit">Save job</button>
-              <button id="job-clear" class="btn btn-outline" type="button">Clear</button>
+        <div class="space-y-4">
+          <div class="rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 sm:p-5">
+            <h2 id="form-title" class="text-lg font-bold">Add Job</h2>
+            <form id="job-form" class="mt-4 space-y-3">
+              <label class="block">
+                <span class="text-sm">Date</span>
+                <input id="job-date" type="date" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10" required />
+              </label>
+              <label class="block">
+                <span class="text-sm">Time</span>
+                <input id="job-time" type="time" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10" required />
+              </label>
+              <label class="block">
+                <span class="text-sm">Customer name</span>
+                <input id="job-customer" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10" required />
+              </label>
+              <label class="block">
+                <span class="text-sm">Phone number</span>
+                <input id="job-phone" type="tel" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10" required />
+              </label>
+              <label class="block">
+                <span class="text-sm">Address</span>
+                <input id="job-address" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10" required />
+              </label>
+              <label class="block">
+                <span class="text-sm">Short job description</span>
+                <textarea id="job-summary" rows="3" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10" required></textarea>
+              </label>
+              <label class="block">
+                <span class="text-sm">Status</span>
+                <select id="job-status" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10">
+                  <option value="Booked">Booked</option>
+                  <option value="In progress">In progress</option>
+                  <option value="Done">Done</option>
+                </select>
+              </label>
+              <div class="flex flex-wrap gap-2 pt-1">
+                <button id="job-save" class="btn btn-primary flex-1" type="submit">Save job</button>
+                <button id="job-clear" class="btn btn-outline" type="button">Clear</button>
+              </div>
+            </form>
+            <p class="mt-3 text-xs text-slate-400">Tip: tap customer phone to call, or address to open Google Maps.</p>
+          </div>
+
+          <div class="rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 sm:p-5">
+            <h2 class="text-lg font-bold">Cross-device Sync</h2>
+            <p class="mt-1 text-xs text-slate-400">Optional: sync jobs between mobile and desktop using a Google Sheet endpoint.</p>
+            <div class="mt-3 space-y-3">
+              <label class="block">
+                <span class="text-sm">Sync URL</span>
+                <input id="sync-url" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-sm ring-1 ring-white/10" placeholder="https://script.google.com/.../exec" />
+              </label>
+              <label class="block">
+                <span class="text-sm">Sync token</span>
+                <input id="sync-token" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-sm ring-1 ring-white/10" placeholder="Paste your shared secret" />
+              </label>
+              <div class="flex flex-wrap gap-2">
+                <button id="sync-save" class="btn btn-outline px-3 py-2 text-sm" type="button">Save sync settings</button>
+                <button id="sync-now" class="btn btn-primary px-3 py-2 text-sm" type="button">Sync now</button>
+                <button id="sync-clear" class="btn btn-secondary px-3 py-2 text-sm" type="button">Disconnect</button>
+              </div>
+              <p id="sync-status" class="text-xs text-slate-400">Local mode only (no sync URL/token saved).</p>
             </div>
-          </form>
-          <p class="mt-3 text-xs text-slate-400">Tip: tap customer phone to call, or address to open Google Maps.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -111,6 +135,10 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
     (function () {
       const AUTH_KEY = "wm_portal_auth_v1";
       const JOBS_KEY = "wm_portal_jobs_v1";
+      const SYNC_URL_KEY = "wm_portal_sync_url_v1";
+      const SYNC_TOKEN_KEY = "wm_portal_sync_token_v1";
+      const SYNC_LAST_KEY = "wm_portal_sync_last_v1";
+
       const PORTAL_USER = "wmadmin";
       const PORTAL_PASS = "wmportal2026";
 
@@ -140,7 +168,14 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         inputAddress: document.getElementById("job-address"),
         inputSummary: document.getElementById("job-summary"),
         inputStatus: document.getElementById("job-status"),
-        jobClear: document.getElementById("job-clear")
+        jobClear: document.getElementById("job-clear"),
+        syncUrl: document.getElementById("sync-url"),
+        syncToken: document.getElementById("sync-token"),
+        syncSave: document.getElementById("sync-save"),
+        syncNow: document.getElementById("sync-now"),
+        syncClear: document.getElementById("sync-clear"),
+        syncStatus: document.getElementById("sync-status"),
+        syncPill: document.getElementById("sync-pill")
       };
 
       const today = new Date();
@@ -148,7 +183,13 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         jobs: [],
         selectedDate: dateKey(today),
         month: new Date(today.getFullYear(), today.getMonth(), 1),
-        editId: null
+        editId: null,
+        syncUrl: "",
+        syncToken: "",
+        syncInFlight: false,
+        queuedSync: false,
+        syncTimer: null,
+        lastSync: ""
       };
 
       function dateKey(d) {
@@ -169,6 +210,13 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         return d.toLocaleDateString("en-NZ", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
       }
 
+      function formatSyncTime(iso) {
+        if (!iso) return "";
+        const d = new Date(iso);
+        if (Number.isNaN(d.getTime())) return "";
+        return d.toLocaleString("en-NZ", { hour12: false });
+      }
+
       function safeText(v) {
         return String(v || "")
           .replace(/&/g, "&amp;")
@@ -178,18 +226,118 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
           .replace(/'/g, "&#39;");
       }
 
+      function nowIso() {
+        return new Date().toISOString();
+      }
+
+      function normalizeJob(job) {
+        const normalized = {
+          id: String(job && job.id ? job.id : Date.now() + "-" + Math.random().toString(36).slice(2, 7)),
+          date: String(job && job.date ? job.date : state.selectedDate),
+          time: String(job && job.time ? job.time : "09:00"),
+          customer: String(job && job.customer ? job.customer : "").trim(),
+          phone: String(job && job.phone ? job.phone : "").trim(),
+          address: String(job && job.address ? job.address : "").trim(),
+          summary: String(job && job.summary ? job.summary : "").trim(),
+          status: String(job && job.status ? job.status : "Booked"),
+          deleted: Boolean(job && job.deleted),
+          updatedAt: String(job && job.updatedAt ? job.updatedAt : nowIso())
+        };
+
+        if (!["Booked", "In progress", "Done"].includes(normalized.status)) {
+          normalized.status = "Booked";
+        }
+
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(normalized.date)) {
+          normalized.date = state.selectedDate;
+        }
+
+        if (!/^\d{2}:\d{2}$/.test(normalized.time)) {
+          normalized.time = "09:00";
+        }
+
+        if (Number.isNaN(new Date(normalized.updatedAt).getTime())) {
+          normalized.updatedAt = nowIso();
+        }
+
+        return normalized;
+      }
+
+      function pruneJobs(jobs) {
+        const cutoff = Date.now() - (1000 * 60 * 60 * 24 * 90);
+        return jobs.filter((job) => {
+          if (!job.deleted) return true;
+          const t = new Date(job.updatedAt).getTime();
+          return Number.isFinite(t) && t >= cutoff;
+        });
+      }
+
       function loadJobs() {
         try {
           const raw = localStorage.getItem(JOBS_KEY);
-          state.jobs = raw ? JSON.parse(raw) : [];
-          if (!Array.isArray(state.jobs)) state.jobs = [];
+          const parsed = raw ? JSON.parse(raw) : [];
+          state.jobs = Array.isArray(parsed) ? pruneJobs(parsed.map(normalizeJob)) : [];
         } catch (_) {
           state.jobs = [];
         }
       }
 
       function saveJobs() {
+        state.jobs = pruneJobs(state.jobs.map(normalizeJob));
         localStorage.setItem(JOBS_KEY, JSON.stringify(state.jobs));
+      }
+
+      function loadSyncSettings() {
+        state.syncUrl = String(localStorage.getItem(SYNC_URL_KEY) || "").trim();
+        state.syncToken = String(localStorage.getItem(SYNC_TOKEN_KEY) || "").trim();
+        state.lastSync = String(localStorage.getItem(SYNC_LAST_KEY) || "").trim();
+      }
+
+      function saveSyncSettings() {
+        localStorage.setItem(SYNC_URL_KEY, state.syncUrl);
+        localStorage.setItem(SYNC_TOKEN_KEY, state.syncToken);
+      }
+
+      function clearSyncSettings() {
+        state.syncUrl = "";
+        state.syncToken = "";
+        state.lastSync = "";
+        localStorage.removeItem(SYNC_URL_KEY);
+        localStorage.removeItem(SYNC_TOKEN_KEY);
+        localStorage.removeItem(SYNC_LAST_KEY);
+      }
+
+      function isSyncConfigured() {
+        return Boolean(state.syncUrl && state.syncToken);
+      }
+
+      function setSyncStatus(message) {
+        el.syncStatus.textContent = message;
+      }
+
+      function updateSyncPill() {
+        if (!isSyncConfigured()) {
+          el.syncPill.textContent = "Local mode";
+          return;
+        }
+        if (state.syncInFlight) {
+          el.syncPill.textContent = "Syncing...";
+          return;
+        }
+        const last = formatSyncTime(state.lastSync);
+        el.syncPill.textContent = last ? "Synced: " + last : "Sync configured";
+      }
+
+      function hydrateSyncInputs() {
+        el.syncUrl.value = state.syncUrl;
+        el.syncToken.value = state.syncToken;
+        if (!isSyncConfigured()) {
+          setSyncStatus("Local mode only (no sync URL/token saved).");
+        } else {
+          const last = formatSyncTime(state.lastSync);
+          setSyncStatus(last ? "Sync configured. Last sync: " + last : "Sync configured. Click Sync now.");
+        }
+        updateSyncPill();
       }
 
       function isLoggedIn() {
@@ -211,9 +359,137 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         el.appWrap.classList.remove("hidden");
       }
 
+      function mergeJobs(localJobs, remoteJobs) {
+        const map = new Map();
+        const merged = [];
+
+        function upsert(job) {
+          const normalized = normalizeJob(job);
+          const current = map.get(normalized.id);
+          if (!current) {
+            map.set(normalized.id, normalized);
+            return;
+          }
+          const currentTime = new Date(current.updatedAt).getTime();
+          const nextTime = new Date(normalized.updatedAt).getTime();
+          if (nextTime > currentTime) {
+            map.set(normalized.id, normalized);
+          }
+        }
+
+        for (const j of localJobs) upsert(j);
+        for (const j of remoteJobs) upsert(j);
+
+        for (const value of map.values()) merged.push(value);
+        merged.sort((a, b) => {
+          const byDate = String(a.date).localeCompare(String(b.date));
+          if (byDate !== 0) return byDate;
+          const byTime = String(a.time).localeCompare(String(b.time));
+          if (byTime !== 0) return byTime;
+          return String(a.customer).localeCompare(String(b.customer));
+        });
+
+        return pruneJobs(merged);
+      }
+
+      function buildSyncUrl(action) {
+        const url = new URL(state.syncUrl);
+        url.searchParams.set("action", action);
+        url.searchParams.set("token", state.syncToken);
+        return url.toString();
+      }
+
+      async function pullRemoteJobs() {
+        const response = await fetch(buildSyncUrl("list"), { cache: "no-store" });
+        if (!response.ok) {
+          throw new Error("Could not fetch remote jobs (" + response.status + ")");
+        }
+
+        const data = await response.json();
+        if (!data || data.ok === false) {
+          throw new Error((data && data.error) || "Remote list failed");
+        }
+
+        const jobs = Array.isArray(data.jobs) ? data.jobs : [];
+        return jobs.map(normalizeJob);
+      }
+
+      async function pushRemoteJobs(jobs) {
+        const response = await fetch(state.syncUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ action: "replace", token: state.syncToken, jobs: jobs })
+        });
+
+        if (!response.ok) {
+          throw new Error("Could not push remote jobs (" + response.status + ")");
+        }
+
+        const data = await response.json();
+        if (!data || data.ok === false) {
+          throw new Error((data && data.error) || "Remote push failed");
+        }
+      }
+
+      async function syncNow(silent) {
+        if (!isSyncConfigured()) {
+          if (!silent) setSyncStatus("Add sync URL and token first.");
+          updateSyncPill();
+          return;
+        }
+
+        if (state.syncInFlight) {
+          state.queuedSync = true;
+          return;
+        }
+
+        state.syncInFlight = true;
+        updateSyncPill();
+        if (!silent) setSyncStatus("Syncing jobs...");
+
+        try {
+          const remoteJobs = await pullRemoteJobs();
+          state.jobs = mergeJobs(state.jobs, remoteJobs);
+          saveJobs();
+          await pushRemoteJobs(state.jobs);
+
+          state.lastSync = nowIso();
+          localStorage.setItem(SYNC_LAST_KEY, state.lastSync);
+
+          renderCalendar();
+          renderDay();
+          updateSyncPill();
+
+          if (!silent) {
+            setSyncStatus("Sync successful at " + formatSyncTime(state.lastSync));
+          }
+        } catch (err) {
+          const message = err && err.message ? err.message : "Sync failed";
+          setSyncStatus("Sync error: " + message);
+          updateSyncPill();
+        } finally {
+          state.syncInFlight = false;
+          updateSyncPill();
+          if (state.queuedSync) {
+            state.queuedSync = false;
+            setTimeout(function () {
+              syncNow(true);
+            }, 800);
+          }
+        }
+      }
+
+      function queueSync() {
+        if (!isSyncConfigured()) return;
+        if (state.syncTimer) clearTimeout(state.syncTimer);
+        state.syncTimer = setTimeout(function () {
+          syncNow(true);
+        }, 1200);
+      }
+
       function jobsOn(dateStr) {
         return state.jobs
-          .filter((j) => j.date === dateStr)
+          .filter((j) => !j.deleted && j.date === dateStr)
           .sort((a, b) => String(a.time).localeCompare(String(b.time)));
       }
 
@@ -228,7 +504,10 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         el.calendarGrid.innerHTML = "";
 
         const counts = {};
-        for (const j of state.jobs) counts[j.date] = (counts[j.date] || 0) + 1;
+        for (const j of state.jobs) {
+          if (j.deleted) continue;
+          counts[j.date] = (counts[j.date] || 0) + 1;
+        }
 
         for (let i = 0; i < 42; i += 1) {
           const d = new Date(start);
@@ -280,8 +559,8 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
           card.className = "rounded-xl bg-[var(--brand-bg)] p-4 ring-1 ring-white/10";
           card.innerHTML =
             '<div class="flex items-start justify-between gap-2">' +
-              '<div>' +
-                '<h3 class="font-semibold">' + safeText(j.customer) + '</h3>' +
+              "<div>" +
+                '<h3 class="font-semibold">' + safeText(j.customer) + "</h3>" +
                 '<p class="text-xs text-slate-400">' + safeText(j.time) + " • " + safeText(j.status || "Booked") + "</p>" +
               "</div>" +
               '<div class="flex gap-2">' +
@@ -320,16 +599,18 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
       }
 
       function saveFormJob() {
-        const job = {
-          id: state.editId || String(Date.now()),
+        const job = normalizeJob({
+          id: state.editId || String(Date.now() + "-" + Math.random().toString(36).slice(2, 7)),
           date: el.inputDate.value,
           time: el.inputTime.value,
-          customer: el.inputCustomer.value.trim(),
-          phone: el.inputPhone.value.trim(),
-          address: el.inputAddress.value.trim(),
-          summary: el.inputSummary.value.trim(),
-          status: el.inputStatus.value
-        };
+          customer: el.inputCustomer.value,
+          phone: el.inputPhone.value,
+          address: el.inputAddress.value,
+          summary: el.inputSummary.value,
+          status: el.inputStatus.value,
+          deleted: false,
+          updatedAt: nowIso()
+        });
 
         if (!job.date || !job.time || !job.customer || !job.phone || !job.address || !job.summary) return;
 
@@ -339,10 +620,24 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
 
         saveJobs();
         state.selectedDate = job.date;
-        state.month = new Date(parseDate(job.date).getFullYear(), parseDate(job.date).getMonth(), 1);
+        const pickedDate = parseDate(job.date);
+        state.month = new Date(pickedDate.getFullYear(), pickedDate.getMonth(), 1);
         clearForm();
         renderCalendar();
         renderDay();
+        queueSync();
+      }
+
+      function deleteJob(id) {
+        const idx = state.jobs.findIndex((x) => x.id === id);
+        if (idx < 0) return;
+        state.jobs[idx].deleted = true;
+        state.jobs[idx].updatedAt = nowIso();
+        saveJobs();
+        renderCalendar();
+        renderDay();
+        clearForm();
+        queueSync();
       }
 
       function bindEvents() {
@@ -357,6 +652,8 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
             renderCalendar();
             renderDay();
             clearForm();
+            hydrateSyncInputs();
+            if (isSyncConfigured()) syncNow(false);
             return;
           }
           el.loginError.classList.remove("hidden");
@@ -410,33 +707,68 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
           const id = btn.dataset.id;
           const action = btn.dataset.action;
           const job = state.jobs.find((x) => x.id === id);
-          if (!job) return;
+          if (!job || job.deleted) return;
           if (action === "edit") {
             fillForm(job);
             return;
           }
           if (action === "delete") {
             if (!window.confirm("Delete this job?")) return;
-            state.jobs = state.jobs.filter((x) => x.id !== id);
-            saveJobs();
-            renderCalendar();
-            renderDay();
-            clearForm();
+            deleteJob(id);
+          }
+        });
+
+        el.syncSave.addEventListener("click", function () {
+          state.syncUrl = (el.syncUrl.value || "").trim();
+          state.syncToken = (el.syncToken.value || "").trim();
+          saveSyncSettings();
+          hydrateSyncInputs();
+          if (isSyncConfigured()) {
+            setSyncStatus("Sync settings saved. Syncing now...");
+            syncNow(false);
+          }
+        });
+
+        el.syncNow.addEventListener("click", function () {
+          syncNow(false);
+        });
+
+        el.syncClear.addEventListener("click", function () {
+          if (!window.confirm("Disconnect sync and keep local jobs only?")) return;
+          clearSyncSettings();
+          hydrateSyncInputs();
+        });
+
+        document.addEventListener("visibilitychange", function () {
+          if (document.visibilityState === "visible" && isSyncConfigured() && isLoggedIn()) {
+            syncNow(true);
           }
         });
       }
 
+      function startAutoSync() {
+        setInterval(function () {
+          if (!isSyncConfigured()) return;
+          if (!isLoggedIn()) return;
+          syncNow(true);
+        }, 60000);
+      }
+
       loadJobs();
+      loadSyncSettings();
       bindEvents();
+      startAutoSync();
+
       if (isLoggedIn()) {
         showApp();
         renderCalendar();
         renderDay();
         clearForm();
+        hydrateSyncInputs();
+        if (isSyncConfigured()) syncNow(true);
       } else {
         showLogin();
       }
     })();
   </script>
 </Layout>
-
