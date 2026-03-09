@@ -61,6 +61,30 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
             <div id="job-list" class="space-y-3"></div>
             <p id="job-empty" class="text-sm text-slate-400">No jobs for this day.</p>
           </div>
+
+          <div class="rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 sm:p-5">
+            <div class="mb-3 flex items-center justify-between">
+              <h2 class="text-lg font-bold">Job Heatmap</h2>
+              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-slate-300">Area load</span>
+            </div>
+            <p class="text-sm text-slate-300">Filter by month and day to see where your jobs are clustered.</p>
+            <div class="mt-3 grid gap-3 sm:grid-cols-2">
+              <label class="block">
+                <span class="text-xs text-slate-400">Month</span>
+                <input id="heatmap-month" type="month" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10" />
+              </label>
+              <label class="block">
+                <span class="text-xs text-slate-400">Day</span>
+                <select id="heatmap-day" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10"></select>
+              </label>
+            </div>
+            <p id="heatmap-summary" class="mt-3 text-sm text-slate-300">No jobs loaded.</p>
+            <div class="mt-2 flex flex-wrap items-center gap-2">
+              <code id="heatmap-line" class="rounded bg-[var(--brand-bg)] px-2 py-1 text-xs text-amber-300">I am in Wellington today.</code>
+              <button id="heatmap-copy-line" type="button" class="btn btn-outline px-2 py-1 text-xs">Copy line</button>
+            </div>
+            <div id="heatmap-grid" class="mt-3 grid gap-2 sm:grid-cols-2"></div>
+          </div>
         </div>
 
         <div class="rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 sm:p-5">
@@ -141,7 +165,13 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         inputAddress: document.getElementById("job-address"),
         inputSummary: document.getElementById("job-summary"),
         inputStatus: document.getElementById("job-status"),
-        jobClear: document.getElementById("job-clear")
+        jobClear: document.getElementById("job-clear"),
+        heatmapMonth: document.getElementById("heatmap-month"),
+        heatmapDay: document.getElementById("heatmap-day"),
+        heatmapSummary: document.getElementById("heatmap-summary"),
+        heatmapLine: document.getElementById("heatmap-line"),
+        heatmapCopyLine: document.getElementById("heatmap-copy-line"),
+        heatmapGrid: document.getElementById("heatmap-grid")
       };
 
       const today = new Date();
@@ -149,10 +179,24 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         jobs: [],
         selectedDate: dateKey(today),
         month: new Date(today.getFullYear(), today.getMonth(), 1),
+        heatmapMonth: dateKey(today).slice(0, 7),
+        heatmapDay: String(today.getDate()).padStart(2, "0"),
         editId: null,
         pollTimer: null,
         saveInFlight: false
       };
+
+      const AREA_KEYWORDS = [
+        { area: "Wellington South", terms: ["wellington south", "newtown", "berhampore", "island bay", "lyall bay", "brooklyn", "kilbirnie", "miramar", "seatoun", "strathmore"] },
+        { area: "Wellington Central", terms: ["wellington central", "te aro", "thorndon", "wadestown", "kelburn", "oriental bay", "mount victoria", "mt victoria", "newlands", "karori"] },
+        { area: "Wellington North", terms: ["wellington north", "johnsonville", "churton park", "tawa", "ngaio", "khandallah", "paparangi", "crofton downs"] },
+        { area: "Lower Hutt", terms: ["lower hutt", "petone", "woburn", "waterloo", "naenae", "taita", "eastbourne", "seaview", "moera", "wellington hutt"] },
+        { area: "Upper Hutt", terms: ["upper hutt", "trentham", "silverstream", "heretaunga", "totara park", "akatarawa"] },
+        { area: "Porirua", terms: ["porirua", "aotea", "papakowhai", "titahi bay", "cannons creek", "plimmerton", "pukerua bay"] },
+        { area: "Kapiti Coast", terms: ["kapiti", "kapiti coast", "paraparaumu", "raumati", "waikanae", "otaki", "paekakariki"] }
+      ];
+
+      const AREA_ORDER = AREA_KEYWORDS.map(function (x) { return x.area; }).concat(["Other"]);
 
       function dateKey(d) {
         const y = d.getFullYear();
@@ -170,6 +214,22 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
       function formatLongDate(str) {
         const d = parseDate(str);
         return d.toLocaleDateString("en-NZ", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+      }
+
+      function formatMonthLabel(value) {
+        const parts = String(value || "").split("-");
+        if (parts.length !== 2) return "selected month";
+        const d = new Date(Number(parts[0]), Number(parts[1]) - 1, 1);
+        return d.toLocaleDateString("en-NZ", { month: "long", year: "numeric" });
+      }
+
+      function daysInMonth(value) {
+        const parts = String(value || "").split("-");
+        if (parts.length !== 2) return 31;
+        const year = Number(parts[0]);
+        const month = Number(parts[1]);
+        if (!year || !month) return 31;
+        return new Date(year, month, 0).getDate();
       }
 
       function safeText(v) {
@@ -255,6 +315,118 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         return state.jobs
           .filter((j) => !j.deleted && j.date === dateStr)
           .sort((a, b) => String(a.time).localeCompare(String(b.time)));
+      }
+
+      function classifyArea(address) {
+        const value = String(address || "").toLowerCase();
+        for (const group of AREA_KEYWORDS) {
+          for (const term of group.terms) {
+            if (value.includes(term)) return group.area;
+          }
+        }
+        return "Other";
+      }
+
+      function syncHeatmapDays() {
+        const monthValue = el.heatmapMonth.value || state.heatmapMonth;
+        const max = daysInMonth(monthValue);
+        const existing = el.heatmapDay.value || state.heatmapDay || "";
+        const current = Number(existing);
+
+        el.heatmapDay.innerHTML = "";
+
+        const allOption = document.createElement("option");
+        allOption.value = "";
+        allOption.textContent = "All days";
+        el.heatmapDay.appendChild(allOption);
+
+        for (let day = 1; day <= max; day += 1) {
+          const opt = document.createElement("option");
+          opt.value = String(day).padStart(2, "0");
+          opt.textContent = String(day);
+          el.heatmapDay.appendChild(opt);
+        }
+
+        if (current >= 1 && current <= max) {
+          el.heatmapDay.value = String(current).padStart(2, "0");
+        } else {
+          el.heatmapDay.value = "";
+        }
+      }
+
+      function renderHeatmap() {
+        if (!el.heatmapMonth || !el.heatmapDay || !el.heatmapGrid) return;
+
+        if (!el.heatmapMonth.value) {
+          el.heatmapMonth.value = state.heatmapMonth;
+        }
+
+        state.heatmapMonth = el.heatmapMonth.value || state.heatmapMonth;
+        syncHeatmapDays();
+
+        if (state.heatmapDay && !el.heatmapDay.value) {
+          el.heatmapDay.value = state.heatmapDay;
+        }
+        state.heatmapDay = el.heatmapDay.value || "";
+
+        const monthValue = state.heatmapMonth;
+        const dayValue = state.heatmapDay;
+        const monthLabel = formatMonthLabel(monthValue);
+        const dateFilter = monthValue + "-" + dayValue;
+
+        const filtered = state.jobs.filter(function (job) {
+          if (job.deleted) return false;
+          if (!job.date.startsWith(monthValue + "-")) return false;
+          if (dayValue && job.date !== dateFilter) return false;
+          return true;
+        });
+
+        const counts = {};
+        for (const area of AREA_ORDER) counts[area] = 0;
+        for (const job of filtered) {
+          const area = classifyArea(job.address);
+          counts[area] = (counts[area] || 0) + 1;
+        }
+
+        const entries = Object.entries(counts).sort(function (a, b) {
+          if (b[1] === a[1]) return a[0].localeCompare(b[0]);
+          return b[1] - a[1];
+        });
+
+        const total = filtered.length;
+        const top = entries[0];
+        const topArea = top && top[1] > 0 ? top[0] : "Wellington";
+
+        if (total === 0) {
+          el.heatmapSummary.textContent = "No jobs scheduled for " + (dayValue ? dayValue + " " + monthLabel : monthLabel) + ".";
+          el.heatmapLine.textContent = "I am in Wellington today.";
+        } else if (dayValue) {
+          el.heatmapSummary.textContent = total + " job" + (total === 1 ? "" : "s") + " on " + dayValue + " " + monthLabel + ". Busiest area: " + topArea + ".";
+          el.heatmapLine.textContent = "I am in " + topArea + " today.";
+        } else {
+          el.heatmapSummary.textContent = total + " job" + (total === 1 ? "" : "s") + " in " + monthLabel + ". Busiest area: " + topArea + ".";
+          el.heatmapLine.textContent = "Most of our bookings this month are in " + topArea + ".";
+        }
+
+        const maxCount = Math.max.apply(null, entries.map(function (item) { return item[1]; }).concat([0]));
+        el.heatmapGrid.innerHTML = "";
+
+        for (const entry of entries) {
+          const area = entry[0];
+          const count = entry[1];
+          const ratio = maxCount > 0 ? count / maxCount : 0;
+          let tone = "bg-white/5 ring-white/10 text-slate-300";
+          if (ratio >= 0.8) tone = "bg-amber-500/25 ring-amber-300/60 text-amber-100";
+          else if (ratio >= 0.5) tone = "bg-amber-500/18 ring-amber-300/45 text-amber-200";
+          else if (ratio > 0) tone = "bg-amber-500/12 ring-amber-300/30 text-slate-100";
+
+          const card = document.createElement("div");
+          card.className = "rounded-xl p-3 ring-1 " + tone;
+          card.innerHTML =
+            '<p class="text-sm font-semibold">' + safeText(area) + "</p>" +
+            '<p class="mt-1 text-xs">' + count + " job" + (count === 1 ? "" : "s") + "</p>";
+          el.heatmapGrid.appendChild(card);
+        }
       }
 
       function renderCalendar() {
@@ -382,6 +554,7 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
           state.jobs = Array.isArray(data.jobs) ? data.jobs.map(normalizeJob) : [];
           renderCalendar();
           renderDay();
+          renderHeatmap();
           if (!silent) setPortalStatus("Jobs refreshed.");
         } catch (err) {
           if (err.message === "__UNAUTHORIZED__") {
@@ -502,8 +675,14 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
           const d = new Date();
           state.selectedDate = dateKey(d);
           state.month = new Date(d.getFullYear(), d.getMonth(), 1);
+          state.heatmapMonth = state.selectedDate.slice(0, 7);
+          state.heatmapDay = state.selectedDate.slice(8, 10);
+          el.heatmapMonth.value = state.heatmapMonth;
+          syncHeatmapDays();
+          el.heatmapDay.value = state.heatmapDay;
           renderCalendar();
           renderDay();
+          renderHeatmap();
           clearForm();
         });
 
@@ -551,6 +730,30 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
             deleteJob(id);
           }
         });
+
+        el.heatmapMonth.addEventListener("change", function () {
+          state.heatmapMonth = el.heatmapMonth.value || state.heatmapMonth;
+          state.heatmapDay = "";
+          el.heatmapDay.value = "";
+          renderHeatmap();
+        });
+
+        el.heatmapDay.addEventListener("change", function () {
+          state.heatmapDay = el.heatmapDay.value || "";
+          renderHeatmap();
+        });
+
+        el.heatmapCopyLine.addEventListener("click", async function () {
+          const text = el.heatmapLine.textContent || "";
+          try {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              await navigator.clipboard.writeText(text);
+              setPortalStatus("Heatmap line copied.");
+              return;
+            }
+          } catch (_) {}
+          setPortalStatus("Copy failed. Select and copy manually.", true);
+        });
       }
 
       async function boot() {
@@ -565,6 +768,9 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
           }
 
           showApp();
+          el.heatmapMonth.value = state.heatmapMonth;
+          syncHeatmapDays();
+          el.heatmapDay.value = state.heatmapDay;
           clearForm();
           await loadJobs(true);
           startPolling();
