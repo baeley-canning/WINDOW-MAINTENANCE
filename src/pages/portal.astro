@@ -30,9 +30,11 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         <div>
           <h1 class="text-2xl font-extrabold sm:text-3xl">Job Calendar Portal</h1>
           <p class="mt-1 text-sm text-slate-300">Add jobs, view daily run sheets, call customers, and open maps in one tap.</p>
+          <p id="portal-status" class="mt-1 text-xs text-slate-400">Connecting to portal...</p>
         </div>
         <div class="flex items-center gap-2">
           <button id="today-btn" class="btn btn-outline px-4 py-2 text-sm">Today</button>
+          <button id="refresh-btn" class="btn btn-outline px-4 py-2 text-sm">Refresh</button>
           <button id="logout-btn" class="btn btn-secondary px-4 py-2 text-sm">Logout</button>
         </div>
       </div>
@@ -109,10 +111,7 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
 
   <script is:inline>
     (function () {
-      const AUTH_KEY = "wm_portal_auth_v1";
-      const JOBS_KEY = "wm_portal_jobs_v1";
-      const PORTAL_USER = "wmadmin";
-      const PORTAL_PASS = "wmportal2026";
+      const API_BASE = "/api/portal/";
 
       const el = {
         loginWrap: document.getElementById("portal-login"),
@@ -122,6 +121,7 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         loginPass: document.getElementById("login-pass"),
         loginError: document.getElementById("login-error"),
         logoutBtn: document.getElementById("logout-btn"),
+        refreshBtn: document.getElementById("refresh-btn"),
         todayBtn: document.getElementById("today-btn"),
         monthPrev: document.getElementById("month-prev"),
         monthNext: document.getElementById("month-next"),
@@ -131,6 +131,7 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         dayCount: document.getElementById("day-count"),
         jobList: document.getElementById("job-list"),
         jobEmpty: document.getElementById("job-empty"),
+        portalStatus: document.getElementById("portal-status"),
         jobForm: document.getElementById("job-form"),
         formTitle: document.getElementById("form-title"),
         inputDate: document.getElementById("job-date"),
@@ -148,7 +149,9 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         jobs: [],
         selectedDate: dateKey(today),
         month: new Date(today.getFullYear(), today.getMonth(), 1),
-        editId: null
+        editId: null,
+        pollTimer: null,
+        saveInFlight: false
       };
 
       function dateKey(d) {
@@ -178,32 +181,16 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
           .replace(/'/g, "&#39;");
       }
 
-      function loadJobs() {
-        try {
-          const raw = localStorage.getItem(JOBS_KEY);
-          state.jobs = raw ? JSON.parse(raw) : [];
-          if (!Array.isArray(state.jobs)) state.jobs = [];
-        } catch (_) {
-          state.jobs = [];
-        }
-      }
-
-      function saveJobs() {
-        localStorage.setItem(JOBS_KEY, JSON.stringify(state.jobs));
-      }
-
-      function isLoggedIn() {
-        return localStorage.getItem(AUTH_KEY) === "1";
-      }
-
-      function setLoggedIn(v) {
-        if (v) localStorage.setItem(AUTH_KEY, "1");
-        else localStorage.removeItem(AUTH_KEY);
+      function setPortalStatus(message, isError) {
+        el.portalStatus.textContent = message;
+        el.portalStatus.classList.toggle("text-red-300", Boolean(isError));
+        el.portalStatus.classList.toggle("text-slate-400", !isError);
       }
 
       function showLogin() {
         el.loginWrap.classList.remove("hidden");
         el.appWrap.classList.add("hidden");
+        stopPolling();
       }
 
       function showApp() {
@@ -211,9 +198,62 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         el.appWrap.classList.remove("hidden");
       }
 
+      function clearLoginError() {
+        el.loginError.textContent = "Incorrect username or password.";
+        el.loginError.classList.add("hidden");
+      }
+
+      function showLoginError(message) {
+        el.loginError.textContent = message;
+        el.loginError.classList.remove("hidden");
+      }
+
+      async function apiRequest(endpoint, options) {
+        const opts = options || {};
+        const init = {
+          method: opts.method || "GET",
+          credentials: "same-origin",
+          headers: { Accept: "application/json" }
+        };
+
+        if (opts.body !== undefined) {
+          init.headers["Content-Type"] = "application/json";
+          init.body = JSON.stringify(opts.body);
+        }
+
+        let response;
+        try {
+          response = await fetch(API_BASE + endpoint, init);
+        } catch (_) {
+          throw new Error("Network error. Could not reach portal API.");
+        }
+
+        let payload = {};
+        try {
+          payload = await response.json();
+        } catch (_) {
+          payload = {};
+        }
+
+        if (response.status === 401) {
+          throw new Error("__UNAUTHORIZED__");
+        }
+
+        if (!response.ok || payload.ok === false) {
+          throw new Error(payload.error || "Request failed (" + response.status + ")");
+        }
+
+        return payload;
+      }
+
+      function handleUnauthorized(message) {
+        showLogin();
+        showLoginError(message || "Session expired. Sign in again.");
+      }
+
       function jobsOn(dateStr) {
         return state.jobs
-          .filter((j) => j.date === dateStr)
+          .filter((j) => !j.deleted && j.date === dateStr)
           .sort((a, b) => String(a.time).localeCompare(String(b.time)));
       }
 
@@ -228,7 +268,10 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         el.calendarGrid.innerHTML = "";
 
         const counts = {};
-        for (const j of state.jobs) counts[j.date] = (counts[j.date] || 0) + 1;
+        for (const j of state.jobs) {
+          if (j.deleted) continue;
+          counts[j.date] = (counts[j.date] || 0) + 1;
+        }
 
         for (let i = 0; i < 42; i += 1) {
           const d = new Date(start);
@@ -319,7 +362,39 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         el.inputStatus.value = job.status || "Booked";
       }
 
-      function saveFormJob() {
+      function normalizeJob(job) {
+        return {
+          id: String(job && job.id ? job.id : ""),
+          date: String(job && job.date ? job.date : ""),
+          time: String(job && job.time ? job.time : ""),
+          customer: String(job && job.customer ? job.customer : ""),
+          phone: String(job && job.phone ? job.phone : ""),
+          address: String(job && job.address ? job.address : ""),
+          summary: String(job && job.summary ? job.summary : ""),
+          status: String(job && job.status ? job.status : "Booked"),
+          deleted: Boolean(job && job.deleted)
+        };
+      }
+
+      async function loadJobs(silent) {
+        try {
+          const data = await apiRequest("jobs.php");
+          state.jobs = Array.isArray(data.jobs) ? data.jobs.map(normalizeJob) : [];
+          renderCalendar();
+          renderDay();
+          if (!silent) setPortalStatus("Jobs refreshed.");
+        } catch (err) {
+          if (err.message === "__UNAUTHORIZED__") {
+            handleUnauthorized("Session expired. Sign in again.");
+            return;
+          }
+          setPortalStatus("Could not load jobs: " + err.message, true);
+        }
+      }
+
+      async function saveFormJob() {
+        if (state.saveInFlight) return;
+
         const job = {
           id: state.editId || String(Date.now()),
           date: el.inputDate.value,
@@ -328,43 +403,99 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
           phone: el.inputPhone.value.trim(),
           address: el.inputAddress.value.trim(),
           summary: el.inputSummary.value.trim(),
-          status: el.inputStatus.value
+          status: el.inputStatus.value,
+          deleted: false
         };
 
         if (!job.date || !job.time || !job.customer || !job.phone || !job.address || !job.summary) return;
 
-        const idx = state.jobs.findIndex((x) => x.id === job.id);
-        if (idx >= 0) state.jobs[idx] = job;
-        else state.jobs.push(job);
+        state.saveInFlight = true;
+        setPortalStatus("Saving job...");
+        try {
+          await apiRequest("jobs.php", { method: "POST", body: { job: job } });
+          state.selectedDate = job.date;
+          const pickedDate = parseDate(job.date);
+          state.month = new Date(pickedDate.getFullYear(), pickedDate.getMonth(), 1);
+          clearForm();
+          await loadJobs(true);
+          setPortalStatus("Job saved.");
+        } catch (err) {
+          if (err.message === "__UNAUTHORIZED__") {
+            handleUnauthorized("Session expired. Sign in again.");
+            return;
+          }
+          setPortalStatus("Could not save job: " + err.message, true);
+        } finally {
+          state.saveInFlight = false;
+        }
+      }
 
-        saveJobs();
-        state.selectedDate = job.date;
-        state.month = new Date(parseDate(job.date).getFullYear(), parseDate(job.date).getMonth(), 1);
-        clearForm();
-        renderCalendar();
-        renderDay();
+      async function deleteJob(id) {
+        setPortalStatus("Deleting job...");
+        try {
+          await apiRequest("jobs.php", { method: "POST", body: { deleteId: id } });
+          await loadJobs(true);
+          clearForm();
+          setPortalStatus("Job deleted.");
+        } catch (err) {
+          if (err.message === "__UNAUTHORIZED__") {
+            handleUnauthorized("Session expired. Sign in again.");
+            return;
+          }
+          setPortalStatus("Could not delete job: " + err.message, true);
+        }
+      }
+
+      function startPolling() {
+        stopPolling();
+        state.pollTimer = setInterval(function () {
+          loadJobs(true);
+        }, 45000);
+      }
+
+      function stopPolling() {
+        if (state.pollTimer) {
+          clearInterval(state.pollTimer);
+          state.pollTimer = null;
+        }
       }
 
       function bindEvents() {
-        el.loginForm.addEventListener("submit", function (e) {
+        el.loginForm.addEventListener("submit", async function (e) {
           e.preventDefault();
-          const u = (el.loginUser.value || "").trim();
-          const p = (el.loginPass.value || "").trim();
-          if (u === PORTAL_USER && p === PORTAL_PASS) {
-            setLoggedIn(true);
-            el.loginError.classList.add("hidden");
+          clearLoginError();
+          setPortalStatus("Signing in...");
+          try {
+            await apiRequest("login.php", {
+              method: "POST",
+              body: {
+                username: (el.loginUser.value || "").trim(),
+                password: (el.loginPass.value || "").trim()
+              }
+            });
+
             showApp();
-            renderCalendar();
-            renderDay();
             clearForm();
-            return;
+            await loadJobs(true);
+            startPolling();
+            setPortalStatus("Signed in.");
+          } catch (err) {
+            showLogin();
+            showLoginError(err.message === "__UNAUTHORIZED__" ? "Invalid username or password." : err.message);
           }
-          el.loginError.classList.remove("hidden");
         });
 
-        el.logoutBtn.addEventListener("click", function () {
-          setLoggedIn(false);
+        el.logoutBtn.addEventListener("click", async function () {
+          try {
+            await apiRequest("logout.php", { method: "POST" });
+          } catch (_) {}
           showLogin();
+          clearLoginError();
+          setPortalStatus("Signed out.");
+        });
+
+        el.refreshBtn.addEventListener("click", function () {
+          loadJobs(false);
         });
 
         el.todayBtn.addEventListener("click", function () {
@@ -410,33 +541,42 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
           const id = btn.dataset.id;
           const action = btn.dataset.action;
           const job = state.jobs.find((x) => x.id === id);
-          if (!job) return;
+          if (!job || job.deleted) return;
           if (action === "edit") {
             fillForm(job);
             return;
           }
           if (action === "delete") {
             if (!window.confirm("Delete this job?")) return;
-            state.jobs = state.jobs.filter((x) => x.id !== id);
-            saveJobs();
-            renderCalendar();
-            renderDay();
-            clearForm();
+            deleteJob(id);
           }
         });
       }
 
-      loadJobs();
-      bindEvents();
-      if (isLoggedIn()) {
-        showApp();
-        renderCalendar();
-        renderDay();
-        clearForm();
-      } else {
-        showLogin();
+      async function boot() {
+        bindEvents();
+        setPortalStatus("Checking session...");
+        try {
+          const me = await apiRequest("me.php");
+          if (!me.authenticated) {
+            showLogin();
+            setPortalStatus("Sign in to access jobs.");
+            return;
+          }
+
+          showApp();
+          clearForm();
+          await loadJobs(true);
+          startPolling();
+          setPortalStatus("Connected.");
+        } catch (err) {
+          showLogin();
+          showLoginError("Portal API unavailable. Check database setup.");
+          setPortalStatus("Portal API error: " + err.message, true);
+        }
       }
+
+      boot();
     })();
   </script>
 </Layout>
-
