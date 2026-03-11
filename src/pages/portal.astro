@@ -42,16 +42,29 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
           <p class="mt-1 text-sm text-slate-300">Add jobs, view daily run sheets, call customers, and open maps in one tap.</p>
           <p id="portal-status" class="mt-1 text-xs text-slate-400">Connecting to portal...</p>
         </div>
-        <div class="flex items-center gap-2">
-          <button id="today-btn" class="btn btn-outline px-4 py-2 text-sm">Today</button>
-          <button id="refresh-btn" class="btn btn-outline px-4 py-2 text-sm">Refresh</button>
-          <button id="logout-btn" class="btn btn-secondary px-4 py-2 text-sm">Logout</button>
+        <div class="grid w-full grid-cols-3 gap-2 sm:flex sm:w-auto sm:items-center">
+          <button id="today-btn" class="btn btn-outline w-full px-4 py-2 text-sm">Today</button>
+          <button id="refresh-btn" class="btn btn-outline w-full px-4 py-2 text-sm">Refresh</button>
+          <button id="logout-btn" class="btn btn-secondary w-full px-4 py-2 text-sm">Logout</button>
         </div>
+      </div>
+
+      <div class="mb-4 rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 md:hidden">
+        <h2 class="text-sm font-semibold uppercase tracking-wide text-amber-300">Quick Day View</h2>
+        <div class="mt-2 grid grid-cols-3 gap-2">
+          <button id="quick-prev-day" class="btn btn-outline w-full px-3 py-2 text-sm" type="button">&larr; Prev</button>
+          <button id="quick-next-day" class="btn btn-outline w-full px-3 py-2 text-sm" type="button">Next &rarr;</button>
+          <button id="quick-today-day" class="btn btn-primary w-full px-3 py-2 text-sm" type="button">Today</button>
+        </div>
+        <label class="mt-3 block">
+          <span class="text-xs text-slate-400">Selected day</span>
+          <input id="quick-date" type="date" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10" />
+        </label>
       </div>
 
       <div class="grid gap-4 lg:grid-cols-3">
         <div class="space-y-4 lg:col-span-2">
-          <div class="rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 sm:p-5">
+          <div class="hidden rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 sm:p-5 md:block">
             <div class="mb-4 flex items-center justify-between">
               <button id="month-prev" class="btn btn-outline px-3 py-2 text-sm" type="button">&larr; Prev</button>
               <h2 id="month-label" class="text-lg font-bold"></h2>
@@ -94,7 +107,7 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
               <button id="heatmap-copy-line" type="button" class="btn btn-outline px-2 py-1 text-xs">Copy line</button>
             </div>
             <div id="heatmap-grid" class="mt-3 grid gap-2 sm:grid-cols-2"></div>
-            <div id="jobs-map" class="mt-3 h-[360px] w-full rounded-xl ring-1 ring-white/10"></div>
+            <div id="jobs-map" class="mt-3 h-[260px] w-full rounded-xl ring-1 ring-white/10 sm:h-[320px] lg:h-[380px]"></div>
             <p id="map-summary" class="mt-2 text-xs text-slate-400">Map loads from saved job addresses.</p>
           </div>
         </div>
@@ -104,33 +117,33 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
           <form id="job-form" class="mt-4 space-y-3">
             <label class="block">
               <span class="text-sm">Date</span>
-              <input id="job-date" type="date" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10" required />
+              <input id="job-date" type="date" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10" required />
             </label>
             <label class="block">
               <span class="text-sm">Time</span>
-              <input id="job-time" type="time" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10" required />
+              <input id="job-time" type="time" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10" required />
             </label>
             <label class="block">
               <span class="text-sm">Customer name</span>
-              <input id="job-customer" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10" required />
+              <input id="job-customer" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10" required />
             </label>
             <label class="block">
               <span class="text-sm">Phone number</span>
-              <input id="job-phone" type="tel" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10" required />
+              <input id="job-phone" type="tel" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10" required />
             </label>
             <label class="block">
               <span class="text-sm">Address</span>
-              <input id="job-address" list="address-suggestions" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10" required />
+              <input id="job-address" list="address-suggestions" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10" required />
               <datalist id="address-suggestions"></datalist>
               <span id="address-hint" class="mt-1 block text-xs text-slate-400">Start typing address (suburb/street) for suggestions.</span>
             </label>
             <label class="block">
               <span class="text-sm">Short job description</span>
-              <textarea id="job-summary" rows="3" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10" required></textarea>
+              <textarea id="job-summary" rows="3" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10" required></textarea>
             </label>
             <label class="block">
               <span class="text-sm">Status</span>
-              <select id="job-status" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10">
+              <select id="job-status" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10">
                 <option value="Booked">Booked</option>
                 <option value="In progress">In progress</option>
                 <option value="Done">Done</option>
@@ -161,6 +174,10 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         logoutBtn: document.getElementById("logout-btn"),
         refreshBtn: document.getElementById("refresh-btn"),
         todayBtn: document.getElementById("today-btn"),
+        quickPrevDay: document.getElementById("quick-prev-day"),
+        quickNextDay: document.getElementById("quick-next-day"),
+        quickTodayDay: document.getElementById("quick-today-day"),
+        quickDate: document.getElementById("quick-date"),
         monthPrev: document.getElementById("month-prev"),
         monthNext: document.getElementById("month-next"),
         monthLabel: document.getElementById("month-label"),
@@ -244,6 +261,31 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
       function formatLongDate(str) {
         const d = parseDate(str);
         return d.toLocaleDateString("en-NZ", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+      }
+
+      function setSelectedDate(dateStr, options) {
+        const opts = options || {};
+        state.selectedDate = String(dateStr || state.selectedDate);
+        const d = parseDate(state.selectedDate);
+        state.month = new Date(d.getFullYear(), d.getMonth(), 1);
+
+        if (opts.syncHeatmap === true) {
+          state.heatmapMonth = state.selectedDate.slice(0, 7);
+          state.heatmapDay = state.selectedDate.slice(8, 10);
+          if (el.heatmapMonth) {
+            el.heatmapMonth.value = state.heatmapMonth;
+            syncHeatmapDays();
+          }
+          if (el.heatmapDay) {
+            el.heatmapDay.value = state.heatmapDay;
+          }
+        }
+
+        renderCalendar();
+        renderDay();
+        renderHeatmap();
+        if (el.quickDate) el.quickDate.value = state.selectedDate;
+        if (opts.clearForm) clearForm();
       }
 
       function formatMonthLabel(value) {
@@ -748,6 +790,7 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
 
       function renderDay() {
         const jobs = jobsOn(state.selectedDate);
+        if (el.quickDate) el.quickDate.value = state.selectedDate;
         el.dayTitle.textContent = "Jobs for " + formatLongDate(state.selectedDate);
         el.dayCount.textContent = jobs.length + " job" + (jobs.length === 1 ? "" : "s");
 
@@ -773,9 +816,9 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
               "</div>" +
             "</div>" +
             '<p class="mt-2 text-sm text-slate-200">' + safeText(j.summary) + "</p>" +
-            '<div class="mt-3 flex flex-wrap gap-2">' +
-              '<a class="btn btn-primary px-3 py-1 text-xs" href="tel:' + safeText(j.phone) + '">Call</a>' +
-              '<a class="btn btn-secondary px-3 py-1 text-xs" target="_blank" rel="noreferrer" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(j.address) + '">Maps</a>' +
+            '<div class="mt-3 grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">' +
+              '<a class="btn btn-primary w-full justify-center px-3 py-1 text-xs sm:w-auto" href="tel:' + safeText(j.phone) + '">Call</a>' +
+              '<a class="btn btn-secondary w-full justify-center px-3 py-1 text-xs sm:w-auto" target="_blank" rel="noreferrer" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(j.address) + '">Maps</a>' +
             "</div>" +
             '<p class="mt-2 text-xs text-slate-400">' + safeText(j.address) + "</p>";
           el.jobList.appendChild(card);
@@ -954,18 +997,7 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         });
 
         el.todayBtn.addEventListener("click", function () {
-          const d = new Date();
-          state.selectedDate = dateKey(d);
-          state.month = new Date(d.getFullYear(), d.getMonth(), 1);
-          state.heatmapMonth = state.selectedDate.slice(0, 7);
-          state.heatmapDay = state.selectedDate.slice(8, 10);
-          el.heatmapMonth.value = state.heatmapMonth;
-          syncHeatmapDays();
-          el.heatmapDay.value = state.heatmapDay;
-          renderCalendar();
-          renderDay();
-          renderHeatmap();
-          clearForm();
+          setSelectedDate(dateKey(new Date()), { syncHeatmap: true, clearForm: true });
         });
 
         el.monthPrev.addEventListener("click", function () {
@@ -981,10 +1013,29 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         el.calendarGrid.addEventListener("click", function (e) {
           const btn = e.target && e.target.closest && e.target.closest("button[data-date]");
           if (!btn) return;
-          state.selectedDate = btn.dataset.date;
-          renderCalendar();
-          renderDay();
-          clearForm();
+          setSelectedDate(btn.dataset.date, { clearForm: true });
+        });
+
+        el.quickPrevDay.addEventListener("click", function () {
+          const d = parseDate(state.selectedDate);
+          d.setDate(d.getDate() - 1);
+          setSelectedDate(dateKey(d), { clearForm: true });
+        });
+
+        el.quickNextDay.addEventListener("click", function () {
+          const d = parseDate(state.selectedDate);
+          d.setDate(d.getDate() + 1);
+          setSelectedDate(dateKey(d), { clearForm: true });
+        });
+
+        el.quickTodayDay.addEventListener("click", function () {
+          setSelectedDate(dateKey(new Date()), { syncHeatmap: true, clearForm: true });
+        });
+
+        el.quickDate.addEventListener("change", function () {
+          const picked = String(el.quickDate.value || "").trim();
+          if (!picked) return;
+          setSelectedDate(picked, { clearForm: true });
         });
 
         el.jobForm.addEventListener("submit", function (e) {
@@ -1081,6 +1132,7 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
           el.heatmapMonth.value = state.heatmapMonth;
           syncHeatmapDays();
           el.heatmapDay.value = state.heatmapDay;
+          if (el.quickDate) el.quickDate.value = state.selectedDate;
           clearForm();
           await loadJobs(true);
           startPolling();
