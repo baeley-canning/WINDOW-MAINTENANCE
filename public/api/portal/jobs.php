@@ -10,7 +10,7 @@ $method = strtoupper((string)($_SERVER['REQUEST_METHOD'] ?? 'GET'));
 if ($method === 'GET') {
     $jobs = [];
     $result = $db->query(
-        "SELECT id, job_date, job_time, customer_name, phone, address, lat, lng, summary, status, is_deleted, updated_at
+        "SELECT id, job_date, job_time, customer_name, phone, address, lat, lng, summary, status, is_unscheduled, is_deleted, updated_at
          FROM portal_jobs
          ORDER BY job_date ASC, job_time ASC, customer_name ASC"
     );
@@ -65,6 +65,7 @@ $lat = portal_parse_coord($job['lat'] ?? null, -90.0, 90.0);
 $lng = portal_parse_coord($job['lng'] ?? null, -180.0, 180.0);
 $summary = trim((string)($job['summary'] ?? ''));
 $status = portal_normalize_status(trim((string)($job['status'] ?? 'Booked')));
+$unscheduled = !empty($job['isUnscheduled']) ? 1 : 0;
 $deleted = !empty($job['deleted']) ? 1 : 0;
 
 if ($id === '') {
@@ -75,12 +76,16 @@ if (strlen($id) > 64) {
     json_response(['ok' => false, 'error' => 'Job id is too long'], 422);
 }
 
-if (!portal_is_valid_date($date)) {
-    json_response(['ok' => false, 'error' => 'Invalid job date'], 422);
-}
-
-if (!portal_is_valid_time($time)) {
-    json_response(['ok' => false, 'error' => 'Invalid job time'], 422);
+if ($unscheduled === 1) {
+    $date = '';
+    $time = '';
+} else {
+    if (!portal_is_valid_date($date)) {
+        json_response(['ok' => false, 'error' => 'Invalid job date'], 422);
+    }
+    if (!portal_is_valid_time($time)) {
+        json_response(['ok' => false, 'error' => 'Invalid job time'], 422);
+    }
 }
 
 if ($customer === '' || $phone === '' || $address === '' || $summary === '') {
@@ -109,9 +114,9 @@ if ($latStr === '' || $lngStr === '') {
 
 $stmt = $db->prepare(
     "INSERT INTO portal_jobs
-      (id, job_date, job_time, customer_name, phone, address, lat, lng, summary, status, is_deleted, updated_at, created_at)
+      (id, job_date, job_time, customer_name, phone, address, lat, lng, summary, status, is_unscheduled, is_deleted, updated_at, created_at)
      VALUES
-      (?, ?, ?, ?, ?, ?, NULLIF(?, ''), NULLIF(?, ''), ?, ?, ?, NOW(), NOW())
+      (?, NULLIF(?, ''), NULLIF(?, ''), ?, ?, ?, NULLIF(?, ''), NULLIF(?, ''), ?, ?, ?, ?, NOW(), NOW())
      ON DUPLICATE KEY UPDATE
       job_date = VALUES(job_date),
       job_time = VALUES(job_time),
@@ -122,6 +127,7 @@ $stmt = $db->prepare(
       lng = VALUES(lng),
       summary = VALUES(summary),
       status = VALUES(status),
+      is_unscheduled = VALUES(is_unscheduled),
       is_deleted = VALUES(is_deleted),
       updated_at = NOW()"
 );
@@ -131,7 +137,7 @@ if (!$stmt) {
 }
 
 $stmt->bind_param(
-    'ssssssssssi',
+    'ssssssssssii',
     $id,
     $date,
     $time,
@@ -142,6 +148,7 @@ $stmt->bind_param(
     $lngStr,
     $summary,
     $status,
+    $unscheduled,
     $deleted
 );
 

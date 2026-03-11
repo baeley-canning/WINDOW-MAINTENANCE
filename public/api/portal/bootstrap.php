@@ -115,13 +115,14 @@ function portal_ensure_schema(mysqli $db): void
     $sql = <<<SQL
 CREATE TABLE IF NOT EXISTS portal_jobs (
   id VARCHAR(64) NOT NULL PRIMARY KEY,
-  job_date DATE NOT NULL,
-  job_time TIME NOT NULL,
+  job_date DATE NULL,
+  job_time TIME NULL,
   customer_name VARCHAR(160) NOT NULL,
   phone VARCHAR(40) NOT NULL,
   address VARCHAR(255) NOT NULL,
   summary TEXT NOT NULL,
   status ENUM('Booked','In progress','Done') NOT NULL DEFAULT 'Booked',
+  is_unscheduled TINYINT(1) NOT NULL DEFAULT 0,
   is_deleted TINYINT(1) NOT NULL DEFAULT 0,
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -157,6 +158,33 @@ SQL;
         json_response([
             'ok' => false,
             'error' => 'Failed to add portal_jobs.lng column',
+            'details' => $db->error,
+        ], 500);
+    }
+
+    if (
+        !$db->query("ALTER TABLE portal_jobs ADD COLUMN is_unscheduled TINYINT(1) NOT NULL DEFAULT 0 AFTER status")
+        && (int)$db->errno !== 1060
+    ) {
+        json_response([
+            'ok' => false,
+            'error' => 'Failed to add portal_jobs.is_unscheduled column',
+            'details' => $db->error,
+        ], 500);
+    }
+
+    if (!$db->query("ALTER TABLE portal_jobs MODIFY COLUMN job_date DATE NULL")) {
+        json_response([
+            'ok' => false,
+            'error' => 'Failed to update portal_jobs.job_date nullability',
+            'details' => $db->error,
+        ], 500);
+    }
+
+    if (!$db->query("ALTER TABLE portal_jobs MODIFY COLUMN job_time TIME NULL")) {
+        json_response([
+            'ok' => false,
+            'error' => 'Failed to update portal_jobs.job_time nullability',
             'details' => $db->error,
         ], 500);
     }
@@ -222,6 +250,7 @@ function portal_job_from_row(array $row): array
         'lng' => $lng,
         'summary' => (string)$row['summary'],
         'status' => (string)$row['status'],
+        'isUnscheduled' => ((int)($row['is_unscheduled'] ?? 0)) === 1,
         'deleted' => ((int)$row['is_deleted']) === 1,
         'updatedAt' => (string)$row['updated_at'],
     ];

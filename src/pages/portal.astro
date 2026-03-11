@@ -87,6 +87,16 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
 
           <div class="rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 sm:p-5">
             <div class="mb-3 flex items-center justify-between">
+              <h2 class="text-lg font-bold">To Be Booked</h2>
+              <span id="unscheduled-count" class="rounded-full bg-white/10 px-3 py-1 text-xs text-slate-300">0 jobs</span>
+            </div>
+            <p class="text-sm text-slate-300">Leads waiting for date/time allocation.</p>
+            <div id="unscheduled-list" class="mt-3 space-y-3"></div>
+            <p id="unscheduled-empty" class="text-sm text-slate-400">No unallocated jobs.</p>
+          </div>
+
+          <div class="rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 sm:p-5">
+            <div class="mb-3 flex items-center justify-between">
               <h2 class="text-lg font-bold">Job Heatmap</h2>
               <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-slate-300">Area load</span>
             </div>
@@ -149,6 +159,10 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
                 <option value="Done">Done</option>
               </select>
             </label>
+            <label class="flex items-center gap-2 rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10">
+              <input id="job-unscheduled" type="checkbox" class="h-4 w-4 accent-amber-400" />
+              <span class="text-sm">To be booked (no date/time yet)</span>
+            </label>
             <div class="flex flex-wrap gap-2 pt-1">
               <button id="job-save" class="btn btn-primary flex-1" type="submit">Save job</button>
               <button id="job-clear" class="btn btn-outline" type="button">Clear</button>
@@ -186,6 +200,9 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         dayCount: document.getElementById("day-count"),
         jobList: document.getElementById("job-list"),
         jobEmpty: document.getElementById("job-empty"),
+        unscheduledCount: document.getElementById("unscheduled-count"),
+        unscheduledList: document.getElementById("unscheduled-list"),
+        unscheduledEmpty: document.getElementById("unscheduled-empty"),
         portalStatus: document.getElementById("portal-status"),
         jobForm: document.getElementById("job-form"),
         formTitle: document.getElementById("form-title"),
@@ -198,6 +215,7 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         addressHint: document.getElementById("address-hint"),
         inputSummary: document.getElementById("job-summary"),
         inputStatus: document.getElementById("job-status"),
+        inputUnscheduled: document.getElementById("job-unscheduled"),
         jobClear: document.getElementById("job-clear"),
         heatmapMonth: document.getElementById("heatmap-month"),
         heatmapDay: document.getElementById("heatmap-day"),
@@ -432,7 +450,7 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
 
       function jobsOn(dateStr) {
         return state.jobs
-          .filter((j) => !j.deleted && j.date === dateStr)
+          .filter((j) => !j.deleted && !j.isUnscheduled && j.date === dateStr)
           .sort((a, b) => String(a.time).localeCompare(String(b.time)));
       }
 
@@ -480,6 +498,7 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
 
         return state.jobs.filter(function (job) {
           if (job.deleted) return false;
+          if (job.isUnscheduled) return false;
           if (!job.date.startsWith(monthValue + "-")) return false;
           if (dayValue && job.date !== dateFilter) return false;
           return true;
@@ -546,6 +565,7 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
           address: job.address,
           summary: job.summary,
           status: job.status || "Booked",
+          isUnscheduled: Boolean(job.isUnscheduled),
           deleted: Boolean(job.deleted),
           lat: lat,
           lng: lng
@@ -752,6 +772,8 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         const counts = {};
         for (const j of state.jobs) {
           if (j.deleted) continue;
+          if (j.isUnscheduled) continue;
+          if (!j.date) continue;
           counts[j.date] = (counts[j.date] || 0) + 1;
         }
 
@@ -825,6 +847,63 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         }
       }
 
+      function renderUnscheduled() {
+        const jobs = state.jobs
+          .filter(function (j) {
+            return !j.deleted && (j.isUnscheduled || !j.date || !j.time);
+          })
+          .sort(function (a, b) {
+            return String(b.updatedAt || "").localeCompare(String(a.updatedAt || ""));
+          });
+
+        el.unscheduledCount.textContent = jobs.length + " job" + (jobs.length === 1 ? "" : "s");
+        el.unscheduledList.innerHTML = "";
+
+        if (!jobs.length) {
+          el.unscheduledEmpty.classList.remove("hidden");
+          return;
+        }
+        el.unscheduledEmpty.classList.add("hidden");
+
+        for (const j of jobs) {
+          const card = document.createElement("article");
+          card.className = "rounded-xl bg-[var(--brand-bg)] p-4 ring-1 ring-white/10";
+          card.innerHTML =
+            '<div class="flex items-start justify-between gap-2">' +
+              '<div>' +
+                '<h3 class="font-semibold">' + safeText(j.customer) + '</h3>' +
+                '<p class="text-xs text-amber-300">To be booked</p>' +
+              "</div>" +
+              '<div class="flex gap-2">' +
+                '<button type="button" data-action="edit" data-id="' + safeText(j.id) + '" class="btn btn-outline px-3 py-1 text-xs">Edit</button>' +
+                '<button type="button" data-action="delete" data-id="' + safeText(j.id) + '" class="btn btn-outline px-3 py-1 text-xs">Delete</button>' +
+              "</div>" +
+            "</div>" +
+            '<p class="mt-2 text-sm text-slate-200">' + safeText(j.summary) + "</p>" +
+            '<div class="mt-3 grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">' +
+              '<a class="btn btn-primary w-full justify-center px-3 py-1 text-xs sm:w-auto" href="tel:' + safeText(j.phone) + '">Call</a>' +
+              '<a class="btn btn-secondary w-full justify-center px-3 py-1 text-xs sm:w-auto" target="_blank" rel="noreferrer" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(j.address) + '">Maps</a>' +
+            "</div>" +
+            '<p class="mt-2 text-xs text-slate-400">' + safeText(j.address) + "</p>";
+          el.unscheduledList.appendChild(card);
+        }
+      }
+
+      function updateScheduleInputs() {
+        const unscheduled = Boolean(el.inputUnscheduled.checked);
+        el.inputDate.disabled = unscheduled;
+        el.inputTime.disabled = unscheduled;
+        el.inputDate.required = !unscheduled;
+        el.inputTime.required = !unscheduled;
+
+        if (unscheduled) {
+          el.inputDate.value = "";
+          el.inputTime.value = "";
+        } else if (!el.inputDate.value) {
+          el.inputDate.value = state.selectedDate;
+        }
+      }
+
       function clearForm() {
         state.editId = null;
         state.pendingLat = null;
@@ -833,6 +912,8 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         el.jobForm.reset();
         el.inputDate.value = state.selectedDate;
         el.inputStatus.value = "Booked";
+        el.inputUnscheduled.checked = false;
+        updateScheduleInputs();
         el.addressHint.textContent = "Start typing address (suburb/street) for suggestions.";
       }
 
@@ -848,6 +929,8 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         el.inputAddress.value = job.address;
         el.inputSummary.value = job.summary;
         el.inputStatus.value = job.status || "Booked";
+        el.inputUnscheduled.checked = Boolean(job.isUnscheduled || !job.date || !job.time);
+        updateScheduleInputs();
         el.addressHint.textContent = hasCoords(job)
           ? "Saved map location found for this address."
           : "No saved map location yet. Pick a suggestion or save to auto-map.";
@@ -867,7 +950,9 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
           lng: Number.isFinite(lng) ? lng : null,
           summary: String(job && job.summary ? job.summary : ""),
           status: String(job && job.status ? job.status : "Booked"),
-          deleted: Boolean(job && job.deleted)
+          isUnscheduled: Boolean(job && (job.isUnscheduled || !job.date || !job.time)),
+          deleted: Boolean(job && job.deleted),
+          updatedAt: String(job && job.updatedAt ? job.updatedAt : "")
         };
       }
 
@@ -877,6 +962,7 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
           state.jobs = Array.isArray(data.jobs) ? data.jobs.map(normalizeJob) : [];
           renderCalendar();
           renderDay();
+          renderUnscheduled();
           renderHeatmap();
           if (!silent) setPortalStatus("Jobs refreshed.");
         } catch (err) {
@@ -890,11 +976,12 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
 
       async function saveFormJob() {
         if (state.saveInFlight) return;
+        const unscheduled = Boolean(el.inputUnscheduled.checked);
 
         const job = {
           id: state.editId || String(Date.now()),
-          date: el.inputDate.value,
-          time: el.inputTime.value,
+          date: unscheduled ? "" : el.inputDate.value,
+          time: unscheduled ? "" : el.inputTime.value,
           customer: el.inputCustomer.value.trim(),
           phone: el.inputPhone.value.trim(),
           address: el.inputAddress.value.trim(),
@@ -902,21 +989,25 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
           lng: state.pendingLng,
           summary: el.inputSummary.value.trim(),
           status: el.inputStatus.value,
+          isUnscheduled: unscheduled,
           deleted: false
         };
 
-        if (!job.date || !job.time || !job.customer || !job.phone || !job.address || !job.summary) return;
+        if (!job.customer || !job.phone || !job.address || !job.summary) return;
+        if (!unscheduled && (!job.date || !job.time)) return;
 
         state.saveInFlight = true;
         setPortalStatus("Saving job...");
         try {
           await apiRequest("jobs.php", { method: "POST", body: { job: job } });
-          state.selectedDate = job.date;
-          const pickedDate = parseDate(job.date);
-          state.month = new Date(pickedDate.getFullYear(), pickedDate.getMonth(), 1);
+          if (!unscheduled && job.date) {
+            state.selectedDate = job.date;
+            const pickedDate = parseDate(job.date);
+            state.month = new Date(pickedDate.getFullYear(), pickedDate.getMonth(), 1);
+          }
           clearForm();
           await loadJobs(true);
-          setPortalStatus("Job saved.");
+          setPortalStatus(unscheduled ? "Saved to To Be Booked." : "Job saved.");
         } catch (err) {
           if (err.message === "__UNAUTHORIZED__") {
             handleUnauthorized("Session expired. Sign in again.");
@@ -1047,6 +1138,10 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
           clearForm();
         });
 
+        el.inputUnscheduled.addEventListener("change", function () {
+          updateScheduleInputs();
+        });
+
         el.inputAddress.addEventListener("input", function () {
           state.pendingLat = null;
           state.pendingLng = null;
@@ -1076,6 +1171,23 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         });
 
         el.jobList.addEventListener("click", function (e) {
+          const btn = e.target && e.target.closest && e.target.closest("button[data-action][data-id]");
+          if (!btn) return;
+          const id = btn.dataset.id;
+          const action = btn.dataset.action;
+          const job = state.jobs.find((x) => x.id === id);
+          if (!job || job.deleted) return;
+          if (action === "edit") {
+            fillForm(job);
+            return;
+          }
+          if (action === "delete") {
+            if (!window.confirm("Delete this job?")) return;
+            deleteJob(id);
+          }
+        });
+
+        el.unscheduledList.addEventListener("click", function (e) {
           const btn = e.target && e.target.closest && e.target.closest("button[data-action][data-id]");
           if (!btn) return;
           const id = btn.dataset.id;
