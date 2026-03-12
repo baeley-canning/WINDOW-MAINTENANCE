@@ -121,13 +121,14 @@ CREATE TABLE IF NOT EXISTS portal_jobs (
   phone VARCHAR(40) NOT NULL,
   address VARCHAR(255) NOT NULL,
   summary TEXT NOT NULL,
-  status ENUM('Booked','In progress','Done') NOT NULL DEFAULT 'Booked',
+  status VARCHAR(40) NOT NULL DEFAULT 'Booked',
   is_unscheduled TINYINT(1) NOT NULL DEFAULT 0,
   is_deleted TINYINT(1) NOT NULL DEFAULT 0,
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   KEY idx_job_date (job_date),
-  KEY idx_updated_at (updated_at)
+  KEY idx_updated_at (updated_at),
+  KEY idx_status (status)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
 SQL;
 
@@ -189,6 +190,25 @@ SQL;
         ], 500);
     }
 
+    if (!$db->query("ALTER TABLE portal_jobs MODIFY COLUMN status VARCHAR(40) NOT NULL DEFAULT 'Booked'")) {
+        json_response([
+            'ok' => false,
+            'error' => 'Failed to update portal_jobs.status type',
+            'details' => $db->error,
+        ], 500);
+    }
+
+    if (
+        !$db->query("ALTER TABLE portal_jobs ADD KEY idx_status (status)")
+        && (int)$db->errno !== 1061
+    ) {
+        json_response([
+            'ok' => false,
+            'error' => 'Failed to add portal_jobs.idx_status index',
+            'details' => $db->error,
+        ], 500);
+    }
+
     $geoSql = <<<SQL
 CREATE TABLE IF NOT EXISTS portal_geocode_cache (
   query_hash CHAR(40) NOT NULL PRIMARY KEY,
@@ -212,7 +232,7 @@ SQL;
 
 function portal_normalize_status(string $status): string
 {
-    $valid = ['Booked', 'In progress', 'Done'];
+    $valid = ['Booked', 'Quoted', 'Awaiting parts', 'In progress', 'Reschedule', 'Done', 'Cancelled'];
     return in_array($status, $valid, true) ? $status : 'Booked';
 }
 

@@ -27,35 +27,35 @@ In cPanel -> `MySQL Databases`:
 2. Click **Add**
 3. Grant **ALL PRIVILEGES**
 
-## 4) Put DB credentials in project
+## 4) Set credentials (recommended secure method)
 
-Edit this file:
+Create this file on server (outside webroot):
 
-- `public/api/portal/config.php`
+- `/home/windowma/portal-config.local.php`
 
-Set:
+Put this in it:
 
-- `WM_PORTAL_DB_PASS`
+```php
+<?php
+define('WM_PORTAL_DB_HOST', 'localhost');
+define('WM_PORTAL_DB_NAME', 'windowma_portal');
+define('WM_PORTAL_DB_USER', 'windowma_portalusr');
+define('WM_PORTAL_DB_PASS', 'YOUR_DB_PASSWORD');
+define('WM_PORTAL_APP_USER', 'wmadmin');
+define('WM_PORTAL_APP_PASS', 'YOUR_PORTAL_PASSWORD');
+define('WM_PORTAL_APP_PASS_HASH', ''); // optional password_hash output
+define('WM_PORTAL_SESSION_DAYS', 30);
+```
 
-`WM_PORTAL_DB_HOST` should stay `localhost` on MyHost.
+The portal loader reads this automatically if present. This keeps secrets out of repo/webroot.
 
-`WM_PORTAL_DB_NAME` and `WM_PORTAL_DB_USER` are already prefilled as:
+If you cannot create that file, fallback is `public/api/portal/config.php` (already prefilled).
 
-- `windowma_portal`
-- `windowma_portalusr`
-
-## 5) Optional: change portal login
-
-In the same file, change:
-
-- `WM_PORTAL_APP_USER`
-- `WM_PORTAL_APP_PASS`
-
-## 6) Deploy
+## 5) Deploy
 
 Push to `main` (your GitHub Action deploys automatically to cPanel).
 
-## 7) Verify
+## 6) Verify
 
 Open:
 
@@ -79,3 +79,8 @@ Sign in and test:
 
 - The DB table is auto-created by the API on first successful DB connection.
 - Session login is persistent (30 days) via secure HTTP-only cookie.
+- New job statuses supported: `Booked`, `Quoted`, `Awaiting parts`, `In progress`, `Reschedule`, `Done`, `Cancelled`.
+- Portal now has:
+  - Search by customer/phone/address/notes
+  - `To Be Booked` queue with one-tap `Schedule`
+  - Duplicate warning when same phone + address already exists
