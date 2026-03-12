@@ -897,36 +897,59 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
       }
 
       function renderDay() {
-        const allJobs = jobsOn(state.selectedDate);
+        const searching = Boolean(String(state.searchQuery || "").trim());
+        const allJobs = searching
+          ? state.jobs
+              .filter(function (j) {
+                return !j.deleted && !j.isUnscheduled && Boolean(j.date);
+              })
+              .sort(function (a, b) {
+                const da = String(a.date || "") + " " + String(a.time || "");
+                const db = String(b.date || "") + " " + String(b.time || "");
+                return da.localeCompare(db);
+              })
+          : jobsOn(state.selectedDate);
         const jobs = allJobs.filter(matchesSearch);
         if (el.quickDate) el.quickDate.value = state.selectedDate;
-        el.dayTitle.textContent = "Jobs for " + formatLongDate(state.selectedDate);
-        if (state.searchQuery && jobs.length !== allJobs.length) {
-          el.dayCount.textContent = jobs.length + " of " + allJobs.length + " jobs";
+        if (searching) {
+          el.dayTitle.textContent = "Search Results (All Scheduled Dates)";
+          el.dayCount.textContent = jobs.length + " match" + (jobs.length === 1 ? "" : "es");
         } else {
+          el.dayTitle.textContent = "Jobs for " + formatLongDate(state.selectedDate);
           el.dayCount.textContent = jobs.length + " job" + (jobs.length === 1 ? "" : "s");
+        }
+        if (!searching && state.searchQuery && jobs.length !== allJobs.length) {
+          el.dayCount.textContent = jobs.length + " of " + allJobs.length + " jobs";
         }
 
         el.jobList.innerHTML = "";
         if (!jobs.length) {
           el.jobEmpty.classList.remove("hidden");
-          el.jobEmpty.textContent = state.searchQuery
-            ? "No jobs match your search for this day."
-            : "No jobs for this day.";
+          if (searching) {
+            el.jobEmpty.textContent = "No scheduled jobs match your search.";
+          } else {
+            el.jobEmpty.textContent = state.searchQuery
+              ? "No jobs match your search for this day."
+              : "No jobs for this day.";
+          }
           return;
+        } else {
+          el.jobEmpty.classList.add("hidden");
         }
-        el.jobEmpty.classList.add("hidden");
 
         for (const j of jobs) {
           const status = j.status || "Booked";
           const statusClass = getStatusBadgeClass(status);
+          const whenLabel = searching
+            ? safeText((j.date || "") + (j.time ? " • " + j.time : ""))
+            : safeText(j.time);
           const card = document.createElement("article");
           card.className = "rounded-xl bg-[var(--brand-bg)] p-4 ring-1 ring-white/10";
           card.innerHTML =
             '<div class="flex items-start justify-between gap-2">' +
               '<div>' +
                 '<h3 class="font-semibold">' + safeText(j.customer) + '</h3>' +
-                '<p class="mt-1 text-xs text-slate-400">' + safeText(j.time) + "</p>" +
+                '<p class="mt-1 text-xs text-slate-400">' + whenLabel + "</p>" +
                 '<span class="mt-1 inline-flex rounded-full px-2 py-0.5 text-xs ' + statusClass + '">' + safeText(status) + "</span>" +
               "</div>" +
               '<div class="flex gap-2">' +
