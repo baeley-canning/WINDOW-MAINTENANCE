@@ -1,7 +1,6 @@
 ---
 import Layout from "../../layouts/WMBase.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
-import FAQ from "../../components/FAQ.astro";
 import Picture from "../../components/Picture.astro";
 import QuoteInline from "../../components/QuoteInline.astro";
 
@@ -29,6 +28,26 @@ const faqSchema = {
   <main class="mx-auto max-w-4xl px-6 py-12">
     <h1 class="text-3xl font-extrabold">Sliding / Ranchslider Door Repairs</h1>
     <p class="mt-4 text-slate-300">Single and double-glazed aluminium sliding door repairs: roller replacement, track refurbishment, alignment and door handle/lock fixes across Wellington, Porirua, Lower Hutt, Upper Hutt, Petone and Kāpiti.</p>
+    <section class="mt-8 grid gap-4 sm:grid-cols-3">
+      <div class="rounded-xl bg-[var(--brand-surface)] p-5 ring-1 ring-white/10">
+        <h2 class="text-lg font-bold">Common issues</h2>
+        <p class="mt-2 text-sm text-slate-300">Hard-to-slide ranchsliders, flat rollers, dented tracks, dropped panels, loose door handles and locks that no longer latch cleanly.</p>
+      </div>
+      <div class="rounded-xl bg-[var(--brand-surface)] p-5 ring-1 ring-white/10">
+        <h2 class="text-lg font-bold">What we do</h2>
+        <p class="mt-2 text-sm text-slate-300">Replace rollers, refurbish or cap tracks, re-align panels, service handles and restore smooth sliding without forcing a full door replacement.</p>
+      </div>
+      <div class="rounded-xl bg-[var(--brand-surface)] p-5 ring-1 ring-white/10">
+        <h2 class="text-lg font-bold">What happens next</h2>
+        <p class="mt-2 text-sm text-slate-300">Send a quick message with the suburb and issue. We’ll come back with likely repair route, ballpark pricing and next available slot.</p>
+      </div>
+    </section>
+    <QuoteInline
+      title="Get a quote for sliding / ranchslider repairs"
+      subtitle="Best for rollers, tracks, dropped panels, misaligned locks and hard-to-slide aluminium doors."
+      buttonLabel="Get my slider quote"
+      source="sliding_door_page"
+    />
     <h2 class="mt-10 text-2xl font-bold">Common parts we replace</h2>
     <div class="mt-4 grid gap-4 sm:grid-cols-2">
 
@@ -68,5 +87,4 @@ const faqSchema = {
       </ul>
     </div>
   </main>
-  <QuoteInline title="Get a quote for sliding/ranchslider repairs" />
 </Layout>

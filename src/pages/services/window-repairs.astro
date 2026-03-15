@@ -1,12 +1,11 @@
 ---
 import Layout from "../../layouts/WMBase.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
-import FAQ from "../../components/FAQ.astro";
 import Picture from "../../components/Picture.astro";
 import QuoteInline from "../../components/QuoteInline.astro";
 
-const title = "Aluminium Window Repairs Wellington | Stays & Hinges";
-const description = "Single and double-glazed aluminium window repairs: stays, hinges, handles, latches and draft fixes across Wellington, Porirua and the Hutt Valley.";
+const title = "Aluminium Window Repairs Wellington | Handles, Hinges & Drafts";
+const description = "Single and double-glazed aluminium window repairs: stays, hinges, window handles, Yale locks, latches and draft fixes across Wellington, Porirua and the Hutt Valley.";
 const canonical = "https://windowmaintenance.co.nz/services/window-repairs/";
 
 const faqItems = [
@@ -28,7 +27,27 @@ const faqSchema = {
   <Breadcrumbs />
   <main class="mx-auto max-w-4xl px-6 py-12">
     <h1 class="text-3xl font-extrabold">Aluminium Window Repairs</h1>
-    <p class="mt-4 text-slate-300">Single and double-glazed aluminium window repairs: stays, hinges, window handles, window locks and latch alignment, plus draft and rattle fixes across Wellington, Porirua, Lower Hutt, Upper Hutt, Petone and Kāpiti.</p>
+    <p class="mt-4 text-slate-300">Single and double-glazed aluminium window repairs: stays, hinges, window handles, Yale window locks, latches and latch alignment, plus draft and rattle fixes across Wellington, Porirua, Lower Hutt, Upper Hutt, Petone and Kāpiti.</p>
+    <section class="mt-8 grid gap-4 sm:grid-cols-3">
+      <div class="rounded-xl bg-[var(--brand-surface)] p-5 ring-1 ring-white/10">
+        <h2 class="text-lg font-bold">Common issues</h2>
+        <p class="mt-2 text-sm text-slate-300">Bent awning stays, worn hinges, loose sash handles, failed Yale window locks and windows that no longer hold position.</p>
+      </div>
+      <div class="rounded-xl bg-[var(--brand-surface)] p-5 ring-1 ring-white/10">
+        <h2 class="text-lg font-bold">What we do</h2>
+        <p class="mt-2 text-sm text-slate-300">Match hardware, re-align sashes, replace broken parts, service locks and stop drafts/rattles without pushing you toward full replacement.</p>
+      </div>
+      <div class="rounded-xl bg-[var(--brand-surface)] p-5 ring-1 ring-white/10">
+        <h2 class="text-lg font-bold">What happens next</h2>
+        <p class="mt-2 text-sm text-slate-300">Send the suburb and issue. We will usually reply the same day with likely parts, pricing guidance and next available booking.</p>
+      </div>
+    </section>
+    <QuoteInline
+      title="Get a quote for window repairs"
+      subtitle="Best for sticking awning windows, bent stays, failed Yale window locks, worn sash handles and rattling single- or double-glazed joinery."
+      buttonLabel="Get my window repair quote"
+      source="window_repairs_page"
+    />
     <h2 class="mt-10 text-2xl font-bold">Common parts we replace</h2>
     <div class="mt-4 grid gap-4 sm:grid-cols-2">
 
@@ -74,5 +93,4 @@ const faqSchema = {
       </ul>
     </div>
   </main>
-  <QuoteInline title="Get a quote for window repairs" />
 </Layout>

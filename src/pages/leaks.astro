@@ -28,6 +28,26 @@ const faqSchema = {
   <main class="mx-auto max-w-4xl px-6 py-12">
     <h1 class="text-3xl font-extrabold">Draught & Leak Repairs</h1>
     <p class="mt-4 text-slate-300">We diagnose and fix window draughts and leaks across Wellington, Porirua, Lower Hutt, Upper Hutt, Petone and Kāpiti: glazing wedges and seals replaced, sashes re-aligned, and hardware serviced for a tight close.</p>
+    <section class="mt-8 grid gap-4 sm:grid-cols-3">
+      <div class="rounded-xl bg-[var(--brand-surface)] p-5 ring-1 ring-white/10">
+        <h2 class="text-lg font-bold">Common symptoms</h2>
+        <p class="mt-2 text-sm text-slate-300">Cold draughts, rattling sashes, blackened seals, wind noise, damp carpet and water tracking around aluminium frames.</p>
+      </div>
+      <div class="rounded-xl bg-[var(--brand-surface)] p-5 ring-1 ring-white/10">
+        <h2 class="text-lg font-bold">What we do</h2>
+        <p class="mt-2 text-sm text-slate-300">Replace wedges and seals, re-align sashes, service latches and diagnose whether the real problem is a mitre, sill or closure issue.</p>
+      </div>
+      <div class="rounded-xl bg-[var(--brand-surface)] p-5 ring-1 ring-white/10">
+        <h2 class="text-lg font-bold">What happens next</h2>
+        <p class="mt-2 text-sm text-slate-300">Tell us where the draught or leak is showing up. We’ll advise whether it sounds like a seal job or a deeper reseal/repair.</p>
+      </div>
+    </section>
+    <QuoteInline
+      title="Get a quote for draught & leak repairs"
+      subtitle="Best for cold rattling windows, failed wedges, noisy sashes and early-stage leak problems before full damage sets in."
+      buttonLabel="Get my leak quote"
+      source="leaks_page"
+    />
     <div class="mt-6 grid gap-4 sm:grid-cols-2">
       <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
         <div class="ratio-4-3 card-frame"><Picture base="glazing-wedge" alt="New glazing wedge / rubber seal installed" className="h-full w-full object-cover" /></div>
@@ -57,7 +77,6 @@ const faqSchema = {
       </ul>
     </div>
   </main>
-  <QuoteInline title="Get a quote for draught & leak repairs" />
   <FAQ items={[
     { q: 'What causes draughts in aluminium windows?', a: 'Usually shrunken glazing wedges/seals, dropped sashes or latch misalignment. We replace seals, re-align sashes and adjust hardware.' },
     { q: 'Do you work in heavy rain?', a: 'We can diagnose in poor weather but prefer dry conditions for seal replacement to ensure proper adhesion.' }

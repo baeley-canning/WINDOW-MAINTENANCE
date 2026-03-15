@@ -54,6 +54,26 @@ const serviceSchema = {
   <main class="mx-auto max-w-4xl px-6 py-12">
     <h1 class="text-3xl font-extrabold">Lock Picking Wellington &amp; Lockout Entry</h1>
     <p class="mt-4 text-slate-300">Locked out of your home? We provide lock picking and lockout entry across Wellington with a non-destructive approach where possible, followed by cylinder servicing or replacement if required.</p>
+    <section class="mt-8 grid gap-4 sm:grid-cols-3">
+      <div class="rounded-xl bg-[var(--brand-surface)] p-5 ring-1 ring-white/10">
+        <h2 class="text-lg font-bold">Best for</h2>
+        <p class="mt-2 text-sm text-slate-300">Lockouts, seized cylinders, keys that no longer turn cleanly and compatible residential locks needing non-destructive entry.</p>
+      </div>
+      <div class="rounded-xl bg-[var(--brand-surface)] p-5 ring-1 ring-white/10">
+        <h2 class="text-lg font-bold">What we do</h2>
+        <p class="mt-2 text-sm text-slate-300">Attempt non-destructive entry first, then service or replace the cylinder if the lock is worn, damaged or unsuitable for picking.</p>
+      </div>
+      <div class="rounded-xl bg-[var(--brand-surface)] p-5 ring-1 ring-white/10">
+        <h2 class="text-lg font-bold">What happens next</h2>
+        <p class="mt-2 text-sm text-slate-300">Call for urgent lockouts. Use the form for non-urgent jobs and we’ll confirm authority requirements and availability.</p>
+      </div>
+    </section>
+    <QuoteInline
+      title="Need urgent lockout entry?"
+      subtitle="For urgent lockouts, call first. For non-urgent lock picking, cylinder changes or sticky locks, send the form and we’ll come back quickly."
+      buttonLabel="Request lockout help"
+      source="lock_picking_page"
+    />
 
     <h2 class="mt-10 text-2xl font-bold">What this service includes</h2>
     <ul class="mt-4 list-disc space-y-2 pl-5 text-slate-300">
@@ -92,6 +112,5 @@ const serviceSchema = {
     </div>
   </main>
 
-  <QuoteInline title="Need urgent lockout entry?" />
   <FAQ heading="Lock picking FAQs" items={faqItems} />
 </Layout>

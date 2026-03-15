@@ -3,6 +3,7 @@ import Layout from "../layouts/WMBase.astro";
 import ContactCTA from "../components/ContactCTA.astro";
 import Picture from "../components/Picture.astro";
 import FAQ from "../components/FAQ.astro";
+import QuoteInline from "../components/QuoteInline.astro";
 const title = "Aluminium Window & Sliding Door Repairs in Wellington Region";
 const description = "Wellington & Hutt Valley aluminium window and sliding door repairs, lock picking and lockout entry, handles/locks (incl. Yale), mitre & sill reseals and hardware replacements.";
 const canonical = "https://windowmaintenance.co.nz/";
@@ -41,13 +42,13 @@ const faqSchema = {
 <Layout title={title} description={description} canonical={canonical} schema={[localBusiness, website, faqSchema]}>
   <section class="bg-gradient-to-b from-[#0a2540] via-[#0b1220] to-[#0a2540]">
     <div class="mx-auto max-w-6xl px-6 py-16 lg:py-24">
-      <div class="flex flex-wrap items-center">
-        <div class="w-full lg:w-1/2">
+      <div class="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
+        <div>
           <p class="text-sm font-semibold uppercase tracking-widest text-amber-400">Wellington single &amp; double-glazed aluminium joinery specialists</p>
           <h1 class="mt-4 text-4xl font-bold leading-tight text-white md:text-5xl">
             Sliding door &amp; aluminium window repairs done right.
           </h1>
-          <p class="mt-4 text-lg text-slate-300">Single- and double-glazed aluminium joinery: rollers replaced, window handles and window locks serviced (including Yale), and hardware aligned across Wellington, Lower Hutt, Upper Hutt, Porirua and Kāpiti.</p>
+          <p class="mt-4 text-lg text-slate-300">Single- and double-glazed aluminium joinery repairs for Wellington homes and rentals. We fix ranchsliders, awning windows, window handles, door handles, window locks, Yale hardware, drafts, leaks and sticking sashes across Wellington, Lower Hutt, Upper Hutt, Porirua and Kāpiti.</p>
           <div class="mt-6 flex flex-wrap items-center gap-4">
             <a href="tel:+6421638205" id="cta-call-home" data-cta="call" class="btn btn-primary">Call 021 638 205</a>
             <a href="/contact/" class="btn btn-secondary">Get a fast quote</a>
@@ -58,26 +59,27 @@ const faqSchema = {
             <li class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-amber-400"></span>Window handles, door handles &amp; window locks</li>
             <li class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-amber-400"></span>Draught/leak diagnosis &amp; fixes</li>
             <li class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-amber-400"></span>Lock picking &amp; cylinder replacement</li>
+            <li class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-amber-400"></span>Same-week bookings where possible</li>
           </ul>
         </div>
-        <div class="mt-10 w-full lg:mt-0 lg:w-1/2">
-          <picture>
-            <source
-              type="image/webp"
-              srcset="/img/window-stay-replacement-480.webp 480w, /img/window-stay-replacement-640.webp 640w, /img/window-stay-replacement-768.webp 768w"
-              sizes="(min-width: 1024px) 50vw, 100vw"
-            />
-            <img
-              src="/img/window-stay-replacement-768.webp"
-              alt="Awning stay replacement on site in Wellington"
-              class="w-full rounded-2xl object-cover shadow-2xl"
-              width="768"
-              height="1024"
-              loading="eager"
-              fetchpriority="high"
-              decoding="async"
-            />
-          </picture>
+        <div>
+          <QuoteInline
+            title="Get a fast quote"
+            subtitle="Name and phone is enough. Tell us what is sticking, leaking or broken and we will usually reply the same day during business hours."
+            buttonLabel="Get my fast quote"
+            source="home_hero_form"
+            className="mt-0 shadow-2xl"
+          />
+          <div class="mt-4 grid gap-3 md:grid-cols-2">
+            <div class="rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
+              <p class="text-sm font-semibold uppercase tracking-[0.25em] text-amber-400">Best for</p>
+              <p class="mt-2 text-sm text-slate-300">Urgent ranchslider repairs, leaking sills, broken window stays, handles, locks and same-week quoting.</p>
+            </div>
+            <div class="rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
+              <p class="text-sm font-semibold uppercase tracking-[0.25em] text-amber-400">What to send</p>
+              <p class="mt-2 text-sm text-slate-300">Suburb, brief issue description and photos if you have them. We can still quote from a short message first.</p>
+            </div>
+          </div>
         </div>
       </div>
       <div class="mt-12 flex flex-wrap items-center gap-6 text-sm text-slate-400">
