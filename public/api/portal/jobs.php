@@ -10,7 +10,7 @@ $method = strtoupper((string)($_SERVER['REQUEST_METHOD'] ?? 'GET'));
 if ($method === 'GET') {
     $jobs = [];
     $result = $db->query(
-        "SELECT id, job_date, job_time, customer_name, phone, address, lat, lng, summary, status, is_unscheduled, is_deleted, updated_at
+        "SELECT id, root_job_id, job_date, job_time, customer_name, phone, address, lat, lng, summary, status, is_unscheduled, is_deleted, created_at, updated_at
          FROM portal_jobs
          ORDER BY job_date ASC, job_time ASC, customer_name ASC"
     );
@@ -56,6 +56,7 @@ if (!isset($body['job']) || !is_array($body['job'])) {
 $job = $body['job'];
 
 $id = trim((string)($job['id'] ?? ''));
+$rootJobId = trim((string)($job['rootJobId'] ?? ''));
 $date = trim((string)($job['date'] ?? ''));
 $time = trim((string)($job['time'] ?? ''));
 $customer = trim((string)($job['customer'] ?? ''));
@@ -74,6 +75,14 @@ if ($id === '') {
 
 if (strlen($id) > 64) {
     json_response(['ok' => false, 'error' => 'Job id is too long'], 422);
+}
+
+if ($rootJobId !== '' && strlen($rootJobId) > 64) {
+    json_response(['ok' => false, 'error' => 'Root job id is too long'], 422);
+}
+
+if ($rootJobId === $id) {
+    $rootJobId = '';
 }
 
 if ($unscheduled === 1) {
@@ -114,10 +123,11 @@ if ($latStr === '' || $lngStr === '') {
 
 $stmt = $db->prepare(
     "INSERT INTO portal_jobs
-      (id, job_date, job_time, customer_name, phone, address, lat, lng, summary, status, is_unscheduled, is_deleted, updated_at, created_at)
+      (id, root_job_id, job_date, job_time, customer_name, phone, address, lat, lng, summary, status, is_unscheduled, is_deleted, updated_at, created_at)
      VALUES
-      (?, NULLIF(?, ''), NULLIF(?, ''), ?, ?, ?, NULLIF(?, ''), NULLIF(?, ''), ?, ?, ?, ?, NOW(), NOW())
+      (?, NULLIF(?, ''), NULLIF(?, ''), NULLIF(?, ''), ?, ?, ?, NULLIF(?, ''), NULLIF(?, ''), ?, ?, ?, ?, NOW(), NOW())
      ON DUPLICATE KEY UPDATE
+      root_job_id = VALUES(root_job_id),
       job_date = VALUES(job_date),
       job_time = VALUES(job_time),
       customer_name = VALUES(customer_name),
@@ -137,8 +147,9 @@ if (!$stmt) {
 }
 
 $stmt->bind_param(
-    'ssssssssssii',
+    'sssssssssssii',
     $id,
+    $rootJobId,
     $date,
     $time,
     $customer,

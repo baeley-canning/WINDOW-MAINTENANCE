@@ -128,7 +128,26 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
           </div>
         </div>
 
-        <div class="rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 sm:p-5">
+        <div class="space-y-4">
+          <div id="job-detail-panel" class="hidden rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 sm:p-5">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <h2 id="job-detail-title" class="text-lg font-bold">Job detail</h2>
+                <p id="job-detail-meta" class="mt-1 text-sm text-slate-300"></p>
+              </div>
+              <div class="flex gap-2">
+                <button id="job-detail-follow-up" class="btn btn-primary px-3 py-2 text-xs" type="button">New booking</button>
+                <button id="job-detail-close" class="btn btn-outline px-3 py-2 text-xs" type="button">Close</button>
+              </div>
+            </div>
+            <div id="job-detail-summary" class="mt-4 grid gap-2 sm:grid-cols-2"></div>
+            <div class="mt-4">
+              <h3 class="text-sm font-semibold uppercase tracking-wide text-amber-300">Bookings &amp; visits</h3>
+              <div id="job-detail-visits" class="mt-3 space-y-3"></div>
+            </div>
+          </div>
+
+          <div class="rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 sm:p-5">
           <h2 id="form-title" class="text-lg font-bold">Add Job</h2>
           <form id="job-form" class="mt-4 space-y-3">
             <label class="block">
@@ -153,9 +172,9 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
               <datalist id="address-suggestions"></datalist>
               <span id="address-hint" class="mt-1 block text-xs text-slate-400">Start typing address (suburb/street) for suggestions.</span>
             </label>
-            <p id="duplicate-hint" class="hidden rounded-lg bg-amber-500/10 px-3 py-2 text-xs text-amber-200 ring-1 ring-amber-300/20">
+            <div id="duplicate-hint" class="hidden rounded-lg bg-amber-500/10 px-3 py-2 text-xs text-amber-200 ring-1 ring-amber-300/20">
               Similar job already exists for this customer/contact. Save anyway only if this is a separate booking.
-            </p>
+            </div>
             <label class="block">
               <span class="text-sm">Short job description</span>
               <textarea id="job-summary" rows="3" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10" required></textarea>
@@ -182,6 +201,7 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
             </div>
           </form>
           <p class="mt-3 text-xs text-slate-400">Tip: tap customer phone to call, or address to open Google Maps.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -190,6 +210,8 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
   <script is:inline>
     (function () {
       const API_BASE = "/api/portal/";
+      const initialParams = new URLSearchParams(window.location.search);
+      const initialJobParam = String(initialParams.get("job") || "").trim();
 
       const el = {
         loginWrap: document.getElementById("portal-login"),
@@ -217,6 +239,13 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         unscheduledCount: document.getElementById("unscheduled-count"),
         unscheduledList: document.getElementById("unscheduled-list"),
         unscheduledEmpty: document.getElementById("unscheduled-empty"),
+        jobDetailPanel: document.getElementById("job-detail-panel"),
+        jobDetailTitle: document.getElementById("job-detail-title"),
+        jobDetailMeta: document.getElementById("job-detail-meta"),
+        jobDetailSummary: document.getElementById("job-detail-summary"),
+        jobDetailVisits: document.getElementById("job-detail-visits"),
+        jobDetailFollowUp: document.getElementById("job-detail-follow-up"),
+        jobDetailClose: document.getElementById("job-detail-close"),
         portalStatus: document.getElementById("portal-status"),
         jobForm: document.getElementById("job-form"),
         formTitle: document.getElementById("form-title"),
@@ -258,7 +287,10 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         pendingLat: null,
         pendingLng: null,
         suggestionLookup: {},
+        rootJobId: "",
         editId: null,
+        selectedFamilyId: initialJobParam,
+        pendingFamilyScroll: Boolean(initialJobParam),
         searchQuery: "",
         pollTimer: null,
         saveInFlight: false
@@ -389,13 +421,129 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         return STATUS_BADGE_CLASS[status] || "bg-white/10 text-slate-200";
       }
 
+      function getJobFamilyId(job) {
+        const rootJobId = String(job && job.rootJobId ? job.rootJobId : "").trim();
+        const jobId = String(job && job.id ? job.id : "").trim();
+        return rootJobId || jobId;
+      }
+
+      function getJobRef(jobOrFamilyId) {
+        const familyId = typeof jobOrFamilyId === "string" ? jobOrFamilyId : getJobFamilyId(jobOrFamilyId);
+        const clean = String(familyId || "").replace(/[^a-z0-9]/gi, "").toUpperCase();
+        return "WM-" + (clean.slice(-6) || "JOB");
+      }
+
+      function currentFormFamilyId() {
+        if (state.rootJobId) return state.rootJobId;
+        if (!state.editId) return "";
+        const currentJob = state.jobs.find(function (job) {
+          return job.id === state.editId;
+        });
+        return currentJob ? getJobFamilyId(currentJob) : "";
+      }
+
+      function sortFamilyJobs(a, b) {
+        const aIsRoot = a.id === getJobFamilyId(a);
+        const bIsRoot = b.id === getJobFamilyId(b);
+        if (aIsRoot !== bIsRoot) return aIsRoot ? -1 : 1;
+        if (Boolean(a.isUnscheduled) !== Boolean(b.isUnscheduled)) return a.isUnscheduled ? 1 : -1;
+
+        const aDate = String(a.date || "9999-12-31") + " " + String(a.time || "23:59");
+        const bDate = String(b.date || "9999-12-31") + " " + String(b.time || "23:59");
+        if (aDate !== bDate) return aDate.localeCompare(bDate);
+
+        const aCreated = String(a.createdAt || a.updatedAt || "");
+        const bCreated = String(b.createdAt || b.updatedAt || "");
+        if (aCreated !== bCreated) return aCreated.localeCompare(bCreated);
+
+        return String(a.id || "").localeCompare(String(b.id || ""));
+      }
+
+      function decorateJobFamilies() {
+        const groups = {};
+
+        for (const job of state.jobs) {
+          if (!job || job.deleted) continue;
+          const familyId = getJobFamilyId(job);
+          if (!familyId) continue;
+          if (!groups[familyId]) groups[familyId] = [];
+          groups[familyId].push(job);
+        }
+
+        for (const familyId of Object.keys(groups)) {
+          const familyJobs = groups[familyId].slice().sort(sortFamilyJobs);
+          const familyCount = familyJobs.length;
+          const completedVisits = familyJobs.filter(function (job) { return job.status === "Done"; }).length;
+          const openBookings = familyJobs.filter(function (job) {
+            return job.status !== "Done" && job.status !== "Cancelled";
+          }).length;
+
+          familyJobs.forEach(function (job, index) {
+            job.familyId = familyId;
+            job.familyRef = getJobRef(familyId);
+            job.visitNumber = index + 1;
+            job.familyCount = familyCount;
+            job.completedVisits = completedVisits;
+            job.openBookings = openBookings;
+          });
+        }
+      }
+
+      function getFamilyJobs(familyId) {
+        return state.jobs
+          .filter(function (job) {
+            return !job.deleted && getJobFamilyId(job) === familyId;
+          })
+          .sort(sortFamilyJobs);
+      }
+
+      function updateJobQueryParam(familyId) {
+        if (!window.history || !window.history.replaceState) return;
+        const url = new URL(window.location.href);
+        if (familyId) {
+          url.searchParams.set("job", familyId);
+        } else {
+          url.searchParams.delete("job");
+        }
+        window.history.replaceState({}, "", url.pathname + url.search + url.hash);
+      }
+
+      function selectFamilyById(familyId, options) {
+        const opts = options || {};
+        state.selectedFamilyId = String(familyId || "").trim();
+        if (opts.updateUrl !== false) {
+          updateJobQueryParam(state.selectedFamilyId);
+        }
+        renderJobDetail();
+        if (opts.scroll && el.jobDetailPanel && !el.jobDetailPanel.classList.contains("hidden")) {
+          setTimeout(function () {
+            try {
+              el.jobDetailPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+            } catch (_) {}
+          }, 60);
+        }
+      }
+
+      function getSuggestedTimeValue() {
+        const now = new Date();
+        let hour = now.getHours();
+        let mins = now.getMinutes() <= 30 ? 30 : 0;
+        if (mins === 0) {
+          hour = (hour + 1) % 24;
+        }
+        const roundedTime = String(hour).padStart(2, "0") + ":" + String(mins).padStart(2, "0");
+        return roundedTime || "09:00";
+      }
+
       function findPotentialDuplicate(job) {
         const addressKey = normalizeAddress(job.address);
         const phoneKey = normalizePhone(job.phone);
+        const ignoreFamilyId = currentFormFamilyId();
         if (!addressKey || !phoneKey) return null;
         return state.jobs.find(function (x) {
           if (!x || x.deleted) return false;
           if (state.editId && x.id === state.editId) return false;
+          if (ignoreFamilyId && getJobFamilyId(x) === ignoreFamilyId) return false;
           return normalizeAddress(x.address) === addressKey && normalizePhone(x.phone) === phoneKey;
         }) || null;
       }
@@ -409,7 +557,14 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         const duplicate = findPotentialDuplicate(probe);
         if (duplicate) {
           el.duplicateHint.classList.remove("hidden");
-          el.duplicateHint.textContent = "Possible duplicate: " + duplicate.customer + " (" + duplicate.phone + ") at " + duplicate.address + ".";
+          const familyId = getJobFamilyId(duplicate);
+          const familyRef = getJobRef(familyId);
+          el.duplicateHint.innerHTML =
+            'Possible duplicate: <a class="font-semibold underline" target="_blank" rel="noreferrer" href="/portal/?job=' +
+            encodeURIComponent(familyId) +
+            '">Job ' + safeText(familyRef) + '</a> for ' +
+            safeText(duplicate.customer) + ' (' + safeText(duplicate.phone) + ') at ' +
+            safeText(duplicate.address) + '.';
         } else {
           el.duplicateHint.classList.add("hidden");
           el.duplicateHint.textContent = "Similar job already exists for this customer/contact. Save anyway only if this is a separate booking.";
@@ -644,6 +799,7 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
       async function persistJobCoords(job, lat, lng) {
         const patch = {
           id: job.id,
+          rootJobId: job.rootJobId || "",
           date: job.date,
           time: job.time,
           customer: job.customer,
@@ -943,6 +1099,8 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
           const whenLabel = searching
             ? safeText((j.date || "") + (j.time ? " • " + j.time : ""))
             : safeText(j.time);
+          const familyRef = safeText(j.familyRef || getJobRef(j));
+          const visitLabel = 'Visit ' + safeText(j.visitNumber || 1) + ' of ' + safeText(j.familyCount || 1);
           const card = document.createElement("article");
           card.className = "rounded-xl bg-[var(--brand-bg)] p-4 ring-1 ring-white/10";
           card.innerHTML =
@@ -950,6 +1108,7 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
               '<div>' +
                 '<h3 class="font-semibold">' + safeText(j.customer) + '</h3>' +
                 '<p class="mt-1 text-xs text-slate-400">' + whenLabel + "</p>" +
+                '<p class="mt-1 text-xs text-slate-400"><a class="underline" target="_blank" rel="noreferrer" href="/portal/?job=' + encodeURIComponent(j.familyId || getJobFamilyId(j)) + '">Job ' + familyRef + '</a> • ' + visitLabel + '</p>' +
                 '<span class="mt-1 inline-flex rounded-full px-2 py-0.5 text-xs ' + statusClass + '">' + safeText(status) + "</span>" +
               "</div>" +
               '<div class="flex gap-2">' +
@@ -958,9 +1117,10 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
               "</div>" +
             "</div>" +
             '<p class="mt-2 text-sm text-slate-200">' + safeText(j.summary) + "</p>" +
-            '<div class="mt-3 grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">' +
+            '<div class="mt-3 grid grid-cols-3 gap-2 sm:flex sm:flex-wrap">' +
               '<a class="btn btn-primary w-full justify-center px-3 py-1 text-xs sm:w-auto" href="tel:' + safeText(j.phone) + '">Call</a>' +
               '<a class="btn btn-secondary w-full justify-center px-3 py-1 text-xs sm:w-auto" target="_blank" rel="noreferrer" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(j.address) + '">Maps</a>' +
+              '<button type="button" data-action="follow-up" data-id="' + safeText(j.id) + '" class="btn btn-outline w-full justify-center px-3 py-1 text-xs sm:w-auto">New visit</button>' +
             "</div>" +
             '<p class="mt-2 text-xs text-slate-400">' + safeText(j.address) + "</p>";
           el.jobList.appendChild(card);
@@ -994,6 +1154,7 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         el.unscheduledEmpty.classList.add("hidden");
 
         for (const j of jobs) {
+          const familyRef = safeText(j.familyRef || getJobRef(j));
           const card = document.createElement("article");
           card.className = "rounded-xl bg-[var(--brand-bg)] p-4 ring-1 ring-white/10";
           card.innerHTML =
@@ -1001,6 +1162,7 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
               '<div>' +
                 '<h3 class="font-semibold">' + safeText(j.customer) + '</h3>' +
                 '<p class="text-xs text-amber-300">To be booked</p>' +
+                '<p class="mt-1 text-xs text-slate-400"><a class="underline" target="_blank" rel="noreferrer" href="/portal/?job=' + encodeURIComponent(j.familyId || getJobFamilyId(j)) + '">Job ' + familyRef + '</a> • Visit ' + safeText(j.visitNumber || 1) + ' of ' + safeText(j.familyCount || 1) + '</p>' +
               "</div>" +
               '<div class="flex gap-2">' +
                 '<button type="button" data-action="schedule" data-id="' + safeText(j.id) + '" class="btn btn-primary px-3 py-1 text-xs">Schedule</button>' +
@@ -1009,13 +1171,90 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
               "</div>" +
             "</div>" +
             '<p class="mt-2 text-sm text-slate-200">' + safeText(j.summary) + "</p>" +
-            '<div class="mt-3 grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">' +
+            '<div class="mt-3 grid grid-cols-3 gap-2 sm:flex sm:flex-wrap">' +
               '<a class="btn btn-primary w-full justify-center px-3 py-1 text-xs sm:w-auto" href="tel:' + safeText(j.phone) + '">Call</a>' +
               '<a class="btn btn-secondary w-full justify-center px-3 py-1 text-xs sm:w-auto" target="_blank" rel="noreferrer" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(j.address) + '">Maps</a>' +
+              '<button type="button" data-action="follow-up" data-id="' + safeText(j.id) + '" class="btn btn-outline w-full justify-center px-3 py-1 text-xs sm:w-auto">New visit</button>' +
             "</div>" +
             '<p class="mt-2 text-xs text-slate-400">' + safeText(j.address) + "</p>";
           el.unscheduledList.appendChild(card);
         }
+      }
+
+      function renderJobDetail() {
+        if (!el.jobDetailPanel || !el.jobDetailSummary || !el.jobDetailVisits) return;
+
+        const familyId = String(state.selectedFamilyId || "").trim();
+        if (!familyId) {
+          el.jobDetailPanel.classList.add("hidden");
+          el.jobDetailSummary.innerHTML = "";
+          el.jobDetailVisits.innerHTML = "";
+          return;
+        }
+
+        const familyJobs = getFamilyJobs(familyId);
+        if (!familyJobs.length) {
+          state.selectedFamilyId = "";
+          updateJobQueryParam("");
+          el.jobDetailPanel.classList.add("hidden");
+          el.jobDetailSummary.innerHTML = "";
+          el.jobDetailVisits.innerHTML = "";
+          return;
+        }
+
+        const leadJob = familyJobs[0];
+        const completedVisits = familyJobs.filter(function (job) { return job.status === "Done"; }).length;
+        const openBookings = familyJobs.filter(function (job) {
+          return job.status !== "Done" && job.status !== "Cancelled";
+        }).length;
+
+        el.jobDetailPanel.classList.remove("hidden");
+        el.jobDetailTitle.textContent = "Job " + safeText(leadJob.familyRef) + " • " + safeText(leadJob.customer);
+        el.jobDetailMeta.innerHTML =
+          '<a class="underline" href="tel:' + safeText(leadJob.phone) + '">' + safeText(leadJob.phone) + '</a> • ' +
+          '<a class="underline" target="_blank" rel="noreferrer" href="https://www.google.com/maps/search/?api=1&query=' +
+          encodeURIComponent(leadJob.address) + '">' + safeText(leadJob.address) + '</a>';
+
+        const summaryCards = [
+          ['Total bookings', String(familyJobs.length)],
+          ['Completed visits', String(completedVisits)],
+          ['Open bookings', String(openBookings)],
+          ['Current status', String(leadJob.status || 'Booked')]
+        ];
+
+        el.jobDetailSummary.innerHTML = summaryCards.map(function (item) {
+          return '<div class="rounded-xl bg-[var(--brand-bg)] p-3 ring-1 ring-white/10">' +
+            '<p class="text-xs uppercase tracking-wide text-slate-400">' + safeText(item[0]) + '</p>' +
+            '<p class="mt-1 text-base font-semibold">' + safeText(item[1]) + '</p>' +
+          '</div>';
+        }).join("");
+
+        el.jobDetailVisits.innerHTML = familyJobs.map(function (job) {
+          const status = job.status || "Booked";
+          const statusClass = getStatusBadgeClass(status);
+          const when = job.isUnscheduled
+            ? "To be booked"
+            : safeText(job.date + (job.time ? " • " + job.time : ""));
+
+          return '<article class="rounded-xl bg-[var(--brand-bg)] p-4 ring-1 ring-white/10">' +
+            '<div class="flex items-start justify-between gap-3">' +
+              '<div>' +
+                '<p class="text-xs uppercase tracking-wide text-amber-300">Visit ' + safeText(job.visitNumber) + ' of ' + safeText(job.familyCount) + '</p>' +
+                '<p class="mt-1 text-sm font-semibold">' + when + '</p>' +
+                '<span class="mt-2 inline-flex rounded-full px-2 py-0.5 text-xs ' + statusClass + '">' + safeText(status) + '</span>' +
+              '</div>' +
+              '<div class="flex gap-2">' +
+                '<button type="button" data-action="follow-up" data-id="' + safeText(job.id) + '" class="btn btn-primary px-3 py-1 text-xs">New booking</button>' +
+                '<button type="button" data-action="edit" data-id="' + safeText(job.id) + '" class="btn btn-outline px-3 py-1 text-xs">Edit</button>' +
+              '</div>' +
+            '</div>' +
+            '<p class="mt-3 text-sm text-slate-200">' + safeText(job.summary) + '</p>' +
+            '<div class="mt-3 grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">' +
+              '<a class="btn btn-primary w-full justify-center px-3 py-1 text-xs sm:w-auto" href="tel:' + safeText(job.phone) + '">Call</a>' +
+              '<a class="btn btn-secondary w-full justify-center px-3 py-1 text-xs sm:w-auto" target="_blank" rel="noreferrer" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(job.address) + '">Maps</a>' +
+            '</div>' +
+          '</article>';
+        }).join("");
       }
 
       function updateScheduleInputs() {
@@ -1035,6 +1274,7 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
 
       function clearForm() {
         state.editId = null;
+        state.rootJobId = "";
         state.pendingLat = null;
         state.pendingLng = null;
         el.formTitle.textContent = "Add Job";
@@ -1049,6 +1289,7 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
 
       function fillForm(job) {
         state.editId = job.id;
+        state.rootJobId = String(job.rootJobId || "");
         state.pendingLat = hasCoords(job) ? job.lat : null;
         state.pendingLng = hasCoords(job) ? job.lng : null;
         el.formTitle.textContent = "Edit Job";
@@ -1067,26 +1308,45 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         updateDuplicateHint();
       }
 
+      function startFollowUpBooking(job) {
+        const familyId = getJobFamilyId(job);
+        state.editId = null;
+        state.rootJobId = familyId;
+        state.pendingLat = hasCoords(job) ? job.lat : null;
+        state.pendingLng = hasCoords(job) ? job.lng : null;
+
+        el.formTitle.textContent = "Add Booking for " + getJobRef(familyId);
+        el.jobForm.reset();
+        el.inputDate.value = state.selectedDate;
+        el.inputTime.value = getSuggestedTimeValue();
+        el.inputCustomer.value = job.customer;
+        el.inputPhone.value = job.phone;
+        el.inputAddress.value = job.address;
+        el.inputSummary.value = "";
+        el.inputStatus.value = "Booked";
+        el.inputUnscheduled.checked = false;
+        updateScheduleInputs();
+        el.addressHint.textContent = hasCoords(job)
+          ? "Saved map location found for this address."
+          : "Address will auto-map when saved.";
+        updateDuplicateHint();
+        selectFamilyById(familyId, { updateUrl: true });
+        setPortalStatus("New booking loaded for " + getJobRef(familyId) + ".");
+        try {
+          el.inputDate.focus();
+        } catch (_) {}
+      }
+
       function scheduleFromQueue(job) {
         fillForm(job);
-        const now = new Date();
-        let hour = now.getHours();
-        let mins = now.getMinutes() <= 30 ? 30 : 0;
-        if (mins === 0) {
-          hour = (hour + 1) % 24;
-        }
-        const roundedTime = String(hour).padStart(2, "0") + ":" + String(mins).padStart(2, "0");
-        const fallbackTime = "09:00";
         el.inputUnscheduled.checked = false;
         updateScheduleInputs();
         el.inputDate.value = state.selectedDate;
-        el.inputTime.value = el.inputTime.value || roundedTime || fallbackTime;
-        if (!el.inputTime.value || el.inputTime.value === "00:00") {
-          el.inputTime.value = fallbackTime;
-        }
+        el.inputTime.value = el.inputTime.value || getSuggestedTimeValue();
         if (!el.inputStatus.value || !STATUS_OPTIONS.includes(el.inputStatus.value)) {
           el.inputStatus.value = "Booked";
         }
+        selectFamilyById(getJobFamilyId(job), { updateUrl: true });
         setPortalStatus("Queue job loaded. Pick date/time and save.");
         try {
           el.inputDate.focus();
@@ -1099,6 +1359,7 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         const rawStatus = String(job && job.status ? job.status : "Booked");
         return {
           id: String(job && job.id ? job.id : ""),
+          rootJobId: String(job && job.rootJobId ? job.rootJobId : ""),
           date: String(job && job.date ? job.date : ""),
           time: String(job && job.time ? job.time : ""),
           customer: String(job && job.customer ? job.customer : ""),
@@ -1110,6 +1371,7 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
           status: STATUS_OPTIONS.includes(rawStatus) ? rawStatus : "Booked",
           isUnscheduled: Boolean(job && (job.isUnscheduled || !job.date || !job.time)),
           deleted: Boolean(job && job.deleted),
+          createdAt: String(job && job.createdAt ? job.createdAt : ""),
           updatedAt: String(job && job.updatedAt ? job.updatedAt : "")
         };
       }
@@ -1118,10 +1380,19 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         try {
           const data = await apiRequest("jobs.php");
           state.jobs = Array.isArray(data.jobs) ? data.jobs.map(normalizeJob) : [];
+          decorateJobFamilies();
           renderCalendar();
           renderDay();
           renderUnscheduled();
           renderHeatmap();
+          renderJobDetail();
+          if (state.selectedFamilyId && !getFamilyJobs(state.selectedFamilyId).length) {
+            selectFamilyById("", { updateUrl: true });
+          }
+          if (state.pendingFamilyScroll && state.selectedFamilyId) {
+            state.pendingFamilyScroll = false;
+            selectFamilyById(state.selectedFamilyId, { updateUrl: false, scroll: true });
+          }
           updateDuplicateHint();
           if (!silent) setPortalStatus("Jobs refreshed.");
         } catch (err) {
@@ -1139,6 +1410,7 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
 
         const job = {
           id: state.editId || String(Date.now()),
+          rootJobId: state.rootJobId,
           date: unscheduled ? "" : el.inputDate.value,
           time: unscheduled ? "" : el.inputTime.value,
           customer: el.inputCustomer.value.trim(),
@@ -1155,7 +1427,10 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         if (!job.customer || !job.phone || !job.address || !job.summary) return;
         if (!unscheduled && (!job.date || !job.time)) return;
         const duplicate = findPotentialDuplicate(job);
-        if (duplicate && !window.confirm("Potential duplicate found for " + duplicate.customer + ". Save this as a separate job?")) {
+        if (!job.rootJobId && duplicate) {
+          job.rootJobId = getJobFamilyId(duplicate);
+        }
+        if (duplicate && !window.confirm("Potential duplicate found under " + getJobRef(duplicate) + ". Save this as a new booking under that job?")) {
           setPortalStatus("Save cancelled to avoid duplicate.");
           return;
         }
@@ -1163,14 +1438,18 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         state.saveInFlight = true;
         setPortalStatus("Saving job...");
         try {
+          const familyId = job.rootJobId || job.id;
           await apiRequest("jobs.php", { method: "POST", body: { job: job } });
           if (!unscheduled && job.date) {
             state.selectedDate = job.date;
             const pickedDate = parseDate(job.date);
             state.month = new Date(pickedDate.getFullYear(), pickedDate.getMonth(), 1);
           }
+          state.selectedFamilyId = familyId;
+          updateJobQueryParam(familyId);
           clearForm();
           await loadJobs(true);
+          selectFamilyById(familyId, { updateUrl: false });
           setPortalStatus(unscheduled ? "Saved to To Be Booked." : "Job saved.");
         } catch (err) {
           if (err.message === "__UNAUTHORIZED__") {
@@ -1355,6 +1634,11 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
           if (!job || job.deleted) return;
           if (action === "edit") {
             fillForm(job);
+            selectFamilyById(getJobFamilyId(job), { updateUrl: true });
+            return;
+          }
+          if (action === "follow-up") {
+            startFollowUpBooking(job);
             return;
           }
           if (action === "delete") {
@@ -1372,6 +1656,11 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
           if (!job || job.deleted) return;
           if (action === "edit") {
             fillForm(job);
+            selectFamilyById(getJobFamilyId(job), { updateUrl: true });
+            return;
+          }
+          if (action === "follow-up") {
+            startFollowUpBooking(job);
             return;
           }
           if (action === "schedule") {
@@ -1383,6 +1672,40 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
             deleteJob(id);
           }
         });
+
+        if (el.jobDetailVisits) {
+          el.jobDetailVisits.addEventListener("click", function (e) {
+            const btn = e.target && e.target.closest && e.target.closest("button[data-action][data-id]");
+            if (!btn) return;
+            const id = btn.dataset.id;
+            const action = btn.dataset.action;
+            const job = state.jobs.find(function (x) { return x.id === id; });
+            if (!job || job.deleted) return;
+            if (action === "edit") {
+              fillForm(job);
+              selectFamilyById(getJobFamilyId(job), { updateUrl: true });
+              return;
+            }
+            if (action === "follow-up") {
+              startFollowUpBooking(job);
+            }
+          });
+        }
+
+        if (el.jobDetailFollowUp) {
+          el.jobDetailFollowUp.addEventListener("click", function () {
+            if (!state.selectedFamilyId) return;
+            const familyJobs = getFamilyJobs(state.selectedFamilyId);
+            if (!familyJobs.length) return;
+            startFollowUpBooking(familyJobs[0]);
+          });
+        }
+
+        if (el.jobDetailClose) {
+          el.jobDetailClose.addEventListener("click", function () {
+            selectFamilyById("", { updateUrl: true });
+          });
+        }
 
         el.heatmapMonth.addEventListener("change", function () {
           state.heatmapMonth = el.heatmapMonth.value || state.heatmapMonth;

@@ -115,6 +115,7 @@ function portal_ensure_schema(mysqli $db): void
     $sql = <<<SQL
 CREATE TABLE IF NOT EXISTS portal_jobs (
   id VARCHAR(64) NOT NULL PRIMARY KEY,
+  root_job_id VARCHAR(64) NULL,
   job_date DATE NULL,
   job_time TIME NULL,
   customer_name VARCHAR(160) NOT NULL,
@@ -126,6 +127,7 @@ CREATE TABLE IF NOT EXISTS portal_jobs (
   is_deleted TINYINT(1) NOT NULL DEFAULT 0,
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  KEY idx_root_job_id (root_job_id),
   KEY idx_job_date (job_date),
   KEY idx_updated_at (updated_at),
   KEY idx_status (status)
@@ -141,6 +143,17 @@ SQL;
     }
 
     // Backward-compatible schema updates for map/geocode support.
+    if (
+        !$db->query("ALTER TABLE portal_jobs ADD COLUMN root_job_id VARCHAR(64) NULL AFTER id")
+        && (int)$db->errno !== 1060
+    ) {
+        json_response([
+            'ok' => false,
+            'error' => 'Failed to add portal_jobs.root_job_id column',
+            'details' => $db->error,
+        ], 500);
+    }
+
     if (
         !$db->query("ALTER TABLE portal_jobs ADD COLUMN lat DECIMAL(10,7) NULL AFTER address")
         && (int)$db->errno !== 1060
@@ -194,6 +207,17 @@ SQL;
         json_response([
             'ok' => false,
             'error' => 'Failed to update portal_jobs.status type',
+            'details' => $db->error,
+        ], 500);
+    }
+
+    if (
+        !$db->query("ALTER TABLE portal_jobs ADD KEY idx_root_job_id (root_job_id)")
+        && (int)$db->errno !== 1061
+    ) {
+        json_response([
+            'ok' => false,
+            'error' => 'Failed to add portal_jobs.idx_root_job_id index',
             'details' => $db->error,
         ], 500);
     }
@@ -261,6 +285,7 @@ function portal_job_from_row(array $row): array
 
     return [
         'id' => (string)$row['id'],
+        'rootJobId' => (string)($row['root_job_id'] ?? ''),
         'date' => (string)$row['job_date'],
         'time' => substr((string)$row['job_time'], 0, 5),
         'customer' => (string)$row['customer_name'],
@@ -272,6 +297,7 @@ function portal_job_from_row(array $row): array
         'status' => (string)$row['status'],
         'isUnscheduled' => ((int)($row['is_unscheduled'] ?? 0)) === 1,
         'deleted' => ((int)$row['is_deleted']) === 1,
+        'createdAt' => (string)($row['created_at'] ?? ''),
         'updatedAt' => (string)$row['updated_at'],
     ];
 }
