@@ -290,6 +290,8 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         rootJobId: "",
         editId: null,
         selectedFamilyId: initialJobParam,
+        familyNumberById: {},
+        familyRefById: {},
         pendingFamilyScroll: Boolean(initialJobParam),
         searchQuery: "",
         pollTimer: null,
@@ -401,19 +403,37 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
           .trim();
       }
 
+      function normalizeSearchToken(v) {
+        return String(v || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+      }
+
       function getJobSearchText(job) {
+        const familyNumber = String(job && job.familyNumber ? job.familyNumber : "");
+        const familyRef = String(job && job.familyRef ? job.familyRef : getJobRef(job));
         return [
           job.customer,
           job.phone,
           job.address,
           job.summary,
-          job.status
+          job.status,
+          familyRef,
+          familyNumber ? "job " + familyNumber : "",
+          familyNumber ? "wm " + familyNumber : ""
         ].join(" ").toLowerCase();
       }
 
       function matchesSearch(job) {
         const q = String(state.searchQuery || "").trim().toLowerCase();
+        const compactQ = normalizeSearchToken(q);
+        const familyNumber = String(job && job.familyNumber ? job.familyNumber : "");
+        const familyRef = String(job && job.familyRef ? job.familyRef : getJobRef(job));
+        const compactFamilyRef = normalizeSearchToken(familyRef);
+
         if (!q) return true;
+
+        if (familyNumber && compactQ === familyNumber) return true;
+        if (compactQ && compactFamilyRef.includes(compactQ)) return true;
+
         return getJobSearchText(job).includes(q);
       }
 
@@ -428,9 +448,16 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
       }
 
       function getJobRef(jobOrFamilyId) {
+        if (jobOrFamilyId && typeof jobOrFamilyId === "object" && jobOrFamilyId.familyRef) {
+          return String(jobOrFamilyId.familyRef);
+        }
+
         const familyId = typeof jobOrFamilyId === "string" ? jobOrFamilyId : getJobFamilyId(jobOrFamilyId);
-        const clean = String(familyId || "").replace(/[^a-z0-9]/gi, "").toUpperCase();
-        return "WM-" + (clean.slice(-6) || "JOB");
+        const familyNumber = Number(state.familyNumberById[familyId] || 0);
+        if (familyNumber > 0) {
+          return "WM-" + String(familyNumber).padStart(5, "0");
+        }
+        return "WM-JOB";
       }
 
       function currentFormFamilyId() {
@@ -461,26 +488,58 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
 
       function decorateJobFamilies() {
         const groups = {};
+        state.familyNumberById = {};
+        state.familyRefById = {};
 
         for (const job of state.jobs) {
-          if (!job || job.deleted) continue;
+          if (!job) continue;
           const familyId = getJobFamilyId(job);
           if (!familyId) continue;
           if (!groups[familyId]) groups[familyId] = [];
           groups[familyId].push(job);
         }
 
-        for (const familyId of Object.keys(groups)) {
+        const families = Object.keys(groups).map(function (familyId) {
           const familyJobs = groups[familyId].slice().sort(sortFamilyJobs);
+          const leadJob = familyJobs[0] || {};
+          return {
+            familyId: familyId,
+            jobs: familyJobs,
+            createdAt: String(leadJob.createdAt || leadJob.updatedAt || ""),
+            leadId: String(leadJob.id || "")
+          };
+        }).sort(function (a, b) {
+          const aCreated = a.createdAt || "9999-12-31 23:59:59";
+          const bCreated = b.createdAt || "9999-12-31 23:59:59";
+          if (aCreated !== bCreated) return aCreated.localeCompare(bCreated);
+          return a.leadId.localeCompare(b.leadId);
+        });
+
+        families.forEach(function (family, index) {
+          const familyNumber = index + 1;
+          const familyRef = "WM-" + String(familyNumber).padStart(5, "0");
+          state.familyNumberById[family.familyId] = familyNumber;
+          state.familyRefById[family.familyId] = familyRef;
+        });
+
+        for (const familyId of Object.keys(groups)) {
+          const familyJobs = groups[familyId]
+            .filter(function (job) { return !job.deleted; })
+            .sort(sortFamilyJobs);
+          if (!familyJobs.length) continue;
+
           const familyCount = familyJobs.length;
           const completedVisits = familyJobs.filter(function (job) { return job.status === "Done"; }).length;
           const openBookings = familyJobs.filter(function (job) {
             return job.status !== "Done" && job.status !== "Cancelled";
           }).length;
+          const familyNumber = Number(state.familyNumberById[familyId] || 0);
+          const familyRef = state.familyRefById[familyId] || getJobRef(familyId);
 
           familyJobs.forEach(function (job, index) {
             job.familyId = familyId;
-            job.familyRef = getJobRef(familyId);
+            job.familyNumber = familyNumber;
+            job.familyRef = familyRef;
             job.visitNumber = index + 1;
             job.familyCount = familyCount;
             job.completedVisits = completedVisits;
