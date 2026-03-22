@@ -180,6 +180,69 @@ const allSchemas = providedTypes.has("LocalBusiness") ? schemas : [...schemas, b
         } catch(_) {}
       })();
     </script>
+    <script>
+      (function () {
+        try {
+          var storageKey = "wmLeadRecentSubmission";
+          var recentWindowMs = 1000 * 60 * 60 * 12;
+          var readRecentSubmission = function () {
+            try {
+              var raw = window.localStorage.getItem(storageKey);
+              return raw ? JSON.parse(raw) : null;
+            } catch (_) {
+              return null;
+            }
+          };
+
+          var hasRecentSubmission = function () {
+            var recent = readRecentSubmission();
+            return !!(recent && recent.ts && (Date.now() - recent.ts) < recentWindowMs);
+          };
+
+          document.querySelectorAll("form[data-lead-form]").forEach(function (form) {
+            if (form.dataset.leadFormReady === "1") return;
+            form.dataset.leadFormReady = "1";
+
+            var submitButton = form.querySelector("[data-submit-button]");
+            var pendingNotice = form.querySelector("[data-form-pending]");
+            var recentNotice = form.querySelector("[data-form-recent]");
+            var actionRow = form.querySelector("[data-form-actions]");
+
+            if (hasRecentSubmission() && recentNotice) {
+              recentNotice.classList.remove("hidden");
+            }
+
+            form.addEventListener("submit", function (event) {
+              if (form.dataset.submitting === "1") {
+                event.preventDefault();
+                return false;
+              }
+
+              form.dataset.submitting = "1";
+
+              if (recentNotice) {
+                recentNotice.classList.add("hidden");
+              }
+
+              if (pendingNotice) {
+                pendingNotice.classList.remove("hidden");
+                pendingNotice.scrollIntoView({ behavior: "smooth", block: "center" });
+              }
+
+              if (submitButton) {
+                submitButton.disabled = true;
+                submitButton.setAttribute("aria-disabled", "true");
+                submitButton.textContent = "Sending...";
+              }
+
+              if (actionRow) {
+                actionRow.classList.add("pointer-events-none", "opacity-60");
+              }
+            });
+          });
+        } catch (_) {}
+      })();
+    </script>
   </body>
   
 </html>

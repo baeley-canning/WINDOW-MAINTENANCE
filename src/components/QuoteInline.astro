@@ -8,7 +8,7 @@ const {
   showSuburb = true
 } = Astro.props;
 const action = "https://formspree.io/f/xpwqlqjb";
-const path = Astro.url?.pathname || '';
+const path = Astro.url?.pathname || "";
 ---
 <section class:list={["mt-10 rounded-2xl bg-[var(--brand-surface)] p-6 ring-1 ring-white/10", className]}>
   <div class="flex flex-wrap items-start justify-between gap-4">
@@ -18,12 +18,27 @@ const path = Astro.url?.pathname || '';
     </div>
     <a class="btn btn-outline text-sm" href="tel:+6421638205" data-cta="call">Call 021 638 205</a>
   </div>
-  <form action={action} method="POST" class="mt-5 grid gap-3 sm:grid-cols-2" onsubmit={`if(window && window.dataLayer){window.dataLayer.push({event:'lead_submit', source:'${source}', path: location.pathname});}`}>
-    <input type="hidden" name="_subject" value="Website enquiry — Window Maintenance" />
+  <form
+    action={action}
+    method="POST"
+    class="mt-5 grid gap-3 sm:grid-cols-2"
+    data-lead-form
+    data-form-source={source}
+    onsubmit={`if(window && window.dataLayer){window.dataLayer.push({event:'lead_submit', source:'${source}', path: location.pathname});}`}
+  >
+    <input type="hidden" name="_subject" value="Website enquiry - Window Maintenance" />
     <input type="hidden" name="_redirect" value="/thanks/" />
     <input type="hidden" name="source_page" value={path} />
     <input type="hidden" name="source_form" value={source} />
     <input type="text" name="_honeypot" style="display:none" tabindex="-1" autocomplete="off" />
+    <div class="hidden rounded-xl border border-emerald-400/30 bg-emerald-500/10 p-4 text-sm text-emerald-100 sm:col-span-2" data-form-recent aria-live="polite">
+      <p class="font-semibold">We already received a quote request from this browser.</p>
+      <p class="mt-1">Please do not resend the form or send a separate email as well. We will reply as soon as possible. Call only if the job is urgent.</p>
+    </div>
+    <div class="hidden rounded-xl border border-amber-400/30 bg-amber-500/10 p-4 text-sm text-amber-100 sm:col-span-2" data-form-pending aria-live="polite">
+      <p class="font-semibold">Sending your quote request now...</p>
+      <p class="mt-1">Please wait for the confirmation page. There is no need to call or email again unless the job is urgent.</p>
+    </div>
     <label class="grid gap-1">
       <span class="text-sm">Name</span>
       <input name="name" required autocomplete="name" class="rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10" />
@@ -40,16 +55,22 @@ const path = Astro.url?.pathname || '';
     )}
     <label class="grid gap-1 sm:col-span-2">
       <span class="text-sm">What needs fixing?</span>
-      <textarea name="message" rows="3" class="w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10" placeholder="Example: ranchslider hard to slide, awning stay bent, window lock not latching, leak at sill corner"></textarea>
+      <textarea
+        name="message"
+        rows="3"
+        class="w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10"
+        placeholder="Example: ranchslider hard to slide, awning stay bent, window lock not latching, leak at sill corner"
+      ></textarea>
     </label>
-    <div class="sm:col-span-2 flex flex-wrap gap-3">
-      <button class="btn btn-primary" type="submit" onclick="if(window && window.gtag_report_conversion){gtag_report_conversion();}">{buttonLabel}</button>
+    <div class="sm:col-span-2 flex flex-wrap gap-3" data-form-actions>
+      <button class="btn btn-primary" type="submit" data-submit-button onclick="if(window && window.gtag_report_conversion){gtag_report_conversion();}">{buttonLabel}</button>
       <a class="btn btn-outline" href="/contact/">Open full contact form</a>
     </div>
+    <p class="text-xs text-slate-400 sm:col-span-2">Use one contact method only. If you send this form, please wait for the confirmation page rather than calling or emailing again as well.</p>
   </form>
   <div class="mt-4 grid gap-2 text-sm text-slate-400 md:grid-cols-3">
     <p>Same-day replies during business hours.</p>
     <p>Photos can be sent after we reply.</p>
-    <p>Wellington, Porirua, Hutt Valley, Petone and Kāpiti.</p>
+    <p>Wellington, Porirua, Hutt Valley, Petone and Kapiti.</p>
   </div>
 </section>
