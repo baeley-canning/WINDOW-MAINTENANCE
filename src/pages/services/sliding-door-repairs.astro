@@ -4,30 +4,32 @@ import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import Picture from "../../components/Picture.astro";
 import QuoteInline from "../../components/QuoteInline.astro";
 
-const title = "Sliding Door Repairs Wellington | Rollers & Tracks";
-const description = "Single and double-glazed aluminium sliding door repairs: rollers, tracks, alignment and door handle/lock fixes across Wellington, Porirua and the Hutt Valley.";
+const title = "Sliding Door Repairs Wellington | Ranchslider Rollers & Tracks";
+const description = "Single and double-glazed aluminium sliding door and ranchslider repairs in Wellington: rollers, tracks, alignment and handle or lock fixes across Wellington, Porirua and the Hutt Valley.";
 const canonical = "https://windowmaintenance.co.nz/services/sliding-door-repairs/";
 
 const faqItems = [
   { q: "Do you work on single and double glazed sliders?", a: "Yes. We service both single- and double-glazed aluminium sliding doors, including rollers, tracks, hardware and alignment." },
-  { q: "Do you service Porirua and the Hutt?", a: "Yes. We’re on the road in Porirua, Lower Hutt and Upper Hutt every week and can group nearby jobs to keep pricing sharp." },
-  { q: "Can you fix water tracking at the sill?", a: "We clear weep holes, restore damaged tracks, and reseal accessible beads so water drains properly during Wellington southerlies." }
+  { q: "Do you service Porirua and the Hutt?", a: "Yes. We are on the road in Porirua, Lower Hutt and Upper Hutt every week and can group nearby jobs to keep pricing sharp." },
+  { q: "Can you fix water tracking at the sill?", a: "We clear weep holes, restore damaged tracks and reseal accessible beads so water drains properly during Wellington southerlies." },
 ];
+
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "mainEntity": faqItems.map((item) => ({
+  mainEntity: faqItems.map((item) => ({
     "@type": "Question",
-    "name": item.q,
-    "acceptedAnswer": { "@type": "Answer", "text": item.a }
-  }))
+    name: item.q,
+    acceptedAnswer: { "@type": "Answer", text: item.a },
+  })),
 };
 ---
 <Layout title={title} description={description} canonical={canonical} schema={[faqSchema]}>
   <Breadcrumbs />
   <main class="mx-auto max-w-4xl px-6 py-12">
     <h1 class="text-3xl font-extrabold">Sliding / Ranchslider Door Repairs</h1>
-    <p class="mt-4 text-slate-300">Single and double-glazed aluminium sliding door repairs: roller replacement, track refurbishment, alignment and door handle/lock fixes across Wellington, Porirua, Lower Hutt, Upper Hutt, Petone and Kāpiti.</p>
+    <p class="mt-4 text-slate-300">Single- and double-glazed aluminium sliding door repairs: roller replacement, track refurbishment, alignment and door handle or lock fixes across Wellington, Porirua, Lower Hutt, Upper Hutt, Petone and Kapiti.</p>
+
     <section class="mt-8 grid gap-4 sm:grid-cols-3">
       <div class="rounded-xl bg-[var(--brand-surface)] p-5 ring-1 ring-white/10">
         <h2 class="text-lg font-bold">Common issues</h2>
@@ -39,45 +41,59 @@ const faqSchema = {
       </div>
       <div class="rounded-xl bg-[var(--brand-surface)] p-5 ring-1 ring-white/10">
         <h2 class="text-lg font-bold">What happens next</h2>
-        <p class="mt-2 text-sm text-slate-300">Send a quick message with the suburb and issue. We’ll come back with likely repair route, ballpark pricing and next available slot.</p>
+        <p class="mt-2 text-sm text-slate-300">Send a quick message with the suburb and issue. We will come back with a likely repair route, ballpark pricing and the next available slot.</p>
       </div>
     </section>
+
+    <section class="mt-8 rounded-2xl bg-[var(--brand-surface)] p-6 ring-1 ring-white/10">
+      <h2 class="text-2xl font-bold">Searches we commonly help with</h2>
+      <p class="mt-3 text-slate-300">This page is built for the jobs people search as sliding door repair, ranchslider repairs, aluminium sliding door repairs, fix sliding door, sliding door roller replacement and sliding door lock or handle repair. If your slider is dragging, dropping, leaking at the sill or refusing to latch, it belongs on this page.</p>
+      <div class="mt-4 flex flex-wrap gap-3 text-sm">
+        <a class="rounded-full border border-white/10 px-3 py-2 text-slate-200 hover:border-amber-400 hover:text-amber-300" href="/services/mitre-reseal/">Mitre and sill reseals</a>
+        <a class="rounded-full border border-white/10 px-3 py-2 text-slate-200 hover:border-amber-400 hover:text-amber-300" href="/services/joinery-repairs/">Aluminium joinery repairs</a>
+        <a class="rounded-full border border-white/10 px-3 py-2 text-slate-200 hover:border-amber-400 hover:text-amber-300" href="/services/hardware-wedge-replacement/">Door handles and locks</a>
+      </div>
+    </section>
+
     <QuoteInline
       title="Get a quote for sliding / ranchslider repairs"
       subtitle="Best for rollers, tracks, dropped panels, misaligned locks and hard-to-slide aluminium doors."
       buttonLabel="Get my slider quote"
       source="sliding_door_page"
     />
+
     <h2 class="mt-10 text-2xl font-bold">Common parts we replace</h2>
     <div class="mt-4 grid gap-4 sm:grid-cols-2">
-
-    <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
-      <div class="ratio-4-3 card-frame">
-        <Picture base="sliding-door-roller" alt="Sliding door roller carriage and wheel" className="h-full w-full object-cover" />
-      </div>
-    </figure>
-    <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
-      <div class="ratio-4-3 card-frame">
-        <Picture base="ranchslider-handle-lockset" alt="Ranchslider handle and lock set" className="h-full w-full object-cover" />
-      </div>
-    </figure>
-    <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
-      <div class="ratio-4-3 card-frame">
-        <Picture base="euro-lock-cylinder" alt="Euro profile lock cylinder for sliding door" className="h-full w-full object-cover" />
-      </div>
-    </figure>
+      <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
+        <div class="ratio-4-3 card-frame">
+          <Picture base="sliding-door-roller" alt="Sliding door roller carriage and wheel" className="h-full w-full object-cover" />
+        </div>
+      </figure>
+      <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
+        <div class="ratio-4-3 card-frame">
+          <Picture base="ranchslider-handle-lockset" alt="Ranchslider handle and lock set" className="h-full w-full object-cover" />
+        </div>
+      </figure>
+      <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
+        <div class="ratio-4-3 card-frame">
+          <Picture base="euro-lock-cylinder" alt="Euro profile lock cylinder for a sliding door" className="h-full w-full object-cover" />
+        </div>
+      </figure>
     </div>
+
     <div class="mt-8 space-y-3">
       <h2 class="text-2xl font-bold">Where we work</h2>
-      <p class="text-slate-300">Wellington, Porirua, Lower Hutt, Upper Hutt, Petone and Kāpiti. Same-week bookings whenever possible.</p>
-      <p class="text-slate-300">Related services: <a class="text-amber-400 underline" href="/services/window-repairs/">Window repairs</a> • <a class="text-amber-400 underline" href="/services/mitre-reseal/">Mitre &amp; sill reseal</a></p>
+      <p class="text-slate-300">We book ranchslider and sliding door repairs across <a class="text-amber-400 underline" href="/areas/central-wellington/">Central Wellington</a>, <a class="text-amber-400 underline" href="/areas/lower-hutt/">Lower Hutt</a>, <a class="text-amber-400 underline" href="/areas/upper-hutt/">Upper Hutt</a>, <a class="text-amber-400 underline" href="/areas/porirua/">Porirua</a>, <a class="text-amber-400 underline" href="/areas/petone/">Petone</a> and <a class="text-amber-400 underline" href="/areas/kapiti/">Kapiti</a>. Same-week bookings whenever possible.</p>
+      <p class="text-slate-300">Related pages: <a class="text-amber-400 underline" href="/services/window-repairs/">Window repairs</a> • <a class="text-amber-400 underline" href="/services/mitre-reseal/">Mitre and sill reseal</a> • <a class="text-amber-400 underline" href="/services/joinery-repairs/">Aluminium joinery repairs</a></p>
     </div>
+
     <div class="mt-8 space-y-3">
       <h2 class="text-2xl font-bold">Sliding door FAQs</h2>
       <ul class="list-disc space-y-2 pl-5 text-slate-300">
-        {faqItems.map(item => <li><strong>{item.q}</strong><br />{item.a}</li>)}
+        {faqItems.map((item) => <li><strong>{item.q}</strong><br />{item.a}</li>)}
       </ul>
     </div>
+
     <div class="mt-8 space-y-3">
       <h2 class="text-2xl font-bold">Helpful guides</h2>
       <ul class="list-disc space-y-2 pl-5 text-slate-300">

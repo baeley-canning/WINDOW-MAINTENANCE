@@ -1,34 +1,102 @@
 ---
-import Layout from "../../layouts/WMBase.astro"; import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import Layout from "../../layouts/WMBase.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import QuoteInline from "../../components/QuoteInline.astro";
+
+const AREA_DETAILS = {
+  "central-wellington": {
+    intro: "We handle aluminium window and sliding door repairs for city apartments, villas and rental properties where access, wind exposure and older hardware all matter.",
+    issues: ["sticking ranchsliders", "failed window handles and Yale locks", "draughty sash windows in exposed streets"],
+  },
+  porirua: {
+    intro: "We repair aluminium joinery across Porirua, including coastal suburbs where salt air, wind-driven rain and tired hardware show up quickly.",
+    issues: ["corroded stays and hinges", "leaking slider sills", "rollers and locks worn by coastal exposure"],
+  },
+  "lower-hutt": {
+    intro: "We cover Lower Hutt for day-to-day aluminium joinery repairs, from sliders and ranchsliders to window stays, wedges, locks and leak diagnosis.",
+    issues: ["dropped sliding doors", "rattling aluminium windows", "failed handles, wedges and latches"],
+  },
+  "upper-hutt": {
+    intro: "We service Upper Hutt homes that need practical aluminium window and door repairs without being pushed toward full replacement.",
+    issues: ["awning stays that no longer hold", "stiff locks and window handles", "draughts through older aluminium joinery"],
+  },
+  petone: {
+    intro: "Petone jobs often involve wind, salt and older hardware. We repair aluminium windows and doors so they seal, latch and slide properly again.",
+    issues: ["salt-affected hardware", "seized locks and cylinders", "slider leaks during bad weather"],
+  },
+  kapiti: {
+    intro: "We cover Kapiti for aluminium window repairs, ranchslider repairs, lockouts and reseals where strong coastal weather gets into tired joinery.",
+    issues: ["wind-driven leaks", "rollers and tracks worn by use", "stays, hinges and restrictors needing replacement"],
+  },
+};
+
 export function getStaticPaths() {
   const AREAS = [
-    { slug: 'central-wellington', name: 'Central Wellington' },
-    { slug: 'porirua', name: 'Porirua' },
-    { slug: 'lower-hutt', name: 'Lower Hutt' },
-    { slug: 'upper-hutt', name: 'Upper Hutt' },
-    { slug: 'petone', name: 'Petone' },
-    { slug: 'kapiti', name: 'Kāpiti' },
+    { slug: "central-wellington", name: "Central Wellington" },
+    { slug: "porirua", name: "Porirua" },
+    { slug: "lower-hutt", name: "Lower Hutt" },
+    { slug: "upper-hutt", name: "Upper Hutt" },
+    { slug: "petone", name: "Petone" },
+    { slug: "kapiti", name: "Kapiti" },
   ];
-  return AREAS.map(a => ({ params: { area: a.slug }, props: { area: a } }));
+
+  return AREAS.map((area) => ({
+    params: { area: area.slug },
+    props: { area },
+  }));
 }
+
 const { area } = Astro.props;
-const title = `${area.name} — Aluminium Window & Sliding Door Repairs`;
-const description = `Local single and double-glazed aluminium window and ranchslider repairs in ${area.name}. Rollers, tracks, stays, hinges, handles, locks, lockout entry and seal replacements.`;
+const details = AREA_DETAILS[area.slug];
+const title = `${area.name} Aluminium Window & Sliding Door Repairs | Window Maintenance`;
+const description = `Single and double-glazed aluminium window and ranchslider repairs in ${area.name}. Rollers, tracks, stays, hinges, handles, locks, lockout entry and reseals for local homes and rentals.`;
 const canonical = `https://windowmaintenance.co.nz/areas/${area.slug}/`;
 ---
 <Layout title={title} description={description} canonical={canonical}>
   <Breadcrumbs />
   <main class="mx-auto max-w-4xl px-6 py-12">
-    <h1 class="text-3xl font-extrabold">{area.name}</h1>
-    <p class="mt-3 text-slate-300">We service homes and businesses across {area.name} with fast quotes, tidy workmanship and parts stocked on the van for one-visit fixes where possible.</p>
-    <ul class="mt-6 grid gap-3 sm:grid-cols-2">
-      <li class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10"><a class="hover:text-amber-400" href="https://windowmaintenance.co.nz/services/sliding-door-repairs/">Sliding/Ranchslider Door Repairs</a></li>
-      <li class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10"><a class="hover:text-amber-400" href="https://windowmaintenance.co.nz/services/window-repairs/">Aluminium Window Repairs</a></li>
-      <li class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10"><a class="hover:text-amber-400" href="https://windowmaintenance.co.nz/stays/">Stays & Hinges</a></li>
-      <li class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10"><a class="hover:text-amber-400" href="https://windowmaintenance.co.nz/leaks/">Draughts & Leaks</a></li>
-      <li class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10"><a class="hover:text-amber-400" href="https://windowmaintenance.co.nz/security/">Security Stays</a></li>
-      <li class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10"><a class="hover:text-amber-400" href="https://windowmaintenance.co.nz/services/hardware-wedge-replacement/">Hardware & Wedge Replacement</a></li>
-      <li class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10"><a class="hover:text-amber-400" href="https://windowmaintenance.co.nz/services/lock-picking/">Lock Picking in {area.name} &amp; Lockout Entry</a></li>
-    </ul>
+    <h1 class="text-3xl font-extrabold">Aluminium window and sliding door repairs in {area.name}</h1>
+    <p class="mt-3 text-slate-300">{details.intro}</p>
+
+    <section class="mt-8 rounded-2xl bg-[var(--brand-surface)] p-6 ring-1 ring-white/10">
+      <h2 class="text-2xl font-bold">Common jobs we book in {area.name}</h2>
+      <p class="mt-3 text-slate-300">People in {area.name} usually find us when searching for aluminium window repairs, ranchslider repairs, aluminium joinery repairs, leaking aluminium windows, window handles, door handles, window locks and lock picking. The most common issues we see are {details.issues.join(", ")}.</p>
+    </section>
+
+    <section class="mt-8">
+      <h2 class="text-2xl font-bold">Popular repair pages for {area.name}</h2>
+      <ul class="mt-6 grid gap-3 sm:grid-cols-2">
+        <li class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10"><a class="hover:text-amber-400" href="/services/sliding-door-repairs/">Sliding / ranchslider door repairs</a></li>
+        <li class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10"><a class="hover:text-amber-400" href="/services/window-repairs/">Aluminium window repairs</a></li>
+        <li class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10"><a class="hover:text-amber-400" href="/services/joinery-repairs/">Aluminium joinery repairs</a></li>
+        <li class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10"><a class="hover:text-amber-400" href="/services/mitre-reseal/">Mitre and sill reseal for leaks</a></li>
+        <li class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10"><a class="hover:text-amber-400" href="/stays/">Awning stays and hinges</a></li>
+        <li class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10"><a class="hover:text-amber-400" href="/services/hardware-wedge-replacement/">Handles, locks, wedges and hardware</a></li>
+        <li class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10"><a class="hover:text-amber-400" href="/services/lock-picking/">Lock picking and lockout entry in {area.name}</a></li>
+      </ul>
+    </section>
+
+    <section class="mt-8 grid gap-4 sm:grid-cols-3">
+      <div class="rounded-xl bg-[var(--brand-surface)] p-5 ring-1 ring-white/10">
+        <h2 class="text-lg font-bold">Best for</h2>
+        <p class="mt-2 text-sm text-slate-300">Sliding doors that drag, aluminium windows that no longer latch, broken stays, worn locks and recurring draught or leak problems.</p>
+      </div>
+      <div class="rounded-xl bg-[var(--brand-surface)] p-5 ring-1 ring-white/10">
+        <h2 class="text-lg font-bold">What we repair</h2>
+        <p class="mt-2 text-sm text-slate-300">Rollers, tracks, stays, hinges, handles, Yale hardware, wedges, seals, mitred corners and sill leak paths on older and newer aluminium joinery.</p>
+      </div>
+      <div class="rounded-xl bg-[var(--brand-surface)] p-5 ring-1 ring-white/10">
+        <h2 class="text-lg font-bold">How to book</h2>
+        <p class="mt-2 text-sm text-slate-300">Send your suburb, a short description and photos if you have them. We usually reply the same day during business hours.</p>
+      </div>
+    </section>
+
+    <QuoteInline
+      title={`Get a quote in ${area.name}`}
+      subtitle={`Best for aluminium window repairs, ranchslider repairs, leaking joinery and hardware replacement in ${area.name}.`}
+      buttonLabel="Get my local quote"
+      source={`area_${area.slug}`}
+      className="mt-8"
+    />
   </main>
 </Layout>

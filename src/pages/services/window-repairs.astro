@@ -4,30 +4,32 @@ import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import Picture from "../../components/Picture.astro";
 import QuoteInline from "../../components/QuoteInline.astro";
 
-const title = "Aluminium Window Repairs Wellington | Handles, Hinges & Drafts";
-const description = "Single and double-glazed aluminium window repairs: stays, hinges, window handles, Yale locks, latches and draft fixes across Wellington, Porirua and the Hutt Valley.";
+const title = "Aluminium Window Repairs Wellington | Handles, Locks & Hinges";
+const description = "Single and double-glazed aluminium window repairs in Wellington: window handles, Yale window locks, hinges, stays, latches and draught fixes across Wellington, Porirua and the Hutt Valley.";
 const canonical = "https://windowmaintenance.co.nz/services/window-repairs/";
 
 const faqItems = [
   { q: "Do you repair single and double glazed aluminium windows?", a: "Yes. We work on both single- and double-glazed aluminium windows, including stays, hinges, seals and alignment." },
-  { q: "Do you replace stays and hinges in coastal areas?", a: "Yes. We carry corrosion-resistant hardware and fit stays/hinges suited to Wellington and Porirua coastal conditions." },
-  { q: "Can you fix drafts in older aluminium windows?", a: "We replace wedges/seals, service latches and re-align sashes to stop rattles and drafts." }
+  { q: "Do you replace stays and hinges in coastal areas?", a: "Yes. We carry corrosion-resistant hardware and fit stays and hinges suited to Wellington and Porirua coastal conditions." },
+  { q: "Can you fix drafts in older aluminium windows?", a: "We replace wedges and seals, service latches and re-align sashes to stop rattles and drafts." },
 ];
+
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "mainEntity": faqItems.map((item) => ({
+  mainEntity: faqItems.map((item) => ({
     "@type": "Question",
-    "name": item.q,
-    "acceptedAnswer": { "@type": "Answer", "text": item.a }
-  }))
+    name: item.q,
+    acceptedAnswer: { "@type": "Answer", text: item.a },
+  })),
 };
 ---
 <Layout title={title} description={description} canonical={canonical} schema={[faqSchema]}>
   <Breadcrumbs />
   <main class="mx-auto max-w-4xl px-6 py-12">
     <h1 class="text-3xl font-extrabold">Aluminium Window Repairs</h1>
-    <p class="mt-4 text-slate-300">Single and double-glazed aluminium window repairs: stays, hinges, window handles, Yale window locks, latches and latch alignment, plus draft and rattle fixes across Wellington, Porirua, Lower Hutt, Upper Hutt, Petone and Kāpiti.</p>
+    <p class="mt-4 text-slate-300">Single- and double-glazed aluminium window repairs: stays, hinges, window handles, Yale window locks, latches and latch alignment, plus draft and rattle fixes across Wellington, Porirua, Lower Hutt, Upper Hutt, Petone and Kapiti.</p>
+
     <section class="mt-8 grid gap-4 sm:grid-cols-3">
       <div class="rounded-xl bg-[var(--brand-surface)] p-5 ring-1 ring-white/10">
         <h2 class="text-lg font-bold">Common issues</h2>
@@ -35,54 +37,68 @@ const faqSchema = {
       </div>
       <div class="rounded-xl bg-[var(--brand-surface)] p-5 ring-1 ring-white/10">
         <h2 class="text-lg font-bold">What we do</h2>
-        <p class="mt-2 text-sm text-slate-300">Match hardware, re-align sashes, replace broken parts, service locks and stop drafts/rattles without pushing you toward full replacement.</p>
+        <p class="mt-2 text-sm text-slate-300">Match hardware, re-align sashes, replace broken parts, service locks and stop drafts or rattles without pushing you toward full replacement.</p>
       </div>
       <div class="rounded-xl bg-[var(--brand-surface)] p-5 ring-1 ring-white/10">
         <h2 class="text-lg font-bold">What happens next</h2>
-        <p class="mt-2 text-sm text-slate-300">Send the suburb and issue. We will usually reply the same day with likely parts, pricing guidance and next available booking.</p>
+        <p class="mt-2 text-sm text-slate-300">Send the suburb and issue. We usually reply the same day with likely parts, pricing guidance and the next available booking.</p>
       </div>
     </section>
+
+    <section class="mt-8 rounded-2xl bg-[var(--brand-surface)] p-6 ring-1 ring-white/10">
+      <h2 class="text-2xl font-bold">Searches we commonly help with</h2>
+      <p class="mt-3 text-slate-300">This page covers the jobs people search as aluminium window repairs, window handle replacement, window lock repair, Yale window handle issues, Yale window lock repair, awning stay replacement and aluminium joinery repairs. If the sash is rattling, not staying open, hard to latch or leaking around tired wedges and seals, it belongs here.</p>
+      <div class="mt-4 flex flex-wrap gap-3 text-sm">
+        <a class="rounded-full border border-white/10 px-3 py-2 text-slate-200 hover:border-amber-400 hover:text-amber-300" href="/services/joinery-repairs/">Aluminium joinery repairs</a>
+        <a class="rounded-full border border-white/10 px-3 py-2 text-slate-200 hover:border-amber-400 hover:text-amber-300" href="/services/hardware-wedge-replacement/">Window handles, locks and wedges</a>
+        <a class="rounded-full border border-white/10 px-3 py-2 text-slate-200 hover:border-amber-400 hover:text-amber-300" href="/stays/">Awning stays and hinges</a>
+      </div>
+    </section>
+
     <QuoteInline
       title="Get a quote for window repairs"
       subtitle="Best for sticking awning windows, bent stays, failed Yale window locks, worn sash handles and rattling single- or double-glazed joinery."
       buttonLabel="Get my window repair quote"
       source="window_repairs_page"
     />
+
     <h2 class="mt-10 text-2xl font-bold">Common parts we replace</h2>
     <div class="mt-4 grid gap-4 sm:grid-cols-2">
-
-    <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
-      <div class="ratio-4-3 card-frame">
-        <Picture base="hinge" alt="Aluminium window hinge replacement" className="h-full w-full object-cover" />
-      </div>
-    </figure>
-    <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
-      <div class="ratio-4-3 card-frame">
-        <Picture base="security-stays" alt="Window security stays / restrictors" className="h-full w-full object-cover" />
-      </div>
-    </figure>
-    <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
-      <div class="ratio-4-3 card-frame">
-        <Picture base="sash-handles" alt="Aluminium sash window handles" className="h-full w-full object-cover" />
-      </div>
-    </figure>
-    <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
-      <div class="ratio-4-3 card-frame">
-        <Picture base="glazing-wedge" alt="Glazing wedge and rubber seal profile for aluminium window" className="h-full w-full object-cover" />
-      </div>
-    </figure>
+      <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
+        <div class="ratio-4-3 card-frame">
+          <Picture base="hinge" alt="Aluminium window hinge replacement" className="h-full w-full object-cover" />
+        </div>
+      </figure>
+      <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
+        <div class="ratio-4-3 card-frame">
+          <Picture base="security-stays" alt="Window security stays and restrictors" className="h-full w-full object-cover" />
+        </div>
+      </figure>
+      <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
+        <div class="ratio-4-3 card-frame">
+          <Picture base="sash-handles" alt="Aluminium sash window handles" className="h-full w-full object-cover" />
+        </div>
+      </figure>
+      <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
+        <div class="ratio-4-3 card-frame">
+          <Picture base="glazing-wedge" alt="Glazing wedge and rubber seal profile for an aluminium window" className="h-full w-full object-cover" />
+        </div>
+      </figure>
     </div>
+
     <div class="mt-8 space-y-3">
       <h2 class="text-2xl font-bold">Where we work</h2>
-      <p class="text-slate-300">Wellington, Porirua, Lower Hutt, Upper Hutt, Petone and Kāpiti.</p>
-      <p class="text-slate-300">Related: <a class="text-amber-400 underline" href="/stays/">Awning stays &amp; hinges</a> • <a class="text-amber-400 underline" href="/leaks/">Draught &amp; leak repairs</a></p>
+      <p class="text-slate-300">We book aluminium window repairs across <a class="text-amber-400 underline" href="/areas/central-wellington/">Central Wellington</a>, <a class="text-amber-400 underline" href="/areas/lower-hutt/">Lower Hutt</a>, <a class="text-amber-400 underline" href="/areas/upper-hutt/">Upper Hutt</a>, <a class="text-amber-400 underline" href="/areas/porirua/">Porirua</a>, <a class="text-amber-400 underline" href="/areas/petone/">Petone</a> and <a class="text-amber-400 underline" href="/areas/kapiti/">Kapiti</a>.</p>
+      <p class="text-slate-300">Related pages: <a class="text-amber-400 underline" href="/stays/">Awning stays and hinges</a> • <a class="text-amber-400 underline" href="/leaks/">Draught and leak repairs</a> • <a class="text-amber-400 underline" href="/services/joinery-repairs/">Aluminium joinery repairs</a></p>
     </div>
+
     <div class="mt-8 space-y-3">
       <h2 class="text-2xl font-bold">Window repair FAQs</h2>
       <ul class="list-disc space-y-2 pl-5 text-slate-300">
-        {faqItems.map(item => <li><strong>{item.q}</strong><br />{item.a}</li>)}
+        {faqItems.map((item) => <li><strong>{item.q}</strong><br />{item.a}</li>)}
       </ul>
     </div>
+
     <div class="mt-8 space-y-3">
       <h2 class="text-2xl font-bold">Helpful guides</h2>
       <ul class="list-disc space-y-2 pl-5 text-slate-300">
