@@ -5,111 +5,119 @@ import QuoteInline from "../../components/QuoteInline.astro";
 import FAQ from "../../components/FAQ.astro";
 import Picture from "../../components/Picture.astro";
 
-const title = "Lock Picking Wellington | Lockout Entry & Cylinder Replacement";
-const description = "Locked out in Wellington, Porirua, Lower Hutt, Upper Hutt, Petone or Kapiti? Non-destructive lock picking, lockout entry and cylinder replacement.";
+const title = "Lock Picking Wellington | Lockouts, Cylinders & Door Lock Repair";
+const description = "Lock picking and lockout entry across Wellington for compatible residential locks, stuck cylinders, door lock repair and on-site cylinder replacement where needed.";
 const canonical = "https://windowmaintenance.co.nz/services/lock-picking/";
 
 const faqItems = [
-  { q: "Can you pick any residential lock?", a: "We pick compatible pin-tumbler style cylinders where non-destructive entry is possible. If a lock is damaged or unsuitable for picking, we can replace the cylinder." },
-  { q: "Do you need proof before opening a door?", a: "Yes. We only provide entry when we can verify occupancy/authority for the property." },
-  { q: "Do you service Wellington and the Hutt Valley?", a: "Yes. We cover Wellington, Porirua, Lower Hutt, Upper Hutt, Petone and Kāpiti." }
+  {
+    q: "Do you offer lock picking across Wellington?",
+    a: "Yes. We provide lock picking and lockout entry across Wellington, Porirua, Lower Hutt, Upper Hutt, Petone and Kapiti for compatible residential locks."
+  },
+  {
+    q: "Can you replace the cylinder if the lock cannot be picked cleanly?",
+    a: "Yes. If non-destructive entry is not suitable, we can replace the cylinder or related lock hardware where appropriate."
+  },
+  {
+    q: "Do you need proof before opening a door?",
+    a: "Yes. We only provide entry when occupancy or authority for the property can be verified."
+  }
 ];
 
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "mainEntity": faqItems.map((item) => ({
+  mainEntity: faqItems.map((item) => ({
     "@type": "Question",
-    "name": item.q,
-    "acceptedAnswer": { "@type": "Answer", "text": item.a }
+    name: item.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.a
+    }
   }))
 };
 
 const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
-  "name": "Lock Picking & Lockout Entry Wellington",
-  "serviceType": "Lock picking and lockout entry",
-  "description": "Non-destructive lock picking, lockout entry and cylinder replacement across Wellington region suburbs.",
-  "url": canonical,
-  "areaServed": [
-    { "@type": "Place", "name": "Wellington" },
-    { "@type": "Place", "name": "Porirua" },
-    { "@type": "Place", "name": "Lower Hutt" },
-    { "@type": "Place", "name": "Upper Hutt" },
-    { "@type": "Place", "name": "Petone" },
-    { "@type": "Place", "name": "Kapiti" }
+  name: "Lock Picking and Lockout Entry Wellington",
+  serviceType: "Lock picking and residential lockout entry",
+  description: "Lock picking, lockout entry, cylinder replacement and related door lock repair across the Wellington region.",
+  url: canonical,
+  areaServed: [
+    { "@type": "Place", name: "Wellington" },
+    { "@type": "Place", name: "Porirua" },
+    { "@type": "Place", name: "Lower Hutt" },
+    { "@type": "Place", name: "Upper Hutt" },
+    { "@type": "Place", name: "Petone" },
+    { "@type": "Place", name: "Kapiti" }
   ],
-  "provider": {
+  provider: {
     "@type": "LocalBusiness",
-    "name": "Window Maintenance",
-    "url": "https://windowmaintenance.co.nz",
-    "telephone": "+6421638205"
+    name: "Window Maintenance",
+    url: "https://windowmaintenance.co.nz",
+    telephone: "+6421638205"
   }
 };
 ---
 
 <Layout title={title} description={description} canonical={canonical} schema={[faqSchema, serviceSchema]}>
   <Breadcrumbs />
+
   <main class="mx-auto max-w-4xl px-6 py-12">
-    <h1 class="text-3xl font-extrabold">Lock Picking Wellington &amp; Lockout Entry</h1>
-    <p class="mt-4 text-slate-300">Locked out of your home? We provide lock picking and lockout entry across Wellington with a non-destructive approach where possible, followed by cylinder servicing or replacement if required.</p>
+    <h1 class="text-3xl font-extrabold">Lock Picking, Lockouts & Door Lock Repair</h1>
+    <p class="mt-4 text-slate-300">This page covers residential lockouts, compatible lock picking, sticky cylinders and door lock repair across Wellington. If you are locked out, dealing with a failed cylinder or need a lock opened and repaired properly, this is the right page.</p>
+
     <section class="mt-8 grid gap-4 sm:grid-cols-3">
       <div class="rounded-xl bg-[var(--brand-surface)] p-5 ring-1 ring-white/10">
-        <h2 class="text-lg font-bold">Best for</h2>
-        <p class="mt-2 text-sm text-slate-300">Lockouts, seized cylinders, keys that no longer turn cleanly and compatible residential locks needing non-destructive entry.</p>
+        <h2 class="text-lg font-bold">Common issues</h2>
+        <p class="mt-2 text-sm text-slate-300">Locked out of the house, key no longer turning, sticky cylinder, worn lock hardware or a door that only opens with force.</p>
       </div>
       <div class="rounded-xl bg-[var(--brand-surface)] p-5 ring-1 ring-white/10">
         <h2 class="text-lg font-bold">What we do</h2>
-        <p class="mt-2 text-sm text-slate-300">Attempt non-destructive entry first, then service or replace the cylinder if the lock is worn, damaged or unsuitable for picking.</p>
+        <p class="mt-2 text-sm text-slate-300">We try non-destructive entry first, then service or replace the cylinder and related hardware if the lock is worn, damaged or beyond clean opening.</p>
       </div>
       <div class="rounded-xl bg-[var(--brand-surface)] p-5 ring-1 ring-white/10">
         <h2 class="text-lg font-bold">What happens next</h2>
-        <p class="mt-2 text-sm text-slate-300">Call for urgent lockouts. Use the form for non-urgent jobs and we’ll confirm authority requirements and availability.</p>
+        <p class="mt-2 text-sm text-slate-300">Urgent lockout? Call. Non-urgent job? Send the form and we will reply with availability and what proof of authority is needed.</p>
       </div>
     </section>
+
+    <section class="mt-8 rounded-2xl bg-[var(--brand-surface)] p-6 ring-1 ring-white/10">
+      <h2 class="text-2xl font-bold">Searches we commonly help with</h2>
+      <p class="mt-3 text-slate-300">This page is aimed at local searches like lock picking Wellington, door lock repair Wellington, locked out of house Wellington, cylinder replacement, front door lock repair, lockout entry Porirua, lockout Lower Hutt and lock picking Kapiti. It is not a general locksmith supply page; it is a local service page for people who need the door opened and the lock sorted.</p>
+      <div class="mt-4 flex flex-wrap gap-3 text-sm">
+        <a class="rounded-full border border-white/10 px-3 py-2 text-slate-200 hover:border-amber-400 hover:text-amber-300" href="/services/hardware-wedge-replacement/">Handles, locks and hardware</a>
+        <a class="rounded-full border border-white/10 px-3 py-2 text-slate-200 hover:border-amber-400 hover:text-amber-300" href="/services/joinery-repairs/">Aluminium joinery repairs</a>
+      </div>
+    </section>
+
     <QuoteInline
-      title="Need urgent lockout entry?"
-      subtitle="For urgent lockouts, call first. For non-urgent lock picking, cylinder changes or sticky locks, send the form and we’ll come back quickly."
-      buttonLabel="Request lockout help"
+      title="Need lockout entry or lock repair?"
+      subtitle="Call for urgent lockouts. Use the form for non-urgent cylinder replacement, sticky locks and general door lock repair."
+      buttonLabel="Request lock help"
       source="lock_picking_page"
     />
 
-    <h2 class="mt-10 text-2xl font-bold">What this service includes</h2>
-    <ul class="mt-4 list-disc space-y-2 pl-5 text-slate-300">
-      <li>Non-destructive entry for compatible residential cylinders</li>
-      <li>Cylinder checks and lock function testing after entry</li>
-      <li>Cylinder replacement when locks are worn, damaged or seized</li>
-      <li>Door handle/lockset adjustments where alignment is causing issues</li>
-    </ul>
-
-    <figure class="mt-6 rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
+    <figure class="mt-8 rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
       <div class="ratio-4-3 card-frame">
-        <Picture base="euro-lock-cylinder" alt="Euro lock cylinder replacement hardware" className="h-full w-full object-cover" />
+        <Picture base="euro-lock-cylinder" alt="Euro lock cylinder replacement for a residential door" className="h-full w-full object-cover" />
       </div>
-      <figcaption class="mt-2 text-sm text-slate-400">We carry common cylinders and lock hardware for on-site replacement if needed.</figcaption>
+      <figcaption class="mt-2 text-sm text-slate-400">We carry common cylinders and related lock hardware for on-site repair or replacement where needed.</figcaption>
     </figure>
 
-    <div class="mt-8 space-y-3">
-      <h2 class="text-2xl font-bold">Important access policy</h2>
-      <p class="text-slate-300">For security and legal compliance, we only open doors when occupancy/authority can be verified.</p>
-    </div>
-
-    <div class="mt-8 space-y-3">
+    <section class="mt-8 space-y-3">
       <h2 class="text-2xl font-bold">Where we work</h2>
-      <p class="text-slate-300">Wellington, Porirua, Lower Hutt, Upper Hutt, Petone and Kāpiti.</p>
-      <p class="text-slate-300">Lock picking suburbs we commonly attend include Wellington CBD, Te Aro, Newtown, Karori, Miramar, Johnsonville, Porirua, Lower Hutt, Upper Hutt, Petone and Kāpiti.</p>
-      <p class="text-slate-300">Related: <a class="text-amber-400 underline" href="/services/hardware-wedge-replacement/">Hardware &amp; lock replacement</a> • <a class="text-amber-400 underline" href="/services/joinery-repairs/">Aluminium joinery repairs</a></p>
-      <p class="text-slate-300">Guide: <a class="text-amber-400 underline" href="/blog/digital-locks-wellington-elok-yale-ydm-doric-de10/">Digital locks in Wellington (Elock, Yale YDM, Doric DE10)</a></p>
-      <ul class="list-disc space-y-1 pl-5 text-slate-300">
-        <li><a class="text-amber-400 underline" href="/areas/central-wellington/">Lock picking in Wellington</a></li>
-        <li><a class="text-amber-400 underline" href="/areas/porirua/">Lock picking in Porirua</a></li>
-        <li><a class="text-amber-400 underline" href="/areas/lower-hutt/">Lock picking in Lower Hutt</a></li>
-        <li><a class="text-amber-400 underline" href="/areas/upper-hutt/">Lock picking in Upper Hutt</a></li>
-        <li><a class="text-amber-400 underline" href="/areas/petone/">Lock picking in Petone</a></li>
-        <li><a class="text-amber-400 underline" href="/areas/kapiti/">Lock picking in Kāpiti</a></li>
+      <p class="text-slate-300">We attend lockouts and door lock repairs across <a class="text-amber-400 underline" href="/areas/central-wellington/">Central Wellington</a>, <a class="text-amber-400 underline" href="/areas/porirua/">Porirua</a>, <a class="text-amber-400 underline" href="/areas/lower-hutt/">Lower Hutt</a>, <a class="text-amber-400 underline" href="/areas/upper-hutt/">Upper Hutt</a>, <a class="text-amber-400 underline" href="/areas/petone/">Petone</a> and <a class="text-amber-400 underline" href="/areas/kapiti/">Kapiti</a>.</p>
+      <p class="text-slate-300">Related pages: <a class="text-amber-400 underline" href="/services/hardware-wedge-replacement/">Hardware and lock replacement</a> • <a class="text-amber-400 underline" href="/services/joinery-repairs/">Aluminium joinery repairs</a></p>
+    </section>
+
+    <section class="mt-8 space-y-3">
+      <h2 class="text-2xl font-bold">Helpful guides</h2>
+      <ul class="list-disc space-y-2 pl-5 text-slate-300">
+        <li><a class="text-amber-400 underline" href="/blog/digital-locks-wellington-elok-yale-ydm-doric-de10/">Digital locks in Wellington: Elock, Yale YDM and Doric DE10</a></li>
       </ul>
-    </div>
+    </section>
   </main>
 
   <FAQ heading="Lock picking FAQs" items={faqItems} />

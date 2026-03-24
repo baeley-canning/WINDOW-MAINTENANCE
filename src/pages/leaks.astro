@@ -5,80 +5,110 @@ import Picture from "../components/Picture.astro";
 import QuoteInline from "../components/QuoteInline.astro";
 import FAQ from "../components/FAQ.astro";
 
-const title = "Draught & Leak Repairs Wellington | Seals & Alignment";
-const description = "Single and double-glazed aluminium leak repairs: seals, wedges, latch servicing and sash realignment across Wellington, Porirua and the Hutt Valley.";
+const title = "Leaking Aluminium Windows Wellington | Draught, Seal & Leak Repairs";
+const description = "Leaking aluminium windows and draught repairs in Wellington: wedges, seals, latch alignment, sash adjustment and mitre or sill diagnosis for single and double glazed joinery.";
 const canonical = "https://windowmaintenance.co.nz/leaks/";
 
 const faqItems = [
-  { q: "Do you reseal mitred corners and sills?", a: "Yes. We open the joinery, back-seal accessible mitres and re-seal the sill, keeping drainage clear for Wellington weather." },
-  { q: "Can you help in coastal Porirua or Petone?", a: "We carry sealants and wedges suited to coastal aluminium joinery and clear weep paths to reduce water tracking." }
+  {
+    q: "Can you fix leaking aluminium windows without replacing the whole window?",
+    a: "Yes. Many leak problems come down to failed wedges, worn seals, latch misalignment, dropped sashes or localised mitre and sill faults rather than full replacement."
+  },
+  {
+    q: "Do you repair draughty aluminium windows as well as obvious leaks?",
+    a: "Yes. We fix cold draughts, noisy windows and rattling sashes by replacing wedges and seals, servicing latches and correcting sash fitment."
+  },
+  {
+    q: "Do you work on single and double glazed joinery?",
+    a: "Yes. We service both single and double glazed aluminium windows and doors across Wellington and the Hutt Valley."
+  }
 ];
+
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "mainEntity": faqItems.map((item) => ({
+  mainEntity: faqItems.map((item) => ({
     "@type": "Question",
-    "name": item.q,
-    "acceptedAnswer": { "@type": "Answer", "text": item.a }
+    name: item.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.a
+    }
   }))
 };
 ---
+
 <Layout title={title} description={description} canonical={canonical} schema={[faqSchema]}>
   <Breadcrumbs />
+
   <main class="mx-auto max-w-4xl px-6 py-12">
     <h1 class="text-3xl font-extrabold">Draught & Leak Repairs</h1>
-    <p class="mt-4 text-slate-300">We diagnose and fix window draughts and leaks across Wellington, Porirua, Lower Hutt, Upper Hutt, Petone and Kāpiti: glazing wedges and seals replaced, sashes re-aligned, and hardware serviced for a tight close.</p>
+    <p class="mt-4 text-slate-300">This page is for leaking aluminium windows, cold draughts, wind noise and early-stage water entry problems across Wellington. If the joinery is still serviceable but no longer sealing properly, this is where the repair starts.</p>
+
     <section class="mt-8 grid gap-4 sm:grid-cols-3">
       <div class="rounded-xl bg-[var(--brand-surface)] p-5 ring-1 ring-white/10">
         <h2 class="text-lg font-bold">Common symptoms</h2>
-        <p class="mt-2 text-sm text-slate-300">Cold draughts, rattling sashes, blackened seals, wind noise, damp carpet and water tracking around aluminium frames.</p>
+        <p class="mt-2 text-sm text-slate-300">Cold air movement, noisy frames, damp carpet, blackened seals, visible water tracking and windows that no longer close down tightly.</p>
       </div>
       <div class="rounded-xl bg-[var(--brand-surface)] p-5 ring-1 ring-white/10">
         <h2 class="text-lg font-bold">What we do</h2>
-        <p class="mt-2 text-sm text-slate-300">Replace wedges and seals, re-align sashes, service latches and diagnose whether the real problem is a mitre, sill or closure issue.</p>
+        <p class="mt-2 text-sm text-slate-300">We work out whether the issue is wedges, seals, latch pressure, sash alignment or a deeper mitre and sill fault and then repair the right layer.</p>
       </div>
       <div class="rounded-xl bg-[var(--brand-surface)] p-5 ring-1 ring-white/10">
         <h2 class="text-lg font-bold">What happens next</h2>
-        <p class="mt-2 text-sm text-slate-300">Tell us where the draught or leak is showing up. We’ll advise whether it sounds like a seal job or a deeper reseal/repair.</p>
+        <p class="mt-2 text-sm text-slate-300">Tell us where the leak or draught is showing up and whether it is worst in wind, heavy rain or all the time. That usually narrows the diagnosis quickly.</p>
       </div>
     </section>
+
+    <section class="mt-8 rounded-2xl bg-[var(--brand-surface)] p-6 ring-1 ring-white/10">
+      <h2 class="text-2xl font-bold">Searches we commonly help with</h2>
+      <p class="mt-3 text-slate-300">People usually land here from searches like leaking aluminium windows, reseal aluminium windows, draughty aluminium windows, window leak repair Wellington, leaking ranchslider, leaking sliding door and seal replacement for aluminium windows. This page supports that wider leak and sealing cluster before the job gets more serious.</p>
+      <div class="mt-4 flex flex-wrap gap-3 text-sm">
+        <a class="rounded-full border border-white/10 px-3 py-2 text-slate-200 hover:border-amber-400 hover:text-amber-300" href="/services/mitre-reseal/">Mitre and sill reseals</a>
+        <a class="rounded-full border border-white/10 px-3 py-2 text-slate-200 hover:border-amber-400 hover:text-amber-300" href="/services/window-repairs/">Window repairs</a>
+        <a class="rounded-full border border-white/10 px-3 py-2 text-slate-200 hover:border-amber-400 hover:text-amber-300" href="/services/sliding-door-repairs/">Sliding door repairs</a>
+      </div>
+    </section>
+
     <QuoteInline
-      title="Get a quote for draught & leak repairs"
-      subtitle="Best for cold rattling windows, failed wedges, noisy sashes and early-stage leak problems before full damage sets in."
+      title="Get a quote for draught or leak repairs"
+      subtitle="Best for leaking aluminium windows, tired wedges and seals, rattling sashes and early-stage water ingress before major damage sets in."
       buttonLabel="Get my leak quote"
       source="leaks_page"
     />
-    <div class="mt-6 grid gap-4 sm:grid-cols-2">
-      <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
-        <div class="ratio-4-3 card-frame"><Picture base="glazing-wedge" alt="New glazing wedge / rubber seal installed" className="h-full w-full object-cover" /></div>
-        <figcaption class="mt-2 text-sm text-slate-400">Glazing wedges & seals</figcaption>
-      </figure>
-    <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
-      <div class="ratio-4-3 card-frame"><Picture base="hinge" alt="Window hinge adjusted for correct seal" className="h-full w-full object-cover" /></div>
-      <figcaption class="mt-2 text-sm text-slate-400">Hinge and latch adjustment</figcaption>
-    </figure>
-    </div>
-    <div class="mt-8 space-y-3">
+
+    <section class="mt-10">
+      <h2 class="text-2xl font-bold">What we usually find</h2>
+      <div class="mt-4 grid gap-4 sm:grid-cols-2">
+        <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
+          <div class="ratio-4-3 card-frame">
+            <Picture base="glazing-wedge" alt="Replacement glazing wedge and rubber seal for aluminium joinery" className="h-full w-full object-cover" />
+          </div>
+          <figcaption class="mt-2 text-sm text-slate-400">Failed wedges and seals are a common cause of draughts and water tracking.</figcaption>
+        </figure>
+        <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10">
+          <div class="ratio-4-3 card-frame">
+            <Picture base="hinge" alt="Window hinge adjusted so the sash seals correctly" className="h-full w-full object-cover" />
+          </div>
+          <figcaption class="mt-2 text-sm text-slate-400">Dropped sashes and poor latch pressure often need adjustment before any seal work lasts.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="mt-8 space-y-3">
       <h2 class="text-2xl font-bold">Where we work</h2>
-      <p class="text-slate-300">Wellington, Porirua, Lower Hutt, Upper Hutt, Petone and Kāpiti.</p>
-      <p class="text-slate-300">Related: <a class="text-amber-400 underline" href="/services/mitre-reseal/">Mitre &amp; sill reseal</a> • <a class="text-amber-400 underline" href="/services/window-repairs/">Window repairs</a></p>
-    </div>
-    <div class="mt-8 space-y-3">
-      <h2 class="text-2xl font-bold">Leak repair FAQs</h2>
-      <ul class="list-disc space-y-2 pl-5 text-slate-300">
-        {faqItems.map(item => <li><strong>{item.q}</strong><br />{item.a}</li>)}
-      </ul>
-    </div>
-    <div class="mt-8 space-y-3">
+      <p class="text-slate-300">We attend draught and leak jobs across <a class="text-amber-400 underline" href="/areas/central-wellington/">Central Wellington</a>, <a class="text-amber-400 underline" href="/areas/porirua/">Porirua</a>, <a class="text-amber-400 underline" href="/areas/lower-hutt/">Lower Hutt</a>, <a class="text-amber-400 underline" href="/areas/upper-hutt/">Upper Hutt</a>, <a class="text-amber-400 underline" href="/areas/petone/">Petone</a> and <a class="text-amber-400 underline" href="/areas/kapiti/">Kapiti</a>.</p>
+      <p class="text-slate-300">Related pages: <a class="text-amber-400 underline" href="/services/mitre-reseal/">Mitre and sill reseal</a> • <a class="text-amber-400 underline" href="/services/window-repairs/">Window repairs</a> • <a class="text-amber-400 underline" href="/services/joinery-repairs/">Aluminium joinery repairs</a></p>
+    </section>
+
+    <section class="mt-8 space-y-3">
       <h2 class="text-2xl font-bold">Helpful guides</h2>
       <ul class="list-disc space-y-2 pl-5 text-slate-300">
-        <li><a class="text-amber-400 underline" href="/blog/draft-proofing-wellington/">Draft-proofing aluminium windows in Wellington</a></li>
         <li><a class="text-amber-400 underline" href="/blog/resealing-imported-sliders-wellington/">Why aluminium sliders leak and how we reseal them</a></li>
+        <li><a class="text-amber-400 underline" href="/blog/draft-proofing-wellington/">Draft-proofing aluminium windows in Wellington</a></li>
       </ul>
-    </div>
+    </section>
   </main>
-  <FAQ items={[
-    { q: 'What causes draughts in aluminium windows?', a: 'Usually shrunken glazing wedges/seals, dropped sashes or latch misalignment. We replace seals, re-align sashes and adjust hardware.' },
-    { q: 'Do you work in heavy rain?', a: 'We can diagnose in poor weather but prefer dry conditions for seal replacement to ensure proper adhesion.' }
-  ]} />
+
+  <FAQ heading="Leak repair FAQs" items={faqItems} />
 </Layout>
