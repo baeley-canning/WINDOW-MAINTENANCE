@@ -49,6 +49,40 @@ if (isset($body['deleteId'])) {
     json_response(['ok' => true]);
 }
 
+if (isset($body['restoreId'])) {
+    $restoreId = trim((string)$body['restoreId']);
+    if ($restoreId === '' || strlen($restoreId) > 64) {
+        json_response(['ok' => false, 'error' => 'Invalid draft id'], 422);
+    }
+
+    $stmt = $db->prepare("UPDATE portal_blog_drafts SET is_deleted = 0, updated_at = NOW() WHERE id = ?");
+    if (!$stmt) {
+        json_response(['ok' => false, 'error' => 'Failed to prepare restore query'], 500);
+    }
+    $stmt->bind_param('s', $restoreId);
+    $stmt->execute();
+    $stmt->close();
+
+    json_response(['ok' => true]);
+}
+
+if (isset($body['purgeId'])) {
+    $purgeId = trim((string)$body['purgeId']);
+    if ($purgeId === '' || strlen($purgeId) > 64) {
+        json_response(['ok' => false, 'error' => 'Invalid draft id'], 422);
+    }
+
+    $stmt = $db->prepare("DELETE FROM portal_blog_drafts WHERE id = ?");
+    if (!$stmt) {
+        json_response(['ok' => false, 'error' => 'Failed to prepare purge query'], 500);
+    }
+    $stmt->bind_param('s', $purgeId);
+    $stmt->execute();
+    $stmt->close();
+
+    json_response(['ok' => true]);
+}
+
 if (!isset($body['blog']) || !is_array($body['blog'])) {
     json_response(['ok' => false, 'error' => 'Missing blog payload'], 422);
 }
