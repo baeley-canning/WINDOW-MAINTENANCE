@@ -204,6 +204,76 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
           </div>
         </div>
       </div>
+
+      <div class="mt-6 grid gap-4 lg:grid-cols-3">
+        <div class="rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 sm:p-5 lg:col-span-1">
+          <div class="mb-3 flex items-center justify-between">
+            <div>
+              <h2 class="text-lg font-bold">Blog Drafts</h2>
+              <p class="mt-1 text-sm text-slate-300">Portal drafts only. Download or copy markdown when ready to publish on the site.</p>
+            </div>
+            <span id="blog-count" class="rounded-full bg-white/10 px-3 py-1 text-xs text-slate-300">0 drafts</span>
+          </div>
+          <div id="blog-list" class="space-y-3"></div>
+          <p id="blog-empty" class="text-sm text-slate-400">No blog drafts yet.</p>
+        </div>
+
+        <div class="rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 sm:p-5 lg:col-span-2">
+          <div class="mb-3 flex items-start justify-between gap-3">
+            <div>
+              <h2 id="blog-form-title" class="text-lg font-bold">Create Blog Draft</h2>
+              <p class="mt-1 text-sm text-slate-300">Write the post once here, then copy or download markdown ready for the Astro blog collection.</p>
+            </div>
+            <code id="blog-preview-path" class="rounded bg-[var(--brand-bg)] px-2 py-1 text-xs text-amber-300">/blog/your-slug/</code>
+          </div>
+          <form id="blog-form" class="space-y-3">
+            <div class="grid gap-3 sm:grid-cols-2">
+              <label class="block">
+                <span class="text-sm">Title</span>
+                <input id="blog-title" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10" required />
+              </label>
+              <label class="block">
+                <span class="text-sm">Slug</span>
+                <input id="blog-slug" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10" placeholder="digital-locks-wellington" required />
+              </label>
+            </div>
+            <div class="grid gap-3 sm:grid-cols-3">
+              <label class="block sm:col-span-2">
+                <span class="text-sm">Meta description</span>
+                <input id="blog-description" maxlength="160" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10" required />
+              </label>
+              <label class="block">
+                <span class="text-sm">Publish date</span>
+                <input id="blog-date" type="date" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10" required />
+              </label>
+            </div>
+            <div class="grid gap-3 sm:grid-cols-2">
+              <label class="block">
+                <span class="text-sm">Hero image path</span>
+                <input id="blog-hero-image" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10" placeholder="/img/example.webp" />
+              </label>
+              <label class="block">
+                <span class="text-sm">Status</span>
+                <select id="blog-status" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10">
+                  <option value="Draft">Draft</option>
+                  <option value="Ready">Ready</option>
+                  <option value="Published">Published</option>
+                </select>
+              </label>
+            </div>
+            <label class="block">
+              <span class="text-sm">Markdown content</span>
+              <textarea id="blog-body" rows="14" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-sm ring-1 ring-white/10" required></textarea>
+            </label>
+            <div class="flex flex-wrap gap-2">
+              <button id="blog-save" class="btn btn-primary" type="submit">Save draft</button>
+              <button id="blog-copy" class="btn btn-secondary" type="button">Copy markdown</button>
+              <button id="blog-download" class="btn btn-outline" type="button">Download .md</button>
+              <button id="blog-clear" class="btn btn-outline" type="button">Clear</button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -261,6 +331,23 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         inputStatus: document.getElementById("job-status"),
         inputUnscheduled: document.getElementById("job-unscheduled"),
         jobClear: document.getElementById("job-clear"),
+        blogCount: document.getElementById("blog-count"),
+        blogList: document.getElementById("blog-list"),
+        blogEmpty: document.getElementById("blog-empty"),
+        blogForm: document.getElementById("blog-form"),
+        blogFormTitle: document.getElementById("blog-form-title"),
+        blogPreviewPath: document.getElementById("blog-preview-path"),
+        blogTitle: document.getElementById("blog-title"),
+        blogSlug: document.getElementById("blog-slug"),
+        blogDescription: document.getElementById("blog-description"),
+        blogDate: document.getElementById("blog-date"),
+        blogHeroImage: document.getElementById("blog-hero-image"),
+        blogStatus: document.getElementById("blog-status"),
+        blogBody: document.getElementById("blog-body"),
+        blogSave: document.getElementById("blog-save"),
+        blogCopy: document.getElementById("blog-copy"),
+        blogDownload: document.getElementById("blog-download"),
+        blogClear: document.getElementById("blog-clear"),
         heatmapMonth: document.getElementById("heatmap-month"),
         heatmapDay: document.getElementById("heatmap-day"),
         heatmapSummary: document.getElementById("heatmap-summary"),
@@ -294,6 +381,9 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         familyRefById: {},
         pendingFamilyScroll: Boolean(initialJobParam),
         searchQuery: "",
+        blogs: [],
+        blogEditId: null,
+        blogSlugTouched: false,
         pollTimer: null,
         saveInFlight: false
       };
@@ -313,6 +403,7 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
 
       const AREA_ORDER = AREA_KEYWORDS.map(function (x) { return x.area; }).concat(["Other"]);
       const STATUS_OPTIONS = ["Booked", "Quoted", "Awaiting parts", "In progress", "Reschedule", "Done", "Cancelled"];
+      const BLOG_STATUS_OPTIONS = ["Draft", "Ready", "Published"];
       const STATUS_BADGE_CLASS = {
         "Booked": "bg-blue-500/20 text-blue-200",
         "Quoted": "bg-cyan-500/20 text-cyan-200",
@@ -321,6 +412,11 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         "Reschedule": "bg-orange-500/20 text-orange-200",
         "Done": "bg-emerald-500/20 text-emerald-200",
         "Cancelled": "bg-rose-500/20 text-rose-200"
+      };
+      const BLOG_STATUS_BADGE_CLASS = {
+        "Draft": "bg-slate-500/20 text-slate-200",
+        "Ready": "bg-amber-500/20 text-amber-200",
+        "Published": "bg-emerald-500/20 text-emerald-200"
       };
 
       function dateKey(d) {
@@ -405,6 +501,74 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
 
       function normalizeSearchToken(v) {
         return String(v || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+      }
+
+      function slugify(v) {
+        return String(v || "")
+          .toLowerCase()
+          .trim()
+          .replace(/&/g, " and ")
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/^-+|-+$/g, "")
+          .replace(/-{2,}/g, "-");
+      }
+
+      function getBlogStatusBadgeClass(status) {
+        return BLOG_STATUS_BADGE_CLASS[status] || "bg-white/10 text-slate-200";
+      }
+
+      function escapeYamlString(v) {
+        return String(v || "").replace(/\\/g, "\\\\").replace(/"/g, '\\"');
+      }
+
+      function buildBlogMarkdown(blog) {
+        const frontmatter = [
+          "---",
+          'title: "' + escapeYamlString(blog.title) + '"',
+          'description: "' + escapeYamlString(blog.description) + '"',
+          "pubDate: " + blog.pubDate
+        ];
+        if (blog.heroImage) {
+          frontmatter.push('heroImage: "' + escapeYamlString(blog.heroImage) + '"');
+        }
+        frontmatter.push("---", "");
+        return frontmatter.join("\n") + String(blog.body || "").trim() + "\n";
+      }
+
+      function normalizeBlog(blog) {
+        const rawStatus = String(blog && blog.status ? blog.status : "Draft");
+        return {
+          id: String(blog && blog.id ? blog.id : ""),
+          slug: String(blog && blog.slug ? blog.slug : ""),
+          title: String(blog && blog.title ? blog.title : ""),
+          description: String(blog && blog.description ? blog.description : ""),
+          pubDate: String(blog && blog.pubDate ? blog.pubDate : ""),
+          heroImage: String(blog && blog.heroImage ? blog.heroImage : ""),
+          status: BLOG_STATUS_OPTIONS.includes(rawStatus) ? rawStatus : "Draft",
+          body: String(blog && blog.body ? blog.body : ""),
+          deleted: Boolean(blog && blog.deleted),
+          createdAt: String(blog && blog.createdAt ? blog.createdAt : ""),
+          updatedAt: String(blog && blog.updatedAt ? blog.updatedAt : "")
+        };
+      }
+
+      function currentBlogPayload() {
+        return {
+          id: state.blogEditId || "",
+          title: String(el.blogTitle ? el.blogTitle.value : "").trim(),
+          slug: slugify(el.blogSlug ? el.blogSlug.value : ""),
+          description: String(el.blogDescription ? el.blogDescription.value : "").trim(),
+          pubDate: String(el.blogDate ? el.blogDate.value : "").trim(),
+          heroImage: String(el.blogHeroImage ? el.blogHeroImage.value : "").trim(),
+          status: BLOG_STATUS_OPTIONS.includes(String(el.blogStatus ? el.blogStatus.value : "")) ? String(el.blogStatus.value) : "Draft",
+          body: String(el.blogBody ? el.blogBody.value : "").trim()
+        };
+      }
+
+      function getBlogById(id) {
+        return state.blogs.find(function (blog) {
+          return blog && blog.id === id && !blog.deleted;
+        }) || null;
       }
 
       function getJobSearchText(job) {
@@ -1367,6 +1531,170 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         updateDuplicateHint();
       }
 
+      function updateBlogPreview() {
+        if (!el.blogPreviewPath) return;
+        const slug = slugify(el.blogSlug ? el.blogSlug.value : "");
+        el.blogPreviewPath.textContent = slug ? "/blog/" + slug + "/" : "/blog/your-slug/";
+      }
+
+      function clearBlogForm() {
+        state.blogEditId = null;
+        state.blogSlugTouched = false;
+        if (el.blogFormTitle) el.blogFormTitle.textContent = "Create Blog Draft";
+        if (el.blogForm) el.blogForm.reset();
+        if (el.blogDate) el.blogDate.value = dateKey(new Date());
+        if (el.blogStatus) el.blogStatus.value = "Draft";
+        updateBlogPreview();
+      }
+
+      function fillBlogForm(blog) {
+        state.blogEditId = blog.id;
+        state.blogSlugTouched = true;
+        if (el.blogFormTitle) el.blogFormTitle.textContent = "Edit Blog Draft";
+        if (el.blogTitle) el.blogTitle.value = blog.title;
+        if (el.blogSlug) el.blogSlug.value = blog.slug;
+        if (el.blogDescription) el.blogDescription.value = blog.description;
+        if (el.blogDate) el.blogDate.value = blog.pubDate;
+        if (el.blogHeroImage) el.blogHeroImage.value = blog.heroImage || "";
+        if (el.blogStatus) el.blogStatus.value = BLOG_STATUS_OPTIONS.includes(blog.status) ? blog.status : "Draft";
+        if (el.blogBody) el.blogBody.value = blog.body;
+        updateBlogPreview();
+      }
+
+      function renderBlogs() {
+        if (!el.blogList || !el.blogEmpty || !el.blogCount) return;
+
+        const blogs = state.blogs
+          .filter(function (blog) { return !blog.deleted; })
+          .sort(function (a, b) {
+            return String(b.updatedAt || "").localeCompare(String(a.updatedAt || ""));
+          });
+
+        el.blogCount.textContent = blogs.length + " draft" + (blogs.length === 1 ? "" : "s");
+        el.blogList.innerHTML = "";
+
+        if (!blogs.length) {
+          el.blogEmpty.classList.remove("hidden");
+          return;
+        }
+
+        el.blogEmpty.classList.add("hidden");
+
+        for (const blog of blogs) {
+          const card = document.createElement("article");
+          card.className = "rounded-xl bg-[var(--brand-bg)] p-4 ring-1 ring-white/10";
+          card.innerHTML =
+            '<div class="flex items-start justify-between gap-3">' +
+              '<div>' +
+                '<p class="text-sm font-semibold">' + safeText(blog.title) + '</p>' +
+                '<p class="mt-1 text-xs text-slate-400">/blog/' + safeText(blog.slug) + '/</p>' +
+                '<span class="mt-2 inline-flex rounded-full px-2 py-0.5 text-xs ' + getBlogStatusBadgeClass(blog.status) + '">' + safeText(blog.status) + '</span>' +
+              '</div>' +
+              '<div class="flex gap-2">' +
+                '<button type="button" data-action="edit" data-id="' + safeText(blog.id) + '" class="btn btn-outline px-3 py-1 text-xs">Edit</button>' +
+                '<button type="button" data-action="delete" data-id="' + safeText(blog.id) + '" class="btn btn-outline px-3 py-1 text-xs">Delete</button>' +
+              '</div>' +
+            '</div>' +
+            '<p class="mt-3 text-sm text-slate-300">' + safeText(blog.description) + '</p>' +
+            '<div class="mt-3 flex flex-wrap gap-2">' +
+              '<button type="button" data-action="copy" data-id="' + safeText(blog.id) + '" class="btn btn-secondary px-3 py-1 text-xs">Copy markdown</button>' +
+              '<button type="button" data-action="download" data-id="' + safeText(blog.id) + '" class="btn btn-outline px-3 py-1 text-xs">Download .md</button>' +
+            '</div>' +
+            '<p class="mt-2 text-xs text-slate-400">Updated ' + safeText(blog.updatedAt || blog.createdAt || "") + '</p>';
+          el.blogList.appendChild(card);
+        }
+      }
+
+      async function loadBlogs(silent) {
+        try {
+          const data = await apiRequest("blogs.php");
+          state.blogs = Array.isArray(data.blogs) ? data.blogs.map(normalizeBlog) : [];
+          renderBlogs();
+          if (!silent) setPortalStatus("Blog drafts refreshed.");
+        } catch (err) {
+          if (err.message === "__UNAUTHORIZED__") {
+            handleUnauthorized("Session expired. Sign in again.");
+            return;
+          }
+          setPortalStatus("Could not load blog drafts: " + err.message, true);
+        }
+      }
+
+      async function copyBlogMarkdown(blog) {
+        const markdown = buildBlogMarkdown(blog);
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(markdown);
+            setPortalStatus("Blog markdown copied.");
+            return;
+          }
+        } catch (_) {}
+        setPortalStatus("Copy failed. Use download instead.", true);
+      }
+
+      function downloadBlogMarkdown(blog) {
+        const markdown = buildBlogMarkdown(blog);
+        const blob = new Blob([markdown], { type: "text/markdown;charset=utf-8" });
+        const href = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = href;
+        link.download = (blog.slug || "blog-draft") + ".md";
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        setTimeout(function () {
+          URL.revokeObjectURL(href);
+        }, 1000);
+        setPortalStatus("Markdown downloaded.");
+      }
+
+      async function saveBlogDraft() {
+        const blog = currentBlogPayload();
+        if (!blog.title || !blog.slug || !blog.description || !blog.pubDate || !blog.body) {
+          setPortalStatus("Fill in title, slug, description, publish date and content.", true);
+          return;
+        }
+
+        setPortalStatus("Saving blog draft...");
+        try {
+          await apiRequest("blogs.php", { method: "POST", body: { blog: blog } });
+          clearBlogForm();
+          await loadBlogs(true);
+          setPortalStatus("Blog draft saved.");
+        } catch (err) {
+          if (err.message === "__UNAUTHORIZED__") {
+            handleUnauthorized("Session expired. Sign in again.");
+            return;
+          }
+          setPortalStatus("Could not save blog draft: " + err.message, true);
+        }
+      }
+
+      async function deleteBlogDraft(id) {
+        setPortalStatus("Deleting blog draft...");
+        try {
+          await apiRequest("blogs.php", { method: "POST", body: { deleteId: id } });
+          if (state.blogEditId === id) clearBlogForm();
+          await loadBlogs(true);
+          setPortalStatus("Blog draft deleted.");
+        } catch (err) {
+          if (err.message === "__UNAUTHORIZED__") {
+            handleUnauthorized("Session expired. Sign in again.");
+            return;
+          }
+          setPortalStatus("Could not delete blog draft: " + err.message, true);
+        }
+      }
+
+      function getBlogDraftForExport() {
+        const draft = currentBlogPayload();
+        if (!draft.title || !draft.slug || !draft.description || !draft.pubDate || !draft.body) {
+          setPortalStatus("Fill in title, slug, description, publish date and content first.", true);
+          return null;
+        }
+        return draft;
+      }
+
       function startFollowUpBooking(job) {
         const familyId = getJobFamilyId(job);
         state.editId = null;
@@ -1567,7 +1895,9 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
 
             showApp();
             clearForm();
+            clearBlogForm();
             await loadJobs(true);
+            await loadBlogs(true);
             startPolling();
             setPortalStatus("Signed in.");
           } catch (err) {
@@ -1587,6 +1917,7 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
 
         el.refreshBtn.addEventListener("click", function () {
           loadJobs(false);
+          loadBlogs(true);
         });
 
         el.jobSearch.addEventListener("input", function () {
@@ -1645,6 +1976,97 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         el.jobClear.addEventListener("click", function () {
           clearForm();
         });
+
+        if (el.blogForm) {
+          el.blogForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            saveBlogDraft();
+          });
+        }
+
+        if (el.blogClear) {
+          el.blogClear.addEventListener("click", function () {
+            clearBlogForm();
+            setPortalStatus("Blog draft form cleared.");
+          });
+        }
+
+        if (el.blogTitle) {
+          el.blogTitle.addEventListener("input", function () {
+            if (!state.blogSlugTouched && el.blogSlug) {
+              el.blogSlug.value = slugify(el.blogTitle.value || "");
+            }
+            updateBlogPreview();
+          });
+        }
+
+        if (el.blogSlug) {
+          el.blogSlug.addEventListener("input", function () {
+            state.blogSlugTouched = true;
+            el.blogSlug.value = slugify(el.blogSlug.value || "");
+            updateBlogPreview();
+          });
+        }
+
+        if (el.blogDescription) {
+          el.blogDescription.addEventListener("input", function () {
+            if (el.blogDescription.value.length > 160) {
+              el.blogDescription.value = el.blogDescription.value.slice(0, 160);
+            }
+          });
+        }
+
+        if (el.blogCopy) {
+          el.blogCopy.addEventListener("click", function () {
+            const draft = getBlogDraftForExport();
+            if (!draft) return;
+            copyBlogMarkdown(draft);
+          });
+        }
+
+        if (el.blogDownload) {
+          el.blogDownload.addEventListener("click", function () {
+            const draft = getBlogDraftForExport();
+            if (!draft) return;
+            downloadBlogMarkdown(draft);
+          });
+        }
+
+        if (el.blogList) {
+          el.blogList.addEventListener("click", function (e) {
+            const btn = e.target && e.target.closest && e.target.closest("button[data-action][data-id]");
+            if (!btn) return;
+            const id = String(btn.dataset.id || "");
+            const action = String(btn.dataset.action || "");
+            const blog = getBlogById(id);
+            if (!blog) return;
+
+            if (action === "edit") {
+              fillBlogForm(blog);
+              setPortalStatus("Blog draft loaded.");
+              try {
+                el.blogTitle.focus();
+                el.blogTitle.scrollIntoView({ behavior: "smooth", block: "center" });
+              } catch (_) {}
+              return;
+            }
+
+            if (action === "copy") {
+              copyBlogMarkdown(blog);
+              return;
+            }
+
+            if (action === "download") {
+              downloadBlogMarkdown(blog);
+              return;
+            }
+
+            if (action === "delete") {
+              if (!window.confirm("Delete this blog draft?")) return;
+              deleteBlogDraft(id);
+            }
+          });
+        }
 
         el.inputUnscheduled.addEventListener("change", function () {
           updateScheduleInputs();
@@ -1809,7 +2231,9 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
           if (el.jobSearch) el.jobSearch.value = state.searchQuery;
           if (el.quickDate) el.quickDate.value = state.selectedDate;
           clearForm();
+          clearBlogForm();
           await loadJobs(true);
+          await loadBlogs(true);
           startPolling();
           setPortalStatus("Connected.");
         } catch (err) {

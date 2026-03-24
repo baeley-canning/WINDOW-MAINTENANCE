@@ -252,12 +252,68 @@ SQL;
             'details' => $db->error,
         ], 500);
     }
+
+    $blogSql = <<<SQL
+CREATE TABLE IF NOT EXISTS portal_blog_drafts (
+  id VARCHAR(64) NOT NULL PRIMARY KEY,
+  slug VARCHAR(180) NOT NULL,
+  title VARCHAR(180) NOT NULL,
+  description VARCHAR(160) NOT NULL,
+  pub_date DATE NOT NULL,
+  hero_image VARCHAR(255) NOT NULL DEFAULT '',
+  status VARCHAR(40) NOT NULL DEFAULT 'Draft',
+  body MEDIUMTEXT NOT NULL,
+  is_deleted TINYINT(1) NOT NULL DEFAULT 0,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  UNIQUE KEY uniq_slug (slug),
+  KEY idx_pub_date (pub_date),
+  KEY idx_status (status),
+  KEY idx_updated_at (updated_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+SQL;
+
+    if (!$db->query($blogSql)) {
+        json_response([
+            'ok' => false,
+            'error' => 'Failed to prepare portal_blog_drafts table',
+            'details' => $db->error,
+        ], 500);
+    }
 }
 
 function portal_normalize_status(string $status): string
 {
     $valid = ['Booked', 'Quoted', 'Awaiting parts', 'In progress', 'Reschedule', 'Done', 'Cancelled'];
     return in_array($status, $valid, true) ? $status : 'Booked';
+}
+
+function portal_normalize_blog_status(string $status): string
+{
+    $valid = ['Draft', 'Ready', 'Published'];
+    return in_array($status, $valid, true) ? $status : 'Draft';
+}
+
+function portal_is_valid_slug(string $slug): bool
+{
+    return (bool)preg_match('/^[a-z0-9]+(?:-[a-z0-9]+)*$/', $slug);
+}
+
+function portal_blog_from_row(array $row): array
+{
+    return [
+        'id' => (string)$row['id'],
+        'slug' => (string)$row['slug'],
+        'title' => (string)$row['title'],
+        'description' => (string)$row['description'],
+        'pubDate' => (string)$row['pub_date'],
+        'heroImage' => (string)($row['hero_image'] ?? ''),
+        'status' => (string)$row['status'],
+        'body' => (string)$row['body'],
+        'deleted' => ((int)($row['is_deleted'] ?? 0)) === 1,
+        'createdAt' => (string)($row['created_at'] ?? ''),
+        'updatedAt' => (string)($row['updated_at'] ?? ''),
+    ];
 }
 
 function portal_is_valid_date(string $date): bool
