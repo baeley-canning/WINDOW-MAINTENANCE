@@ -43,6 +43,9 @@ const allSchemas = providedTypes.has("LocalBusiness") ? schemas : [...schemas, b
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/manifest.webmanifest" />
     <link rel="manifest" href="/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <meta name="msapplication-TileColor" content="#0f172a" />
     <meta property="og:site_name" content={siteName} />
     <meta property="og:title" content={title} />
@@ -101,67 +104,81 @@ const allSchemas = providedTypes.has("LocalBusiness") ? schemas : [...schemas, b
   </head>
   <body class="min-h-screen selection:bg-amber-500/30 bg-[var(--brand-bg)] text-[var(--brand-text)]">
     {showHeader && (
-      <header class="border-b bg-[var(--brand-bg)]/60 backdrop-blur border-[color:var(--brand-border)]">
-        <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <a href="/" class="font-extrabold tracking-tight">Window Maintenance</a>
-          <nav class="hidden gap-6 md:flex">
-            <a href="/services/" class="hover:text-amber-400">Services</a>
-            <a href="/areas/" class="hover:text-amber-400">Areas</a>
-            <a href="/gallery/" class="hover:text-amber-400">Gallery</a>
-            <a href="/blog/" class="hover:text-amber-400">Blog</a>
-            <a href="/reviews/" class="hover:text-amber-400">Reviews</a>
-            <a href="/contact/" class="hover:text-amber-400">Contact</a>
+      <header class="sticky top-0 z-30 border-b bg-[var(--brand-bg)]/80 backdrop-blur-md border-[color:var(--brand-border)]">
+        <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
+          <a href="/" class="flex items-center gap-2.5 font-extrabold tracking-tight text-white">
+            <svg class="h-6 w-6 flex-shrink-0 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="2.5"/>
+              <line x1="2" y1="12" x2="22" y2="12"/>
+              <line x1="12" y1="2" x2="12" y2="12"/>
+            </svg>
+            <span>Window Maintenance</span>
+          </a>
+          <nav class="hidden gap-1 md:flex">
+            <a href="/services/" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-300 transition-colors hover:bg-white/5 hover:text-amber-400">Services</a>
+            <a href="/areas/" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-300 transition-colors hover:bg-white/5 hover:text-amber-400">Areas</a>
+            <a href="/gallery/" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-300 transition-colors hover:bg-white/5 hover:text-amber-400">Gallery</a>
+            <a href="/blog/" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-300 transition-colors hover:bg-white/5 hover:text-amber-400">Blog</a>
+            <a href="/reviews/" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-300 transition-colors hover:bg-white/5 hover:text-amber-400">Reviews</a>
+            <a href="/contact/" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-300 transition-colors hover:bg-white/5 hover:text-amber-400">Contact</a>
           </nav>
           <a
             href="tel:+6421638205"
             id="cta-call-header"
             data-cta="call"
-            class="btn btn-primary"
+            class="btn btn-primary text-sm px-5 py-2.5"
             >Call 021 638 205</a>
         </div>
       </header>
     )}
     <main><slot /></main>
     {showFooter && (
-      <footer class="mt-20 border-t bg-[var(--brand-bg)]/80 border-[color:var(--brand-border)]">
-        <div class="mx-auto grid max-w-6xl gap-6 px-6 py-10 md:grid-cols-3">
-          <div>
-            <div class="font-bold">Window Maintenance</div>
-            <div class="mt-2 text-sm text-slate-300">
-              Aluminium window & sliding door repairs across the Wellington region.
+      <footer class="mt-20 border-t bg-[var(--brand-surface)] border-[color:var(--brand-border)]">
+        <div class="mx-auto max-w-6xl px-6 py-12">
+          <div class="grid gap-10 md:grid-cols-3">
+            <div>
+              <div class="flex items-center gap-2 font-bold text-white">
+                <svg class="h-5 w-5 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="2" y="2" width="20" height="20" rx="2.5"/>
+                  <line x1="2" y1="12" x2="22" y2="12"/>
+                  <line x1="12" y1="2" x2="12" y2="12"/>
+                </svg>
+                Window Maintenance
+              </div>
+              <p class="mt-3 text-sm leading-relaxed text-slate-400">
+                Aluminium window &amp; sliding door repairs across the Wellington region.
+              </p>
+              <a href="tel:+6421638205" data-cta="call" class="mt-5 inline-flex items-center gap-2 rounded-lg bg-amber-500/10 px-4 py-2.5 text-sm font-semibold text-amber-400 ring-1 ring-amber-400/20 transition hover:bg-amber-500/20">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.72A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                021 638 205
+              </a>
             </div>
-          </div>
-          <div class="text-sm">
-            <div class="font-semibold">Contact</div>
-            <div class="mt-1">
-              <a class="hover:text-amber-400" href="tel:+6421638205">021 638 205</a>
+            <div class="text-sm">
+              <div class="mb-3 font-semibold text-white">Contact</div>
+              <ul class="space-y-2 text-slate-400">
+                <li><a class="transition hover:text-amber-400" href="tel:+6421638205">021 638 205</a></li>
+                <li><a class="transition hover:text-amber-400" href="mailto:baeley@windowmaintenance.co.nz">baeley@windowmaintenance.co.nz</a></li>
+                <li><a class="transition hover:text-amber-400" href="https://www.facebook.com/WindowMaintenanceNZ/">Facebook</a></li>
+                <li>Wellington region</li>
+                <li>NZBN: 9429052805455</li>
+              </ul>
             </div>
-            <div class="mt-1">
-              <a class="hover:text-amber-400" href="mailto:baeley@windowmaintenance.co.nz">baeley@windowmaintenance.co.nz</a>
+            <div class="text-sm">
+              <div class="mb-3 font-semibold text-white">Areas</div>
+              <ul class="space-y-2 text-slate-400">
+                <li><a class="transition hover:text-amber-400" href="/areas/central-wellington/">Central Wellington</a></li>
+                <li><a class="transition hover:text-amber-400" href="/areas/porirua/">Porirua</a></li>
+                <li><a class="transition hover:text-amber-400" href="/areas/lower-hutt/">Lower Hutt</a></li>
+                <li><a class="transition hover:text-amber-400" href="/areas/upper-hutt/">Upper Hutt</a></li>
+                <li><a class="transition hover:text-amber-400" href="/areas/petone/">Petone</a></li>
+                <li><a class="transition hover:text-amber-400" href="/areas/kapiti/">Kāpiti</a></li>
+              </ul>
             </div>
-            <div class="mt-1">
-              <a class="hover:text-amber-400" href="https://www.facebook.com/WindowMaintenanceNZ/">Facebook</a>
-            </div>
-            <div class="mt-1 text-slate-400">Wellington region</div>
-            <div class="text-slate-400">NZBN: 9429052805455</div>
-          </div>
-          <div class="text-sm">
-            <div class="font-semibold">Areas</div>
-            <ul class="mt-1 space-y-1">
-              <li>
-                <a class="hover:text-amber-400" href="/areas/central-wellington/">Central Wellington</a>
-              </li>
-              <li><a class="hover:text-amber-400" href="/areas/porirua/">Porirua</a></li>
-              <li><a class="hover:text-amber-400" href="/areas/lower-hutt/">Lower Hutt</a></li>
-              <li><a class="hover:text-amber-400" href="/areas/upper-hutt/">Upper Hutt</a></li>
-              <li><a class="hover:text-amber-400" href="/areas/petone/">Petone</a></li>
-              <li><a class="hover:text-amber-400" href="/areas/kapiti/">Kāpiti</a></li>
-            </ul>
           </div>
         </div>
-        <div class="border-t border-white/5 py-4 text-center text-xs text-slate-400">
+        <div class="border-t border-white/5 py-4 text-center text-xs text-slate-500">
           &copy; {new Date().getFullYear()} Window Maintenance &mdash; Wellington, NZ &mdash;
-          Site by <a class="hover:text-amber-400" href="https://slateseo.co.nz">SlateSEO</a>
+          Site by <a class="hover:text-amber-400 transition" href="https://slateseo.co.nz">SlateSEO</a>
         </div>
       </footer>
     )}

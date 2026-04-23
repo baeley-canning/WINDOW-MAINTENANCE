@@ -155,6 +155,13 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] };
+"digital-locks-wellington-elok-yale-ydm-doric-de10.md": {
+	id: "digital-locks-wellington-elok-yale-ydm-doric-de10.md";
+  slug: "digital-locks-wellington-elok-yale-ydm-doric-de10";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
 "draft-proofing-wellington.md": {
 	id: "draft-proofing-wellington.md";
   slug: "draft-proofing-wellington";
@@ -172,6 +179,13 @@ declare module 'astro:content' {
 "resealing-imported-sliders-wellington.md": {
 	id: "resealing-imported-sliders-wellington.md";
   slug: "resealing-imported-sliders-wellington";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"sash-window-rebuild-wellington.md": {
+	id: "sash-window-rebuild-wellington.md";
+  slug: "sash-window-rebuild-wellington";
   body: string;
   collection: "blog";
   data: InferEntrySchema<"blog">

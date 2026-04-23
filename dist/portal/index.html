@@ -1,0 +1,2087 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Job Portal | Window Maintenance</title><meta name="description" content="Private job calendar and schedule portal for Window Maintenance."><meta name="robots" content="noindex, nofollow"><link rel="canonical" href="https://windowmaintenance.co.nz/portal/"><meta name="theme-color" content="#0f172a"><link rel="icon" href="/favicon.ico"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/manifest.webmanifest"><link rel="manifest" href="/site.webmanifest"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><meta name="msapplication-TileColor" content="#0f172a"><meta property="og:site_name" content="Window Maintenance"><meta property="og:title" content="Job Portal | Window Maintenance"><meta property="og:description" content="Private job calendar and schedule portal for Window Maintenance."><meta property="og:type" content="website"><meta property="og:url" content="https://windowmaintenance.co.nz/portal/"><meta property="og:image" content="/img/og-cover.jpg"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Job Portal | Window Maintenance"><meta name="twitter:description" content="Private job calendar and schedule portal for Window Maintenance."><meta name="twitter:image" content="/img/og-cover.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"Window Maintenance","url":"https://windowmaintenance.co.nz","telephone":"+6421638205","email":"mailto:baeley@windowmaintenance.co.nz","sameAs":["https://www.facebook.com/WindowMaintenanceNZ/"],"image":"/img/og-cover.jpg","address":{"@type":"PostalAddress","addressLocality":"Wellington","addressRegion":"WGN","addressCountry":"NZ"}}</script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-69S1NYW3V6"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+      window.gtag("js", new Date());
+      window.gtag("config", "G-69S1NYW3V6");
+      window.gtag("config", "AW-16889477810");
+
+      window.gtag_report_conversion = function (url) {
+        var callback = function () {
+          if (typeof url !== "undefined") {
+            window.location = url;
+          }
+        };
+        window.gtag("event", "conversion", {
+          send_to: "AW-16889477810/q6GQCNa6kfMbELL1w_U-",
+          value: 1.0,
+          currency: "NZD",
+          event_callback: callback
+        });
+        return false;
+      };
+
+      window.gtag_report_form_conversion = function (form) {
+        try {
+          var emailInput = form && form.querySelector && form.querySelector('input[name="email"]');
+          var phoneInput = form && form.querySelector && form.querySelector('input[name="phone"]');
+          var email = emailInput && emailInput.value ? emailInput.value.trim() : "";
+          var phone = phoneInput && phoneInput.value ? phoneInput.value.trim() : "";
+          if (email || phone) {
+            window.gtag("set", "user_data", {
+              email: email || undefined,
+              phone_number: phone || undefined
+            });
+          }
+        } catch (_) {}
+        return window.gtag_report_conversion();
+      };
+    </script><script src="https://analytics.ahrefs.com/analytics.js" data-key="1qYp7UMQiOWTjRN9OG1kOQ" async></script><link rel="stylesheet" href="/_astro/_area_.DbhQWWMt.css"><script type="module">(function(){try{var e="wmLeadRecentSubmission",a=432e5,d=function(){try{var t=window.localStorage.getItem(e);return t?JSON.parse(t):null}catch{return null}},o=function(){var t=d();return!!(t&&t.ts&&Date.now()-t.ts<a)};document.querySelectorAll("form[data-lead-form]").forEach(function(t){if(t.dataset.leadFormReady!=="1"){t.dataset.leadFormReady="1";var n=t.querySelector("[data-submit-button]"),i=t.querySelector("[data-form-pending]"),r=t.querySelector("[data-form-recent]"),c=t.querySelector("[data-form-actions]");o()&&r&&r.classList.remove("hidden"),t.addEventListener("submit",function(s){if(t.dataset.submitting==="1")return s.preventDefault(),!1;t.dataset.submitting="1",r&&r.classList.add("hidden"),i&&(i.classList.remove("hidden"),i.scrollIntoView({behavior:"smooth",block:"center"})),n&&(n.disabled=!0,n.setAttribute("aria-disabled","true"),n.textContent="Sending..."),c&&c.classList.add("pointer-events-none","opacity-60")})}})}catch{}})();(function(){try{document.addEventListener("click",function(e){const a=e.target&&e.target.closest&&e.target.closest('a[data-cta="call"]');a&&window&&window.dataLayer&&window.dataLayer.push({event:"call_click",href:a.getAttribute("href"),id:a.id||null,path:location.pathname})},!0)}catch{}})();
+</script></head> <body class="min-h-screen selection:bg-amber-500/30 bg-[var(--brand-bg)] text-[var(--brand-text)]">  <main> <link rel="stylesheet" href="/vendor/leaflet/leaflet.css"> <script src="/vendor/leaflet/leaflet.js"></script> <section class="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10"> <div id="portal-login" class="mx-auto max-w-md rounded-2xl bg-[var(--brand-surface)] p-6 ring-1 ring-white/10"> <h1 class="text-2xl font-extrabold">Job Portal Login</h1> <p class="mt-2 text-sm text-slate-300">Private scheduling portal for day-to-day bookings.</p> <form id="login-form" class="mt-5 space-y-4"> <label class="block"> <span class="text-sm">Username</span> <input id="login-user" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10" autocomplete="username" required> </label> <label class="block"> <span class="text-sm">Password</span> <input id="login-pass" type="password" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10" autocomplete="current-password" required> </label> <p id="login-error" class="hidden text-sm text-red-300">Incorrect username or password.</p> <button class="btn btn-primary w-full" type="submit">Sign in</button> </form> </div> <div id="portal-app" class="hidden"> <div class="mb-4 flex flex-wrap items-center justify-between gap-3"> <div> <h1 class="text-2xl font-extrabold sm:text-3xl">Job Calendar Portal</h1> <p class="mt-1 text-sm text-slate-300">Add jobs, view daily run sheets, call customers, and open maps in one tap.</p> <p id="portal-status" class="mt-1 text-xs text-slate-400">Connecting to portal...</p> </div> <div class="w-full sm:max-w-sm"> <label class="block"> <span class="text-xs text-slate-400">Search jobs</span> <input id="job-search" placeholder="Name, phone, address, notes..." class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-sm ring-1 ring-white/10"> </label> </div> <div class="grid w-full grid-cols-3 gap-2 sm:flex sm:w-auto sm:items-center"> <button id="today-btn" class="btn btn-outline w-full px-4 py-2 text-sm">Today</button> <button id="refresh-btn" class="btn btn-outline w-full px-4 py-2 text-sm">Refresh</button> <button id="logout-btn" class="btn btn-secondary w-full px-4 py-2 text-sm">Logout</button> </div> </div> <div class="mb-4 rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 md:hidden"> <h2 class="text-sm font-semibold uppercase tracking-wide text-amber-300">Quick Day View</h2> <div class="mt-2 grid grid-cols-3 gap-2"> <button id="quick-prev-day" class="btn btn-outline w-full px-3 py-2 text-sm" type="button">&larr; Prev</button> <button id="quick-next-day" class="btn btn-outline w-full px-3 py-2 text-sm" type="button">Next &rarr;</button> <button id="quick-today-day" class="btn btn-primary w-full px-3 py-2 text-sm" type="button">Today</button> </div> <label class="mt-3 block"> <span class="text-xs text-slate-400">Selected day</span> <input id="quick-date" type="date" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10"> </label> </div> <div class="grid gap-4 lg:grid-cols-3"> <div class="space-y-4 lg:col-span-2"> <div class="hidden rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 sm:p-5 md:block"> <div class="mb-4 flex items-center justify-between"> <button id="month-prev" class="btn btn-outline px-3 py-2 text-sm" type="button">&larr; Prev</button> <h2 id="month-label" class="text-lg font-bold"></h2> <button id="month-next" class="btn btn-outline px-3 py-2 text-sm" type="button">Next &rarr;</button> </div> <div class="grid grid-cols-7 gap-1 text-center text-xs uppercase tracking-wide text-slate-400 sm:gap-2"> <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div> </div> <div id="calendar-grid" class="mt-2 grid grid-cols-7 gap-1 sm:gap-2"></div> </div> <div class="rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 sm:p-5"> <div class="mb-3 flex items-center justify-between"> <h2 id="day-title" class="text-lg font-bold">Jobs</h2> <span id="day-count" class="rounded-full bg-white/10 px-3 py-1 text-xs text-slate-300">0 jobs</span> </div> <div id="job-list" class="space-y-3"></div> <p id="job-empty" class="text-sm text-slate-400">No jobs for this day.</p> </div> <div class="rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 sm:p-5"> <div class="mb-3 flex items-center justify-between"> <h2 class="text-lg font-bold">To Be Booked</h2> <span id="unscheduled-count" class="rounded-full bg-white/10 px-3 py-1 text-xs text-slate-300">0 jobs</span> </div> <p class="text-sm text-slate-300">Leads waiting for date/time allocation.</p> <div id="unscheduled-list" class="mt-3 space-y-3"></div> <p id="unscheduled-empty" class="text-sm text-slate-400">No unallocated jobs.</p> </div> <div class="rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 sm:p-5"> <div class="mb-3 flex items-center justify-between"> <h2 class="text-lg font-bold">Job Heatmap</h2> <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-slate-300">Area load</span> </div> <p class="text-sm text-slate-300">Filter by month and day to see where your jobs are clustered.</p> <div class="mt-3 grid gap-3 sm:grid-cols-2"> <label class="block"> <span class="text-xs text-slate-400">Month</span> <input id="heatmap-month" type="month" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10"> </label> <label class="block"> <span class="text-xs text-slate-400">Day</span> <select id="heatmap-day" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10"></select> </label> </div> <p id="heatmap-summary" class="mt-3 text-sm text-slate-300">No jobs loaded.</p> <div class="mt-2 flex flex-wrap items-center gap-2"> <code id="heatmap-line" class="rounded bg-[var(--brand-bg)] px-2 py-1 text-xs text-amber-300">I am in Wellington today.</code> <button id="heatmap-copy-line" type="button" class="btn btn-outline px-2 py-1 text-xs">Copy line</button> </div> <div id="heatmap-grid" class="mt-3 grid gap-2 sm:grid-cols-2"></div> <div id="jobs-map" class="mt-3 h-[260px] w-full rounded-xl ring-1 ring-white/10 sm:h-[320px] lg:h-[380px]"></div> <p id="map-summary" class="mt-2 text-xs text-slate-400">Map loads from saved job addresses.</p> </div> </div> <div class="space-y-4"> <div id="job-detail-panel" class="hidden rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 sm:p-5"> <div class="flex items-start justify-between gap-3"> <div> <h2 id="job-detail-title" class="text-lg font-bold">Job detail</h2> <p id="job-detail-meta" class="mt-1 text-sm text-slate-300"></p> </div> <div class="flex gap-2"> <button id="job-detail-follow-up" class="btn btn-primary px-3 py-2 text-xs" type="button">New booking</button> <button id="job-detail-close" class="btn btn-outline px-3 py-2 text-xs" type="button">Close</button> </div> </div> <div id="job-detail-summary" class="mt-4 grid gap-2 sm:grid-cols-2"></div> <div class="mt-4"> <h3 class="text-sm font-semibold uppercase tracking-wide text-amber-300">Bookings &amp; visits</h3> <div id="job-detail-visits" class="mt-3 space-y-3"></div> </div> </div> <div class="rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 sm:p-5"> <h2 id="form-title" class="text-lg font-bold">Add Job</h2> <form id="job-form" class="mt-4 space-y-3"> <label class="block"> <span class="text-sm">Date</span> <input id="job-date" type="date" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10" required> </label> <label class="block"> <span class="text-sm">Time</span> <input id="job-time" type="time" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10" required> </label> <label class="block"> <span class="text-sm">Customer name</span> <input id="job-customer" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10" required> </label> <label class="block"> <span class="text-sm">Phone number</span> <input id="job-phone" type="tel" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10" required> </label> <label class="block"> <span class="text-sm">Address</span> <input id="job-address" list="address-suggestions" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10" required> <datalist id="address-suggestions"></datalist> <span id="address-hint" class="mt-1 block text-xs text-slate-400">Start typing address (suburb/street) for suggestions.</span> </label> <div id="duplicate-hint" class="hidden rounded-lg bg-amber-500/10 px-3 py-2 text-xs text-amber-200 ring-1 ring-amber-300/20">
+Similar job already exists for this customer/contact. Save anyway only if this is a separate booking.
+</div> <label class="block"> <span class="text-sm">Short job description</span> <textarea id="job-summary" rows="3" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10" required></textarea> </label> <label class="block"> <span class="text-sm">Status</span> <select id="job-status" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10"> <option value="Booked">Booked</option> <option value="Quoted">Quoted</option> <option value="Awaiting parts">Awaiting parts</option> <option value="In progress">In progress</option> <option value="Reschedule">Reschedule</option> <option value="Done">Done</option> <option value="Cancelled">Cancelled</option> </select> </label> <label class="flex items-center gap-2 rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10"> <input id="job-unscheduled" type="checkbox" class="h-4 w-4 accent-amber-400"> <span class="text-sm">To be booked (no date/time yet)</span> </label> <div class="flex flex-wrap gap-2 pt-1"> <button id="job-save" class="btn btn-primary flex-1" type="submit">Save job</button> <button id="job-clear" class="btn btn-outline" type="button">Clear</button> </div> </form> <p class="mt-3 text-xs text-slate-400">Tip: tap customer phone to call, or address to open Google Maps.</p> </div> </div> </div> <div class="mt-6 grid gap-4 lg:grid-cols-3"> <div class="rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 sm:p-5 lg:col-span-1"> <div class="mb-3 flex items-center justify-between"> <div> <h2 class="text-lg font-bold">Blog Drafts</h2> <p class="mt-1 text-sm text-slate-300">Portal drafts only. Download or copy markdown when ready to publish on the site.</p> </div> <span id="blog-count" class="rounded-full bg-white/10 px-3 py-1 text-xs text-slate-300">0 drafts</span> </div> <div id="blog-list" class="space-y-3"></div> <p id="blog-empty" class="text-sm text-slate-400">No blog drafts yet.</p> <div class="mt-4 border-t border-white/10 pt-4"> <div class="mb-3 flex items-center justify-between"> <h3 class="text-sm font-semibold uppercase tracking-wide text-slate-300">Trash</h3> <span id="blog-trash-count" class="rounded-full bg-white/10 px-3 py-1 text-xs text-slate-300">0 deleted</span> </div> <div id="blog-trash-list" class="space-y-3"></div> <p id="blog-trash-empty" class="text-sm text-slate-400">No deleted drafts.</p> </div> </div> <div class="rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 sm:p-5 lg:col-span-2"> <div class="mb-3 flex items-start justify-between gap-3"> <div> <h2 id="blog-form-title" class="text-lg font-bold">Create Blog Draft</h2> <p class="mt-1 text-sm text-slate-300">Write the post once here, then copy or download markdown ready for the Astro blog collection.</p> </div> <code id="blog-preview-path" class="rounded bg-[var(--brand-bg)] px-2 py-1 text-xs text-amber-300">/blog/your-slug/</code> </div> <form id="blog-form" class="space-y-3"> <div class="grid gap-3 sm:grid-cols-2"> <label class="block"> <span class="text-sm">Title</span> <input id="blog-title" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10" required> </label> <label class="block"> <span class="text-sm">Slug</span> <input id="blog-slug" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10" placeholder="digital-locks-wellington" required> </label> </div> <div class="grid gap-3 sm:grid-cols-3"> <label class="block sm:col-span-2"> <span class="text-sm">Meta description</span> <input id="blog-description" maxlength="160" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10" required> </label> <label class="block"> <span class="text-sm">Publish date</span> <input id="blog-date" type="date" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10" required> </label> </div> <div class="grid gap-3 sm:grid-cols-2"> <label class="block"> <span class="text-sm">Hero image path</span> <input id="blog-hero-image" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10" placeholder="/img/example.webp"> </label> <label class="block"> <span class="text-sm">Status</span> <select id="blog-status" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10"> <option value="Draft">Draft</option> <option value="Ready">Ready</option> <option value="Published">Published</option> </select> </label> </div> <label class="block"> <span class="text-sm">Markdown content</span> <textarea id="blog-body" rows="14" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-sm ring-1 ring-white/10" required></textarea> </label> <div class="flex flex-wrap gap-2"> <button id="blog-save" class="btn btn-primary" type="submit">Save draft</button> <button id="blog-copy" class="btn btn-secondary" type="button">Copy markdown</button> <button id="blog-download" class="btn btn-outline" type="button">Download .md</button> <button id="blog-clear" class="btn btn-outline" type="button">Clear</button> </div> </form> </div> </div> </div> </section> <script>
+    (function () {
+      const API_BASE = "/api/portal/";
+      const initialParams = new URLSearchParams(window.location.search);
+      const initialJobParam = String(initialParams.get("job") || "").trim();
+
+      const el = {
+        loginWrap: document.getElementById("portal-login"),
+        appWrap: document.getElementById("portal-app"),
+        loginForm: document.getElementById("login-form"),
+        loginUser: document.getElementById("login-user"),
+        loginPass: document.getElementById("login-pass"),
+        loginError: document.getElementById("login-error"),
+        logoutBtn: document.getElementById("logout-btn"),
+        refreshBtn: document.getElementById("refresh-btn"),
+        todayBtn: document.getElementById("today-btn"),
+        jobSearch: document.getElementById("job-search"),
+        quickPrevDay: document.getElementById("quick-prev-day"),
+        quickNextDay: document.getElementById("quick-next-day"),
+        quickTodayDay: document.getElementById("quick-today-day"),
+        quickDate: document.getElementById("quick-date"),
+        monthPrev: document.getElementById("month-prev"),
+        monthNext: document.getElementById("month-next"),
+        monthLabel: document.getElementById("month-label"),
+        calendarGrid: document.getElementById("calendar-grid"),
+        dayTitle: document.getElementById("day-title"),
+        dayCount: document.getElementById("day-count"),
+        jobList: document.getElementById("job-list"),
+        jobEmpty: document.getElementById("job-empty"),
+        unscheduledCount: document.getElementById("unscheduled-count"),
+        unscheduledList: document.getElementById("unscheduled-list"),
+        unscheduledEmpty: document.getElementById("unscheduled-empty"),
+        jobDetailPanel: document.getElementById("job-detail-panel"),
+        jobDetailTitle: document.getElementById("job-detail-title"),
+        jobDetailMeta: document.getElementById("job-detail-meta"),
+        jobDetailSummary: document.getElementById("job-detail-summary"),
+        jobDetailVisits: document.getElementById("job-detail-visits"),
+        jobDetailFollowUp: document.getElementById("job-detail-follow-up"),
+        jobDetailClose: document.getElementById("job-detail-close"),
+        portalStatus: document.getElementById("portal-status"),
+        jobForm: document.getElementById("job-form"),
+        formTitle: document.getElementById("form-title"),
+        inputDate: document.getElementById("job-date"),
+        inputTime: document.getElementById("job-time"),
+        inputCustomer: document.getElementById("job-customer"),
+        inputPhone: document.getElementById("job-phone"),
+        inputAddress: document.getElementById("job-address"),
+        addressSuggestions: document.getElementById("address-suggestions"),
+        addressHint: document.getElementById("address-hint"),
+        duplicateHint: document.getElementById("duplicate-hint"),
+        inputSummary: document.getElementById("job-summary"),
+        inputStatus: document.getElementById("job-status"),
+        inputUnscheduled: document.getElementById("job-unscheduled"),
+        jobClear: document.getElementById("job-clear"),
+        blogCount: document.getElementById("blog-count"),
+        blogList: document.getElementById("blog-list"),
+        blogEmpty: document.getElementById("blog-empty"),
+        blogTrashCount: document.getElementById("blog-trash-count"),
+        blogTrashList: document.getElementById("blog-trash-list"),
+        blogTrashEmpty: document.getElementById("blog-trash-empty"),
+        blogForm: document.getElementById("blog-form"),
+        blogFormTitle: document.getElementById("blog-form-title"),
+        blogPreviewPath: document.getElementById("blog-preview-path"),
+        blogTitle: document.getElementById("blog-title"),
+        blogSlug: document.getElementById("blog-slug"),
+        blogDescription: document.getElementById("blog-description"),
+        blogDate: document.getElementById("blog-date"),
+        blogHeroImage: document.getElementById("blog-hero-image"),
+        blogStatus: document.getElementById("blog-status"),
+        blogBody: document.getElementById("blog-body"),
+        blogSave: document.getElementById("blog-save"),
+        blogCopy: document.getElementById("blog-copy"),
+        blogDownload: document.getElementById("blog-download"),
+        blogClear: document.getElementById("blog-clear"),
+        heatmapMonth: document.getElementById("heatmap-month"),
+        heatmapDay: document.getElementById("heatmap-day"),
+        heatmapSummary: document.getElementById("heatmap-summary"),
+        heatmapLine: document.getElementById("heatmap-line"),
+        heatmapCopyLine: document.getElementById("heatmap-copy-line"),
+        heatmapGrid: document.getElementById("heatmap-grid"),
+        mapWrap: document.getElementById("jobs-map"),
+        mapSummary: document.getElementById("map-summary")
+      };
+
+      const today = new Date();
+      const state = {
+        jobs: [],
+        selectedDate: dateKey(today),
+        month: new Date(today.getFullYear(), today.getMonth(), 1),
+        heatmapMonth: dateKey(today).slice(0, 7),
+        heatmapDay: String(today.getDate()).padStart(2, "0"),
+        map: null,
+        mapLayer: null,
+        mapReady: false,
+        geocodeInFlight: {},
+        geocodeLookup: {},
+        suggestionTimer: null,
+        pendingLat: null,
+        pendingLng: null,
+        suggestionLookup: {},
+        rootJobId: "",
+        editId: null,
+        selectedFamilyId: initialJobParam,
+        familyNumberById: {},
+        familyRefById: {},
+        pendingFamilyScroll: Boolean(initialJobParam),
+        searchQuery: "",
+        blogs: [],
+        blogEditId: null,
+        blogSlugTouched: false,
+        pollTimer: null,
+        saveInFlight: false
+      };
+
+      const MAP_DEFAULT_CENTER = [-41.2865, 174.7762];
+      const MAP_DEFAULT_ZOOM = 10;
+
+      const AREA_KEYWORDS = [
+        { area: "Wellington South", terms: ["wellington south", "newtown", "berhampore", "island bay", "lyall bay", "brooklyn", "kilbirnie", "miramar", "seatoun", "strathmore"] },
+        { area: "Wellington Central", terms: ["wellington central", "te aro", "thorndon", "wadestown", "kelburn", "oriental bay", "mount victoria", "mt victoria", "newlands", "karori"] },
+        { area: "Wellington North", terms: ["wellington north", "johnsonville", "churton park", "tawa", "ngaio", "khandallah", "paparangi", "crofton downs"] },
+        { area: "Lower Hutt", terms: ["lower hutt", "petone", "woburn", "waterloo", "naenae", "taita", "eastbourne", "seaview", "moera", "wellington hutt"] },
+        { area: "Upper Hutt", terms: ["upper hutt", "trentham", "silverstream", "heretaunga", "totara park", "akatarawa"] },
+        { area: "Porirua", terms: ["porirua", "aotea", "papakowhai", "titahi bay", "cannons creek", "plimmerton", "pukerua bay"] },
+        { area: "Kapiti Coast", terms: ["kapiti", "kapiti coast", "paraparaumu", "raumati", "waikanae", "otaki", "paekakariki"] }
+      ];
+
+      const AREA_ORDER = AREA_KEYWORDS.map(function (x) { return x.area; }).concat(["Other"]);
+      const STATUS_OPTIONS = ["Booked", "Quoted", "Awaiting parts", "In progress", "Reschedule", "Done", "Cancelled"];
+      const BLOG_STATUS_OPTIONS = ["Draft", "Ready", "Published"];
+      const STATUS_BADGE_CLASS = {
+        "Booked": "bg-blue-500/20 text-blue-200",
+        "Quoted": "bg-cyan-500/20 text-cyan-200",
+        "Awaiting parts": "bg-yellow-500/20 text-yellow-200",
+        "In progress": "bg-amber-500/20 text-amber-200",
+        "Reschedule": "bg-orange-500/20 text-orange-200",
+        "Done": "bg-emerald-500/20 text-emerald-200",
+        "Cancelled": "bg-rose-500/20 text-rose-200"
+      };
+      const BLOG_STATUS_BADGE_CLASS = {
+        "Draft": "bg-slate-500/20 text-slate-200",
+        "Ready": "bg-amber-500/20 text-amber-200",
+        "Published": "bg-emerald-500/20 text-emerald-200"
+      };
+
+      function dateKey(d) {
+        const y = d.getFullYear();
+        const m = String(d.getMonth() + 1).padStart(2, "0");
+        const day = String(d.getDate()).padStart(2, "0");
+        return y + "-" + m + "-" + day;
+      }
+
+      function parseDate(str) {
+        const parts = String(str || "").split("-");
+        if (parts.length !== 3) return new Date();
+        return new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+      }
+
+      function formatLongDate(str) {
+        const d = parseDate(str);
+        return d.toLocaleDateString("en-NZ", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+      }
+
+      function setSelectedDate(dateStr, options) {
+        const opts = options || {};
+        state.selectedDate = String(dateStr || state.selectedDate);
+        const d = parseDate(state.selectedDate);
+        state.month = new Date(d.getFullYear(), d.getMonth(), 1);
+
+        if (opts.syncHeatmap === true) {
+          state.heatmapMonth = state.selectedDate.slice(0, 7);
+          state.heatmapDay = state.selectedDate.slice(8, 10);
+          if (el.heatmapMonth) {
+            el.heatmapMonth.value = state.heatmapMonth;
+            syncHeatmapDays();
+          }
+          if (el.heatmapDay) {
+            el.heatmapDay.value = state.heatmapDay;
+          }
+        }
+
+        renderCalendar();
+        renderDay();
+        renderHeatmap();
+        if (el.quickDate) el.quickDate.value = state.selectedDate;
+        if (opts.clearForm) clearForm();
+      }
+
+      function formatMonthLabel(value) {
+        const parts = String(value || "").split("-");
+        if (parts.length !== 2) return "selected month";
+        const d = new Date(Number(parts[0]), Number(parts[1]) - 1, 1);
+        return d.toLocaleDateString("en-NZ", { month: "long", year: "numeric" });
+      }
+
+      function daysInMonth(value) {
+        const parts = String(value || "").split("-");
+        if (parts.length !== 2) return 31;
+        const year = Number(parts[0]);
+        const month = Number(parts[1]);
+        if (!year || !month) return 31;
+        return new Date(year, month, 0).getDate();
+      }
+
+      function safeText(v) {
+        return String(v || "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/\"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+
+      function normalizePhone(v) {
+        return String(v || "").toLowerCase().replace(/[^0-9+]/g, "");
+      }
+
+      function normalizeAddress(v) {
+        return String(v || "")
+          .toLowerCase()
+          .replace(/[^\w\s]/g, " ")
+          .replace(/\s+/g, " ")
+          .trim();
+      }
+
+      function normalizeSearchToken(v) {
+        return String(v || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+      }
+
+      function slugify(v) {
+        return String(v || "")
+          .toLowerCase()
+          .trim()
+          .replace(/&/g, " and ")
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/^-+|-+$/g, "")
+          .replace(/-{2,}/g, "-");
+      }
+
+      function getBlogStatusBadgeClass(status) {
+        return BLOG_STATUS_BADGE_CLASS[status] || "bg-white/10 text-slate-200";
+      }
+
+      function escapeYamlString(v) {
+        return String(v || "").replace(/\\/g, "\\\\").replace(/"/g, '\\"');
+      }
+
+      function buildBlogMarkdown(blog) {
+        const frontmatter = [
+          "---",
+          'title: "' + escapeYamlString(blog.title) + '"',
+          'description: "' + escapeYamlString(blog.description) + '"',
+          "pubDate: " + blog.pubDate
+        ];
+        if (blog.heroImage) {
+          frontmatter.push('heroImage: "' + escapeYamlString(blog.heroImage) + '"');
+        }
+        frontmatter.push("---", "");
+        return frontmatter.join("\n") + String(blog.body || "").trim() + "\n";
+      }
+
+      function normalizeBlog(blog) {
+        const rawStatus = String(blog && blog.status ? blog.status : "Draft");
+        return {
+          id: String(blog && blog.id ? blog.id : ""),
+          slug: String(blog && blog.slug ? blog.slug : ""),
+          title: String(blog && blog.title ? blog.title : ""),
+          description: String(blog && blog.description ? blog.description : ""),
+          pubDate: String(blog && blog.pubDate ? blog.pubDate : ""),
+          heroImage: String(blog && blog.heroImage ? blog.heroImage : ""),
+          status: BLOG_STATUS_OPTIONS.includes(rawStatus) ? rawStatus : "Draft",
+          body: String(blog && blog.body ? blog.body : ""),
+          deleted: Boolean(blog && blog.deleted),
+          createdAt: String(blog && blog.createdAt ? blog.createdAt : ""),
+          updatedAt: String(blog && blog.updatedAt ? blog.updatedAt : "")
+        };
+      }
+
+      function currentBlogPayload() {
+        return {
+          id: state.blogEditId || "",
+          title: String(el.blogTitle ? el.blogTitle.value : "").trim(),
+          slug: slugify(el.blogSlug ? el.blogSlug.value : ""),
+          description: String(el.blogDescription ? el.blogDescription.value : "").trim(),
+          pubDate: String(el.blogDate ? el.blogDate.value : "").trim(),
+          heroImage: String(el.blogHeroImage ? el.blogHeroImage.value : "").trim(),
+          status: BLOG_STATUS_OPTIONS.includes(String(el.blogStatus ? el.blogStatus.value : "")) ? String(el.blogStatus.value) : "Draft",
+          body: String(el.blogBody ? el.blogBody.value : "").trim()
+        };
+      }
+
+      function getBlogById(id) {
+        return state.blogs.find(function (blog) {
+          return blog && blog.id === id && !blog.deleted;
+        }) || null;
+      }
+
+      function getJobSearchText(job) {
+        const familyNumber = String(job && job.familyNumber ? job.familyNumber : "");
+        const familyRef = String(job && job.familyRef ? job.familyRef : getJobRef(job));
+        return [
+          job.customer,
+          job.phone,
+          job.address,
+          job.summary,
+          job.status,
+          familyRef,
+          familyNumber ? "job " + familyNumber : "",
+          familyNumber ? "wm " + familyNumber : ""
+        ].join(" ").toLowerCase();
+      }
+
+      function matchesSearch(job) {
+        const q = String(state.searchQuery || "").trim().toLowerCase();
+        const compactQ = normalizeSearchToken(q);
+        const familyNumber = String(job && job.familyNumber ? job.familyNumber : "");
+        const familyRef = String(job && job.familyRef ? job.familyRef : getJobRef(job));
+        const compactFamilyRef = normalizeSearchToken(familyRef);
+
+        if (!q) return true;
+
+        if (familyNumber && compactQ === familyNumber) return true;
+        if (compactQ && compactFamilyRef.includes(compactQ)) return true;
+
+        return getJobSearchText(job).includes(q);
+      }
+
+      function getStatusBadgeClass(status) {
+        return STATUS_BADGE_CLASS[status] || "bg-white/10 text-slate-200";
+      }
+
+      function getJobFamilyId(job) {
+        const rootJobId = String(job && job.rootJobId ? job.rootJobId : "").trim();
+        const jobId = String(job && job.id ? job.id : "").trim();
+        return rootJobId || jobId;
+      }
+
+      function getJobRef(jobOrFamilyId) {
+        if (jobOrFamilyId && typeof jobOrFamilyId === "object" && jobOrFamilyId.familyRef) {
+          return String(jobOrFamilyId.familyRef);
+        }
+
+        const familyId = typeof jobOrFamilyId === "string" ? jobOrFamilyId : getJobFamilyId(jobOrFamilyId);
+        const familyNumber = Number(state.familyNumberById[familyId] || 0);
+        if (familyNumber > 0) {
+          return "WM-" + String(familyNumber).padStart(5, "0");
+        }
+        return "WM-JOB";
+      }
+
+      function currentFormFamilyId() {
+        if (state.rootJobId) return state.rootJobId;
+        if (!state.editId) return "";
+        const currentJob = state.jobs.find(function (job) {
+          return job.id === state.editId;
+        });
+        return currentJob ? getJobFamilyId(currentJob) : "";
+      }
+
+      function sortFamilyJobs(a, b) {
+        const aIsRoot = a.id === getJobFamilyId(a);
+        const bIsRoot = b.id === getJobFamilyId(b);
+        if (aIsRoot !== bIsRoot) return aIsRoot ? -1 : 1;
+        if (Boolean(a.isUnscheduled) !== Boolean(b.isUnscheduled)) return a.isUnscheduled ? 1 : -1;
+
+        const aDate = String(a.date || "9999-12-31") + " " + String(a.time || "23:59");
+        const bDate = String(b.date || "9999-12-31") + " " + String(b.time || "23:59");
+        if (aDate !== bDate) return aDate.localeCompare(bDate);
+
+        const aCreated = String(a.createdAt || a.updatedAt || "");
+        const bCreated = String(b.createdAt || b.updatedAt || "");
+        if (aCreated !== bCreated) return aCreated.localeCompare(bCreated);
+
+        return String(a.id || "").localeCompare(String(b.id || ""));
+      }
+
+      function decorateJobFamilies() {
+        const groups = {};
+        state.familyNumberById = {};
+        state.familyRefById = {};
+
+        for (const job of state.jobs) {
+          if (!job) continue;
+          const familyId = getJobFamilyId(job);
+          if (!familyId) continue;
+          if (!groups[familyId]) groups[familyId] = [];
+          groups[familyId].push(job);
+        }
+
+        const families = Object.keys(groups).map(function (familyId) {
+          const familyJobs = groups[familyId].slice().sort(sortFamilyJobs);
+          const leadJob = familyJobs[0] || {};
+          return {
+            familyId: familyId,
+            jobs: familyJobs,
+            createdAt: String(leadJob.createdAt || leadJob.updatedAt || ""),
+            leadId: String(leadJob.id || "")
+          };
+        }).sort(function (a, b) {
+          const aCreated = a.createdAt || "9999-12-31 23:59:59";
+          const bCreated = b.createdAt || "9999-12-31 23:59:59";
+          if (aCreated !== bCreated) return aCreated.localeCompare(bCreated);
+          return a.leadId.localeCompare(b.leadId);
+        });
+
+        families.forEach(function (family, index) {
+          const familyNumber = index + 1;
+          const familyRef = "WM-" + String(familyNumber).padStart(5, "0");
+          state.familyNumberById[family.familyId] = familyNumber;
+          state.familyRefById[family.familyId] = familyRef;
+        });
+
+        for (const familyId of Object.keys(groups)) {
+          const familyJobs = groups[familyId]
+            .filter(function (job) { return !job.deleted; })
+            .sort(sortFamilyJobs);
+          if (!familyJobs.length) continue;
+
+          const familyCount = familyJobs.length;
+          const completedVisits = familyJobs.filter(function (job) { return job.status === "Done"; }).length;
+          const openBookings = familyJobs.filter(function (job) {
+            return job.status !== "Done" && job.status !== "Cancelled";
+          }).length;
+          const familyNumber = Number(state.familyNumberById[familyId] || 0);
+          const familyRef = state.familyRefById[familyId] || getJobRef(familyId);
+
+          familyJobs.forEach(function (job, index) {
+            job.familyId = familyId;
+            job.familyNumber = familyNumber;
+            job.familyRef = familyRef;
+            job.visitNumber = index + 1;
+            job.familyCount = familyCount;
+            job.completedVisits = completedVisits;
+            job.openBookings = openBookings;
+          });
+        }
+      }
+
+      function getFamilyJobs(familyId) {
+        return state.jobs
+          .filter(function (job) {
+            return !job.deleted && getJobFamilyId(job) === familyId;
+          })
+          .sort(sortFamilyJobs);
+      }
+
+      function updateJobQueryParam(familyId) {
+        if (!window.history || !window.history.replaceState) return;
+        const url = new URL(window.location.href);
+        if (familyId) {
+          url.searchParams.set("job", familyId);
+        } else {
+          url.searchParams.delete("job");
+        }
+        window.history.replaceState({}, "", url.pathname + url.search + url.hash);
+      }
+
+      function selectFamilyById(familyId, options) {
+        const opts = options || {};
+        state.selectedFamilyId = String(familyId || "").trim();
+        if (opts.updateUrl !== false) {
+          updateJobQueryParam(state.selectedFamilyId);
+        }
+        renderJobDetail();
+        if (opts.scroll && el.jobDetailPanel && !el.jobDetailPanel.classList.contains("hidden")) {
+          setTimeout(function () {
+            try {
+              el.jobDetailPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+            } catch (_) {}
+          }, 60);
+        }
+      }
+
+      function getSuggestedTimeValue() {
+        const now = new Date();
+        let hour = now.getHours();
+        let mins = now.getMinutes() <= 30 ? 30 : 0;
+        if (mins === 0) {
+          hour = (hour + 1) % 24;
+        }
+        const roundedTime = String(hour).padStart(2, "0") + ":" + String(mins).padStart(2, "0");
+        return roundedTime || "09:00";
+      }
+
+      function findPotentialDuplicate(job) {
+        const addressKey = normalizeAddress(job.address);
+        const phoneKey = normalizePhone(job.phone);
+        const ignoreFamilyId = currentFormFamilyId();
+        if (!addressKey || !phoneKey) return null;
+        return state.jobs.find(function (x) {
+          if (!x || x.deleted) return false;
+          if (state.editId && x.id === state.editId) return false;
+          if (ignoreFamilyId && getJobFamilyId(x) === ignoreFamilyId) return false;
+          return normalizeAddress(x.address) === addressKey && normalizePhone(x.phone) === phoneKey;
+        }) || null;
+      }
+
+      function updateDuplicateHint() {
+        if (!el.duplicateHint) return null;
+        const probe = {
+          address: el.inputAddress ? el.inputAddress.value : "",
+          phone: el.inputPhone ? el.inputPhone.value : ""
+        };
+        const duplicate = findPotentialDuplicate(probe);
+        if (duplicate) {
+          el.duplicateHint.classList.remove("hidden");
+          const familyId = getJobFamilyId(duplicate);
+          const familyRef = getJobRef(familyId);
+          el.duplicateHint.innerHTML =
+            'Possible duplicate: <a class="font-semibold underline" target="_blank" rel="noreferrer" href="/portal/?job=' +
+            encodeURIComponent(familyId) +
+            '">Job ' + safeText(familyRef) + '</a> for ' +
+            safeText(duplicate.customer) + ' (' + safeText(duplicate.phone) + ') at ' +
+            safeText(duplicate.address) + '.';
+        } else {
+          el.duplicateHint.classList.add("hidden");
+          el.duplicateHint.textContent = "Similar job already exists for this customer/contact. Save anyway only if this is a separate booking.";
+        }
+        return duplicate;
+      }
+
+      function hasCoords(job) {
+        return (
+          typeof job.lat === "number" &&
+          typeof job.lng === "number" &&
+          Number.isFinite(job.lat) &&
+          Number.isFinite(job.lng)
+        );
+      }
+
+      function initMap() {
+        if (state.map || !el.mapWrap || !window.L) return;
+
+        state.map = window.L.map(el.mapWrap, {
+          zoomControl: true,
+          preferCanvas: true
+        }).setView(MAP_DEFAULT_CENTER, MAP_DEFAULT_ZOOM);
+
+        window.L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          maxZoom: 19,
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap</a> contributors'
+        }).addTo(state.map);
+
+        state.mapLayer = window.L.layerGroup().addTo(state.map);
+        state.mapReady = true;
+      }
+
+      function refreshMapLayout() {
+        if (!state.map) return;
+        setTimeout(function () {
+          try {
+            state.map.invalidateSize();
+          } catch (_) {}
+        }, 80);
+      }
+
+      function pickCircleColor(ratio) {
+        if (ratio >= 0.66) {
+          return { stroke: "#ef4444", fill: "#ef4444" }; // red
+        }
+        if (ratio >= 0.33) {
+          return { stroke: "#f59e0b", fill: "#f59e0b" }; // yellow
+        }
+        return { stroke: "#22c55e", fill: "#22c55e" }; // green
+      }
+
+      function setPortalStatus(message, isError) {
+        el.portalStatus.textContent = message;
+        el.portalStatus.classList.toggle("text-red-300", Boolean(isError));
+        el.portalStatus.classList.toggle("text-slate-400", !isError);
+      }
+
+      function showLogin() {
+        el.loginWrap.classList.remove("hidden");
+        el.appWrap.classList.add("hidden");
+        stopPolling();
+      }
+
+      function showApp() {
+        el.loginWrap.classList.add("hidden");
+        el.appWrap.classList.remove("hidden");
+        initMap();
+        refreshMapLayout();
+      }
+
+      function clearLoginError() {
+        el.loginError.textContent = "Incorrect username or password.";
+        el.loginError.classList.add("hidden");
+      }
+
+      function showLoginError(message) {
+        el.loginError.textContent = message;
+        el.loginError.classList.remove("hidden");
+      }
+
+      async function apiRequest(endpoint, options) {
+        const opts = options || {};
+        const init = {
+          method: opts.method || "GET",
+          credentials: "same-origin",
+          headers: { Accept: "application/json" }
+        };
+
+        if (opts.body !== undefined) {
+          init.headers["Content-Type"] = "application/json";
+          init.body = JSON.stringify(opts.body);
+        }
+
+        let response;
+        try {
+          response = await fetch(API_BASE + endpoint, init);
+        } catch (_) {
+          throw new Error("Network error. Could not reach portal API.");
+        }
+
+        let payload = {};
+        try {
+          payload = await response.json();
+        } catch (_) {
+          payload = {};
+        }
+
+        if (response.status === 401) {
+          throw new Error("__UNAUTHORIZED__");
+        }
+
+        if (!response.ok || payload.ok === false) {
+          throw new Error(payload.error || "Request failed (" + response.status + ")");
+        }
+
+        return payload;
+      }
+
+      function handleUnauthorized(message) {
+        showLogin();
+        showLoginError(message || "Session expired. Sign in again.");
+      }
+
+      function jobsOn(dateStr) {
+        return state.jobs
+          .filter((j) => !j.deleted && !j.isUnscheduled && j.date === dateStr)
+          .sort((a, b) => String(a.time).localeCompare(String(b.time)));
+      }
+
+      function classifyArea(address) {
+        const value = String(address || "").toLowerCase();
+        for (const group of AREA_KEYWORDS) {
+          for (const term of group.terms) {
+            if (value.includes(term)) return group.area;
+          }
+        }
+        return "Other";
+      }
+
+      function syncHeatmapDays() {
+        const monthValue = el.heatmapMonth.value || state.heatmapMonth;
+        const max = daysInMonth(monthValue);
+        const existing = el.heatmapDay.value || state.heatmapDay || "";
+        const current = Number(existing);
+
+        el.heatmapDay.innerHTML = "";
+
+        const allOption = document.createElement("option");
+        allOption.value = "";
+        allOption.textContent = "All days";
+        el.heatmapDay.appendChild(allOption);
+
+        for (let day = 1; day <= max; day += 1) {
+          const opt = document.createElement("option");
+          opt.value = String(day).padStart(2, "0");
+          opt.textContent = String(day);
+          el.heatmapDay.appendChild(opt);
+        }
+
+        if (current >= 1 && current <= max) {
+          el.heatmapDay.value = String(current).padStart(2, "0");
+        } else {
+          el.heatmapDay.value = "";
+        }
+      }
+
+      function getHeatmapFilteredJobs() {
+        const monthValue = state.heatmapMonth;
+        const dayValue = state.heatmapDay;
+        const dateFilter = monthValue + "-" + dayValue;
+
+        return state.jobs.filter(function (job) {
+          if (job.deleted) return false;
+          if (job.isUnscheduled) return false;
+          if (!job.date.startsWith(monthValue + "-")) return false;
+          if (dayValue && job.date !== dateFilter) return false;
+          return true;
+        });
+      }
+
+      function buildAreaClusters(jobs) {
+        const clusters = {};
+        for (const area of AREA_ORDER) {
+          clusters[area] = { count: 0, latSum: 0, lngSum: 0, mapped: 0 };
+        }
+
+        for (const job of jobs) {
+          const area = classifyArea(job.address);
+          clusters[area].count += 1;
+          if (hasCoords(job)) {
+            clusters[area].latSum += job.lat;
+            clusters[area].lngSum += job.lng;
+            clusters[area].mapped += 1;
+          }
+        }
+
+        return clusters;
+      }
+
+      async function geocodeAddressOnce(address) {
+        const query = String(address || "").trim();
+        if (query.length < 5) return null;
+        const key = query.toLowerCase();
+        if (Object.prototype.hasOwnProperty.call(state.geocodeLookup, key)) {
+          return state.geocodeLookup[key];
+        }
+        if (state.geocodeInFlight[key]) return null;
+        state.geocodeInFlight[key] = true;
+        try {
+          const data = await apiRequest("address.php?mode=geocode&q=" + encodeURIComponent(query));
+          if (!data.found || !data.item) {
+            state.geocodeLookup[key] = null;
+            return null;
+          }
+          const lat = Number(data.item.lat);
+          const lng = Number(data.item.lng);
+          if (!Number.isFinite(lat) || !Number.isFinite(lng)) {
+            state.geocodeLookup[key] = null;
+            return null;
+          }
+          state.geocodeLookup[key] = { lat: lat, lng: lng };
+          return state.geocodeLookup[key];
+        } catch (_) {
+          state.geocodeLookup[key] = null;
+          return null;
+        } finally {
+          delete state.geocodeInFlight[key];
+        }
+      }
+
+      async function persistJobCoords(job, lat, lng) {
+        const patch = {
+          id: job.id,
+          rootJobId: job.rootJobId || "",
+          date: job.date,
+          time: job.time,
+          customer: job.customer,
+          phone: job.phone,
+          address: job.address,
+          summary: job.summary,
+          status: job.status || "Booked",
+          isUnscheduled: Boolean(job.isUnscheduled),
+          deleted: Boolean(job.deleted),
+          lat: lat,
+          lng: lng
+        };
+        try {
+          await apiRequest("jobs.php", { method: "POST", body: { job: patch } });
+        } catch (_) {}
+      }
+
+      async function fillMissingCoords(jobs) {
+        const missing = jobs.filter(function (job) {
+          return !job.deleted && !hasCoords(job) && String(job.address || "").trim().length >= 5;
+        }).slice(0, 2);
+
+        for (const job of missing) {
+          const geo = await geocodeAddressOnce(job.address);
+          if (!geo) continue;
+          job.lat = geo.lat;
+          job.lng = geo.lng;
+          persistJobCoords(job, geo.lat, geo.lng);
+        }
+      }
+
+      function renderMap(jobs, clustersByArea) {
+        if (!state.mapReady || !state.mapLayer) return;
+
+        state.mapLayer.clearLayers();
+
+        const mappedJobs = jobs.filter(hasCoords);
+        if (!mappedJobs.length) {
+          el.mapSummary.textContent = "No mapped addresses yet for this filter. Save or edit jobs and coordinates will auto-fill.";
+          state.map.setView(MAP_DEFAULT_CENTER, MAP_DEFAULT_ZOOM);
+          fillMissingCoords(jobs);
+          return;
+        }
+
+        let bounds = null;
+        for (const job of mappedJobs) {
+          const marker = window.L.circleMarker([job.lat, job.lng], {
+            radius: 4,
+            color: "#e2e8f0",
+            weight: 1,
+            fillColor: "#e2e8f0",
+            fillOpacity: 0.85
+          });
+          marker.bindPopup(
+            "<strong>" + safeText(job.customer) + "</strong><br>" +
+            safeText(job.date) + " " + safeText(job.time) + "<br>" +
+            safeText(job.address)
+          );
+          marker.addTo(state.mapLayer);
+          const ll = window.L.latLng(job.lat, job.lng);
+          bounds = bounds ? bounds.extend(ll) : window.L.latLngBounds([ll]);
+        }
+
+        const maxCount = Math.max.apply(null, Object.keys(clustersByArea).map(function (key) {
+          return clustersByArea[key].count;
+        }).concat([0]));
+
+        for (const area of AREA_ORDER) {
+          const cluster = clustersByArea[area];
+          if (!cluster || cluster.count <= 0 || cluster.mapped <= 0) continue;
+          const centerLat = cluster.latSum / cluster.mapped;
+          const centerLng = cluster.lngSum / cluster.mapped;
+          const ratio = maxCount > 0 ? cluster.count / maxCount : 0;
+          const color = pickCircleColor(ratio);
+          const circle = window.L.circle([centerLat, centerLng], {
+            radius: 700 + cluster.count * 220,
+            color: color.stroke,
+            weight: 2,
+            fillColor: color.fill,
+            fillOpacity: 0.28
+          });
+          circle.bindTooltip(area + ": " + cluster.count + " job" + (cluster.count === 1 ? "" : "s"), {
+            direction: "top",
+            offset: [0, -4]
+          });
+          circle.addTo(state.mapLayer);
+          const ll = window.L.latLng(centerLat, centerLng);
+          bounds = bounds ? bounds.extend(ll) : window.L.latLngBounds([ll]);
+        }
+
+        if (bounds) {
+          state.map.fitBounds(bounds.pad(0.2));
+        }
+
+        const mappedCount = mappedJobs.length;
+        el.mapSummary.textContent = mappedCount + " mapped job" + (mappedCount === 1 ? "" : "s") + " shown.";
+        fillMissingCoords(jobs);
+      }
+
+      async function loadAddressSuggestions(query) {
+        const q = String(query || "").trim();
+        if (q.length < 3) {
+          state.suggestionLookup = {};
+          el.addressSuggestions.innerHTML = "";
+          el.addressHint.textContent = "Start typing address (suburb/street) for suggestions.";
+          return;
+        }
+
+        try {
+          const data = await apiRequest("address.php?mode=suggest&q=" + encodeURIComponent(q));
+          const items = Array.isArray(data.items) ? data.items : [];
+          state.suggestionLookup = {};
+          el.addressSuggestions.innerHTML = "";
+
+          for (const item of items) {
+            const label = String(item && item.label ? item.label : "").trim();
+            const lat = Number(item && item.lat);
+            const lng = Number(item && item.lng);
+            if (!label || !Number.isFinite(lat) || !Number.isFinite(lng)) continue;
+            state.suggestionLookup[label] = { lat: lat, lng: lng };
+            const opt = document.createElement("option");
+            opt.value = label;
+            el.addressSuggestions.appendChild(opt);
+          }
+
+          if (items.length) {
+            el.addressHint.textContent = "Pick a suggested address for faster map pinning.";
+          } else {
+            el.addressHint.textContent = "No close suggestions found yet. You can still save manually.";
+          }
+        } catch (_) {
+          el.addressHint.textContent = "Address suggestions unavailable right now.";
+        }
+      }
+
+      function renderHeatmap() {
+        if (!el.heatmapMonth || !el.heatmapDay || !el.heatmapGrid) return;
+
+        if (!el.heatmapMonth.value) {
+          el.heatmapMonth.value = state.heatmapMonth;
+        }
+
+        state.heatmapMonth = el.heatmapMonth.value || state.heatmapMonth;
+        syncHeatmapDays();
+
+        if (state.heatmapDay && !el.heatmapDay.value) {
+          el.heatmapDay.value = state.heatmapDay;
+        }
+        state.heatmapDay = el.heatmapDay.value || "";
+
+        const monthValue = state.heatmapMonth;
+        const dayValue = state.heatmapDay;
+        const monthLabel = formatMonthLabel(monthValue);
+        const filtered = getHeatmapFilteredJobs();
+        const clusters = buildAreaClusters(filtered);
+        const counts = {};
+        for (const area of AREA_ORDER) counts[area] = clusters[area].count;
+
+        const entries = Object.entries(counts).sort(function (a, b) {
+          if (b[1] === a[1]) return a[0].localeCompare(b[0]);
+          return b[1] - a[1];
+        });
+
+        const total = filtered.length;
+        const top = entries[0];
+        const topArea = top && top[1] > 0 ? top[0] : "Wellington";
+
+        if (total === 0) {
+          el.heatmapSummary.textContent = "No jobs scheduled for " + (dayValue ? dayValue + " " + monthLabel : monthLabel) + ".";
+          el.heatmapLine.textContent = "I am in Wellington today.";
+        } else if (dayValue) {
+          el.heatmapSummary.textContent = total + " job" + (total === 1 ? "" : "s") + " on " + dayValue + " " + monthLabel + ". Busiest area: " + topArea + ".";
+          el.heatmapLine.textContent = "I am in " + topArea + " today.";
+        } else {
+          el.heatmapSummary.textContent = total + " job" + (total === 1 ? "" : "s") + " in " + monthLabel + ". Busiest area: " + topArea + ".";
+          el.heatmapLine.textContent = "Most of our bookings this month are in " + topArea + ".";
+        }
+
+        const maxCount = Math.max.apply(null, entries.map(function (item) { return item[1]; }).concat([0]));
+        el.heatmapGrid.innerHTML = "";
+
+        for (const entry of entries) {
+          const area = entry[0];
+          const count = entry[1];
+          const ratio = maxCount > 0 ? count / maxCount : 0;
+          let tone = "bg-white/5 ring-white/10 text-slate-300";
+          if (ratio >= 0.8) tone = "bg-amber-500/25 ring-amber-300/60 text-amber-100";
+          else if (ratio >= 0.5) tone = "bg-amber-500/18 ring-amber-300/45 text-amber-200";
+          else if (ratio > 0) tone = "bg-amber-500/12 ring-amber-300/30 text-slate-100";
+
+          const card = document.createElement("div");
+          card.className = "rounded-xl p-3 ring-1 " + tone;
+          card.innerHTML =
+            '<p class="text-sm font-semibold">' + safeText(area) + "</p>" +
+            '<p class="mt-1 text-xs">' + count + " job" + (count === 1 ? "" : "s") + "</p>";
+          el.heatmapGrid.appendChild(card);
+        }
+
+        renderMap(filtered, clusters);
+      }
+
+      function renderCalendar() {
+        const year = state.month.getFullYear();
+        const month = state.month.getMonth();
+        const firstDay = new Date(year, month, 1);
+        const start = new Date(firstDay);
+        start.setDate(firstDay.getDate() - firstDay.getDay());
+
+        el.monthLabel.textContent = state.month.toLocaleDateString("en-NZ", { month: "long", year: "numeric" });
+        el.calendarGrid.innerHTML = "";
+
+        const counts = {};
+        for (const j of state.jobs) {
+          if (j.deleted) continue;
+          if (j.isUnscheduled) continue;
+          if (!j.date) continue;
+          counts[j.date] = (counts[j.date] || 0) + 1;
+        }
+
+        for (let i = 0; i < 42; i += 1) {
+          const d = new Date(start);
+          d.setDate(start.getDate() + i);
+          const key = dateKey(d);
+          const isCurrentMonth = d.getMonth() === month;
+          const isSelected = key === state.selectedDate;
+          const isToday = key === dateKey(new Date());
+          const count = counts[key] || 0;
+
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.dataset.date = key;
+          btn.className =
+            "relative min-h-[74px] rounded-lg border px-2 py-1 text-left transition " +
+            (isCurrentMonth ? "border-white/10 bg-[var(--brand-bg)]" : "border-white/5 bg-[var(--brand-bg)]/50 text-slate-500") +
+            (isSelected ? " ring-2 ring-amber-400" : " hover:border-amber-400/40");
+
+          const day = document.createElement("div");
+          day.className = "text-sm font-semibold " + (isToday ? "text-amber-300" : "");
+          day.textContent = String(d.getDate());
+          btn.appendChild(day);
+
+          if (count > 0) {
+            const badge = document.createElement("div");
+            badge.className = "mt-2 inline-flex rounded-full bg-amber-500/20 px-2 py-0.5 text-xs text-amber-300";
+            badge.textContent = count + " job" + (count > 1 ? "s" : "");
+            btn.appendChild(badge);
+          }
+
+          el.calendarGrid.appendChild(btn);
+        }
+      }
+
+      function renderDay() {
+        const searching = Boolean(String(state.searchQuery || "").trim());
+        const allJobs = searching
+          ? state.jobs
+              .filter(function (j) {
+                return !j.deleted && !j.isUnscheduled && Boolean(j.date);
+              })
+              .sort(function (a, b) {
+                const da = String(a.date || "") + " " + String(a.time || "");
+                const db = String(b.date || "") + " " + String(b.time || "");
+                return da.localeCompare(db);
+              })
+          : jobsOn(state.selectedDate);
+        const jobs = allJobs.filter(matchesSearch);
+        if (el.quickDate) el.quickDate.value = state.selectedDate;
+        if (searching) {
+          el.dayTitle.textContent = "Search Results (All Scheduled Dates)";
+          el.dayCount.textContent = jobs.length + " match" + (jobs.length === 1 ? "" : "es");
+        } else {
+          el.dayTitle.textContent = "Jobs for " + formatLongDate(state.selectedDate);
+          el.dayCount.textContent = jobs.length + " job" + (jobs.length === 1 ? "" : "s");
+        }
+        if (!searching && state.searchQuery && jobs.length !== allJobs.length) {
+          el.dayCount.textContent = jobs.length + " of " + allJobs.length + " jobs";
+        }
+
+        el.jobList.innerHTML = "";
+        if (!jobs.length) {
+          el.jobEmpty.classList.remove("hidden");
+          if (searching) {
+            el.jobEmpty.textContent = "No scheduled jobs match your search.";
+          } else {
+            el.jobEmpty.textContent = state.searchQuery
+              ? "No jobs match your search for this day."
+              : "No jobs for this day.";
+          }
+          return;
+        } else {
+          el.jobEmpty.classList.add("hidden");
+        }
+
+        for (const j of jobs) {
+          const status = j.status || "Booked";
+          const statusClass = getStatusBadgeClass(status);
+          const whenLabel = searching
+            ? safeText((j.date || "") + (j.time ? " • " + j.time : ""))
+            : safeText(j.time);
+          const familyRef = safeText(j.familyRef || getJobRef(j));
+          const visitLabel = 'Visit ' + safeText(j.visitNumber || 1) + ' of ' + safeText(j.familyCount || 1);
+          const card = document.createElement("article");
+          card.className = "rounded-xl bg-[var(--brand-bg)] p-4 ring-1 ring-white/10";
+          card.innerHTML =
+            '<div class="flex items-start justify-between gap-2">' +
+              '<div>' +
+                '<h3 class="font-semibold">' + safeText(j.customer) + '</h3>' +
+                '<p class="mt-1 text-xs text-slate-400">' + whenLabel + "</p>" +
+                '<p class="mt-1 text-xs text-slate-400"><a class="underline" target="_blank" rel="noreferrer" href="/portal/?job=' + encodeURIComponent(j.familyId || getJobFamilyId(j)) + '">Job ' + familyRef + '</a> • ' + visitLabel + '</p>' +
+                '<span class="mt-1 inline-flex rounded-full px-2 py-0.5 text-xs ' + statusClass + '">' + safeText(status) + "</span>" +
+              "</div>" +
+              '<div class="flex gap-2">' +
+                '<button type="button" data-action="edit" data-id="' + safeText(j.id) + '" class="btn btn-outline px-3 py-1 text-xs">Edit</button>' +
+                '<button type="button" data-action="delete" data-id="' + safeText(j.id) + '" class="btn btn-outline px-3 py-1 text-xs">Delete</button>' +
+              "</div>" +
+            "</div>" +
+            '<p class="mt-2 text-sm text-slate-200">' + safeText(j.summary) + "</p>" +
+            '<div class="mt-3 grid grid-cols-3 gap-2 sm:flex sm:flex-wrap">' +
+              '<a class="btn btn-primary w-full justify-center px-3 py-1 text-xs sm:w-auto" href="tel:' + safeText(j.phone) + '">Call</a>' +
+              '<a class="btn btn-secondary w-full justify-center px-3 py-1 text-xs sm:w-auto" target="_blank" rel="noreferrer" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(j.address) + '">Maps</a>' +
+              '<button type="button" data-action="follow-up" data-id="' + safeText(j.id) + '" class="btn btn-outline w-full justify-center px-3 py-1 text-xs sm:w-auto">New visit</button>' +
+            "</div>" +
+            '<p class="mt-2 text-xs text-slate-400">' + safeText(j.address) + "</p>";
+          el.jobList.appendChild(card);
+        }
+      }
+
+      function renderUnscheduled() {
+        const allJobs = state.jobs
+          .filter(function (j) {
+            return !j.deleted && (j.isUnscheduled || !j.date || !j.time);
+          })
+          .sort(function (a, b) {
+            return String(b.updatedAt || "").localeCompare(String(a.updatedAt || ""));
+          });
+        const jobs = allJobs.filter(matchesSearch);
+
+        if (state.searchQuery && jobs.length !== allJobs.length) {
+          el.unscheduledCount.textContent = jobs.length + " of " + allJobs.length + " jobs";
+        } else {
+          el.unscheduledCount.textContent = jobs.length + " job" + (jobs.length === 1 ? "" : "s");
+        }
+        el.unscheduledList.innerHTML = "";
+
+        if (!jobs.length) {
+          el.unscheduledEmpty.classList.remove("hidden");
+          el.unscheduledEmpty.textContent = state.searchQuery
+            ? "No unallocated jobs match your search."
+            : "No unallocated jobs.";
+          return;
+        }
+        el.unscheduledEmpty.classList.add("hidden");
+
+        for (const j of jobs) {
+          const familyRef = safeText(j.familyRef || getJobRef(j));
+          const card = document.createElement("article");
+          card.className = "rounded-xl bg-[var(--brand-bg)] p-4 ring-1 ring-white/10";
+          card.innerHTML =
+            '<div class="flex items-start justify-between gap-2">' +
+              '<div>' +
+                '<h3 class="font-semibold">' + safeText(j.customer) + '</h3>' +
+                '<p class="text-xs text-amber-300">To be booked</p>' +
+                '<p class="mt-1 text-xs text-slate-400"><a class="underline" target="_blank" rel="noreferrer" href="/portal/?job=' + encodeURIComponent(j.familyId || getJobFamilyId(j)) + '">Job ' + familyRef + '</a> • Visit ' + safeText(j.visitNumber || 1) + ' of ' + safeText(j.familyCount || 1) + '</p>' +
+              "</div>" +
+              '<div class="flex gap-2">' +
+                '<button type="button" data-action="schedule" data-id="' + safeText(j.id) + '" class="btn btn-primary px-3 py-1 text-xs">Schedule</button>' +
+                '<button type="button" data-action="edit" data-id="' + safeText(j.id) + '" class="btn btn-outline px-3 py-1 text-xs">Edit</button>' +
+                '<button type="button" data-action="delete" data-id="' + safeText(j.id) + '" class="btn btn-outline px-3 py-1 text-xs">Delete</button>' +
+              "</div>" +
+            "</div>" +
+            '<p class="mt-2 text-sm text-slate-200">' + safeText(j.summary) + "</p>" +
+            '<div class="mt-3 grid grid-cols-3 gap-2 sm:flex sm:flex-wrap">' +
+              '<a class="btn btn-primary w-full justify-center px-3 py-1 text-xs sm:w-auto" href="tel:' + safeText(j.phone) + '">Call</a>' +
+              '<a class="btn btn-secondary w-full justify-center px-3 py-1 text-xs sm:w-auto" target="_blank" rel="noreferrer" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(j.address) + '">Maps</a>' +
+              '<button type="button" data-action="follow-up" data-id="' + safeText(j.id) + '" class="btn btn-outline w-full justify-center px-3 py-1 text-xs sm:w-auto">New visit</button>' +
+            "</div>" +
+            '<p class="mt-2 text-xs text-slate-400">' + safeText(j.address) + "</p>";
+          el.unscheduledList.appendChild(card);
+        }
+      }
+
+      function renderJobDetail() {
+        if (!el.jobDetailPanel || !el.jobDetailSummary || !el.jobDetailVisits) return;
+
+        const familyId = String(state.selectedFamilyId || "").trim();
+        if (!familyId) {
+          el.jobDetailPanel.classList.add("hidden");
+          el.jobDetailSummary.innerHTML = "";
+          el.jobDetailVisits.innerHTML = "";
+          return;
+        }
+
+        const familyJobs = getFamilyJobs(familyId);
+        if (!familyJobs.length) {
+          state.selectedFamilyId = "";
+          updateJobQueryParam("");
+          el.jobDetailPanel.classList.add("hidden");
+          el.jobDetailSummary.innerHTML = "";
+          el.jobDetailVisits.innerHTML = "";
+          return;
+        }
+
+        const leadJob = familyJobs[0];
+        const completedVisits = familyJobs.filter(function (job) { return job.status === "Done"; }).length;
+        const openBookings = familyJobs.filter(function (job) {
+          return job.status !== "Done" && job.status !== "Cancelled";
+        }).length;
+
+        el.jobDetailPanel.classList.remove("hidden");
+        el.jobDetailTitle.textContent = "Job " + safeText(leadJob.familyRef) + " • " + safeText(leadJob.customer);
+        el.jobDetailMeta.innerHTML =
+          '<a class="underline" href="tel:' + safeText(leadJob.phone) + '">' + safeText(leadJob.phone) + '</a> • ' +
+          '<a class="underline" target="_blank" rel="noreferrer" href="https://www.google.com/maps/search/?api=1&query=' +
+          encodeURIComponent(leadJob.address) + '">' + safeText(leadJob.address) + '</a>';
+
+        const summaryCards = [
+          ['Total bookings', String(familyJobs.length)],
+          ['Completed visits', String(completedVisits)],
+          ['Open bookings', String(openBookings)],
+          ['Current status', String(leadJob.status || 'Booked')]
+        ];
+
+        el.jobDetailSummary.innerHTML = summaryCards.map(function (item) {
+          return '<div class="rounded-xl bg-[var(--brand-bg)] p-3 ring-1 ring-white/10">' +
+            '<p class="text-xs uppercase tracking-wide text-slate-400">' + safeText(item[0]) + '</p>' +
+            '<p class="mt-1 text-base font-semibold">' + safeText(item[1]) + '</p>' +
+          '</div>';
+        }).join("");
+
+        el.jobDetailVisits.innerHTML = familyJobs.map(function (job) {
+          const status = job.status || "Booked";
+          const statusClass = getStatusBadgeClass(status);
+          const when = job.isUnscheduled
+            ? "To be booked"
+            : safeText(job.date + (job.time ? " • " + job.time : ""));
+
+          return '<article class="rounded-xl bg-[var(--brand-bg)] p-4 ring-1 ring-white/10">' +
+            '<div class="flex items-start justify-between gap-3">' +
+              '<div>' +
+                '<p class="text-xs uppercase tracking-wide text-amber-300">Visit ' + safeText(job.visitNumber) + ' of ' + safeText(job.familyCount) + '</p>' +
+                '<p class="mt-1 text-sm font-semibold">' + when + '</p>' +
+                '<span class="mt-2 inline-flex rounded-full px-2 py-0.5 text-xs ' + statusClass + '">' + safeText(status) + '</span>' +
+              '</div>' +
+              '<div class="flex gap-2">' +
+                '<button type="button" data-action="follow-up" data-id="' + safeText(job.id) + '" class="btn btn-primary px-3 py-1 text-xs">New booking</button>' +
+                '<button type="button" data-action="edit" data-id="' + safeText(job.id) + '" class="btn btn-outline px-3 py-1 text-xs">Edit</button>' +
+              '</div>' +
+            '</div>' +
+            '<p class="mt-3 text-sm text-slate-200">' + safeText(job.summary) + '</p>' +
+            '<div class="mt-3 grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">' +
+              '<a class="btn btn-primary w-full justify-center px-3 py-1 text-xs sm:w-auto" href="tel:' + safeText(job.phone) + '">Call</a>' +
+              '<a class="btn btn-secondary w-full justify-center px-3 py-1 text-xs sm:w-auto" target="_blank" rel="noreferrer" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(job.address) + '">Maps</a>' +
+            '</div>' +
+          '</article>';
+        }).join("");
+      }
+
+      function updateScheduleInputs() {
+        const unscheduled = Boolean(el.inputUnscheduled.checked);
+        el.inputDate.disabled = unscheduled;
+        el.inputTime.disabled = unscheduled;
+        el.inputDate.required = !unscheduled;
+        el.inputTime.required = !unscheduled;
+
+        if (unscheduled) {
+          el.inputDate.value = "";
+          el.inputTime.value = "";
+        } else if (!el.inputDate.value) {
+          el.inputDate.value = state.selectedDate;
+        }
+      }
+
+      function clearForm() {
+        state.editId = null;
+        state.rootJobId = "";
+        state.pendingLat = null;
+        state.pendingLng = null;
+        el.formTitle.textContent = "Add Job";
+        el.jobForm.reset();
+        el.inputDate.value = state.selectedDate;
+        el.inputStatus.value = "Booked";
+        el.inputUnscheduled.checked = false;
+        updateScheduleInputs();
+        el.addressHint.textContent = "Start typing address (suburb/street) for suggestions.";
+        updateDuplicateHint();
+      }
+
+      function fillForm(job) {
+        state.editId = job.id;
+        state.rootJobId = String(job.rootJobId || "");
+        state.pendingLat = hasCoords(job) ? job.lat : null;
+        state.pendingLng = hasCoords(job) ? job.lng : null;
+        el.formTitle.textContent = "Edit Job";
+        el.inputDate.value = job.date;
+        el.inputTime.value = job.time;
+        el.inputCustomer.value = job.customer;
+        el.inputPhone.value = job.phone;
+        el.inputAddress.value = job.address;
+        el.inputSummary.value = job.summary;
+        el.inputStatus.value = STATUS_OPTIONS.includes(job.status) ? job.status : "Booked";
+        el.inputUnscheduled.checked = Boolean(job.isUnscheduled || !job.date || !job.time);
+        updateScheduleInputs();
+        el.addressHint.textContent = hasCoords(job)
+          ? "Saved map location found for this address."
+          : "No saved map location yet. Pick a suggestion or save to auto-map.";
+        updateDuplicateHint();
+      }
+
+      function updateBlogPreview() {
+        if (!el.blogPreviewPath) return;
+        const slug = slugify(el.blogSlug ? el.blogSlug.value : "");
+        el.blogPreviewPath.textContent = slug ? "/blog/" + slug + "/" : "/blog/your-slug/";
+      }
+
+      function clearBlogForm() {
+        state.blogEditId = null;
+        state.blogSlugTouched = false;
+        if (el.blogFormTitle) el.blogFormTitle.textContent = "Create Blog Draft";
+        if (el.blogForm) el.blogForm.reset();
+        if (el.blogDate) el.blogDate.value = dateKey(new Date());
+        if (el.blogStatus) el.blogStatus.value = "Draft";
+        updateBlogPreview();
+      }
+
+      function fillBlogForm(blog) {
+        state.blogEditId = blog.id;
+        state.blogSlugTouched = true;
+        if (el.blogFormTitle) el.blogFormTitle.textContent = "Edit Blog Draft";
+        if (el.blogTitle) el.blogTitle.value = blog.title;
+        if (el.blogSlug) el.blogSlug.value = blog.slug;
+        if (el.blogDescription) el.blogDescription.value = blog.description;
+        if (el.blogDate) el.blogDate.value = blog.pubDate;
+        if (el.blogHeroImage) el.blogHeroImage.value = blog.heroImage || "";
+        if (el.blogStatus) el.blogStatus.value = BLOG_STATUS_OPTIONS.includes(blog.status) ? blog.status : "Draft";
+        if (el.blogBody) el.blogBody.value = blog.body;
+        updateBlogPreview();
+      }
+
+      function renderBlogs() {
+        if (!el.blogList || !el.blogEmpty || !el.blogCount || !el.blogTrashList || !el.blogTrashEmpty || !el.blogTrashCount) return;
+
+        const activeBlogs = state.blogs
+          .filter(function (blog) { return !blog.deleted; })
+          .sort(function (a, b) {
+            return String(b.updatedAt || "").localeCompare(String(a.updatedAt || ""));
+          });
+        const deletedBlogs = state.blogs
+          .filter(function (blog) { return blog.deleted; })
+          .sort(function (a, b) {
+            return String(b.updatedAt || "").localeCompare(String(a.updatedAt || ""));
+          });
+
+        el.blogCount.textContent = activeBlogs.length + " draft" + (activeBlogs.length === 1 ? "" : "s");
+        el.blogTrashCount.textContent = deletedBlogs.length + " deleted";
+        el.blogList.innerHTML = "";
+        el.blogTrashList.innerHTML = "";
+
+        if (!activeBlogs.length) {
+          el.blogEmpty.classList.remove("hidden");
+        } else {
+          el.blogEmpty.classList.add("hidden");
+        }
+
+        for (const blog of activeBlogs) {
+          const card = document.createElement("article");
+          card.className = "rounded-xl bg-[var(--brand-bg)] p-4 ring-1 ring-white/10";
+          card.innerHTML =
+            '<div class="flex items-start justify-between gap-3">' +
+              '<div>' +
+                '<p class="text-sm font-semibold">' + safeText(blog.title) + '</p>' +
+                '<p class="mt-1 text-xs text-slate-400">/blog/' + safeText(blog.slug) + '/</p>' +
+                '<span class="mt-2 inline-flex rounded-full px-2 py-0.5 text-xs ' + getBlogStatusBadgeClass(blog.status) + '">' + safeText(blog.status) + '</span>' +
+              '</div>' +
+              '<div class="flex gap-2">' +
+                '<button type="button" data-action="edit" data-id="' + safeText(blog.id) + '" class="btn btn-outline px-3 py-1 text-xs">Edit</button>' +
+                '<button type="button" data-action="delete" data-id="' + safeText(blog.id) + '" class="btn btn-outline px-3 py-1 text-xs">Trash</button>' +
+              '</div>' +
+            '</div>' +
+            '<p class="mt-3 text-sm text-slate-300">' + safeText(blog.description) + '</p>' +
+            '<div class="mt-3 flex flex-wrap gap-2">' +
+              '<button type="button" data-action="copy" data-id="' + safeText(blog.id) + '" class="btn btn-secondary px-3 py-1 text-xs">Copy markdown</button>' +
+              '<button type="button" data-action="download" data-id="' + safeText(blog.id) + '" class="btn btn-outline px-3 py-1 text-xs">Download .md</button>' +
+            '</div>' +
+            '<p class="mt-2 text-xs text-slate-400">Updated ' + safeText(blog.updatedAt || blog.createdAt || "") + '</p>';
+          el.blogList.appendChild(card);
+        }
+
+        if (!deletedBlogs.length) {
+          el.blogTrashEmpty.classList.remove("hidden");
+          return;
+        }
+
+        el.blogTrashEmpty.classList.add("hidden");
+
+        for (const blog of deletedBlogs) {
+          const card = document.createElement("article");
+          card.className = "rounded-xl bg-[var(--brand-bg)] p-4 ring-1 ring-white/10 opacity-80";
+          card.innerHTML =
+            '<div class="flex items-start justify-between gap-3">' +
+              '<div>' +
+                '<p class="text-sm font-semibold">' + safeText(blog.title) + '</p>' +
+                '<p class="mt-1 text-xs text-slate-400">/blog/' + safeText(blog.slug) + '/</p>' +
+                '<span class="mt-2 inline-flex rounded-full px-2 py-0.5 text-xs bg-rose-500/20 text-rose-200">Deleted</span>' +
+              '</div>' +
+              '<div class="flex gap-2">' +
+                '<button type="button" data-action="restore" data-id="' + safeText(blog.id) + '" class="btn btn-secondary px-3 py-1 text-xs">Restore</button>' +
+                '<button type="button" data-action="purge" data-id="' + safeText(blog.id) + '" class="btn btn-outline px-3 py-1 text-xs">Delete forever</button>' +
+              '</div>' +
+            '</div>' +
+            '<p class="mt-3 text-sm text-slate-300">' + safeText(blog.description) + '</p>' +
+            '<p class="mt-2 text-xs text-slate-400">Deleted draft last updated ' + safeText(blog.updatedAt || blog.createdAt || "") + '</p>';
+          el.blogTrashList.appendChild(card);
+        }
+      }
+
+      async function loadBlogs(silent) {
+        try {
+          const data = await apiRequest("blogs.php");
+          state.blogs = Array.isArray(data.blogs) ? data.blogs.map(normalizeBlog) : [];
+          renderBlogs();
+          if (!silent) setPortalStatus("Blog drafts refreshed.");
+        } catch (err) {
+          if (err.message === "__UNAUTHORIZED__") {
+            handleUnauthorized("Session expired. Sign in again.");
+            return;
+          }
+          setPortalStatus("Could not load blog drafts: " + err.message, true);
+        }
+      }
+
+      async function copyBlogMarkdown(blog) {
+        const markdown = buildBlogMarkdown(blog);
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(markdown);
+            setPortalStatus("Blog markdown copied.");
+            return;
+          }
+        } catch (_) {}
+        setPortalStatus("Copy failed. Use download instead.", true);
+      }
+
+      function downloadBlogMarkdown(blog) {
+        const markdown = buildBlogMarkdown(blog);
+        const blob = new Blob([markdown], { type: "text/markdown;charset=utf-8" });
+        const href = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = href;
+        link.download = (blog.slug || "blog-draft") + ".md";
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        setTimeout(function () {
+          URL.revokeObjectURL(href);
+        }, 1000);
+        setPortalStatus("Markdown downloaded.");
+      }
+
+      async function saveBlogDraft() {
+        const blog = currentBlogPayload();
+        if (!blog.title || !blog.slug || !blog.description || !blog.pubDate || !blog.body) {
+          setPortalStatus("Fill in title, slug, description, publish date and content.", true);
+          return;
+        }
+
+        setPortalStatus("Saving blog draft...");
+        try {
+          await apiRequest("blogs.php", { method: "POST", body: { blog: blog } });
+          clearBlogForm();
+          await loadBlogs(true);
+          setPortalStatus("Blog draft saved.");
+        } catch (err) {
+          if (err.message === "__UNAUTHORIZED__") {
+            handleUnauthorized("Session expired. Sign in again.");
+            return;
+          }
+          setPortalStatus("Could not save blog draft: " + err.message, true);
+        }
+      }
+
+      async function deleteBlogDraft(id) {
+        setPortalStatus("Deleting blog draft...");
+        try {
+          await apiRequest("blogs.php", { method: "POST", body: { deleteId: id } });
+          if (state.blogEditId === id) clearBlogForm();
+          await loadBlogs(true);
+          setPortalStatus("Blog draft deleted.");
+        } catch (err) {
+          if (err.message === "__UNAUTHORIZED__") {
+            handleUnauthorized("Session expired. Sign in again.");
+            return;
+          }
+          setPortalStatus("Could not delete blog draft: " + err.message, true);
+        }
+      }
+
+      async function restoreBlogDraft(id) {
+        setPortalStatus("Restoring blog draft...");
+        try {
+          await apiRequest("blogs.php", { method: "POST", body: { restoreId: id } });
+          await loadBlogs(true);
+          setPortalStatus("Blog draft restored.");
+        } catch (err) {
+          if (err.message === "__UNAUTHORIZED__") {
+            handleUnauthorized("Session expired. Sign in again.");
+            return;
+          }
+          setPortalStatus("Could not restore blog draft: " + err.message, true);
+        }
+      }
+
+      async function purgeBlogDraft(id) {
+        setPortalStatus("Deleting blog draft forever...");
+        try {
+          await apiRequest("blogs.php", { method: "POST", body: { purgeId: id } });
+          if (state.blogEditId === id) clearBlogForm();
+          await loadBlogs(true);
+          setPortalStatus("Blog draft permanently deleted.");
+        } catch (err) {
+          if (err.message === "__UNAUTHORIZED__") {
+            handleUnauthorized("Session expired. Sign in again.");
+            return;
+          }
+          setPortalStatus("Could not permanently delete blog draft: " + err.message, true);
+        }
+      }
+
+      function getBlogDraftForExport() {
+        const draft = currentBlogPayload();
+        if (!draft.title || !draft.slug || !draft.description || !draft.pubDate || !draft.body) {
+          setPortalStatus("Fill in title, slug, description, publish date and content first.", true);
+          return null;
+        }
+        return draft;
+      }
+
+      function startFollowUpBooking(job) {
+        const familyId = getJobFamilyId(job);
+        state.editId = null;
+        state.rootJobId = familyId;
+        state.pendingLat = hasCoords(job) ? job.lat : null;
+        state.pendingLng = hasCoords(job) ? job.lng : null;
+
+        el.formTitle.textContent = "Add Booking for " + getJobRef(familyId);
+        el.jobForm.reset();
+        el.inputDate.value = state.selectedDate;
+        el.inputTime.value = getSuggestedTimeValue();
+        el.inputCustomer.value = job.customer;
+        el.inputPhone.value = job.phone;
+        el.inputAddress.value = job.address;
+        el.inputSummary.value = "";
+        el.inputStatus.value = "Booked";
+        el.inputUnscheduled.checked = false;
+        updateScheduleInputs();
+        el.addressHint.textContent = hasCoords(job)
+          ? "Saved map location found for this address."
+          : "Address will auto-map when saved.";
+        updateDuplicateHint();
+        selectFamilyById(familyId, { updateUrl: true });
+        setPortalStatus("New booking loaded for " + getJobRef(familyId) + ".");
+        try {
+          el.inputDate.focus();
+        } catch (_) {}
+      }
+
+      function scheduleFromQueue(job) {
+        fillForm(job);
+        el.inputUnscheduled.checked = false;
+        updateScheduleInputs();
+        el.inputDate.value = state.selectedDate;
+        el.inputTime.value = el.inputTime.value || getSuggestedTimeValue();
+        if (!el.inputStatus.value || !STATUS_OPTIONS.includes(el.inputStatus.value)) {
+          el.inputStatus.value = "Booked";
+        }
+        selectFamilyById(getJobFamilyId(job), { updateUrl: true });
+        setPortalStatus("Queue job loaded. Pick date/time and save.");
+        try {
+          el.inputDate.focus();
+        } catch (_) {}
+      }
+
+      function normalizeJob(job) {
+        const lat = job && job.lat !== null && job.lat !== undefined && job.lat !== "" ? Number(job.lat) : null;
+        const lng = job && job.lng !== null && job.lng !== undefined && job.lng !== "" ? Number(job.lng) : null;
+        const rawStatus = String(job && job.status ? job.status : "Booked");
+        return {
+          id: String(job && job.id ? job.id : ""),
+          rootJobId: String(job && job.rootJobId ? job.rootJobId : ""),
+          date: String(job && job.date ? job.date : ""),
+          time: String(job && job.time ? job.time : ""),
+          customer: String(job && job.customer ? job.customer : ""),
+          phone: String(job && job.phone ? job.phone : ""),
+          address: String(job && job.address ? job.address : ""),
+          lat: Number.isFinite(lat) ? lat : null,
+          lng: Number.isFinite(lng) ? lng : null,
+          summary: String(job && job.summary ? job.summary : ""),
+          status: STATUS_OPTIONS.includes(rawStatus) ? rawStatus : "Booked",
+          isUnscheduled: Boolean(job && (job.isUnscheduled || !job.date || !job.time)),
+          deleted: Boolean(job && job.deleted),
+          createdAt: String(job && job.createdAt ? job.createdAt : ""),
+          updatedAt: String(job && job.updatedAt ? job.updatedAt : "")
+        };
+      }
+
+      async function loadJobs(silent) {
+        try {
+          const data = await apiRequest("jobs.php");
+          state.jobs = Array.isArray(data.jobs) ? data.jobs.map(normalizeJob) : [];
+          decorateJobFamilies();
+          renderCalendar();
+          renderDay();
+          renderUnscheduled();
+          renderHeatmap();
+          renderJobDetail();
+          if (state.selectedFamilyId && !getFamilyJobs(state.selectedFamilyId).length) {
+            selectFamilyById("", { updateUrl: true });
+          }
+          if (state.pendingFamilyScroll && state.selectedFamilyId) {
+            state.pendingFamilyScroll = false;
+            selectFamilyById(state.selectedFamilyId, { updateUrl: false, scroll: true });
+          }
+          updateDuplicateHint();
+          if (!silent) setPortalStatus("Jobs refreshed.");
+        } catch (err) {
+          if (err.message === "__UNAUTHORIZED__") {
+            handleUnauthorized("Session expired. Sign in again.");
+            return;
+          }
+          setPortalStatus("Could not load jobs: " + err.message, true);
+        }
+      }
+
+      async function saveFormJob() {
+        if (state.saveInFlight) return;
+        const unscheduled = Boolean(el.inputUnscheduled.checked);
+
+        const job = {
+          id: state.editId || String(Date.now()),
+          rootJobId: state.rootJobId,
+          date: unscheduled ? "" : el.inputDate.value,
+          time: unscheduled ? "" : el.inputTime.value,
+          customer: el.inputCustomer.value.trim(),
+          phone: el.inputPhone.value.trim(),
+          address: el.inputAddress.value.trim(),
+          lat: state.pendingLat,
+          lng: state.pendingLng,
+          summary: el.inputSummary.value.trim(),
+          status: STATUS_OPTIONS.includes(el.inputStatus.value) ? el.inputStatus.value : "Booked",
+          isUnscheduled: unscheduled,
+          deleted: false
+        };
+
+        if (!job.customer || !job.phone || !job.address || !job.summary) return;
+        if (!unscheduled && (!job.date || !job.time)) return;
+        const duplicate = findPotentialDuplicate(job);
+        if (!job.rootJobId && duplicate) {
+          job.rootJobId = getJobFamilyId(duplicate);
+        }
+        if (duplicate && !window.confirm("Potential duplicate found under " + getJobRef(duplicate) + ". Save this as a new booking under that job?")) {
+          setPortalStatus("Save cancelled to avoid duplicate.");
+          return;
+        }
+
+        state.saveInFlight = true;
+        setPortalStatus("Saving job...");
+        try {
+          const familyId = job.rootJobId || job.id;
+          await apiRequest("jobs.php", { method: "POST", body: { job: job } });
+          if (!unscheduled && job.date) {
+            state.selectedDate = job.date;
+            const pickedDate = parseDate(job.date);
+            state.month = new Date(pickedDate.getFullYear(), pickedDate.getMonth(), 1);
+          }
+          state.selectedFamilyId = familyId;
+          updateJobQueryParam(familyId);
+          clearForm();
+          await loadJobs(true);
+          selectFamilyById(familyId, { updateUrl: false });
+          setPortalStatus(unscheduled ? "Saved to To Be Booked." : "Job saved.");
+        } catch (err) {
+          if (err.message === "__UNAUTHORIZED__") {
+            handleUnauthorized("Session expired. Sign in again.");
+            return;
+          }
+          setPortalStatus("Could not save job: " + err.message, true);
+        } finally {
+          state.saveInFlight = false;
+        }
+      }
+
+      async function deleteJob(id) {
+        setPortalStatus("Deleting job...");
+        try {
+          await apiRequest("jobs.php", { method: "POST", body: { deleteId: id } });
+          await loadJobs(true);
+          clearForm();
+          setPortalStatus("Job deleted.");
+        } catch (err) {
+          if (err.message === "__UNAUTHORIZED__") {
+            handleUnauthorized("Session expired. Sign in again.");
+            return;
+          }
+          setPortalStatus("Could not delete job: " + err.message, true);
+        }
+      }
+
+      function startPolling() {
+        stopPolling();
+        state.pollTimer = setInterval(function () {
+          loadJobs(true);
+        }, 45000);
+      }
+
+      function stopPolling() {
+        if (state.pollTimer) {
+          clearInterval(state.pollTimer);
+          state.pollTimer = null;
+        }
+      }
+
+      function bindEvents() {
+        el.loginForm.addEventListener("submit", async function (e) {
+          e.preventDefault();
+          clearLoginError();
+          setPortalStatus("Signing in...");
+          try {
+            await apiRequest("login.php", {
+              method: "POST",
+              body: {
+                username: (el.loginUser.value || "").trim(),
+                password: (el.loginPass.value || "").trim()
+              }
+            });
+
+            showApp();
+            clearForm();
+            clearBlogForm();
+            await loadJobs(true);
+            await loadBlogs(true);
+            startPolling();
+            setPortalStatus("Signed in.");
+          } catch (err) {
+            showLogin();
+            showLoginError(err.message === "__UNAUTHORIZED__" ? "Invalid username or password." : err.message);
+          }
+        });
+
+        el.logoutBtn.addEventListener("click", async function () {
+          try {
+            await apiRequest("logout.php", { method: "POST" });
+          } catch (_) {}
+          showLogin();
+          clearLoginError();
+          setPortalStatus("Signed out.");
+        });
+
+        el.refreshBtn.addEventListener("click", function () {
+          loadJobs(false);
+          loadBlogs(true);
+        });
+
+        el.jobSearch.addEventListener("input", function () {
+          state.searchQuery = String(el.jobSearch.value || "").trim();
+          renderDay();
+          renderUnscheduled();
+        });
+
+        el.todayBtn.addEventListener("click", function () {
+          setSelectedDate(dateKey(new Date()), { syncHeatmap: true, clearForm: true });
+        });
+
+        el.monthPrev.addEventListener("click", function () {
+          state.month = new Date(state.month.getFullYear(), state.month.getMonth() - 1, 1);
+          renderCalendar();
+        });
+
+        el.monthNext.addEventListener("click", function () {
+          state.month = new Date(state.month.getFullYear(), state.month.getMonth() + 1, 1);
+          renderCalendar();
+        });
+
+        el.calendarGrid.addEventListener("click", function (e) {
+          const btn = e.target && e.target.closest && e.target.closest("button[data-date]");
+          if (!btn) return;
+          setSelectedDate(btn.dataset.date, { clearForm: true });
+        });
+
+        el.quickPrevDay.addEventListener("click", function () {
+          const d = parseDate(state.selectedDate);
+          d.setDate(d.getDate() - 1);
+          setSelectedDate(dateKey(d), { clearForm: true });
+        });
+
+        el.quickNextDay.addEventListener("click", function () {
+          const d = parseDate(state.selectedDate);
+          d.setDate(d.getDate() + 1);
+          setSelectedDate(dateKey(d), { clearForm: true });
+        });
+
+        el.quickTodayDay.addEventListener("click", function () {
+          setSelectedDate(dateKey(new Date()), { syncHeatmap: true, clearForm: true });
+        });
+
+        el.quickDate.addEventListener("change", function () {
+          const picked = String(el.quickDate.value || "").trim();
+          if (!picked) return;
+          setSelectedDate(picked, { clearForm: true });
+        });
+
+        el.jobForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+          saveFormJob();
+        });
+
+        el.jobClear.addEventListener("click", function () {
+          clearForm();
+        });
+
+        if (el.blogForm) {
+          el.blogForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            saveBlogDraft();
+          });
+        }
+
+        if (el.blogClear) {
+          el.blogClear.addEventListener("click", function () {
+            clearBlogForm();
+            setPortalStatus("Blog draft form cleared.");
+          });
+        }
+
+        if (el.blogTitle) {
+          el.blogTitle.addEventListener("input", function () {
+            if (!state.blogSlugTouched && el.blogSlug) {
+              el.blogSlug.value = slugify(el.blogTitle.value || "");
+            }
+            updateBlogPreview();
+          });
+        }
+
+        if (el.blogSlug) {
+          el.blogSlug.addEventListener("input", function () {
+            state.blogSlugTouched = true;
+            el.blogSlug.value = slugify(el.blogSlug.value || "");
+            updateBlogPreview();
+          });
+        }
+
+        if (el.blogDescription) {
+          el.blogDescription.addEventListener("input", function () {
+            if (el.blogDescription.value.length > 160) {
+              el.blogDescription.value = el.blogDescription.value.slice(0, 160);
+            }
+          });
+        }
+
+        if (el.blogCopy) {
+          el.blogCopy.addEventListener("click", function () {
+            const draft = getBlogDraftForExport();
+            if (!draft) return;
+            copyBlogMarkdown(draft);
+          });
+        }
+
+        if (el.blogDownload) {
+          el.blogDownload.addEventListener("click", function () {
+            const draft = getBlogDraftForExport();
+            if (!draft) return;
+            downloadBlogMarkdown(draft);
+          });
+        }
+
+        if (el.blogList) {
+          el.blogList.addEventListener("click", function (e) {
+            const btn = e.target && e.target.closest && e.target.closest("button[data-action][data-id]");
+            if (!btn) return;
+            const id = String(btn.dataset.id || "");
+            const action = String(btn.dataset.action || "");
+            const blog = getBlogById(id);
+            if (!blog) return;
+
+            if (action === "edit") {
+              fillBlogForm(blog);
+              setPortalStatus("Blog draft loaded.");
+              try {
+                el.blogTitle.focus();
+                el.blogTitle.scrollIntoView({ behavior: "smooth", block: "center" });
+              } catch (_) {}
+              return;
+            }
+
+            if (action === "copy") {
+              copyBlogMarkdown(blog);
+              return;
+            }
+
+            if (action === "download") {
+              downloadBlogMarkdown(blog);
+              return;
+            }
+
+            if (action === "delete") {
+              if (!window.confirm("Move this blog draft to trash?")) return;
+              deleteBlogDraft(id);
+              return;
+            }
+
+            if (action === "restore") {
+              restoreBlogDraft(id);
+              return;
+            }
+
+            if (action === "purge") {
+              if (!window.confirm("Permanently delete this draft? This cannot be undone.")) return;
+              purgeBlogDraft(id);
+            }
+          });
+        }
+
+        el.inputUnscheduled.addEventListener("change", function () {
+          updateScheduleInputs();
+        });
+
+        el.inputPhone.addEventListener("input", function () {
+          updateDuplicateHint();
+        });
+
+        el.inputAddress.addEventListener("input", function () {
+          state.pendingLat = null;
+          state.pendingLng = null;
+          const value = el.inputAddress.value || "";
+          updateDuplicateHint();
+          if (state.suggestionTimer) {
+            clearTimeout(state.suggestionTimer);
+            state.suggestionTimer = null;
+          }
+          state.suggestionTimer = setTimeout(function () {
+            loadAddressSuggestions(value);
+          }, 280);
+        });
+
+        el.inputAddress.addEventListener("change", function () {
+          const selected = String(el.inputAddress.value || "").trim();
+          const match = state.suggestionLookup[selected];
+          if (match) {
+            state.pendingLat = Number(match.lat);
+            state.pendingLng = Number(match.lng);
+            state.geocodeLookup[selected.toLowerCase()] = { lat: state.pendingLat, lng: state.pendingLng };
+            el.addressHint.textContent = "Address pinned on map from suggestion.";
+            return;
+          }
+          state.pendingLat = null;
+          state.pendingLng = null;
+          el.addressHint.textContent = "Address saved. Map pin will be resolved automatically.";
+          updateDuplicateHint();
+        });
+
+        el.jobList.addEventListener("click", function (e) {
+          const btn = e.target && e.target.closest && e.target.closest("button[data-action][data-id]");
+          if (!btn) return;
+          const id = btn.dataset.id;
+          const action = btn.dataset.action;
+          const job = state.jobs.find((x) => x.id === id);
+          if (!job || job.deleted) return;
+          if (action === "edit") {
+            fillForm(job);
+            selectFamilyById(getJobFamilyId(job), { updateUrl: true });
+            return;
+          }
+          if (action === "follow-up") {
+            startFollowUpBooking(job);
+            return;
+          }
+          if (action === "delete") {
+            if (!window.confirm("Delete this job?")) return;
+            deleteJob(id);
+          }
+        });
+
+        el.unscheduledList.addEventListener("click", function (e) {
+          const btn = e.target && e.target.closest && e.target.closest("button[data-action][data-id]");
+          if (!btn) return;
+          const id = btn.dataset.id;
+          const action = btn.dataset.action;
+          const job = state.jobs.find((x) => x.id === id);
+          if (!job || job.deleted) return;
+          if (action === "edit") {
+            fillForm(job);
+            selectFamilyById(getJobFamilyId(job), { updateUrl: true });
+            return;
+          }
+          if (action === "follow-up") {
+            startFollowUpBooking(job);
+            return;
+          }
+          if (action === "schedule") {
+            scheduleFromQueue(job);
+            return;
+          }
+          if (action === "delete") {
+            if (!window.confirm("Delete this job?")) return;
+            deleteJob(id);
+          }
+        });
+
+        if (el.jobDetailVisits) {
+          el.jobDetailVisits.addEventListener("click", function (e) {
+            const btn = e.target && e.target.closest && e.target.closest("button[data-action][data-id]");
+            if (!btn) return;
+            const id = btn.dataset.id;
+            const action = btn.dataset.action;
+            const job = state.jobs.find(function (x) { return x.id === id; });
+            if (!job || job.deleted) return;
+            if (action === "edit") {
+              fillForm(job);
+              selectFamilyById(getJobFamilyId(job), { updateUrl: true });
+              return;
+            }
+            if (action === "follow-up") {
+              startFollowUpBooking(job);
+            }
+          });
+        }
+
+        if (el.jobDetailFollowUp) {
+          el.jobDetailFollowUp.addEventListener("click", function () {
+            if (!state.selectedFamilyId) return;
+            const familyJobs = getFamilyJobs(state.selectedFamilyId);
+            if (!familyJobs.length) return;
+            startFollowUpBooking(familyJobs[0]);
+          });
+        }
+
+        if (el.jobDetailClose) {
+          el.jobDetailClose.addEventListener("click", function () {
+            selectFamilyById("", { updateUrl: true });
+          });
+        }
+
+        el.heatmapMonth.addEventListener("change", function () {
+          state.heatmapMonth = el.heatmapMonth.value || state.heatmapMonth;
+          state.heatmapDay = "";
+          el.heatmapDay.value = "";
+          renderHeatmap();
+        });
+
+        el.heatmapDay.addEventListener("change", function () {
+          state.heatmapDay = el.heatmapDay.value || "";
+          renderHeatmap();
+        });
+
+        el.heatmapCopyLine.addEventListener("click", async function () {
+          const text = el.heatmapLine.textContent || "";
+          try {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              await navigator.clipboard.writeText(text);
+              setPortalStatus("Heatmap line copied.");
+              return;
+            }
+          } catch (_) {}
+          setPortalStatus("Copy failed. Select and copy manually.", true);
+        });
+      }
+
+      async function boot() {
+        bindEvents();
+        setPortalStatus("Checking session...");
+        try {
+          const me = await apiRequest("me.php");
+          if (!me.authenticated) {
+            showLogin();
+            setPortalStatus("Sign in to access jobs.");
+            return;
+          }
+
+          showApp();
+          el.heatmapMonth.value = state.heatmapMonth;
+          syncHeatmapDays();
+          el.heatmapDay.value = state.heatmapDay;
+          if (el.jobSearch) el.jobSearch.value = state.searchQuery;
+          if (el.quickDate) el.quickDate.value = state.selectedDate;
+          clearForm();
+          clearBlogForm();
+          await loadJobs(true);
+          await loadBlogs(true);
+          startPolling();
+          setPortalStatus("Connected.");
+        } catch (err) {
+          showLogin();
+          showLoginError("Portal API unavailable. Check database setup.");
+          setPortalStatus("Portal API error: " + err.message, true);
+        }
+      }
+
+      boot();
+    })();
+  </script> </main>     </body> </html>
