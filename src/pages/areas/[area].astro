@@ -25,7 +25,7 @@ const AREA_DETAILS = {
     issues: ["salt-affected hardware", "seized locks and cylinders", "slider leaks during bad weather"],
   },
   kapiti: {
-    intro: "We cover Kapiti for aluminium window repairs, ranchslider repairs, lockouts and reseals where strong coastal weather gets into tired joinery.",
+    intro: "We cover Kāpiti for aluminium window repairs, ranchslider repairs, lockouts and reseals where strong coastal weather gets into tired joinery.",
     issues: ["wind-driven leaks", "rollers and tracks worn by use", "stays, hinges and restrictors needing replacement"],
   },
 };
@@ -37,7 +37,7 @@ export function getStaticPaths() {
     { slug: "lower-hutt", name: "Lower Hutt" },
     { slug: "upper-hutt", name: "Upper Hutt" },
     { slug: "petone", name: "Petone" },
-    { slug: "kapiti", name: "Kapiti" },
+    { slug: "kapiti", name: "Kāpiti" },
   ];
 
   return AREAS.map((area) => ({
@@ -48,8 +48,8 @@ export function getStaticPaths() {
 
 const { area } = Astro.props;
 const details = AREA_DETAILS[area.slug];
-const title = `${area.name} Aluminium Window & Sliding Door Repairs | Window Maintenance`;
-const description = `Single and double-glazed aluminium window and ranchslider repairs in ${area.name}. Rollers, tracks, stays, hinges, handles, locks, lockout entry and reseals for local homes and rentals.`;
+const title = `${area.name} Window & Door Repairs | Window Maintenance`;
+const description = `Aluminium window and ranchslider repairs in ${area.name} — rollers, tracks, stays, handles, locks and reseals for Wellington homes and rentals.`;
 const canonical = `https://windowmaintenance.co.nz/areas/${area.slug}/`;
 ---
 <Layout title={title} description={description} canonical={canonical}>

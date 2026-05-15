@@ -1,0 +1,59 @@
+Row Type,Action,Keyword status,Level,Campaign ID,Campaign,Ad group ID,Ad group,Keyword ID,Negative keyword,Type
+"# Optional.
+Supported values: Negative keyword","Optional.
+Supported values: Add; Edit; Remove","Optional.
+Supported values: Enabled; Removed; Paused","Optional.
+Supported values: Ad group; Campaign","Optional.
+Example(s): 1234","Required.
+Example(s): Shoe campaign","Optional.
+Example(s): 1234","Required.
+Example(s): Shoe ad group","Optional.
+Example(s): 1234","Required on create.
+Example(s): cat","Optional.
+Supported values: Exact match; Phrase match; Broad match"
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,exceed,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,exceed windows,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,exceed windows and doors,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,exceed windows wellington,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,firstwindows,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,firstwindows co nz,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,nu look,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,nulook,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,metro windows,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,metro windows and doors,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,wellington glass,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,builderscrack,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,jims handyman,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,thermashield,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,fairview,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,rylock,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,viridian,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,replacement,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,replacements,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,window replacement,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,house window replacement,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,cheap window replacement,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,new windows,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,new doors,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,install,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,installation,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,for sale,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,buy,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,wholesale,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,supplier,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,suppliers,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,bunnings,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,mitre 10,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,jobs,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,job,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,careers,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,salary,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,diy,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,how to,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,youtube,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,auto glass,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,car window,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,windscreen,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,windshield,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,curtains,Phrase match
+Negative keyword,Add,Enabled,Campaign,,WM | Search | Leads v3,,,,blinds,Phrase match

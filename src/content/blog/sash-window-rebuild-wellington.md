@@ -16,7 +16,7 @@ This week we rebuilt a **badly damaged single glazed aluminium sash window** tha
 ## Why this matters
 Older aluminium joinery can still be repaired when the correct parts and processes are used. This kind of rebuild is ideal when the window is **single glazed**, the profile is **obsolete**, or the hardware is worn out. It is also a good time to replace **Yale style window handles and locks** if the original hardware is loose, corroded or mismatched.
 
-If you have a damaged sash, stuck window, broken handle, or a window that will not lock, we can help. We service Wellington, Porirua, Lower Hutt, Upper Hutt and Kapiti.
+If you have a damaged sash, stuck window, broken handle, or a window that will not lock, we can help. We service Wellington, Porirua, Lower Hutt, Upper Hutt and Kāpiti.
 
 ![Single glazed aluminium sash before repair, inside closeup](/img/sash-work-before-closeup.jpg)
 

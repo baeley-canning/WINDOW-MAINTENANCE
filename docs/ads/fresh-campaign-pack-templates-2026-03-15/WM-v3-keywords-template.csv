@@ -1,0 +1,120 @@
+Row Type,Action,Keyword status,Campaign ID,Campaign,Ad group ID,Ad group,Keyword ID,Keyword,Type,Label,Default max. CPC,Max. CPV,Final URL,Mobile final URL,Final URL suffix,Tracking template,Custom parameter
+"# Optional.
+Supported values: Keyword","Optional.
+Supported values: Add; Edit; Remove","Optional.
+Supported values: Enabled; Removed; Paused","Optional.
+Example(s): 1234","Required.
+Example(s): Shoe campaign","Optional.
+Example(s): 1234","Required.
+Example(s): Shoe ad group","Optional.
+Example(s): 1234","Required on create.
+Example(s): buy frisbee","Optional.
+Supported values: Exact match; Phrase match; Broad match","Optional.
+Example(s): label 1; label 2; label 3 [123-456-7890]
+Supports remove_value","Optional.
+Example(s): 12.34
+Supports remove_value","Optional.
+Example(s): 12.34
+Supports remove_value","Optional.
+Example(s): http://www.example.com ; https://www.example.org
+Supports remove_value","Optional.
+Example(s): http://m.example.com ; https://m.example.org
+Supports remove_value","Optional.
+Example(s): x=y
+Supports remove_value","Optional.
+Example(s): http://www.abc.com/tracking?param1=create&url={lpurl}
+Supports remove_value","Optional.
+Example(s): {_color}=red ; {_bg}=blue
+Supports remove_value"
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Window Repairs,,aluminium window repairs wellington,Exact match,,,,https://windowmaintenance.co.nz/services/window-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Window Repairs,,aluminium window repairs wellington,Phrase match,,,,https://windowmaintenance.co.nz/services/window-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Window Repairs,,window repairs wellington,Exact match,,,,https://windowmaintenance.co.nz/services/window-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Window Repairs,,window repairs wellington,Phrase match,,,,https://windowmaintenance.co.nz/services/window-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Window Repairs,,aluminium door repairs wellington,Exact match,,,,https://windowmaintenance.co.nz/services/window-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Window Repairs,,aluminium door repairs wellington,Phrase match,,,,https://windowmaintenance.co.nz/services/window-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Window Repairs,,repair aluminium windows,Exact match,,,,https://windowmaintenance.co.nz/services/window-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Window Repairs,,repair aluminium windows,Phrase match,,,,https://windowmaintenance.co.nz/services/window-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Window Repairs,,broken window repair near me,Exact match,,,,https://windowmaintenance.co.nz/services/window-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Window Repairs,,broken window repair near me,Phrase match,,,,https://windowmaintenance.co.nz/services/window-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Window Repairs,,window maintenance near me,Exact match,,,,https://windowmaintenance.co.nz/services/window-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Window Repairs,,window maintenance near me,Phrase match,,,,https://windowmaintenance.co.nz/services/window-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Window Repairs,,aluminium joinery repairs,Exact match,,,,https://windowmaintenance.co.nz/services/window-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Window Repairs,,aluminium joinery repairs,Phrase match,,,,https://windowmaintenance.co.nz/services/window-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Window Repairs,,joinery repairs wellington,Exact match,,,,https://windowmaintenance.co.nz/services/window-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Window Repairs,,joinery repairs wellington,Phrase match,,,,https://windowmaintenance.co.nz/services/window-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Sliding Door Repairs,,sliding door repairs wellington,Exact match,,,,https://windowmaintenance.co.nz/services/sliding-door-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Sliding Door Repairs,,sliding door repairs wellington,Phrase match,,,,https://windowmaintenance.co.nz/services/sliding-door-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Sliding Door Repairs,,ranch slider repairs,Exact match,,,,https://windowmaintenance.co.nz/services/sliding-door-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Sliding Door Repairs,,ranch slider repairs,Phrase match,,,,https://windowmaintenance.co.nz/services/sliding-door-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Sliding Door Repairs,,ranch slider repair,Exact match,,,,https://windowmaintenance.co.nz/services/sliding-door-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Sliding Door Repairs,,ranch slider repair,Phrase match,,,,https://windowmaintenance.co.nz/services/sliding-door-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Sliding Door Repairs,,sliding door repair near me,Exact match,,,,https://windowmaintenance.co.nz/services/sliding-door-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Sliding Door Repairs,,sliding door repair near me,Phrase match,,,,https://windowmaintenance.co.nz/services/sliding-door-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Sliding Door Repairs,,fix sliding door,Exact match,,,,https://windowmaintenance.co.nz/services/sliding-door-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Sliding Door Repairs,,fix sliding door,Phrase match,,,,https://windowmaintenance.co.nz/services/sliding-door-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Sliding Door Repairs,,aluminium sliding door repairs,Exact match,,,,https://windowmaintenance.co.nz/services/sliding-door-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Sliding Door Repairs,,aluminium sliding door repairs,Phrase match,,,,https://windowmaintenance.co.nz/services/sliding-door-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Sliding Door Repairs,,sliding door roller repair,Exact match,,,,https://windowmaintenance.co.nz/services/sliding-door-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Sliding Door Repairs,,sliding door roller repair,Phrase match,,,,https://windowmaintenance.co.nz/services/sliding-door-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Sliding Door Repairs,,ranchslider repairs,Exact match,,,,https://windowmaintenance.co.nz/services/sliding-door-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Sliding Door Repairs,,ranchslider repairs,Phrase match,,,,https://windowmaintenance.co.nz/services/sliding-door-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Window Stays And Hinges,,awning stay replacement,Exact match,,,,https://windowmaintenance.co.nz/stays/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Window Stays And Hinges,,awning stay replacement,Phrase match,,,,https://windowmaintenance.co.nz/stays/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Window Stays And Hinges,,window stay repair,Exact match,,,,https://windowmaintenance.co.nz/stays/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Window Stays And Hinges,,window stay repair,Phrase match,,,,https://windowmaintenance.co.nz/stays/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Window Stays And Hinges,,window stay replacement,Exact match,,,,https://windowmaintenance.co.nz/stays/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Window Stays And Hinges,,window stay replacement,Phrase match,,,,https://windowmaintenance.co.nz/stays/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Window Stays And Hinges,,window hinge repair,Exact match,,,,https://windowmaintenance.co.nz/stays/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Window Stays And Hinges,,window hinge repair,Phrase match,,,,https://windowmaintenance.co.nz/stays/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Window Stays And Hinges,,awning window hinge repair,Exact match,,,,https://windowmaintenance.co.nz/stays/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Window Stays And Hinges,,awning window hinge repair,Phrase match,,,,https://windowmaintenance.co.nz/stays/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Window Stays And Hinges,,window restrictor repair,Exact match,,,,https://windowmaintenance.co.nz/stays/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Window Stays And Hinges,,window restrictor repair,Phrase match,,,,https://windowmaintenance.co.nz/stays/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Window Stays And Hinges,,security stays wellington,Exact match,,,,https://windowmaintenance.co.nz/stays/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Window Stays And Hinges,,security stays wellington,Phrase match,,,,https://windowmaintenance.co.nz/stays/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Window Stays And Hinges,,window restrictors wellington,Exact match,,,,https://windowmaintenance.co.nz/stays/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Window Stays And Hinges,,window restrictors wellington,Phrase match,,,,https://windowmaintenance.co.nz/stays/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Leaks And Reseals,,reseal aluminium windows,Exact match,,,,https://windowmaintenance.co.nz/services/mitre-reseal/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Leaks And Reseals,,reseal aluminium windows,Phrase match,,,,https://windowmaintenance.co.nz/services/mitre-reseal/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Leaks And Reseals,,leaking aluminium windows,Exact match,,,,https://windowmaintenance.co.nz/services/mitre-reseal/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Leaks And Reseals,,leaking aluminium windows,Phrase match,,,,https://windowmaintenance.co.nz/services/mitre-reseal/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Leaks And Reseals,,ranch slider leaking,Exact match,,,,https://windowmaintenance.co.nz/services/mitre-reseal/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Leaks And Reseals,,ranch slider leaking,Phrase match,,,,https://windowmaintenance.co.nz/services/mitre-reseal/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Leaks And Reseals,,leaking sliding door,Exact match,,,,https://windowmaintenance.co.nz/services/mitre-reseal/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Leaks And Reseals,,leaking sliding door,Phrase match,,,,https://windowmaintenance.co.nz/services/mitre-reseal/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Leaks And Reseals,,mitre reseal,Exact match,,,,https://windowmaintenance.co.nz/services/mitre-reseal/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Leaks And Reseals,,mitre reseal,Phrase match,,,,https://windowmaintenance.co.nz/services/mitre-reseal/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Leaks And Reseals,,sill reseal,Exact match,,,,https://windowmaintenance.co.nz/services/mitre-reseal/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Leaks And Reseals,,sill reseal,Phrase match,,,,https://windowmaintenance.co.nz/services/mitre-reseal/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Leaks And Reseals,,leaking aluminium sliders,Exact match,,,,https://windowmaintenance.co.nz/services/mitre-reseal/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Leaks And Reseals,,leaking aluminium sliders,Phrase match,,,,https://windowmaintenance.co.nz/services/mitre-reseal/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Leaks And Reseals,,aluminium window leak repair,Exact match,,,,https://windowmaintenance.co.nz/services/mitre-reseal/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Leaks And Reseals,,aluminium window leak repair,Phrase match,,,,https://windowmaintenance.co.nz/services/mitre-reseal/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Handles Locks And Hardware,,window handle repair,Exact match,,,,https://windowmaintenance.co.nz/services/joinery-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Handles Locks And Hardware,,window handle repair,Phrase match,,,,https://windowmaintenance.co.nz/services/joinery-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Handles Locks And Hardware,,door handle repair,Exact match,,,,https://windowmaintenance.co.nz/services/joinery-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Handles Locks And Hardware,,door handle repair,Phrase match,,,,https://windowmaintenance.co.nz/services/joinery-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Handles Locks And Hardware,,window lock repair,Exact match,,,,https://windowmaintenance.co.nz/services/joinery-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Handles Locks And Hardware,,window lock repair,Phrase match,,,,https://windowmaintenance.co.nz/services/joinery-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Handles Locks And Hardware,,yale window lock repair,Exact match,,,,https://windowmaintenance.co.nz/services/joinery-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Handles Locks And Hardware,,yale window lock repair,Phrase match,,,,https://windowmaintenance.co.nz/services/joinery-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Handles Locks And Hardware,,yale window handle,Exact match,,,,https://windowmaintenance.co.nz/services/joinery-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Handles Locks And Hardware,,yale window handle,Phrase match,,,,https://windowmaintenance.co.nz/services/joinery-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Handles Locks And Hardware,,door lock repair wellington,Exact match,,,,https://windowmaintenance.co.nz/services/joinery-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Handles Locks And Hardware,,door lock repair wellington,Phrase match,,,,https://windowmaintenance.co.nz/services/joinery-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Handles Locks And Hardware,,aluminium door lock repair,Exact match,,,,https://windowmaintenance.co.nz/services/joinery-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Handles Locks And Hardware,,aluminium door lock repair,Phrase match,,,,https://windowmaintenance.co.nz/services/joinery-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Handles Locks And Hardware,,hardware replacement wellington,Exact match,,,,https://windowmaintenance.co.nz/services/joinery-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Handles Locks And Hardware,,hardware replacement wellington,Phrase match,,,,https://windowmaintenance.co.nz/services/joinery-repairs/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Lock Picking And Lockouts,,lock picking wellington,Exact match,,,,https://windowmaintenance.co.nz/services/lock-picking/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Lock Picking And Lockouts,,lock picking wellington,Phrase match,,,,https://windowmaintenance.co.nz/services/lock-picking/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Lock Picking And Lockouts,,lockout service wellington,Exact match,,,,https://windowmaintenance.co.nz/services/lock-picking/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Lock Picking And Lockouts,,lockout service wellington,Phrase match,,,,https://windowmaintenance.co.nz/services/lock-picking/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Lock Picking And Lockouts,,locked out of house wellington,Exact match,,,,https://windowmaintenance.co.nz/services/lock-picking/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Lock Picking And Lockouts,,locked out of house wellington,Phrase match,,,,https://windowmaintenance.co.nz/services/lock-picking/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Lock Picking And Lockouts,,non destructive entry wellington,Exact match,,,,https://windowmaintenance.co.nz/services/lock-picking/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Lock Picking And Lockouts,,non destructive entry wellington,Phrase match,,,,https://windowmaintenance.co.nz/services/lock-picking/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Lock Picking And Lockouts,,cylinder replacement wellington,Exact match,,,,https://windowmaintenance.co.nz/services/lock-picking/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Lock Picking And Lockouts,,cylinder replacement wellington,Phrase match,,,,https://windowmaintenance.co.nz/services/lock-picking/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Lock Picking And Lockouts,,door lockout wellington,Exact match,,,,https://windowmaintenance.co.nz/services/lock-picking/,,,,
+Keyword,Add,Enabled,,WM | Search | Leads v3,,Lock Picking And Lockouts,,door lockout wellington,Phrase match,,,,https://windowmaintenance.co.nz/services/lock-picking/,,,,
