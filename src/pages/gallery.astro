@@ -18,33 +18,33 @@ const images = [
     <h1 class="text-3xl font-extrabold">Gallery</h1>
     <div class="mt-8 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
       {images.map((it) => (
-        <figure class="rounded-xl bg-[var(--brand-surface)] p-3 ring-1 ring-white/10">
+        <figure class="rounded-xl bg-[var(--brand-surface)] p-3 ring-1 ring-slate-200">
           <div class="ratio-4-3 card-frame"><Picture base={it.base} alt={it.alt} className="h-full w-full object-cover" /></div>
         </figure>
       ))}
-      <figure class="rounded-xl bg-[var(--brand-surface)] p-3 ring-1 ring-white/10">
+      <figure class="rounded-xl bg-[var(--brand-surface)] p-3 ring-1 ring-slate-200">
         <div class="ratio-4-3 card-frame">
           <img src="/img/window-stay-replacement-640.webp" alt="Replaced awning stay (new vs old)" class="h-full w-full object-cover" width="640" height="853" loading="lazy" decoding="async" />
         </div>
-        <figcaption class="text-slate-400">New awning stay installed after storm damage.</figcaption>
+        <figcaption class="text-slate-600">New awning stay installed after storm damage.</figcaption>
       </figure>
-      <figure class="rounded-xl bg-[var(--brand-surface)] p-3 ring-1 ring-white/10">
+      <figure class="rounded-xl bg-[var(--brand-surface)] p-3 ring-1 ring-slate-200">
         <div class="ratio-4-3 card-frame">
           <img src="/img/mitre-reseal-before.jpg" alt="Leaking aluminium frame mitre opened for reseal" class="h-full w-full object-cover" />
         </div>
-        <figcaption class="text-slate-400">Mitre/sill leak opened for proper reseal.</figcaption>
+        <figcaption class="text-slate-600">Mitre/sill leak opened for proper reseal.</figcaption>
       </figure>
-      <figure class="rounded-xl bg-[var(--brand-surface)] p-3 ring-1 ring-white/10">
+      <figure class="rounded-xl bg-[var(--brand-surface)] p-3 ring-1 ring-slate-200">
         <div class="ratio-4-3 card-frame">
           <img src="/img/mitre-reseal-small-joint.jpg" alt="Mitre reseal inside aluminium joinery" class="h-full w-full object-cover" />
         </div>
-        <figcaption class="text-slate-400">Resealing inside the aluminium frame.</figcaption>
+        <figcaption class="text-slate-600">Resealing inside the aluminium frame.</figcaption>
       </figure>
-      <figure class="rounded-xl bg-[var(--brand-surface)] p-3 ring-1 ring-white/10">
+      <figure class="rounded-xl bg-[var(--brand-surface)] p-3 ring-1 ring-slate-200">
         <div class="ratio-4-3 card-frame">
           <img src="/img/drainage-cover-3dprint.jpg" alt="3D printed drainage cover fitted to a sash window" class="h-full w-full object-cover" />
         </div>
-        <figcaption class="text-slate-400">3D-printed drainage cover for high-wind zones.</figcaption>
+        <figcaption class="text-slate-600">3D-printed drainage cover for high-wind zones.</figcaption>
       </figure>
     </div>
   </section>

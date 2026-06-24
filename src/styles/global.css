@@ -54,15 +54,18 @@
 }
 
 :root {
-  color-scheme: dark;
-  --brand-bg: #080e1a;
-  --brand-surface: #0f1b2d;
-  --brand-surface-2: #162035;
-  --brand-text: #e2e8f0;
-  --brand-muted: #94a3b8;
-  --brand-accent: #f59e0b;
-  --brand-accent-hover: #fbbf24;
-  --brand-border: rgba(255,255,255,.08);
+  color-scheme: light;
+  --brand-bg: #f8fafc;
+  --brand-surface: #ffffff;
+  --brand-surface-2: #f1f5f9;
+  --brand-text: #0f172a;
+  --brand-muted: #475569;
+  --brand-accent: #2563eb;
+  --brand-accent-hover: #1d4ed8;
+  --brand-border: rgba(15,23,42,.10);
+  /* Deep blue used for the hero panel (white text sits on this) */
+  --brand-hero-from: #1e3a8a;
+  --brand-hero-to: #1d4ed8;
 }
 
 html, body { height: 100%; }
@@ -77,7 +80,7 @@ img { max-width: 100%; height: auto; }
 figure { margin: 0; }
 figcaption {
   font-size: .85rem;
-  color: rgb(148 163 184);
+  color: rgb(71 85 105);
   margin-top: .5rem;
   font-weight: 500;
 }
@@ -91,33 +94,34 @@ figcaption {
   @apply inline-flex items-center justify-center rounded-xl px-6 py-3 font-semibold transition-all duration-200;
 }
 .btn-primary {
-  background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
-  color: #111827;
-  box-shadow: 0 4px 14px rgba(245,158,11,.30);
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(37,99,235,.28);
 }
 .btn-primary:hover {
-  background: linear-gradient(135deg, #fbbf24 0%, #fb923c 100%);
-  box-shadow: 0 6px 20px rgba(245,158,11,.45);
+  background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+  box-shadow: 0 6px 20px rgba(37,99,235,.40);
   transform: translateY(-1px);
 }
 .btn-secondary {
   border: 1.5px solid var(--brand-accent);
   color: var(--brand-accent);
-  background: transparent;
+  background: #ffffff;
 }
 .btn-secondary:hover {
   background: var(--brand-accent);
-  color: #111827;
-  box-shadow: 0 4px 14px rgba(245,158,11,.30);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(37,99,235,.28);
   transform: translateY(-1px);
 }
 .btn-outline {
   border: 1px solid var(--brand-border);
   color: var(--brand-text);
+  background: #ffffff;
 }
 .btn-outline:hover {
-  background: rgba(255,255,255,.06);
-  border-color: rgba(255,255,255,.18);
+  background: #f1f5f9;
+  border-color: rgba(15,23,42,.20);
 }
 
 /* Hoverable card links */
@@ -126,7 +130,7 @@ figcaption {
 }
 .card-link:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 32px rgba(0,0,0,.45), 0 0 0 1px rgba(245,158,11,.18);
+  box-shadow: 0 12px 28px rgba(15,23,42,.10), 0 0 0 1px rgba(37,99,235,.20);
 }
 
 /* FAQ expand */
@@ -139,5 +143,5 @@ input:focus-visible,
 textarea:focus-visible,
 select:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px rgba(245,158,11,.45);
+  box-shadow: 0 0 0 2px rgba(37,99,235,.45);
 }

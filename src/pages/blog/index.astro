@@ -10,8 +10,8 @@ const canonical = "https://windowmaintenance.co.nz/blog/";
 <Layout title={title} description={description} canonical={canonical}>
   <main class="mx-auto max-w-4xl px-6 py-12">
     <h1 class="text-3xl font-extrabold">Blog</h1>
-    <section class="mt-4 grid gap-4 rounded-2xl bg-[var(--brand-surface)] p-5 ring-1 ring-white/10 text-sm text-slate-200">
-      <div class="text-xs font-semibold uppercase tracking-[0.3em] text-amber-400">Top services</div>
+    <section class="mt-4 grid gap-4 rounded-2xl bg-[var(--brand-surface)] p-5 ring-1 ring-slate-200 text-sm text-slate-800">
+      <div class="text-xs font-semibold uppercase tracking-[0.3em] text-blue-600">Top services</div>
       <div class="flex flex-wrap gap-3">
         <a class="btn btn-secondary" href="/services/sliding-door-repairs/">Sliding door repairs</a>
         <a class="btn btn-secondary" href="/services/mitre-reseal/">Mitre &amp; sill reseal</a>
@@ -22,11 +22,11 @@ const canonical = "https://windowmaintenance.co.nz/blog/";
     </section>
     <ul class="mt-6 space-y-6">
       {posts.map((post) => (
-        <li class="rounded-xl bg-[var(--brand-surface)] p-6 ring-1 ring-white/10">
-          <a href={`/blog/${post.slug}/`} class="block hover:text-amber-400">
+        <li class="rounded-xl bg-[var(--brand-surface)] p-6 ring-1 ring-slate-200">
+          <a href={`/blog/${post.slug}/`} class="block hover:text-blue-600">
             <h2 class="text-xl font-semibold">{post.data.title}</h2>
-            <div class="mt-1 text-xs text-slate-400">{new Date(post.data.pubDate).toLocaleDateString()}</div>
-            {post.data.description && <p class="mt-2 text-slate-300">{post.data.description}</p>}
+            <div class="mt-1 text-xs text-slate-600">{new Date(post.data.pubDate).toLocaleDateString()}</div>
+            {post.data.description && <p class="mt-2 text-slate-700">{post.data.description}</p>}
           </a>
         </li>
       ))}

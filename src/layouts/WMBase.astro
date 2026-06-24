@@ -36,7 +36,7 @@ const allSchemas = providedTypes.has("LocalBusiness") ? schemas : [...schemas, b
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonical} />
-    <meta name="theme-color" content="#0f172a" />
+    <meta name="theme-color" content="#ffffff" />
     <link rel="icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
@@ -44,7 +44,7 @@ const allSchemas = providedTypes.has("LocalBusiness") ? schemas : [...schemas, b
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="preload" href="/fonts/inter/inter-latin-400.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/inter/inter-latin-700.woff2" as="font" type="font/woff2" crossorigin />
-    <meta name="msapplication-TileColor" content="#0f172a" />
+    <meta name="msapplication-TileColor" content="#2563eb" />
     <meta property="og:site_name" content={siteName} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -100,12 +100,12 @@ const allSchemas = providedTypes.has("LocalBusiness") ? schemas : [...schemas, b
     </script>
     <script src="https://analytics.ahrefs.com/analytics.js" data-key="1qYp7UMQiOWTjRN9OG1kOQ" async></script>
   </head>
-  <body class="min-h-screen selection:bg-amber-500/30 bg-[var(--brand-bg)] text-[var(--brand-text)]">
+  <body class="min-h-screen selection:bg-blue-600/30 bg-[var(--brand-bg)] text-[var(--brand-text)]">
     {showHeader && (
       <header class="sticky top-0 z-30 border-b bg-[var(--brand-bg)]/80 backdrop-blur-md border-[color:var(--brand-border)]">
         <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
-          <a href="/" class="flex items-center gap-2.5 font-extrabold tracking-tight text-white">
-            <svg class="h-6 w-6 flex-shrink-0 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <a href="/" class="flex items-center gap-2.5 font-extrabold tracking-tight text-slate-900">
+            <svg class="h-6 w-6 flex-shrink-0 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <rect x="2" y="2" width="20" height="20" rx="2.5"/>
               <line x1="2" y1="12" x2="22" y2="12"/>
               <line x1="12" y1="2" x2="12" y2="12"/>
@@ -113,12 +113,12 @@ const allSchemas = providedTypes.has("LocalBusiness") ? schemas : [...schemas, b
             <span>Window Maintenance</span>
           </a>
           <nav class="hidden gap-1 md:flex">
-            <a href="/services/" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-300 transition-colors hover:bg-white/5 hover:text-amber-400">Services</a>
-            <a href="/areas/" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-300 transition-colors hover:bg-white/5 hover:text-amber-400">Areas</a>
-            <a href="/gallery/" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-300 transition-colors hover:bg-white/5 hover:text-amber-400">Gallery</a>
-            <a href="/blog/" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-300 transition-colors hover:bg-white/5 hover:text-amber-400">Blog</a>
-            <a href="/reviews/" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-300 transition-colors hover:bg-white/5 hover:text-amber-400">Reviews</a>
-            <a href="/contact/" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-300 transition-colors hover:bg-white/5 hover:text-amber-400">Contact</a>
+            <a href="/services/" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100 hover:text-blue-600">Services</a>
+            <a href="/areas/" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100 hover:text-blue-600">Areas</a>
+            <a href="/gallery/" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100 hover:text-blue-600">Gallery</a>
+            <a href="/blog/" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100 hover:text-blue-600">Blog</a>
+            <a href="/reviews/" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100 hover:text-blue-600">Reviews</a>
+            <a href="/contact/" class="rounded-lg px-3 py-2 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100 hover:text-blue-600">Contact</a>
           </nav>
           <div class="flex items-center gap-2">
             <a
@@ -140,7 +140,7 @@ const allSchemas = providedTypes.has("LocalBusiness") ? schemas : [...schemas, b
               aria-label="Open menu"
               aria-expanded="false"
               aria-controls="mobile-menu"
-              class="inline-flex items-center justify-center rounded-lg p-2 text-slate-200 ring-1 ring-white/10 transition hover:bg-white/5 md:hidden">
+              class="inline-flex items-center justify-center rounded-lg p-2 text-slate-800 ring-1 ring-slate-200 transition hover:bg-slate-100 md:hidden">
               <svg id="mobile-menu-icon-open" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
               <svg id="mobile-menu-icon-close" class="hidden h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
@@ -148,12 +148,12 @@ const allSchemas = providedTypes.has("LocalBusiness") ? schemas : [...schemas, b
         </div>
         <nav id="mobile-menu" aria-label="Mobile navigation" class="hidden border-t border-[color:var(--brand-border)] md:hidden">
           <div class="mx-auto flex max-w-6xl flex-col gap-1 px-6 py-3">
-            <a href="/services/" class="rounded-lg px-3 py-2.5 text-sm font-medium text-slate-200 transition-colors hover:bg-white/5 hover:text-amber-400">Services</a>
-            <a href="/areas/" class="rounded-lg px-3 py-2.5 text-sm font-medium text-slate-200 transition-colors hover:bg-white/5 hover:text-amber-400">Areas</a>
-            <a href="/gallery/" class="rounded-lg px-3 py-2.5 text-sm font-medium text-slate-200 transition-colors hover:bg-white/5 hover:text-amber-400">Gallery</a>
-            <a href="/blog/" class="rounded-lg px-3 py-2.5 text-sm font-medium text-slate-200 transition-colors hover:bg-white/5 hover:text-amber-400">Blog</a>
-            <a href="/reviews/" class="rounded-lg px-3 py-2.5 text-sm font-medium text-slate-200 transition-colors hover:bg-white/5 hover:text-amber-400">Reviews</a>
-            <a href="/contact/" class="rounded-lg px-3 py-2.5 text-sm font-medium text-slate-200 transition-colors hover:bg-white/5 hover:text-amber-400">Contact</a>
+            <a href="/services/" class="rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 transition-colors hover:bg-slate-100 hover:text-blue-600">Services</a>
+            <a href="/areas/" class="rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 transition-colors hover:bg-slate-100 hover:text-blue-600">Areas</a>
+            <a href="/gallery/" class="rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 transition-colors hover:bg-slate-100 hover:text-blue-600">Gallery</a>
+            <a href="/blog/" class="rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 transition-colors hover:bg-slate-100 hover:text-blue-600">Blog</a>
+            <a href="/reviews/" class="rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 transition-colors hover:bg-slate-100 hover:text-blue-600">Reviews</a>
+            <a href="/contact/" class="rounded-lg px-3 py-2.5 text-sm font-medium text-slate-800 transition-colors hover:bg-slate-100 hover:text-blue-600">Contact</a>
             <a href="tel:+6421638205" data-cta="call" class="btn btn-primary mt-2">Call 021 638 205</a>
           </div>
         </nav>
@@ -165,49 +165,49 @@ const allSchemas = providedTypes.has("LocalBusiness") ? schemas : [...schemas, b
         <div class="mx-auto max-w-6xl px-6 py-12">
           <div class="grid gap-10 md:grid-cols-3">
             <div>
-              <div class="flex items-center gap-2 font-bold text-white">
-                <svg class="h-5 w-5 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <div class="flex items-center gap-2 font-bold text-slate-900">
+                <svg class="h-5 w-5 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <rect x="2" y="2" width="20" height="20" rx="2.5"/>
                   <line x1="2" y1="12" x2="22" y2="12"/>
                   <line x1="12" y1="2" x2="12" y2="12"/>
                 </svg>
                 Window Maintenance
               </div>
-              <p class="mt-3 text-sm leading-relaxed text-slate-400">
+              <p class="mt-3 text-sm leading-relaxed text-slate-600">
                 Aluminium window &amp; sliding door repairs across the Wellington region.
               </p>
-              <a href="tel:+6421638205" data-cta="call" class="mt-5 inline-flex items-center gap-2 rounded-lg bg-amber-500/10 px-4 py-2.5 text-sm font-semibold text-amber-400 ring-1 ring-amber-400/20 transition hover:bg-amber-500/20">
+              <a href="tel:+6421638205" data-cta="call" class="mt-5 inline-flex items-center gap-2 rounded-lg bg-blue-600/10 px-4 py-2.5 text-sm font-semibold text-blue-600 ring-1 ring-blue-600/20 transition hover:bg-blue-600/20">
                 <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.72A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
                 021 638 205
               </a>
             </div>
             <div class="text-sm">
-              <div class="mb-3 font-semibold text-white">Contact</div>
-              <ul class="space-y-2 text-slate-400">
-                <li><a class="transition hover:text-amber-400" href="tel:+6421638205">021 638 205</a></li>
-                <li><a class="transition hover:text-amber-400" href="mailto:baeley@windowmaintenance.co.nz">baeley@windowmaintenance.co.nz</a></li>
-                <li><a class="transition hover:text-amber-400" href="https://www.facebook.com/WindowMaintenanceNZ/">Facebook</a></li>
+              <div class="mb-3 font-semibold text-slate-900">Contact</div>
+              <ul class="space-y-2 text-slate-600">
+                <li><a class="transition hover:text-blue-600" href="tel:+6421638205">021 638 205</a></li>
+                <li><a class="transition hover:text-blue-600" href="mailto:baeley@windowmaintenance.co.nz">baeley@windowmaintenance.co.nz</a></li>
+                <li><a class="transition hover:text-blue-600" href="https://www.facebook.com/WindowMaintenanceNZ/">Facebook</a></li>
                 <li>Wellington region</li>
                 <li>NZBN: 9429052805455</li>
               </ul>
             </div>
             <div class="text-sm">
-              <div class="mb-3 font-semibold text-white">Areas</div>
-              <ul class="space-y-2 text-slate-400">
-                <li><a class="transition hover:text-amber-400" href="/areas/central-wellington/">Central Wellington</a></li>
-                <li><a class="transition hover:text-amber-400" href="/areas/porirua/">Porirua</a></li>
-                <li><a class="transition hover:text-amber-400" href="/areas/lower-hutt/">Lower Hutt</a></li>
-                <li><a class="transition hover:text-amber-400" href="/areas/upper-hutt/">Upper Hutt</a></li>
-                <li><a class="transition hover:text-amber-400" href="/areas/petone/">Petone</a></li>
-                <li><a class="transition hover:text-amber-400" href="/areas/kapiti/">Kāpiti</a></li>
+              <div class="mb-3 font-semibold text-slate-900">Areas</div>
+              <ul class="space-y-2 text-slate-600">
+                <li><a class="transition hover:text-blue-600" href="/areas/central-wellington/">Central Wellington</a></li>
+                <li><a class="transition hover:text-blue-600" href="/areas/porirua/">Porirua</a></li>
+                <li><a class="transition hover:text-blue-600" href="/areas/lower-hutt/">Lower Hutt</a></li>
+                <li><a class="transition hover:text-blue-600" href="/areas/upper-hutt/">Upper Hutt</a></li>
+                <li><a class="transition hover:text-blue-600" href="/areas/petone/">Petone</a></li>
+                <li><a class="transition hover:text-blue-600" href="/areas/kapiti/">Kāpiti</a></li>
               </ul>
             </div>
           </div>
         </div>
-        <div class="border-t border-white/5 py-4 text-center text-xs text-slate-500">
+        <div class="border-t border-slate-200 py-4 text-center text-xs text-slate-500">
           &copy; {new Date().getFullYear()} Window Maintenance &mdash; Wellington, NZ &mdash;
-          <a class="hover:text-amber-400 transition" href="/privacy/">Privacy Policy</a> &mdash;
-          Site by <a class="hover:text-amber-400 transition" href="https://slateseo.co.nz">SlateSEO</a>
+          <a class="hover:text-blue-600 transition" href="/privacy/">Privacy Policy</a> &mdash;
+          Site by <a class="hover:text-blue-600 transition" href="https://slateseo.co.nz">SlateSEO</a>
         </div>
       </footer>
     )}

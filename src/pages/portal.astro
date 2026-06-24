@@ -18,19 +18,19 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
   <link rel="stylesheet" href="/vendor/leaflet/leaflet.css" />
   <script is:inline src="/vendor/leaflet/leaflet.js"></script>
   <section class="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10">
-    <div id="portal-login" class="mx-auto max-w-md rounded-2xl bg-[var(--brand-surface)] p-6 ring-1 ring-white/10">
+    <div id="portal-login" class="mx-auto max-w-md rounded-2xl bg-[var(--brand-surface)] p-6 ring-1 ring-slate-200">
       <h1 class="text-2xl font-extrabold">Job Portal Login</h1>
-      <p class="mt-2 text-sm text-slate-300">Private scheduling portal for day-to-day bookings.</p>
+      <p class="mt-2 text-sm text-slate-700">Private scheduling portal for day-to-day bookings.</p>
       <form id="login-form" class="mt-5 space-y-4">
         <label class="block">
           <span class="text-sm">Username</span>
-          <input id="login-user" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10" autocomplete="username" required />
+          <input id="login-user" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-slate-200" autocomplete="username" required />
         </label>
         <label class="block">
           <span class="text-sm">Password</span>
-          <input id="login-pass" type="password" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10" autocomplete="current-password" required />
+          <input id="login-pass" type="password" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-slate-200" autocomplete="current-password" required />
         </label>
-        <p id="login-error" class="hidden text-sm text-red-300">Incorrect username or password.</p>
+        <p id="login-error" class="hidden text-sm text-red-600">Incorrect username or password.</p>
         <button class="btn btn-primary w-full" type="submit">Sign in</button>
       </form>
     </div>
@@ -39,13 +39,13 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
       <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
         <div>
           <h1 class="text-2xl font-extrabold sm:text-3xl">Job Calendar Portal</h1>
-          <p class="mt-1 text-sm text-slate-300">Add jobs, view daily run sheets, call customers, and open maps in one tap.</p>
-          <p id="portal-status" class="mt-1 text-xs text-slate-400">Connecting to portal...</p>
+          <p class="mt-1 text-sm text-slate-700">Add jobs, view daily run sheets, call customers, and open maps in one tap.</p>
+          <p id="portal-status" class="mt-1 text-xs text-slate-600">Connecting to portal...</p>
         </div>
         <div class="w-full sm:max-w-sm">
           <label class="block">
-            <span class="text-xs text-slate-400">Search jobs</span>
-            <input id="job-search" placeholder="Name, phone, address, notes..." class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-sm ring-1 ring-white/10" />
+            <span class="text-xs text-slate-600">Search jobs</span>
+            <input id="job-search" placeholder="Name, phone, address, notes..." class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-sm ring-1 ring-slate-200" />
           </label>
         </div>
         <div class="grid w-full grid-cols-3 gap-2 sm:flex sm:w-auto sm:items-center">
@@ -55,85 +55,85 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         </div>
       </div>
 
-      <div class="mb-4 rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 md:hidden">
-        <h2 class="text-sm font-semibold uppercase tracking-wide text-amber-300">Quick Day View</h2>
+      <div class="mb-4 rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-slate-200 md:hidden">
+        <h2 class="text-sm font-semibold uppercase tracking-wide text-blue-700">Quick Day View</h2>
         <div class="mt-2 grid grid-cols-3 gap-2">
           <button id="quick-prev-day" class="btn btn-outline w-full px-3 py-2 text-sm" type="button">&larr; Prev</button>
           <button id="quick-next-day" class="btn btn-outline w-full px-3 py-2 text-sm" type="button">Next &rarr;</button>
           <button id="quick-today-day" class="btn btn-primary w-full px-3 py-2 text-sm" type="button">Today</button>
         </div>
         <label class="mt-3 block">
-          <span class="text-xs text-slate-400">Selected day</span>
-          <input id="quick-date" type="date" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10" />
+          <span class="text-xs text-slate-600">Selected day</span>
+          <input id="quick-date" type="date" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-slate-200" />
         </label>
       </div>
 
       <div class="grid gap-4 lg:grid-cols-3">
         <div class="space-y-4 lg:col-span-2">
-          <div class="hidden rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 sm:p-5 md:block">
+          <div class="hidden rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-slate-200 sm:p-5 md:block">
             <div class="mb-4 flex items-center justify-between">
               <button id="month-prev" class="btn btn-outline px-3 py-2 text-sm" type="button">&larr; Prev</button>
               <h2 id="month-label" class="text-lg font-bold"></h2>
               <button id="month-next" class="btn btn-outline px-3 py-2 text-sm" type="button">Next &rarr;</button>
             </div>
-            <div class="grid grid-cols-7 gap-1 text-center text-xs uppercase tracking-wide text-slate-400 sm:gap-2">
+            <div class="grid grid-cols-7 gap-1 text-center text-xs uppercase tracking-wide text-slate-600 sm:gap-2">
               <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
             </div>
             <div id="calendar-grid" class="mt-2 grid grid-cols-7 gap-1 sm:gap-2"></div>
           </div>
 
-          <div class="rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 sm:p-5">
+          <div class="rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-slate-200 sm:p-5">
             <div class="mb-3 flex items-center justify-between">
               <h2 id="day-title" class="text-lg font-bold">Jobs</h2>
-              <span id="day-count" class="rounded-full bg-white/10 px-3 py-1 text-xs text-slate-300">0 jobs</span>
+              <span id="day-count" class="rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-700">0 jobs</span>
             </div>
             <div id="job-list" class="space-y-3"></div>
-            <p id="job-empty" class="text-sm text-slate-400">No jobs for this day.</p>
+            <p id="job-empty" class="text-sm text-slate-600">No jobs for this day.</p>
           </div>
 
-          <div class="rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 sm:p-5">
+          <div class="rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-slate-200 sm:p-5">
             <div class="mb-3 flex items-center justify-between">
               <h2 class="text-lg font-bold">To Be Booked</h2>
-              <span id="unscheduled-count" class="rounded-full bg-white/10 px-3 py-1 text-xs text-slate-300">0 jobs</span>
+              <span id="unscheduled-count" class="rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-700">0 jobs</span>
             </div>
-            <p class="text-sm text-slate-300">Leads waiting for date/time allocation.</p>
+            <p class="text-sm text-slate-700">Leads waiting for date/time allocation.</p>
             <div id="unscheduled-list" class="mt-3 space-y-3"></div>
-            <p id="unscheduled-empty" class="text-sm text-slate-400">No unallocated jobs.</p>
+            <p id="unscheduled-empty" class="text-sm text-slate-600">No unallocated jobs.</p>
           </div>
 
-          <div class="rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 sm:p-5">
+          <div class="rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-slate-200 sm:p-5">
             <div class="mb-3 flex items-center justify-between">
               <h2 class="text-lg font-bold">Job Heatmap</h2>
-              <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-slate-300">Area load</span>
+              <span class="rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-700">Area load</span>
             </div>
-            <p class="text-sm text-slate-300">Filter by month and day to see where your jobs are clustered.</p>
+            <p class="text-sm text-slate-700">Filter by month and day to see where your jobs are clustered.</p>
             <div class="mt-3 grid gap-3 sm:grid-cols-2">
               <label class="block">
-                <span class="text-xs text-slate-400">Month</span>
-                <input id="heatmap-month" type="month" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10" />
+                <span class="text-xs text-slate-600">Month</span>
+                <input id="heatmap-month" type="month" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-slate-200" />
               </label>
               <label class="block">
-                <span class="text-xs text-slate-400">Day</span>
-                <select id="heatmap-day" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10"></select>
+                <span class="text-xs text-slate-600">Day</span>
+                <select id="heatmap-day" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-slate-200"></select>
               </label>
             </div>
-            <p id="heatmap-summary" class="mt-3 text-sm text-slate-300">No jobs loaded.</p>
+            <p id="heatmap-summary" class="mt-3 text-sm text-slate-700">No jobs loaded.</p>
             <div class="mt-2 flex flex-wrap items-center gap-2">
-              <code id="heatmap-line" class="rounded bg-[var(--brand-bg)] px-2 py-1 text-xs text-amber-300">I am in Wellington today.</code>
+              <code id="heatmap-line" class="rounded bg-[var(--brand-bg)] px-2 py-1 text-xs text-blue-700">I am in Wellington today.</code>
               <button id="heatmap-copy-line" type="button" class="btn btn-outline px-2 py-1 text-xs">Copy line</button>
             </div>
             <div id="heatmap-grid" class="mt-3 grid gap-2 sm:grid-cols-2"></div>
-            <div id="jobs-map" class="mt-3 h-[260px] w-full rounded-xl ring-1 ring-white/10 sm:h-[320px] lg:h-[380px]"></div>
-            <p id="map-summary" class="mt-2 text-xs text-slate-400">Map loads from saved job addresses.</p>
+            <div id="jobs-map" class="mt-3 h-[260px] w-full rounded-xl ring-1 ring-slate-200 sm:h-[320px] lg:h-[380px]"></div>
+            <p id="map-summary" class="mt-2 text-xs text-slate-600">Map loads from saved job addresses.</p>
           </div>
         </div>
 
         <div class="space-y-4">
-          <div id="job-detail-panel" class="hidden rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 sm:p-5">
+          <div id="job-detail-panel" class="hidden rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-slate-200 sm:p-5">
             <div class="flex items-start justify-between gap-3">
               <div>
                 <h2 id="job-detail-title" class="text-lg font-bold">Job detail</h2>
-                <p id="job-detail-meta" class="mt-1 text-sm text-slate-300"></p>
+                <p id="job-detail-meta" class="mt-1 text-sm text-slate-700"></p>
               </div>
               <div class="flex gap-2">
                 <button id="job-detail-follow-up" class="btn btn-primary px-3 py-2 text-xs" type="button">New booking</button>
@@ -142,46 +142,46 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
             </div>
             <div id="job-detail-summary" class="mt-4 grid gap-2 sm:grid-cols-2"></div>
             <div class="mt-4">
-              <h3 class="text-sm font-semibold uppercase tracking-wide text-amber-300">Bookings &amp; visits</h3>
+              <h3 class="text-sm font-semibold uppercase tracking-wide text-blue-700">Bookings &amp; visits</h3>
               <div id="job-detail-visits" class="mt-3 space-y-3"></div>
             </div>
           </div>
 
-          <div class="rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 sm:p-5">
+          <div class="rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-slate-200 sm:p-5">
           <h2 id="form-title" class="text-lg font-bold">Add Job</h2>
           <form id="job-form" class="mt-4 space-y-3">
             <label class="block">
               <span class="text-sm">Date</span>
-              <input id="job-date" type="date" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10" required />
+              <input id="job-date" type="date" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-slate-200" required />
             </label>
             <label class="block">
               <span class="text-sm">Time</span>
-              <input id="job-time" type="time" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10" required />
+              <input id="job-time" type="time" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-slate-200" required />
             </label>
             <label class="block">
               <span class="text-sm">Customer name</span>
-              <input id="job-customer" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10" required />
+              <input id="job-customer" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-slate-200" required />
             </label>
             <label class="block">
               <span class="text-sm">Phone number</span>
-              <input id="job-phone" type="tel" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10" required />
+              <input id="job-phone" type="tel" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-slate-200" required />
             </label>
             <label class="block">
               <span class="text-sm">Address</span>
-              <input id="job-address" list="address-suggestions" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10" required />
+              <input id="job-address" list="address-suggestions" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-slate-200" required />
               <datalist id="address-suggestions"></datalist>
-              <span id="address-hint" class="mt-1 block text-xs text-slate-400">Start typing address (suburb/street) for suggestions.</span>
+              <span id="address-hint" class="mt-1 block text-xs text-slate-600">Start typing address (suburb/street) for suggestions.</span>
             </label>
-            <div id="duplicate-hint" class="hidden rounded-lg bg-amber-500/10 px-3 py-2 text-xs text-amber-200 ring-1 ring-amber-300/20">
+            <div id="duplicate-hint" class="hidden rounded-lg bg-blue-600/10 px-3 py-2 text-xs text-blue-700 ring-1 ring-blue-700/20">
               Similar job already exists for this customer/contact. Save anyway only if this is a separate booking.
             </div>
             <label class="block">
               <span class="text-sm">Short job description</span>
-              <textarea id="job-summary" rows="3" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10" required></textarea>
+              <textarea id="job-summary" rows="3" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-slate-200" required></textarea>
             </label>
             <label class="block">
               <span class="text-sm">Status</span>
-              <select id="job-status" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10">
+              <select id="job-status" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-slate-200">
                 <option value="Booked">Booked</option>
                 <option value="Quoted">Quoted</option>
                 <option value="Awaiting parts">Awaiting parts</option>
@@ -191,8 +191,8 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
                 <option value="Cancelled">Cancelled</option>
               </select>
             </label>
-            <label class="flex items-center gap-2 rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-white/10">
-              <input id="job-unscheduled" type="checkbox" class="h-4 w-4 accent-amber-400" />
+            <label class="flex items-center gap-2 rounded-lg bg-[var(--brand-bg)] px-3 py-2 ring-1 ring-slate-200">
+              <input id="job-unscheduled" type="checkbox" class="h-4 w-4 accent-blue-600" />
               <span class="text-sm">To be booked (no date/time yet)</span>
             </label>
             <div class="flex flex-wrap gap-2 pt-1">
@@ -200,69 +200,69 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
               <button id="job-clear" class="btn btn-outline" type="button">Clear</button>
             </div>
           </form>
-          <p class="mt-3 text-xs text-slate-400">Tip: tap customer phone to call, or address to open Google Maps.</p>
+          <p class="mt-3 text-xs text-slate-600">Tip: tap customer phone to call, or address to open Google Maps.</p>
           </div>
         </div>
       </div>
 
       <div class="mt-6 grid gap-4 lg:grid-cols-3">
-        <div class="rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 sm:p-5 lg:col-span-1">
+        <div class="rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-slate-200 sm:p-5 lg:col-span-1">
           <div class="mb-3 flex items-center justify-between">
             <div>
               <h2 class="text-lg font-bold">Blog Drafts</h2>
-              <p class="mt-1 text-sm text-slate-300">Portal drafts only. Download or copy markdown when ready to publish on the site.</p>
+              <p class="mt-1 text-sm text-slate-700">Portal drafts only. Download or copy markdown when ready to publish on the site.</p>
             </div>
-            <span id="blog-count" class="rounded-full bg-white/10 px-3 py-1 text-xs text-slate-300">0 drafts</span>
+            <span id="blog-count" class="rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-700">0 drafts</span>
           </div>
           <div id="blog-list" class="space-y-3"></div>
-          <p id="blog-empty" class="text-sm text-slate-400">No blog drafts yet.</p>
-          <div class="mt-4 border-t border-white/10 pt-4">
+          <p id="blog-empty" class="text-sm text-slate-600">No blog drafts yet.</p>
+          <div class="mt-4 border-t border-slate-200 pt-4">
             <div class="mb-3 flex items-center justify-between">
-              <h3 class="text-sm font-semibold uppercase tracking-wide text-slate-300">Trash</h3>
-              <span id="blog-trash-count" class="rounded-full bg-white/10 px-3 py-1 text-xs text-slate-300">0 deleted</span>
+              <h3 class="text-sm font-semibold uppercase tracking-wide text-slate-700">Trash</h3>
+              <span id="blog-trash-count" class="rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-700">0 deleted</span>
             </div>
             <div id="blog-trash-list" class="space-y-3"></div>
-            <p id="blog-trash-empty" class="text-sm text-slate-400">No deleted drafts.</p>
+            <p id="blog-trash-empty" class="text-sm text-slate-600">No deleted drafts.</p>
           </div>
         </div>
 
-        <div class="rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-white/10 sm:p-5 lg:col-span-2">
+        <div class="rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-slate-200 sm:p-5 lg:col-span-2">
           <div class="mb-3 flex items-start justify-between gap-3">
             <div>
               <h2 id="blog-form-title" class="text-lg font-bold">Create Blog Draft</h2>
-              <p class="mt-1 text-sm text-slate-300">Write the post once here, then copy or download markdown ready for the Astro blog collection.</p>
+              <p class="mt-1 text-sm text-slate-700">Write the post once here, then copy or download markdown ready for the Astro blog collection.</p>
             </div>
-            <code id="blog-preview-path" class="rounded bg-[var(--brand-bg)] px-2 py-1 text-xs text-amber-300">/blog/your-slug/</code>
+            <code id="blog-preview-path" class="rounded bg-[var(--brand-bg)] px-2 py-1 text-xs text-blue-700">/blog/your-slug/</code>
           </div>
           <form id="blog-form" class="space-y-3">
             <div class="grid gap-3 sm:grid-cols-2">
               <label class="block">
                 <span class="text-sm">Title</span>
-                <input id="blog-title" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10" required />
+                <input id="blog-title" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-slate-200" required />
               </label>
               <label class="block">
                 <span class="text-sm">Slug</span>
-                <input id="blog-slug" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10" placeholder="digital-locks-wellington" required />
+                <input id="blog-slug" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-slate-200" placeholder="digital-locks-wellington" required />
               </label>
             </div>
             <div class="grid gap-3 sm:grid-cols-3">
               <label class="block sm:col-span-2">
                 <span class="text-sm">Meta description</span>
-                <input id="blog-description" maxlength="160" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10" required />
+                <input id="blog-description" maxlength="160" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-slate-200" required />
               </label>
               <label class="block">
                 <span class="text-sm">Publish date</span>
-                <input id="blog-date" type="date" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10" required />
+                <input id="blog-date" type="date" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-slate-200" required />
               </label>
             </div>
             <div class="grid gap-3 sm:grid-cols-2">
               <label class="block">
                 <span class="text-sm">Hero image path</span>
-                <input id="blog-hero-image" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10" placeholder="/img/example.webp" />
+                <input id="blog-hero-image" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-slate-200" placeholder="/img/example.webp" />
               </label>
               <label class="block">
                 <span class="text-sm">Status</span>
-                <select id="blog-status" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-white/10">
+                <select id="blog-status" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-base ring-1 ring-slate-200">
                   <option value="Draft">Draft</option>
                   <option value="Ready">Ready</option>
                   <option value="Published">Published</option>
@@ -271,7 +271,7 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
             </div>
             <label class="block">
               <span class="text-sm">Markdown content</span>
-              <textarea id="blog-body" rows="14" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-sm ring-1 ring-white/10" required></textarea>
+              <textarea id="blog-body" rows="14" class="mt-1 w-full rounded-lg bg-[var(--brand-bg)] px-3 py-2 text-sm ring-1 ring-slate-200" required></textarea>
             </label>
             <div class="flex flex-wrap gap-2">
               <button id="blog-save" class="btn btn-primary" type="submit">Save draft</button>
@@ -419,15 +419,15 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         "Booked": "bg-blue-500/20 text-blue-200",
         "Quoted": "bg-cyan-500/20 text-cyan-200",
         "Awaiting parts": "bg-yellow-500/20 text-yellow-200",
-        "In progress": "bg-amber-500/20 text-amber-200",
+        "In progress": "bg-blue-600/20 text-blue-700",
         "Reschedule": "bg-orange-500/20 text-orange-200",
-        "Done": "bg-emerald-500/20 text-emerald-200",
+        "Done": "bg-emerald-500/20 text-emerald-800",
         "Cancelled": "bg-rose-500/20 text-rose-200"
       };
       const BLOG_STATUS_BADGE_CLASS = {
-        "Draft": "bg-slate-500/20 text-slate-200",
-        "Ready": "bg-amber-500/20 text-amber-200",
-        "Published": "bg-emerald-500/20 text-emerald-200"
+        "Draft": "bg-slate-500/20 text-slate-800",
+        "Ready": "bg-blue-600/20 text-blue-700",
+        "Published": "bg-emerald-500/20 text-emerald-800"
       };
 
       function dateKey(d) {
@@ -525,7 +525,7 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
       }
 
       function getBlogStatusBadgeClass(status) {
-        return BLOG_STATUS_BADGE_CLASS[status] || "bg-white/10 text-slate-200";
+        return BLOG_STATUS_BADGE_CLASS[status] || "bg-slate-100 text-slate-800";
       }
 
       function escapeYamlString(v) {
@@ -613,7 +613,7 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
       }
 
       function getStatusBadgeClass(status) {
-        return STATUS_BADGE_CLASS[status] || "bg-white/10 text-slate-200";
+        return STATUS_BADGE_CLASS[status] || "bg-slate-100 text-slate-800";
       }
 
       function getJobFamilyId(job) {
@@ -853,8 +853,8 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
 
       function setPortalStatus(message, isError) {
         el.portalStatus.textContent = message;
-        el.portalStatus.classList.toggle("text-red-300", Boolean(isError));
-        el.portalStatus.classList.toggle("text-slate-400", !isError);
+        el.portalStatus.classList.toggle("text-red-600", Boolean(isError));
+        el.portalStatus.classList.toggle("text-slate-600", !isError);
       }
 
       function showLogin() {
@@ -1219,10 +1219,10 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
           const area = entry[0];
           const count = entry[1];
           const ratio = maxCount > 0 ? count / maxCount : 0;
-          let tone = "bg-white/5 ring-white/10 text-slate-300";
-          if (ratio >= 0.8) tone = "bg-amber-500/25 ring-amber-300/60 text-amber-100";
-          else if (ratio >= 0.5) tone = "bg-amber-500/18 ring-amber-300/45 text-amber-200";
-          else if (ratio > 0) tone = "bg-amber-500/12 ring-amber-300/30 text-slate-100";
+          let tone = "bg-slate-100 ring-slate-200 text-slate-700";
+          if (ratio >= 0.8) tone = "bg-blue-600/25 ring-blue-700/60 text-blue-800";
+          else if (ratio >= 0.5) tone = "bg-blue-600/18 ring-blue-700/45 text-blue-700";
+          else if (ratio > 0) tone = "bg-blue-600/12 ring-blue-700/30 text-slate-100";
 
           const card = document.createElement("div");
           card.className = "rounded-xl p-3 ring-1 " + tone;
@@ -1267,17 +1267,17 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
           btn.dataset.date = key;
           btn.className =
             "relative min-h-[74px] rounded-lg border px-2 py-1 text-left transition " +
-            (isCurrentMonth ? "border-white/10 bg-[var(--brand-bg)]" : "border-white/5 bg-[var(--brand-bg)]/50 text-slate-500") +
-            (isSelected ? " ring-2 ring-amber-400" : " hover:border-amber-400/40");
+            (isCurrentMonth ? "border-slate-200 bg-[var(--brand-bg)]" : "border-slate-200 bg-[var(--brand-bg)]/50 text-slate-500") +
+            (isSelected ? " ring-2 ring-blue-600" : " hover:border-blue-600/40");
 
           const day = document.createElement("div");
-          day.className = "text-sm font-semibold " + (isToday ? "text-amber-300" : "");
+          day.className = "text-sm font-semibold " + (isToday ? "text-blue-700" : "");
           day.textContent = String(d.getDate());
           btn.appendChild(day);
 
           if (count > 0) {
             const badge = document.createElement("div");
-            badge.className = "mt-2 inline-flex rounded-full bg-amber-500/20 px-2 py-0.5 text-xs text-amber-300";
+            badge.className = "mt-2 inline-flex rounded-full bg-blue-600/20 px-2 py-0.5 text-xs text-blue-700";
             badge.textContent = count + " job" + (count > 1 ? "s" : "");
             btn.appendChild(badge);
           }
@@ -1336,13 +1336,13 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
           const familyRef = safeText(j.familyRef || getJobRef(j));
           const visitLabel = 'Visit ' + safeText(j.visitNumber || 1) + ' of ' + safeText(j.familyCount || 1);
           const card = document.createElement("article");
-          card.className = "rounded-xl bg-[var(--brand-bg)] p-4 ring-1 ring-white/10";
+          card.className = "rounded-xl bg-[var(--brand-bg)] p-4 ring-1 ring-slate-200";
           card.innerHTML =
             '<div class="flex items-start justify-between gap-2">' +
               '<div>' +
                 '<h3 class="font-semibold">' + safeText(j.customer) + '</h3>' +
-                '<p class="mt-1 text-xs text-slate-400">' + whenLabel + "</p>" +
-                '<p class="mt-1 text-xs text-slate-400"><a class="underline" target="_blank" rel="noreferrer" href="/portal/?job=' + encodeURIComponent(j.familyId || getJobFamilyId(j)) + '">Job ' + familyRef + '</a> • ' + visitLabel + '</p>' +
+                '<p class="mt-1 text-xs text-slate-600">' + whenLabel + "</p>" +
+                '<p class="mt-1 text-xs text-slate-600"><a class="underline" target="_blank" rel="noreferrer" href="/portal/?job=' + encodeURIComponent(j.familyId || getJobFamilyId(j)) + '">Job ' + familyRef + '</a> • ' + visitLabel + '</p>' +
                 '<span class="mt-1 inline-flex rounded-full px-2 py-0.5 text-xs ' + statusClass + '">' + safeText(status) + "</span>" +
               "</div>" +
               '<div class="flex gap-2">' +
@@ -1350,13 +1350,13 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
                 '<button type="button" data-action="delete" data-id="' + safeText(j.id) + '" class="btn btn-outline px-3 py-1 text-xs">Delete</button>' +
               "</div>" +
             "</div>" +
-            '<p class="mt-2 text-sm text-slate-200">' + safeText(j.summary) + "</p>" +
+            '<p class="mt-2 text-sm text-slate-800">' + safeText(j.summary) + "</p>" +
             '<div class="mt-3 grid grid-cols-3 gap-2 sm:flex sm:flex-wrap">' +
               '<a class="btn btn-primary w-full justify-center px-3 py-1 text-xs sm:w-auto" href="tel:' + safeText(j.phone) + '">Call</a>' +
               '<a class="btn btn-secondary w-full justify-center px-3 py-1 text-xs sm:w-auto" target="_blank" rel="noreferrer" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(j.address) + '">Maps</a>' +
               '<button type="button" data-action="follow-up" data-id="' + safeText(j.id) + '" class="btn btn-outline w-full justify-center px-3 py-1 text-xs sm:w-auto">New visit</button>' +
             "</div>" +
-            '<p class="mt-2 text-xs text-slate-400">' + safeText(j.address) + "</p>";
+            '<p class="mt-2 text-xs text-slate-600">' + safeText(j.address) + "</p>";
           el.jobList.appendChild(card);
         }
       }
@@ -1390,13 +1390,13 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         for (const j of jobs) {
           const familyRef = safeText(j.familyRef || getJobRef(j));
           const card = document.createElement("article");
-          card.className = "rounded-xl bg-[var(--brand-bg)] p-4 ring-1 ring-white/10";
+          card.className = "rounded-xl bg-[var(--brand-bg)] p-4 ring-1 ring-slate-200";
           card.innerHTML =
             '<div class="flex items-start justify-between gap-2">' +
               '<div>' +
                 '<h3 class="font-semibold">' + safeText(j.customer) + '</h3>' +
-                '<p class="text-xs text-amber-300">To be booked</p>' +
-                '<p class="mt-1 text-xs text-slate-400"><a class="underline" target="_blank" rel="noreferrer" href="/portal/?job=' + encodeURIComponent(j.familyId || getJobFamilyId(j)) + '">Job ' + familyRef + '</a> • Visit ' + safeText(j.visitNumber || 1) + ' of ' + safeText(j.familyCount || 1) + '</p>' +
+                '<p class="text-xs text-blue-700">To be booked</p>' +
+                '<p class="mt-1 text-xs text-slate-600"><a class="underline" target="_blank" rel="noreferrer" href="/portal/?job=' + encodeURIComponent(j.familyId || getJobFamilyId(j)) + '">Job ' + familyRef + '</a> • Visit ' + safeText(j.visitNumber || 1) + ' of ' + safeText(j.familyCount || 1) + '</p>' +
               "</div>" +
               '<div class="flex gap-2">' +
                 '<button type="button" data-action="schedule" data-id="' + safeText(j.id) + '" class="btn btn-primary px-3 py-1 text-xs">Schedule</button>' +
@@ -1404,13 +1404,13 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
                 '<button type="button" data-action="delete" data-id="' + safeText(j.id) + '" class="btn btn-outline px-3 py-1 text-xs">Delete</button>' +
               "</div>" +
             "</div>" +
-            '<p class="mt-2 text-sm text-slate-200">' + safeText(j.summary) + "</p>" +
+            '<p class="mt-2 text-sm text-slate-800">' + safeText(j.summary) + "</p>" +
             '<div class="mt-3 grid grid-cols-3 gap-2 sm:flex sm:flex-wrap">' +
               '<a class="btn btn-primary w-full justify-center px-3 py-1 text-xs sm:w-auto" href="tel:' + safeText(j.phone) + '">Call</a>' +
               '<a class="btn btn-secondary w-full justify-center px-3 py-1 text-xs sm:w-auto" target="_blank" rel="noreferrer" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(j.address) + '">Maps</a>' +
               '<button type="button" data-action="follow-up" data-id="' + safeText(j.id) + '" class="btn btn-outline w-full justify-center px-3 py-1 text-xs sm:w-auto">New visit</button>' +
             "</div>" +
-            '<p class="mt-2 text-xs text-slate-400">' + safeText(j.address) + "</p>";
+            '<p class="mt-2 text-xs text-slate-600">' + safeText(j.address) + "</p>";
           el.unscheduledList.appendChild(card);
         }
       }
@@ -1457,8 +1457,8 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
         ];
 
         el.jobDetailSummary.innerHTML = summaryCards.map(function (item) {
-          return '<div class="rounded-xl bg-[var(--brand-bg)] p-3 ring-1 ring-white/10">' +
-            '<p class="text-xs uppercase tracking-wide text-slate-400">' + safeText(item[0]) + '</p>' +
+          return '<div class="rounded-xl bg-[var(--brand-bg)] p-3 ring-1 ring-slate-200">' +
+            '<p class="text-xs uppercase tracking-wide text-slate-600">' + safeText(item[0]) + '</p>' +
             '<p class="mt-1 text-base font-semibold">' + safeText(item[1]) + '</p>' +
           '</div>';
         }).join("");
@@ -1470,10 +1470,10 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
             ? "To be booked"
             : safeText(job.date + (job.time ? " • " + job.time : ""));
 
-          return '<article class="rounded-xl bg-[var(--brand-bg)] p-4 ring-1 ring-white/10">' +
+          return '<article class="rounded-xl bg-[var(--brand-bg)] p-4 ring-1 ring-slate-200">' +
             '<div class="flex items-start justify-between gap-3">' +
               '<div>' +
-                '<p class="text-xs uppercase tracking-wide text-amber-300">Visit ' + safeText(job.visitNumber) + ' of ' + safeText(job.familyCount) + '</p>' +
+                '<p class="text-xs uppercase tracking-wide text-blue-700">Visit ' + safeText(job.visitNumber) + ' of ' + safeText(job.familyCount) + '</p>' +
                 '<p class="mt-1 text-sm font-semibold">' + when + '</p>' +
                 '<span class="mt-2 inline-flex rounded-full px-2 py-0.5 text-xs ' + statusClass + '">' + safeText(status) + '</span>' +
               '</div>' +
@@ -1482,7 +1482,7 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
                 '<button type="button" data-action="edit" data-id="' + safeText(job.id) + '" class="btn btn-outline px-3 py-1 text-xs">Edit</button>' +
               '</div>' +
             '</div>' +
-            '<p class="mt-3 text-sm text-slate-200">' + safeText(job.summary) + '</p>' +
+            '<p class="mt-3 text-sm text-slate-800">' + safeText(job.summary) + '</p>' +
             '<div class="mt-3 grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">' +
               '<a class="btn btn-primary w-full justify-center px-3 py-1 text-xs sm:w-auto" href="tel:' + safeText(job.phone) + '">Call</a>' +
               '<a class="btn btn-secondary w-full justify-center px-3 py-1 text-xs sm:w-auto" target="_blank" rel="noreferrer" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(job.address) + '">Maps</a>' +
@@ -1599,12 +1599,12 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
 
         for (const blog of activeBlogs) {
           const card = document.createElement("article");
-          card.className = "rounded-xl bg-[var(--brand-bg)] p-4 ring-1 ring-white/10";
+          card.className = "rounded-xl bg-[var(--brand-bg)] p-4 ring-1 ring-slate-200";
           card.innerHTML =
             '<div class="flex items-start justify-between gap-3">' +
               '<div>' +
                 '<p class="text-sm font-semibold">' + safeText(blog.title) + '</p>' +
-                '<p class="mt-1 text-xs text-slate-400">/blog/' + safeText(blog.slug) + '/</p>' +
+                '<p class="mt-1 text-xs text-slate-600">/blog/' + safeText(blog.slug) + '/</p>' +
                 '<span class="mt-2 inline-flex rounded-full px-2 py-0.5 text-xs ' + getBlogStatusBadgeClass(blog.status) + '">' + safeText(blog.status) + '</span>' +
               '</div>' +
               '<div class="flex gap-2">' +
@@ -1612,12 +1612,12 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
                 '<button type="button" data-action="delete" data-id="' + safeText(blog.id) + '" class="btn btn-outline px-3 py-1 text-xs">Trash</button>' +
               '</div>' +
             '</div>' +
-            '<p class="mt-3 text-sm text-slate-300">' + safeText(blog.description) + '</p>' +
+            '<p class="mt-3 text-sm text-slate-700">' + safeText(blog.description) + '</p>' +
             '<div class="mt-3 flex flex-wrap gap-2">' +
               '<button type="button" data-action="copy" data-id="' + safeText(blog.id) + '" class="btn btn-secondary px-3 py-1 text-xs">Copy markdown</button>' +
               '<button type="button" data-action="download" data-id="' + safeText(blog.id) + '" class="btn btn-outline px-3 py-1 text-xs">Download .md</button>' +
             '</div>' +
-            '<p class="mt-2 text-xs text-slate-400">Updated ' + safeText(blog.updatedAt || blog.createdAt || "") + '</p>';
+            '<p class="mt-2 text-xs text-slate-600">Updated ' + safeText(blog.updatedAt || blog.createdAt || "") + '</p>';
           el.blogList.appendChild(card);
         }
 
@@ -1630,12 +1630,12 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
 
         for (const blog of deletedBlogs) {
           const card = document.createElement("article");
-          card.className = "rounded-xl bg-[var(--brand-bg)] p-4 ring-1 ring-white/10 opacity-80";
+          card.className = "rounded-xl bg-[var(--brand-bg)] p-4 ring-1 ring-slate-200 opacity-80";
           card.innerHTML =
             '<div class="flex items-start justify-between gap-3">' +
               '<div>' +
                 '<p class="text-sm font-semibold">' + safeText(blog.title) + '</p>' +
-                '<p class="mt-1 text-xs text-slate-400">/blog/' + safeText(blog.slug) + '/</p>' +
+                '<p class="mt-1 text-xs text-slate-600">/blog/' + safeText(blog.slug) + '/</p>' +
                 '<span class="mt-2 inline-flex rounded-full px-2 py-0.5 text-xs bg-rose-500/20 text-rose-200">Deleted</span>' +
               '</div>' +
               '<div class="flex gap-2">' +
@@ -1643,8 +1643,8 @@ const canonical = "https://windowmaintenance.co.nz/portal/";
                 '<button type="button" data-action="purge" data-id="' + safeText(blog.id) + '" class="btn btn-outline px-3 py-1 text-xs">Delete forever</button>' +
               '</div>' +
             '</div>' +
-            '<p class="mt-3 text-sm text-slate-300">' + safeText(blog.description) + '</p>' +
-            '<p class="mt-2 text-xs text-slate-400">Deleted draft last updated ' + safeText(blog.updatedAt || blog.createdAt || "") + '</p>';
+            '<p class="mt-3 text-sm text-slate-700">' + safeText(blog.description) + '</p>' +
+            '<p class="mt-2 text-xs text-slate-600">Deleted draft last updated ' + safeText(blog.updatedAt || blog.createdAt || "") + '</p>';
           el.blogTrashList.appendChild(card);
         }
       }

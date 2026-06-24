@@ -16,8 +16,8 @@ const breadcrumbSchema = {
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)}></script>
 )}
 <nav aria-label="Breadcrumb" class="mx-auto max-w-6xl px-6 py-4 text-sm">
-  <ol class="flex gap-2 text-slate-400">
-    <li><a href="/" class="hover:text-amber-400">Home</a></li>
-    {crumbs.map(c => (<li class="flex items-center gap-2">/ <a href={c.href} class="hover:text-amber-400">{c.label}</a></li>))}
+  <ol class="flex gap-2 text-slate-600">
+    <li><a href="/" class="hover:text-blue-600">Home</a></li>
+    {crumbs.map(c => (<li class="flex items-center gap-2">/ <a href={c.href} class="hover:text-blue-600">{c.label}</a></li>))}
   </ol>
 </nav>
