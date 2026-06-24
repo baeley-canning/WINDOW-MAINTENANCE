@@ -2,7 +2,19 @@
 const segments = Astro.url.pathname.replace(/\/+$/,'').split('/').filter(Boolean);
 let acc = '';
 const crumbs = segments.map((seg) => { acc += '/' + seg; return { label: seg.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase()), href: acc + '/' }; });
+const origin = Astro.site ? Astro.site.origin : "https://windowmaintenance.co.nz";
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: origin + "/" },
+    ...crumbs.map((c, i) => ({ "@type": "ListItem", position: i + 2, name: c.label, item: origin + c.href })),
+  ],
+};
 ---
+{crumbs.length > 0 && (
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)}></script>
+)}
 <nav aria-label="Breadcrumb" class="mx-auto max-w-6xl px-6 py-4 text-sm">
   <ol class="flex gap-2 text-slate-400">
     <li><a href="/" class="hover:text-amber-400">Home</a></li>
