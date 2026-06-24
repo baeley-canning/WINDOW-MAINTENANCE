@@ -1,1 +1,12 @@
 node_modules
+
+# Build output — CI rebuilds this from source on every deploy, so it is not tracked
+dist
+.astro
+
+# Deploy / OS / editor cruft
+.ftp-deploy-sync-state.json
+.DS_Store
+
+# Archives / backups
+*.zip
