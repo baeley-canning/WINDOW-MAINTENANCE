@@ -9,9 +9,13 @@ const description = "Aluminium window repairs Wellington — window handles, Yal
 const canonical = "https://windowmaintenance.co.nz/services/window-repairs/";
 
 const faqItems = [
-  { q: "Do you repair single and double glazed aluminium windows?", a: "Yes. We work on both single- and double-glazed aluminium windows, including stays, hinges, seals and alignment." },
-  { q: "Do you replace stays and hinges in coastal areas?", a: "Yes. We carry corrosion-resistant hardware and fit stays and hinges suited to Wellington and Porirua coastal conditions." },
-  { q: "Can you fix drafts in older aluminium windows?", a: "We replace wedges and seals, service latches and re-align sashes to stop rattles and drafts." },
+  { q: "Do you repair single and double glazed aluminium windows?", a: "Yes. We work on both single- and double-glazed aluminium windows, including stays, hinges, handles, locks, seals and sash alignment." },
+  { q: "Can you repair the window instead of replacing it?", a: "Almost always. Most problems are worn hardware, perished seals or a dropped sash rather than the frame or glass, so a repair restores the window for a fraction of replacement cost." },
+  { q: "How much do aluminium window repairs cost?", a: "It depends on the part and how many windows are involved — a single stay, hinge, handle or lock is a small job, while several windows or matched hardware costs more. Send a photo and your suburb and we will give a guide price, usually the same day." },
+  { q: "Can you match old or discontinued aluminium window hardware?", a: "Often yes. We carry common profiles and work with national suppliers to match out-of-production stays, hinges, handles, wedges and locks." },
+  { q: "Do you replace stays and hinges in coastal areas?", a: "Yes. We carry corrosion-resistant hardware and fit stays and hinges suited to Wellington, Porirua and Petone coastal conditions where salt air shortens hardware life." },
+  { q: "Can you fix draughts and rattles in older aluminium windows?", a: "Yes. We replace wedges and seals, service latches and re-align sashes to stop rattles, whistling and draughts." },
+  { q: "Do you do aluminium window repairs for rentals and property managers?", a: "Yes. We handle rental and property-management repairs across the region and can quote, invoice and report per job." },
 ];
 
 const faqSchema = {
@@ -23,8 +27,31 @@ const faqSchema = {
     acceptedAnswer: { "@type": "Answer", text: item.a },
   })),
 };
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Aluminium Window Repairs Wellington",
+  serviceType: "Aluminium window repair",
+  description: "Repairs for single- and double-glazed aluminium windows — awning stays, hinges, handles, Yale window locks, latches, wedges, seals, sash alignment and draught fixes across the Wellington region.",
+  url: canonical,
+  areaServed: [
+    { "@type": "Place", name: "Wellington" },
+    { "@type": "Place", name: "Porirua" },
+    { "@type": "Place", name: "Lower Hutt" },
+    { "@type": "Place", name: "Upper Hutt" },
+    { "@type": "Place", name: "Petone" },
+    { "@type": "Place", name: "Kāpiti" },
+  ],
+  provider: {
+    "@type": "LocalBusiness",
+    name: "Window Maintenance",
+    url: "https://windowmaintenance.co.nz",
+    telephone: "+6421638205",
+  },
+};
 ---
-<Layout title={title} description={description} canonical={canonical} schema={[faqSchema]}>
+<Layout title={title} description={description} canonical={canonical} schema={[faqSchema, serviceSchema]}>
   <Breadcrumbs />
   <main class="mx-auto max-w-4xl px-6 py-12">
     <h1 class="text-3xl font-extrabold">Aluminium Window Repairs</h1>
@@ -43,6 +70,42 @@ const faqSchema = {
         <h2 class="text-lg font-bold">What happens next</h2>
         <p class="mt-2 text-sm text-slate-300">Send the suburb and issue. We usually reply the same day with likely parts, pricing guidance and the next available booking.</p>
       </div>
+    </section>
+
+    <section class="mt-10">
+      <h2 class="text-2xl font-bold">Aluminium window types we repair</h2>
+      <p class="mt-3 text-slate-300">Most Wellington homes have aluminium joinery from a handful of common window styles. We repair the hardware, seals and alignment on all of them rather than replacing the whole window.</p>
+      <div class="mt-5 grid gap-4 sm:grid-cols-2">
+        <div class="rounded-xl bg-[var(--brand-surface)] p-5 ring-1 ring-white/10">
+          <h3 class="font-bold text-white">Awning windows</h3>
+          <p class="mt-2 text-sm text-slate-300">The most common style in NZ aluminium joinery. We replace bent or seized awning stays and restrictors, service hinges and re-align the sash so it opens, holds position and seals shut again.</p>
+        </div>
+        <div class="rounded-xl bg-[var(--brand-surface)] p-5 ring-1 ring-white/10">
+          <h3 class="font-bold text-white">Casement windows</h3>
+          <p class="mt-2 text-sm text-slate-300">Side-hung sashes that swing out. We sort stiff or dropped hinges, worn handles and latches that no longer pull the sash in tight.</p>
+        </div>
+        <div class="rounded-xl bg-[var(--brand-surface)] p-5 ring-1 ring-white/10">
+          <h3 class="font-bold text-white">Sliding aluminium windows</h3>
+          <p class="mt-2 text-sm text-slate-300">Horizontal sliders that drag, jump the track or won't catch. We clean and refurbish tracks, replace rollers and catches and get them sliding and locking smoothly.</p>
+        </div>
+        <div class="rounded-xl bg-[var(--brand-surface)] p-5 ring-1 ring-white/10">
+          <h3 class="font-bold text-white">Double-hung &amp; fixed windows</h3>
+          <p class="mt-2 text-sm text-slate-300">Double-hung sashes with tired balances or catches, plus fixed lights leaking around perished wedges and seals — re-sealed and serviced so they stop draughts and water.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-10 rounded-2xl bg-[var(--brand-surface)] p-6 ring-1 ring-white/10">
+      <h2 class="text-2xl font-bold">Signs your aluminium windows need repair, not replacement</h2>
+      <p class="mt-3 text-slate-300">If you recognise any of these, it is almost always a repair rather than a new window:</p>
+      <ul class="mt-4 grid gap-2 text-slate-300 sm:grid-cols-2">
+        <li class="flex items-start gap-2"><span class="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-amber-400"></span>The window won't stay open or drops shut (a failed stay).</li>
+        <li class="flex items-start gap-2"><span class="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-amber-400"></span>The handle spins, feels loose or won't lock (worn handle or Yale lock).</li>
+        <li class="flex items-start gap-2"><span class="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-amber-400"></span>The sash no longer lines up to latch or sits crooked in the frame.</li>
+        <li class="flex items-start gap-2"><span class="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-amber-400"></span>Draughts, whistling or rattling when the wind picks up.</li>
+        <li class="flex items-start gap-2"><span class="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-amber-400"></span>Water or condensation tracking in around perished wedges and seals.</li>
+        <li class="flex items-start gap-2"><span class="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-amber-400"></span>Hinges that are stiff, seized or corroded, especially near the coast.</li>
+      </ul>
     </section>
 
     <section class="mt-8 rounded-2xl bg-[var(--brand-surface)] p-6 ring-1 ring-white/10">
