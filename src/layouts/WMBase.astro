@@ -11,7 +11,7 @@ const {
   showHeader = true,
   showFooter = true,
   showStickyBar = true
-} = Astro.props;
+} = Astro.props;h
 const siteName = "Window Maintenance";
 const schemas = Array.isArray(schema) ? schema : (schema ? [schema] : []);
 const baseSchema = {
@@ -232,19 +232,28 @@ const allSchemas = providedTypes.has("LocalBusiness") ? schemas : [...schemas, b
       })();
     </script>
     <script>
-      // Track call clicks
-      (function(){
-        try {
-          document.addEventListener('click', function(e){
-            const a = e.target && (e.target.closest && e.target.closest('a[data-cta="call"]'));
-            if (!a) return;
-            if (window && window.dataLayer) {
-              window.dataLayer.push({ event: 'call_click', href: a.getAttribute('href'), id: a.id || null, path: location.pathname });
-            }
-          }, true);
-        } catch(_) {}
-      })();
-    </script>
+  // Track call clicks + fire Google Ads conversion (AW-16889477810)
+  (function(){
+    try {
+      document.addEventListener('click', function(e){
+        var a = e.target && (e.target.closest && e.target.closest('a[data-cta="call"]'));
+        if (!a) return;
+        // Push to dataLayer for GA4
+        if (window && window.dataLayer) {
+          window.dataLayer.push({ event: 'call_click', href: a.getAttribute('href'), id: a.id || null, path: location.pathname });
+        }
+        // Fire Google Ads phone call conversion
+        if (window.gtag) {
+          window.gtag('event', 'conversion', {
+            'send_to': 'AW-16889477810/msZ6CJqJhcgcELl1w_U-',
+            'value': 10.0,
+            'currency': 'NZD'
+          });
+        }
+      }, true);
+    } catch(_) {}
+  })();
+/script>
     <script>
       (function () {
         try {
