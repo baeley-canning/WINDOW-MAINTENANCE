@@ -53,19 +53,29 @@
   unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
+/* Self-hosted Bitter (variable, headings). latin-ext carries the ā macron in "Kāpiti". */
+@font-face {
+  font-family: 'Bitter'; font-style: normal; font-display: swap; font-weight: 600 800;
+  src: url(/fonts/bitter/bitter-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face {
+  font-family: 'Bitter'; font-style: normal; font-display: swap; font-weight: 600 800;
+  src: url(/fonts/bitter/bitter-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+
 :root {
   color-scheme: light;
-  --brand-bg: #f8fafc;
+  --brand-bg: #f6f6f4;
   --brand-surface: #ffffff;
-  --brand-surface-2: #f1f5f9;
-  --brand-text: #0f172a;
-  --brand-muted: #475569;
-  --brand-accent: #2563eb;
-  --brand-accent-hover: #1d4ed8;
-  --brand-border: rgba(15,23,42,.10);
-  /* Deep blue used for the hero panel (white text sits on this) */
-  --brand-hero-from: #1e3a8a;
-  --brand-hero-to: #1d4ed8;
+  --brand-surface-2: #ebebe7;
+  --brand-text: #1b1b18;
+  --brand-muted: #565550;
+  --brand-accent: #1d5876;
+  --brand-accent-hover: #184a63;
+  --brand-border: rgba(27,27,24,.14);
+  --font-display: 'Bitter', Georgia, 'Times New Roman', serif;
 }
 
 html, body { height: 100%; }
@@ -73,6 +83,11 @@ html, body { height: 100%; }
 body {
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, .wordmark {
+  font-family: var(--font-display);
+  letter-spacing: -0.015em;
 }
 
 a { text-underline-offset: 3px; }
@@ -85,13 +100,25 @@ figcaption {
   font-weight: 500;
 }
 
+/* Article typography (blog posts use class="prose"; no Tailwind typography plugin installed) */
+.prose { line-height: 1.75; }
+.prose p, .prose ul, .prose ol, .prose figure { margin: 1rem 0; }
+.prose h2 { font-size: 1.5rem; font-weight: 700; margin: 2.25rem 0 .75rem; }
+.prose h3 { font-size: 1.25rem; font-weight: 700; margin: 1.75rem 0 .5rem; }
+.prose ul { list-style: disc; padding-left: 1.5rem; }
+.prose ol { list-style: decimal; padding-left: 1.5rem; }
+.prose li { margin: .375rem 0; }
+.prose a:not(.btn) { color: var(--brand-accent); text-decoration: underline; }
+.prose img { border-radius: .25rem; }
+.prose figcaption { margin-top: .5rem; }
+
 /* Image card helpers */
 .ratio-4-3 { aspect-ratio: 4 / 3; }
-.card-frame { overflow: hidden; border-radius: 0.75rem; }
+.card-frame { overflow: hidden; border-radius: 0.25rem; }
 
 /* Buttons */
 .btn {
-  @apply inline-flex items-center justify-center rounded-lg px-6 py-3 font-semibold transition-colors duration-150;
+  @apply inline-flex items-center justify-center rounded px-6 py-3 font-semibold transition-colors duration-150;
 }
 .btn-primary {
   background: var(--brand-accent);
@@ -124,8 +151,8 @@ figcaption {
   transition: background-color 0.15s ease, box-shadow 0.15s ease;
 }
 .card-link:hover {
-  background-color: #f8fafc;
-  box-shadow: 0 1px 3px rgba(15,23,42,.08);
+  background-color: #fafaf8;
+  box-shadow: 0 1px 3px rgba(27,27,24,.10);
 }
 
 /* FAQ expand */
@@ -138,5 +165,5 @@ input:focus-visible,
 textarea:focus-visible,
 select:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px rgba(37,99,235,.45);
+  box-shadow: 0 0 0 2px rgba(29,88,118,.55);
 }

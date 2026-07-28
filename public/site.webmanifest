@@ -3,8 +3,8 @@
   "short_name": "WMaint",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0B132B",
-  "theme_color": "#0B132B",
+  "background_color": "#1d5876",
+  "theme_color": "#1d5876",
   "icons": [
     {
       "src": "/icons/favicon-192.png",
