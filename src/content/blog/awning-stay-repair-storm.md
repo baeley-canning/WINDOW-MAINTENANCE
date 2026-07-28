@@ -4,7 +4,7 @@ description: "Storm-bent awning stays replaced, sash re-aligned and seals tested
 pubDate: 2025-11-06
 ---
 
-Last week’s storm bent the awning stays on a customer’s sash window. We replaced the damaged stays, re‑aligned the sash and tested the seals — no more draughts or leaks.
+Last week’s storm bent the awning stays on a customer’s sash window. We replaced the damaged stays, re‑aligned the sash and tested the seals. No more draughts or leaks.
 
 They told us we were the only ones who replied, and left a glowing review after the job. If your window won’t open/close properly or whistles in the wind, we can help.
 

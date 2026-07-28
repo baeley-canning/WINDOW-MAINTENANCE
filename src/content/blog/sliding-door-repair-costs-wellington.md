@@ -1,14 +1,14 @@
 ---
 title: "Sliding door repair costs Wellington: rollers & tracks"
-description: "Typical pricing bands in Wellington for sliding door repairs -- rollers, tracks, alignment and lock fixes -- and when a reseal is needed."
+description: "Typical pricing bands in Wellington for sliding door repairs: rollers, tracks, alignment and lock fixes, and when a reseal is needed."
 pubDate: 2026-01-12
 ---
 
-Sliding door repairs in Wellington usually come down to the same hardware: rollers, tracks, alignment and locks. Here’s what we see on-site and the pricing bands we work in.
+Sliding door repairs in Wellington usually come down to the same hardware: rollers, tracks, alignment and locks. This is what we see on-site and the pricing bands we work in.
 
 ## Common fixes and typical ranges
 
-- **Roller replacement**: $280–$480 incl. GST per door, depending on hardware and access. Quality rollers matter — cheap ones flatten quickly.
+- **Roller replacement**: $280–$480 incl. GST per door, depending on hardware and access. Quality rollers matter: cheap ones flatten quickly.
 - **Track refurbishment/caps**: $180–$320 when the track is dented or pitted. We reface or cap to give the new rollers a smooth run.
 - **Alignment & clearance**: $120–$240 if the panel has dropped or is rubbing on the frame; often paired with rollers.
 - **Lock/keeper adjustment or replacement**: $120–$260 depending on parts. Misaligned latches make doors feel “stiff.”
@@ -23,7 +23,7 @@ Sliding door repairs in Wellington usually come down to the same hardware: rolle
 ## How to keep it down
 
 - Get the right rollers the first time; incorrect wheel size or material shortens life.
-- Don’t force a dragging door — it flattens rollers and damages tracks.
+- Don’t force a dragging door. It flattens rollers and damages tracks.
 - Keep weep holes clear to reduce corrosion and track staining.
 
 ## Ready for a quote?

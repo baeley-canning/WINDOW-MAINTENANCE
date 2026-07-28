@@ -30,10 +30,9 @@ const articleSchema = {
     <nav class="text-sm text-slate-600">
       <a href="/blog/" class="hover:text-blue-600">&larr; Back to blog</a>
     </nav>
-    <article class="mt-4 rounded-2xl bg-[var(--brand-surface)] px-6 py-8 ring-1 ring-slate-200 shadow-xl">
+    <article class="mt-4 rounded-lg bg-[var(--brand-surface)] px-6 py-8 ring-1 ring-slate-200">
       <header class="mb-6">
-        <p class="text-xs font-semibold uppercase tracking-[0.3em] text-blue-600">Window Maintenance — Wellington</p>
-        <h1 class="mt-2 text-3xl font-extrabold leading-tight md:text-4xl">{post.data.title}</h1>
+        <h1 class="text-3xl font-extrabold leading-tight md:text-4xl">{post.data.title}</h1>
         <div class="mt-2 text-xs text-slate-600">{new Date(post.data.pubDate).toLocaleDateString()}</div>
       </header>
       <div class="prose prose-lg prose-slate max-w-none leading-relaxed">
@@ -41,12 +40,12 @@ const articleSchema = {
       </div>
       <div class="mt-10 grid gap-4 rounded-xl bg-[var(--brand-bg)] px-4 py-5 ring-1 ring-slate-200 md:grid-cols-3 md:items-center">
         <div class="md:col-span-2">
-          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">Need this fixed?</p>
-          <p class="mt-1 text-sm text-slate-800">Sliding / ranchslider door repairs across Wellington, Porirua, Lower Hutt, Upper Hutt, Petone and Kāpiti. Same-week bookings where possible.</p>
+          <p class="text-sm font-semibold text-blue-700">Need this fixed?</p>
+          <p class="mt-1 text-sm text-slate-800">Aluminium window and sliding door repairs across Wellington, Porirua, Lower Hutt, Upper Hutt, Petone and Kāpiti. Same-week bookings where possible.</p>
         </div>
         <div class="flex flex-wrap gap-3 md:justify-end">
           <a class="btn btn-primary" href="tel:+6421638205">Call 021 638 205</a>
-          <a class="btn btn-secondary" href="/services/sliding-door-repairs/">Sliding door repairs</a>
+          <a class="btn btn-secondary" href="/services/">Our services</a>
           <a class="btn btn-secondary" href="/contact/">Get a fast quote</a>
         </div>
       </div>

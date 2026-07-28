@@ -4,7 +4,7 @@ description: "Wellington wind and salt air are rough on sliding doors. Common fa
 pubDate: 2025-12-26
 ---
 
-Wellington weather is hard on sliding doors. Wind pressure, salt air and daily use combine to wear rollers, dent tracks and open up small leaks. Here’s what we see every week in Wellington, Porirua and the Hutt — and how we fix it so the door runs smoothly and seals properly.
+Wellington weather is hard on sliding doors. Wind pressure, salt air and daily use combine to wear rollers, dent tracks and open up small leaks. This is what we see every week in Wellington, Porirua and the Hutt, and how we fix it so the door runs smoothly and seals properly.
 
 ## The most common Wellington failures
 - **Flat or seized rollers:** Salt and grit seize bearings; doors drag and feel heavy.
@@ -22,7 +22,7 @@ Wellington weather is hard on sliding doors. Wind pressure, salt air and daily u
 
 ## Why it matters in Wellington
 - **Wind load:** Panels must be aligned and rollers true so the door closes tight against wind pressure.
-- **Salt and grit:** Coastal air in Porirua and Petone accelerates bearing wear — quality rollers and clear drainage matter.
+- **Salt and grit:** Coastal air in Porirua and Petone accelerates bearing wear, so quality rollers and clear drainage matter.
 - **Water shedding:** Healthy weep paths and intact sill seals stop water tracking inside during southerlies.
 
 ## Typical outcomes

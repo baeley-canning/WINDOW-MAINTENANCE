@@ -6,11 +6,11 @@ pubDate: 2025-11-10
 
 Recent reporting has highlighted non‑compliant and even fraudulently certified window and door products entering New Zealand. If you’re seeing leaks on relatively new joinery, you’re not alone. We were engaged to remediate a number of aluminium sliders in Wellington that were leaking at the mitres.
 
-This post explains what likely went wrong, the NZ context for “what good looks like”, and how we resealed these units inside the frame. We do not test, certify or re‑certify joinery — we simply repair leaks within the limits of the original system design.
+This post explains what likely went wrong, the NZ context for “what good looks like”, and how we resealed these units inside the frame. We do not test, certify or re‑certify joinery. We simply repair leaks within the limits of the original system design.
 
 ## Why these sliders leaked
 
-- Rigid or incompatible sealants used at moving joints — cracked under thermal movement.
+- Rigid or incompatible sealants used at moving joints, which cracked under thermal movement.
 - Weep/drain paths blocked, allowing pressure to build at the sill/mitre.
 - Missing OEM details (e.g. corner soakers) that many systems rely on for watertightness.
 
@@ -19,7 +19,7 @@ This post explains what likely went wrong, the NZ context for “what good looks
 The Building Code clause **E2 External Moisture** sets the performance outcome. E2/AS1 is an installation pathway for getting windows/doors into walls (flashings, perimeter air seal, etc.). It’s not a reseal manual for in‑frame mitre joints, but it shows the intent NZ expects for a weathertight system.
 
 - MBIE overview: https://www.building.govt.nz/building-code-compliance/e-moisture/e2-external-moisture/
-- WGANZ installation guidance (aligned to E2/AS1) — note the use of corner soakers at sill/jamb intersections and other system details: https://www.wganz.org.nz/
+- WGANZ installation guidance (aligned to E2/AS1), including the use of corner soakers at sill/jamb intersections and other system details: https://www.wganz.org.nz/
 - News background on non‑compliant imports: https://www.nzherald.co.nz/ (search the headline referenced in current reporting)
 
 ## Our resealing method (inside the frame)
@@ -35,17 +35,17 @@ This is remedial work within the aluminium joinery, not a perimeter install into
 
 - We cannot certify or re‑certify window or door products. If a system was not compliant to begin with, resealing may reduce leaks but does not make it compliant.
 - Many systems expect OEM corner soakers and other proprietary parts. If these are missing or unavailable (common with some imported systems), that limitation is noted in our quote and on completion.
-- Our scope is in‑frame reseal and reinstatement of intended drainage to the manufacturer’s intent — not a whole‑of‑envelope watertightness warranty.
+- Our scope is in‑frame reseal and reinstatement of intended drainage to the manufacturer’s intent, not a whole‑of‑envelope watertightness warranty.
 
 ## The result
 
 All affected sliders were stripped, joints reinstated (internal + external), and drainage restored. We logged before/after photos and each unit passed a controlled hose test.
 
-## Buyer beware — quick checks for owners/builders
+## Buyer beware: quick checks for owners/builders
 
 - Ask for the window/door performance classification and wind‑zone rating.
 - Confirm the manufacturer’s fabrication and install details align with NZ practice (incl. corner soakers). Avoid rigid sealants on moving joints.
-- If you’re importing, demand genuine evidence of performance — not just a sticker.
+- If you’re importing, demand genuine evidence of performance, not just a sticker.
 
 For compliance or formal sign‑off, talk to your designer/engineer or council. We focus on leak repair and in‑frame resealing only.
 

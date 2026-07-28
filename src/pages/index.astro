@@ -6,7 +6,7 @@ import FAQ from "../components/FAQ.astro";
 import QuoteInline from "../components/QuoteInline.astro";
 
 const title = "Aluminium Window & Sliding Door Repairs in Wellington Region";
-const description = "Wellington aluminium window and sliding door repairs — handles, locks, rollers, mitre reseals and lock picking. Covering Hutt Valley, Porirua and Kāpiti.";
+const description = "Wellington aluminium window and sliding door repairs: handles, locks, rollers, mitre reseals and lock picking. Covering Hutt Valley, Porirua and Kāpiti.";
 const canonical = "https://windowmaintenance.co.nz/";
 
 const localBusiness = {
@@ -83,11 +83,11 @@ const faqSchema = {
 };
 ---
 <Layout title={title} description={description} canonical={canonical} schema={[localBusiness, website, faqSchema]}>
-  <section class="border-b border-slate-200 bg-gradient-to-br from-blue-50 via-white to-slate-100">
+  <section class="border-b border-slate-200 bg-white">
     <div class="mx-auto max-w-6xl px-6 py-16 lg:py-24">
       <div class="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
         <div>
-          <p class="text-sm font-semibold uppercase tracking-widest text-blue-600">Wellington single &amp; double-glazed aluminium joinery specialists</p>
+          <p class="text-sm font-semibold text-blue-700">Wellington single &amp; double-glazed aluminium joinery specialists</p>
           <h1 class="mt-4 text-4xl font-bold leading-tight text-slate-900 md:text-5xl">Sliding door and aluminium window repairs done right.</h1>
           <p class="mt-4 text-lg text-slate-700">Single- and double-glazed aluminium joinery repairs for Wellington homes and rentals. We fix ranchsliders, awning windows, window handles, door handles, window locks, Yale hardware, drafts, leaks and sticking sashes across Wellington, Lower Hutt, Upper Hutt, Porirua and Kāpiti.</p>
           <div class="mt-6 flex flex-wrap items-center gap-4">
@@ -109,15 +109,15 @@ const faqSchema = {
             subtitle="Name and phone is enough. Tell us what is sticking, leaking or broken and we will usually reply the same day during business hours."
             buttonLabel="Get my fast quote"
             source="home_hero_form"
-            className="mt-0 shadow-2xl"
+            className="mt-0"
           />
           <div class="mt-4 grid gap-3 md:grid-cols-2">
-            <div class="rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-slate-200">
-              <p class="text-sm font-semibold uppercase tracking-[0.25em] text-blue-600">Best for</p>
+            <div class="rounded-lg bg-[var(--brand-surface)] p-4 ring-1 ring-slate-200">
+              <p class="text-sm font-semibold text-blue-700">Best for</p>
               <p class="mt-2 text-sm text-slate-700">Urgent ranchslider repairs, leaking sills, broken window stays, handles, locks and same-week quoting.</p>
             </div>
-            <div class="rounded-2xl bg-[var(--brand-surface)] p-4 ring-1 ring-slate-200">
-              <p class="text-sm font-semibold uppercase tracking-[0.25em] text-blue-600">What to send</p>
+            <div class="rounded-lg bg-[var(--brand-surface)] p-4 ring-1 ring-slate-200">
+              <p class="text-sm font-semibold text-blue-700">What to send</p>
               <p class="mt-2 text-sm text-slate-700">Suburb, short issue description and photos if you have them. We can still quote from a quick message first.</p>
             </div>
           </div>
@@ -133,12 +133,12 @@ const faqSchema = {
 
   <section class="border-t border-slate-200 bg-[var(--brand-bg)]">
     <div class="mx-auto max-w-6xl px-6 py-16">
-      <p class="text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">What people actually search</p>
-      <h2 class="mt-2 text-3xl font-bold text-slate-900">High-intent repair pages built to rank and convert</h2>
-      <p class="mt-3 max-w-3xl text-slate-700">Most visitors are not searching for a generic handyman. They are looking for aluminium window repairs, ranchslider repairs, leaking aluminium windows, window handles, Yale window locks and aluminium joinery repairs. These are the pages we want Google to understand and rank.</p>
+      <p class="text-sm font-semibold text-blue-700">Common problems</p>
+      <h2 class="mt-2 text-3xl font-bold text-slate-900">Straight to the right repair page</h2>
+      <p class="mt-3 max-w-3xl text-slate-700">Most of our calls are about the same things: aluminium window repairs, ranchslider repairs, leaking aluminium windows, window handles, Yale window locks and aluminium joinery repairs. Pick the page that matches your problem.</p>
       <div class="mt-8 grid gap-5 md:grid-cols-2">
         {popularSearches.map((item) => (
-          <a href={item.href} class="card-link rounded-2xl bg-[var(--brand-surface)] p-6 ring-1 ring-slate-200">
+          <a href={item.href} class="card-link rounded-lg bg-[var(--brand-surface)] p-6 ring-1 ring-slate-200">
             <h3 class="text-lg font-bold text-slate-900">{item.title}</h3>
             <p class="mt-3 text-sm text-slate-700">{item.copy}</p>
             <span class="mt-4 inline-flex items-center text-sm font-semibold text-blue-700">Open page &rarr;</span>
@@ -152,7 +152,7 @@ const faqSchema = {
     <div class="mx-auto max-w-6xl px-6 py-16">
       <div class="md:flex md:items-center md:justify-between">
         <div>
-          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">What we fix daily</p>
+          <p class="text-sm font-semibold text-blue-700">What we fix daily</p>
           <h2 class="mt-2 text-3xl font-bold text-slate-900">Parts and hardware carried on the van</h2>
         </div>
         <a href="/gallery/" class="mt-4 inline-flex items-center text-sm font-semibold text-blue-700 md:mt-0">See more work &rarr;</a>
@@ -200,7 +200,7 @@ const faqSchema = {
 
   <section class="border-t border-slate-200 bg-[var(--brand-bg)]">
     <div class="mx-auto max-w-6xl px-6 py-16">
-      <p class="text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">Guides</p>
+      <p class="text-sm font-semibold text-blue-700">Guides</p>
       <h2 class="mt-2 text-3xl font-bold">Helpful repair guides for Wellington homes</h2>
       <p class="mt-3 text-slate-700">Practical tips on rollers, seals and joinery issues we see every week in Wellington, Porirua and the Hutt Valley.</p>
       <div class="mt-8 grid gap-4 md:grid-cols-3">
@@ -215,15 +215,15 @@ const faqSchema = {
     <div class="mx-auto max-w-6xl px-6 py-16">
       <div class="md:flex md:items-center md:justify-between">
         <div>
-          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">Services</p>
+          <p class="text-sm font-semibold text-blue-700">Services</p>
           <h2 class="mt-2 text-3xl font-bold">One team for every aluminium window and door issue</h2>
         </div>
         <a href="/services/" class="mt-4 inline-flex items-center text-sm font-semibold text-blue-700 md:mt-0">View full services &rarr;</a>
       </div>
       <div class="mt-8 grid gap-5 md:grid-cols-2">
         {services.map((service) => (
-          <a href={service.href} class="card-link rounded-2xl bg-[var(--brand-surface)] p-6 ring-1 ring-slate-200">
-            <div class="text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">{service.title}</div>
+          <a href={service.href} class="card-link rounded-lg bg-[var(--brand-surface)] p-6 ring-1 ring-slate-200">
+            <h3 class="text-lg font-bold text-slate-900">{service.title}</h3>
             <p class="mt-3 text-sm text-slate-700">{service.copy}</p>
             <span class="mt-4 inline-flex items-center text-sm font-semibold text-blue-700">Learn more &rarr;</span>
           </a>
@@ -244,7 +244,7 @@ const faqSchema = {
           <img
             src="/img/window-stay-replacement-640.webp"
             alt="Window stay replacement case study"
-            class="w-full rounded-2xl object-cover"
+            class="w-full rounded-lg object-cover"
             width="640"
             height="853"
             loading="lazy"
@@ -253,7 +253,7 @@ const faqSchema = {
         </picture>
       </div>
       <div class="mt-8 md:mt-0 md:w-1/2">
-        <p class="text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">Latest job</p>
+        <p class="text-sm font-semibold text-blue-700">Latest job</p>
         <h2 class="mt-2 text-3xl font-bold">Storm-bent awning stays replaced the same week</h2>
         <p class="mt-4 text-slate-700">We removed bent stays, fitted new hardware, re-aligned the sash and tested seals, leaving the window smooth, quiet and leak-free.</p>
         <ul class="mt-4 list-disc space-y-1 pl-5 text-slate-700">
@@ -270,7 +270,7 @@ const faqSchema = {
     <div class="mx-auto max-w-6xl px-6 py-16">
       <div class="md:flex md:items-center md:justify-between">
         <div>
-          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">Service areas</p>
+          <p class="text-sm font-semibold text-blue-700">Service areas</p>
           <h2 class="mt-2 text-3xl font-bold">Every suburb, one team</h2>
           <p class="mt-3 text-slate-700">Central Wellington • Lower Hutt • Upper Hutt • Porirua • Petone • Kāpiti</p>
         </div>
@@ -278,7 +278,7 @@ const faqSchema = {
       </div>
       <div class="mt-8 grid gap-5 md:grid-cols-3">
         {areaLinks.map((area) => (
-          <a href={area.href} class="card-link rounded-2xl bg-[var(--brand-surface)] p-6 ring-1 ring-slate-200">
+          <a href={area.href} class="card-link rounded-lg bg-[var(--brand-surface)] p-6 ring-1 ring-slate-200">
             <h3 class="text-lg font-bold text-slate-900">{area.title}</h3>
             <p class="mt-3 text-sm text-slate-700">{area.copy}</p>
             <span class="mt-4 inline-flex items-center text-sm font-semibold text-blue-700">View {area.title} page &rarr;</span>
@@ -290,7 +290,7 @@ const faqSchema = {
 
   <section class="border-t border-slate-200 bg-[var(--brand-bg)]">
     <div class="mx-auto max-w-4xl px-6 py-16">
-      <p class="text-sm font-semibold uppercase tracking-[0.3em] text-blue-600">FAQ</p>
+      <p class="text-sm font-semibold text-blue-700">FAQ</p>
       <FAQ heading="Questions we’re asked most" items={faqs} />
     </div>
   </section>
