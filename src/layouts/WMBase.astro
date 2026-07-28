@@ -11,7 +11,7 @@ const {
   showHeader = true,
   showFooter = true,
   showStickyBar = true
-} = Astro.props;h
+} = Astro.props;
 const siteName = "Window Maintenance";
 const schemas = Array.isArray(schema) ? schema : (schema ? [schema] : []);
 const baseSchema = {
@@ -253,7 +253,7 @@ const allSchemas = providedTypes.has("LocalBusiness") ? schemas : [...schemas, b
       }, true);
     } catch(_) {}
   })();
-/script>
+    </script>
     <script>
       (function () {
         try {
