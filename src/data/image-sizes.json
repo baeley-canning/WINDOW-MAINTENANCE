@@ -1,0 +1,30 @@
+{
+  "euro-lock-cylinder": {
+    "w": 450,
+    "h": 186
+  },
+  "glazing-wedge": {
+    "w": 1000,
+    "h": 710
+  },
+  "hinge": {
+    "w": 445,
+    "h": 450
+  },
+  "ranchslider-handle-lockset": {
+    "w": 408,
+    "h": 450
+  },
+  "sash-handles": {
+    "w": 450,
+    "h": 414
+  },
+  "security-stays": {
+    "w": 362,
+    "h": 378
+  },
+  "sliding-door-roller": {
+    "w": 372,
+    "h": 450
+  }
+}

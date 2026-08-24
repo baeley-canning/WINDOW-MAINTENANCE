@@ -1,7 +1,23 @@
 ---
-const { base, alt, className = "", loading = "lazy" } = Astro.props;
+import sizes from "../data/image-sizes.json";
+
+const { base, alt, className = "", loading = "lazy", width, height } = Astro.props;
+
+// Intrinsic dimensions reserve layout space so the image cannot shift the page
+// while it loads. Generated from public/img/*.jpg; falls back to explicit props.
+const dims = (sizes as Record<string, { w: number; h: number }>)[base];
+const w = width ?? dims?.w;
+const h = height ?? dims?.h;
 ---
 <picture>
   <source srcset={`/img/${base}.webp`} type="image/webp" />
-  <img src={`/img/${base}.jpg`} alt={alt} loading={loading} class={className} />
+  <img
+    src={`/img/${base}.jpg`}
+    alt={alt}
+    loading={loading}
+    decoding="async"
+    width={w}
+    height={h}
+    class={className}
+  />
 </picture>
