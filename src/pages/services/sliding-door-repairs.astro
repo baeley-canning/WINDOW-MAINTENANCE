@@ -9,9 +9,14 @@ const description = "Aluminium sliding door and ranchslider repairs Wellington: 
 const canonical = "https://windowmaintenance.co.nz/services/sliding-door-repairs/";
 
 const faqItems = [
-  { q: "Do you work on single and double glazed sliders?", a: "Yes. We service both single- and double-glazed aluminium sliding doors, including rollers, tracks, hardware and alignment." },
+  { q: "Do you work on single and double glazed sliders?", a: "Yes. We service both single- and double-glazed aluminium sliding doors, including rollers, tracks, hardware and alignment. Double glazed panels are considerably heavier, so we match roller weight ratings to the door rather than fitting a generic part." },
+  { q: "How much does ranchslider roller replacement cost?", a: "It depends on the door system, how many panels are involved and whether the track also needs work. Roller replacement on its own is a small job. Send a photo of the door and your suburb and we will give you a guide price, usually the same day." },
+  { q: "How long does a sliding door repair take?", a: "Most roller and alignment jobs are done in a single visit of one to two hours. Track capping or hard-to-source hardware can mean a second visit once parts arrive." },
+  { q: "Can you replace rollers on old or discontinued doors?", a: "Usually yes. We carry common roller patterns on the van and work with national suppliers to match out-of-production carriages. Where nothing matches exactly we fit the closest correct-rated equivalent and adjust the door to suit." },
+  { q: "My door was re-rollered recently and is stiff again. Why?", a: "Almost always a damaged track. New rollers running on a dented or pitted track wear out quickly. The track needs refacing or capping at the same time, otherwise the problem returns within a year." },
   { q: "Do you service Porirua and the Hutt?", a: "Yes. We are on the road in Porirua, Lower Hutt and Upper Hutt every week and can group nearby jobs to keep pricing sharp." },
-  { q: "Can you fix water tracking at the sill?", a: "We clear weep holes, restore damaged tracks and reseal accessible beads so water drains properly during Wellington southerlies." },
+  { q: "Can you fix water tracking at the sill?", a: "We clear weep holes, restore damaged tracks and reseal accessible beads so water drains properly during Wellington southerlies. If water is getting in at the mitred corners, that is a mitre and sill reseal instead." },
+  { q: "Is it worth repairing or should I replace the door?", a: "Repair is almost always the cheaper route. Unless the frame is damaged or the glass has failed, the fault is worn hardware and a repair restores the same door for a fraction of replacement cost." },
 ];
 
 const faqSchema = {
@@ -23,11 +28,34 @@ const faqSchema = {
     acceptedAnswer: { "@type": "Answer", text: item.a },
   })),
 };
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Sliding Door & Ranchslider Repairs Wellington",
+  serviceType: "Aluminium sliding door repair",
+  description: "Repairs for single- and double-glazed aluminium sliding doors and ranchsliders: roller replacement, track refurbishment and capping, panel re-alignment, handles, locks and keepers across the Wellington region.",
+  url: canonical,
+  areaServed: [
+    { "@type": "Place", name: "Wellington" },
+    { "@type": "Place", name: "Porirua" },
+    { "@type": "Place", name: "Lower Hutt" },
+    { "@type": "Place", name: "Upper Hutt" },
+    { "@type": "Place", name: "Petone" },
+    { "@type": "Place", name: "Kāpiti" },
+  ],
+  provider: {
+    "@type": "LocalBusiness",
+    name: "Window Maintenance",
+    url: "https://windowmaintenance.co.nz",
+    telephone: "+6421638205",
+  },
+};
 ---
-<Layout title={title} description={description} canonical={canonical} schema={[faqSchema]}>
+<Layout title={title} description={description} canonical={canonical} schema={[faqSchema, serviceSchema]}>
   <Breadcrumbs />
   <main class="mx-auto max-w-4xl px-6 py-12">
-    <h1 class="text-3xl font-extrabold">Sliding / Ranchslider Door Repairs</h1>
+    <h1 class="text-3xl font-extrabold">Sliding & Ranchslider Door Repairs</h1>
     <p class="mt-4 text-slate-700">Single- and double-glazed aluminium sliding door repairs: roller replacement, track refurbishment, alignment and door handle or lock fixes across Wellington, Porirua, Lower Hutt, Upper Hutt, Petone and Kāpiti.</p>
 
     <section class="mt-8 grid gap-4 sm:grid-cols-3">
@@ -45,9 +73,22 @@ const faqSchema = {
       </div>
     </section>
 
-    <section class="mt-8 rounded-lg bg-[var(--brand-surface)] p-6 ring-1 ring-slate-200">
-      <h2 class="text-2xl font-bold">Searches we commonly help with</h2>
-      <p class="mt-3 text-slate-700">This page is built for the jobs people search as sliding door repair, ranchslider repairs, aluminium sliding door repairs, fix sliding door, sliding door roller replacement and sliding door lock or handle repair. If your slider is dragging, dropping, leaking at the sill or refusing to latch, it belongs on this page.</p>
+    <section class="mt-10">
+      <h2 class="text-2xl font-bold">Ranchslider roller replacement</h2>
+      <p class="mt-3 text-slate-700">Rollers are the part that fails most often, and they are the reason most sliders end up needing two hands and a shoulder. Each panel sits on a pair of roller carriages that run in the bottom track. Inside each carriage is a wheel on a bearing, and both parts wear.</p>
+      <p class="mt-3 text-slate-700">A door that sits in the same position for months develops flat spots on the wheels, so it bumps rhythmically as it runs. Bearings pack up with salt and grit, which happens fastest in Petone, Porirua, Kāpiti and along the south coast, and then the wheel stops turning and simply drags. Once that starts, every hard shove pushes the seized wheel along the track and begins denting it.</p>
+      <p class="mt-3 text-slate-700">Getting the replacement right is a matching job. Carriages vary by height, by the way they clip or screw into the sash, by wheel material, and by weight rating. A double glazed panel can weigh well over twice its single glazed equivalent, so a carriage rated for the original door will fail early under a retrofitted unit. We identify the door system, match the carriage on pattern and rating, then set the adjustment so the panel hangs square and the lock lines up.</p>
+    </section>
+
+    <section class="mt-10">
+      <h2 class="text-2xl font-bold">Track repair and capping</h2>
+      <p class="mt-3 text-slate-700">New rollers on a damaged track do not last. This is the single most common reason a slider goes stiff again a few months after someone re-rollered it. If the track has dents, a lipped edge or corrosion pitting, the new wheels are running over the same damage that killed the old ones.</p>
+      <p class="mt-3 text-slate-700">Where the track is salvageable we reface it. Where it is not, we cap it, which means fitting a new running surface over the damaged one so the rollers get a true, smooth path without replacing the whole door frame. We also clear the weep holes while we are in there, because a track holding water corrodes both the track and the roller spindles and quietly makes the door heavier every season.</p>
+    </section>
+
+    <section class="mt-10 rounded-lg bg-[var(--brand-surface)] p-6 ring-1 ring-slate-200">
+      <h2 class="text-2xl font-bold">Problems this page covers</h2>
+      <p class="mt-3 text-slate-700">Sliding doors and ranchsliders that drag or need forcing, flat and seized rollers, dented or pitted tracks, panels that have dropped out of square, door handles and locksets that are loose or will not latch, and water tracking at the sill. If your slider is doing any of that, it belongs here.</p>
       <div class="mt-4 flex flex-wrap gap-3 text-sm">
         <a class="rounded-full border border-slate-200 px-3 py-2 text-slate-800 hover:border-blue-600 hover:text-blue-700" href="/services/mitre-reseal/">Mitre and sill reseals</a>
         <a class="rounded-full border border-slate-200 px-3 py-2 text-slate-800 hover:border-blue-600 hover:text-blue-700" href="/services/joinery-repairs/">Aluminium joinery repairs</a>
@@ -68,23 +109,31 @@ const faqSchema = {
         <div class="ratio-4-3 card-frame">
           <Picture base="sliding-door-roller" alt="Sliding door roller carriage and wheel" className="h-full w-full object-cover" />
         </div>
+        <figcaption>Roller carriage and wheel, matched on pattern and weight rating.</figcaption>
       </figure>
       <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-slate-200">
         <div class="ratio-4-3 card-frame">
           <Picture base="ranchslider-handle-lockset" alt="Ranchslider handle and lock set" className="h-full w-full object-cover" />
         </div>
+        <figcaption>Ranchslider handle and lockset, replaced when the latch no longer pulls in.</figcaption>
       </figure>
       <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-slate-200">
         <div class="ratio-4-3 card-frame">
           <Picture base="euro-lock-cylinder" alt="Euro profile lock cylinder for a sliding door" className="h-full w-full object-cover" />
         </div>
+        <figcaption>Euro cylinder, swapped when a key turns but the door will not lock.</figcaption>
       </figure>
+    </div>
+
+    <div class="mt-10 space-y-3">
+      <h2 class="text-2xl font-bold">Repair or replace?</h2>
+      <p class="text-slate-700">Replacing a ranchslider means new joinery, new glazing, installation and often scaffolding. A repair fixes the part that actually failed, which is nearly always hardware rather than the door itself. Unless the frame is damaged or a glazing unit has failed, repairing is faster and costs a fraction of replacement. There is a breakdown of typical pricing in our <a class="text-blue-600 underline" href="/blog/sliding-door-repair-costs-wellington/">sliding door repair costs</a> guide.</p>
     </div>
 
     <div class="mt-8 space-y-3">
       <h2 class="text-2xl font-bold">Where we work</h2>
       <p class="text-slate-700">We book ranchslider and sliding door repairs across <a class="text-blue-600 underline" href="/areas/central-wellington/">Central Wellington</a>, <a class="text-blue-600 underline" href="/areas/lower-hutt/">Lower Hutt</a>, <a class="text-blue-600 underline" href="/areas/upper-hutt/">Upper Hutt</a>, <a class="text-blue-600 underline" href="/areas/porirua/">Porirua</a>, <a class="text-blue-600 underline" href="/areas/petone/">Petone</a> and <a class="text-blue-600 underline" href="/areas/kapiti/">Kapiti</a>. Same-week bookings whenever possible.</p>
-      <p class="text-slate-700">Related pages: <a class="text-blue-600 underline" href="/services/window-repairs/">Window repairs</a> • <a class="text-blue-600 underline" href="/services/mitre-reseal/">Mitre and sill reseal</a> • <a class="text-blue-600 underline" href="/services/joinery-repairs/">Aluminium joinery repairs</a></p>
+      <p class="text-slate-700">Related pages: <a class="text-blue-600 underline" href="/services/window-repairs/">Aluminium window repairs</a> • <a class="text-blue-600 underline" href="/services/mitre-reseal/">Mitre and sill reseal</a> • <a class="text-blue-600 underline" href="/services/joinery-repairs/">Aluminium joinery repairs</a></p>
     </div>
 
     <div class="mt-8 space-y-3">
@@ -98,7 +147,7 @@ const faqSchema = {
       <h2 class="text-2xl font-bold">Helpful guides</h2>
       <ul class="list-disc space-y-2 pl-5 text-slate-700">
         <li><a class="text-blue-600 underline" href="/blog/sliding-door-repair-costs-wellington/">Sliding door repair costs in Wellington</a></li>
-        <li><a class="text-blue-600 underline" href="/blog/sliding-door-sticking/">Fix a sticking sliding door</a></li>
+        <li><a class="text-blue-600 underline" href="/blog/sliding-door-sticking/">Sliding door sticking? How to tell what is wrong</a></li>
         <li><a class="text-blue-600 underline" href="/blog/wellington-sliding-door-weather-guide/">Sliding doors in Wellington weather</a></li>
       </ul>
     </div>
