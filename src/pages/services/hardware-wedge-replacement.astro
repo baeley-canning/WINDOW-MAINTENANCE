@@ -16,11 +16,31 @@ const faqItems = [
   },
   {
     q: "What are glazing wedges and do you replace them?",
-    a: "Glazing wedges are the rubber sealing profiles that help secure and weather-seal the glass in aluminium joinery. We replace hardened, shrunken or damaged wedges where needed."
+    a: "Glazing wedges are the rubber sealing profiles that hold and weather-seal the glass in aluminium joinery. We replace hardened, shrunken or damaged wedges where needed."
   },
   {
     q: "Can you source older or obsolete hardware?",
-    a: "Yes. We regularly identify and source older handles, catches, locksets and compatible replacements for aluminium windows and doors."
+    a: "Yes. We regularly identify and source older handles, catches, locksets and compatible replacements for aluminium windows and doors. Where a part is genuinely unavailable we fit the closest correct-fitting equivalent and adapt the installation rather than replacing the joinery."
+  },
+  {
+    q: "My handle turns but nothing happens. Is that the handle or the lock?",
+    a: "Usually the spindle or the drive gear inside the handle has stripped, so the handle is turning without moving the latch. Sometimes it is the lock body itself. We check both, because replacing only the handle on a failed lock body will not fix it."
+  },
+  {
+    q: "My key turns but the door will not lock. What is wrong?",
+    a: "Most often a worn euro cylinder cam, or a door that has dropped so the lock no longer aligns with the keeper. We check alignment first, because fitting a new cylinder to a misaligned door leaves you with the same problem."
+  },
+  {
+    q: "Can you match the finish to my existing hardware?",
+    a: "Yes. We match finish to the rest of your joinery where the part is available in it, which matters when only one or two handles in a house are being replaced."
+  },
+  {
+    q: "Do you fit restrictors and safety stays at the same time?",
+    a: "Yes. If we are already replacing a handle or catch on a window it is an efficient time to add a restrictor for child safety or ground-floor security."
+  },
+  {
+    q: "Do you do hardware repairs for rentals and property managers?",
+    a: "Yes. We handle rental and property-management hardware work across the region and can quote, invoice and report per job."
   }
 ];
 
@@ -36,14 +56,37 @@ const faqSchema = {
     }
   }))
 };
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Window & Door Hardware Replacement Wellington",
+  serviceType: "Aluminium joinery hardware replacement",
+  description: "Replacement of window handles, door handles, Yale window locks, catches, euro cylinders, restrictors, safety stays and glazing wedges on aluminium joinery across the Wellington region.",
+  url: canonical,
+  areaServed: [
+    { "@type": "Place", name: "Wellington" },
+    { "@type": "Place", name: "Porirua" },
+    { "@type": "Place", name: "Lower Hutt" },
+    { "@type": "Place", name: "Upper Hutt" },
+    { "@type": "Place", name: "Petone" },
+    { "@type": "Place", name: "Kāpiti" }
+  ],
+  provider: {
+    "@type": "LocalBusiness",
+    name: "Window Maintenance",
+    url: "https://windowmaintenance.co.nz",
+    telephone: "+6421638205"
+  }
+};
 ---
 
-<Layout title={title} description={description} canonical={canonical} schema={[faqSchema]}>
+<Layout title={title} description={description} canonical={canonical} schema={[faqSchema, serviceSchema]}>
   <Breadcrumbs />
 
   <main class="mx-auto max-w-4xl px-6 py-12">
-    <h1 class="text-3xl font-extrabold">Hardware, Handles, Locks & Wedge Replacement</h1>
-    <p class="mt-4 text-slate-700">This page is for aluminium joinery hardware repairs and replacements across Wellington. That includes window handles, door handles, window locks, Yale window handles, Yale window locks, catches, cylinders, restrictors, safety stays and glazing wedges or seals.</p>
+    <h1 class="text-3xl font-extrabold">Window Handles, Locks & Hardware Replacement</h1>
+    <p class="mt-4 text-slate-700">Aluminium joinery hardware repairs and replacements across Wellington: window handles, door handles, window locks, Yale window handles and locks, catches, cylinders, restrictors, safety stays and glazing wedges or seals.</p>
 
     <section class="mt-8 grid gap-4 sm:grid-cols-3">
       <div class="rounded-xl bg-[var(--brand-surface)] p-5 ring-1 ring-slate-200">
@@ -60,9 +103,28 @@ const faqSchema = {
       </div>
     </section>
 
-    <section class="mt-8 rounded-lg bg-[var(--brand-surface)] p-6 ring-1 ring-slate-200">
-      <h2 class="text-2xl font-bold">Searches we commonly help with</h2>
-      <p class="mt-3 text-slate-700">People usually land here from searches like window handle replacement, door handle repair, window lock repair, Yale window handle, Yale window lock, sliding door handle repair, aluminium window hardware replacement, glazing wedge replacement and restrictor fitting. This page is built to pick up that whole hardware-and-sealing cluster.</p>
+    <section class="mt-10">
+      <h2 class="text-2xl font-bold">Window and door handles</h2>
+      <p class="mt-3 text-slate-700">Handles are the part you touch every day, so they wear out first. Most aluminium joinery in Wellington uses one of a handful of patterns: wind-out winders on awning windows, cockspur and sash catch handles on older casements, lever handles on hinged doors, and D-pulls or hook-latch handles on sliders.</p>
+      <p class="mt-3 text-slate-700">The usual failure is the drive. Many handles are die-cast, and the square spindle or the internal gear wears round over years of use. You feel it as a handle that turns further than it used to, then turns freely without moving anything. The other common failure is the fixings pulling out of the aluminium, which usually means the sash has been dropping and the handle has been taking load it was never meant to carry.</p>
+      <p class="mt-3 text-slate-700">Because of that we check what the handle is attached to before quoting a handle. If the sash has dropped or the keeper is out of line, a new handle will wear out the same way.</p>
+    </section>
+
+    <section class="mt-10">
+      <h2 class="text-2xl font-bold">Window locks, Yale hardware and cylinders</h2>
+      <p class="mt-3 text-slate-700">Keyed sash locks and snib locks seize for the same reason everything else does around here, which is salt and grit working into the mechanism. Once a lock is stiff, people force it, and forcing it is what snaps the cam or strips the key barrel.</p>
+      <p class="mt-3 text-slate-700">On doors, the most common call is a key that turns without locking. That is usually a worn euro cylinder cam or a door that has dropped so the bolt no longer meets the keeper. Cylinder sizing matters as well. A euro cylinder should sit close to flush with the escutcheon, because one that protrudes past the handle plate is easier to attack and is a genuine security weakness rather than a cosmetic detail. When we replace a cylinder we size it to the door rather than fitting whatever length is on the shelf.</p>
+    </section>
+
+    <section class="mt-10">
+      <h2 class="text-2xl font-bold">Glazing wedges and seals</h2>
+      <p class="mt-3 text-slate-700">Wedges are the rubber profiles that hold the glass in the sash and seal that joint. They harden and shrink with age and UV, and once they lose their flex they stop filling the gap, which is where rattles, whistling and water tracking start. They are not the same component as the weather seals around the opening joint, and the two are not interchangeable.</p>
+      <p class="mt-3 text-slate-700">Profiles differ between joinery systems, so a wedge that is nearly right will either sit proud and stop the window closing or sit loose and do nothing. There is more detail on how this interacts with latch pressure in our <a class="text-blue-600 underline" href="/blog/draft-proofing-wellington/">draught-proofing guide</a>.</p>
+    </section>
+
+    <section class="mt-10 rounded-lg bg-[var(--brand-surface)] p-6 ring-1 ring-slate-200">
+      <h2 class="text-2xl font-bold">Problems this page covers</h2>
+      <p class="mt-3 text-slate-700">Window handle and door handle replacement, window lock repair, Yale window handles and locks, sliding door handle and lockset repair, worn euro cylinders, aluminium window hardware replacement, glazing wedge replacement and restrictor fitting. If a part you operate by hand has broken, worn or seized, it belongs here.</p>
       <div class="mt-4 flex flex-wrap gap-3 text-sm">
         <a class="rounded-full border border-slate-200 px-3 py-2 text-slate-800 hover:border-blue-600 hover:text-blue-700" href="/services/window-repairs/">Window repairs</a>
         <a class="rounded-full border border-slate-200 px-3 py-2 text-slate-800 hover:border-blue-600 hover:text-blue-700" href="/services/sliding-door-repairs/">Sliding door repairs</a>
@@ -84,23 +146,32 @@ const faqSchema = {
           <div class="ratio-4-3 card-frame">
             <img src="/img/yale-window-handles.webp" alt="Yale window handles for aluminium joinery" class="h-full w-full object-contain bg-slate-100 p-2" loading="lazy" decoding="async" width="602" height="463" />
           </div>
+          <figcaption>Yale window handles, matched on pattern and finish.</figcaption>
         </figure>
         <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-slate-200">
           <div class="ratio-4-3 card-frame">
             <Picture base="sash-handles" alt="Aluminium sash window handles" className="h-full w-full object-contain bg-slate-100 p-2" />
           </div>
+          <figcaption>Sash handles, replaced when the drive wears round.</figcaption>
         </figure>
         <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-slate-200">
           <div class="ratio-4-3 card-frame">
             <Picture base="euro-lock-cylinder" alt="Euro lock cylinder for aluminium doors" className="h-full w-full object-contain bg-slate-100 p-2" />
           </div>
+          <figcaption>Euro cylinder, sized to sit flush rather than protrude.</figcaption>
         </figure>
         <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-slate-200">
           <div class="ratio-4-3 card-frame">
             <Picture base="glazing-wedge" alt="Glazing wedge and seal profile for aluminium joinery" className="h-full w-full object-contain bg-slate-100 p-2" />
           </div>
+          <figcaption>Glazing wedge profile, matched to the joinery system.</figcaption>
         </figure>
       </div>
+    </section>
+
+    <section class="mt-10 space-y-3">
+      <h2 class="text-2xl font-bold">Matching discontinued hardware</h2>
+      <p class="text-slate-700">A lot of Wellington housing stock carries joinery from fabricators who stopped making these parts decades ago, and the single most useful thing we do is find something that fits. We carry common profiles on the van and work with national suppliers to identify older handles, catches, locksets and wedges. Where nothing matches exactly, we fit the closest correct-fitting equivalent and adapt the installation, which is nearly always cheaper and faster than replacing a window because a handle broke.</p>
     </section>
 
     <section class="mt-8 space-y-3">
@@ -114,7 +185,7 @@ const faqSchema = {
       <ul class="list-disc space-y-2 pl-5 text-slate-700">
         <li><a class="text-blue-600 underline" href="/blog/digital-locks-wellington-elok-yale-ydm-doric-de10/">Digital locks in Wellington: Elock, Yale YDM and Doric DE10</a></li>
         <li><a class="text-blue-600 underline" href="/blog/inframe-security-stays-wellington/">In-frame security stays vs face-mounted stays</a></li>
-        <li><a class="text-blue-600 underline" href="/blog/sliding-door-sticking/">Fix a sticking sliding door</a></li>
+        <li><a class="text-blue-600 underline" href="/blog/sliding-door-sticking/">Sliding door sticking? How to tell what is wrong</a></li>
       </ul>
     </section>
   </main>

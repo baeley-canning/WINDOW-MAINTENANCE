@@ -20,6 +20,26 @@ const faqItems = [
   {
     q: "Do you replace old or obsolete joinery hardware?",
     a: "Yes. Where possible we source compatible older hardware, including handles, locks, rollers and wedges for aluminium joinery that is no longer current."
+  },
+  {
+    q: "I have several windows with different problems. Can you do them in one visit?",
+    a: "That is exactly what this page is for. We quote a whole-house or whole-property visit, group the faults and work through them in one booking, which costs less per window than separate call-outs."
+  },
+  {
+    q: "I do not know what is actually wrong. Can you still quote?",
+    a: "Yes. Describe the symptom rather than the part, for example a window that will not stay open or a door that drags. Photos help. We identify the faulty component and quote from there."
+  },
+  {
+    q: "Do you do pre-sale or pre-inspection joinery work?",
+    a: "Yes. Sticking doors, windows that will not latch and failed catches are common items on builder and pre-purchase reports, and most of them are straightforward hardware repairs rather than replacement."
+  },
+  {
+    q: "Do you work for rentals and property managers?",
+    a: "Yes. We handle rental and property-management repairs across the region and can quote, invoice and report per job or per property."
+  },
+  {
+    q: "Is my joinery too old to repair?",
+    a: "Rarely. Aluminium frames themselves last a very long time. It is nearly always the hardware and seals that fail, and those are replaceable even on joinery from the 1970s and 1980s."
   }
 ];
 
@@ -35,9 +55,32 @@ const faqSchema = {
     }
   }))
 };
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Aluminium Joinery Repairs Wellington",
+  serviceType: "Aluminium joinery repair",
+  description: "Repairs to single- and double-glazed aluminium windows and doors: handles, locks, stays, hinges, rollers, wedges, seals, alignment and leak-related faults across the Wellington region.",
+  url: canonical,
+  areaServed: [
+    { "@type": "Place", name: "Wellington" },
+    { "@type": "Place", name: "Porirua" },
+    { "@type": "Place", name: "Lower Hutt" },
+    { "@type": "Place", name: "Upper Hutt" },
+    { "@type": "Place", name: "Petone" },
+    { "@type": "Place", name: "Kāpiti" }
+  ],
+  provider: {
+    "@type": "LocalBusiness",
+    name: "Window Maintenance",
+    url: "https://windowmaintenance.co.nz",
+    telephone: "+6421638205"
+  }
+};
 ---
 
-<Layout title={title} description={description} canonical={canonical} schema={[faqSchema]}>
+<Layout title={title} description={description} canonical={canonical} schema={[faqSchema, serviceSchema]}>
   <Breadcrumbs />
 
   <main class="mx-auto max-w-4xl px-6 py-12">
@@ -59,7 +102,26 @@ const faqSchema = {
       </div>
     </section>
 
-    <section class="mt-8 rounded-lg bg-[var(--brand-surface)] p-6 ring-1 ring-slate-200">
+    <section class="mt-10">
+      <h2 class="text-2xl font-bold">When this is the page you want</h2>
+      <p class="mt-3 text-slate-700">If you already know the fault, the specific pages are quicker: <a class="text-blue-600 underline" href="/services/window-repairs/">aluminium window repairs</a> for stays, hinges and sash problems, <a class="text-blue-600 underline" href="/services/sliding-door-repairs/">sliding door repairs</a> for rollers and tracks, <a class="text-blue-600 underline" href="/services/hardware-wedge-replacement/">handles, locks and wedges</a> for hardware, and <a class="text-blue-600 underline" href="/services/mitre-reseal/">mitre and sill reseal</a> for leaks.</p>
+      <p class="mt-3 text-slate-700">This page is for the jobs that do not sort neatly into one of those. A house with a list of niggles across several windows. A rental being brought up to scratch between tenancies. A property where nothing is dramatically broken but nothing quite works either. Those are worth quoting as one visit rather than as separate call-outs, because most of the cost of a small repair is getting to you.</p>
+    </section>
+
+    <section class="mt-10">
+      <h2 class="text-2xl font-bold">Single and double glazed joinery</h2>
+      <p class="mt-3 text-slate-700">We work on both, but they fail differently and it is worth knowing which you have. Single glazed aluminium is the bulk of Wellington's older housing stock. The frames are usually sound and the faults are almost entirely hardware and seals, which makes them cheap to bring back to full working order.</p>
+      <p class="mt-3 text-slate-700">Double glazed units are heavier, sometimes substantially so. That extra weight is why hardware on double glazed joinery wears faster if the original parts were under-rated, and it matters most on stays, hinges and rollers. Retrofitted double glazing is the case to watch, because the sash weight went up while the hardware often stayed the same. If your double glazed windows are dropping, binding or refusing to latch, that mismatch is the usual reason.</p>
+      <p class="mt-3 text-slate-700">One limit worth stating plainly: if a double glazed unit has failed internally, meaning it is fogging or holding moisture between the panes, that is a glass replacement rather than a joinery repair. We will tell you if that is what you are looking at.</p>
+    </section>
+
+    <section class="mt-10">
+      <h2 class="text-2xl font-bold">Older and discontinued joinery systems</h2>
+      <p class="mt-3 text-slate-700">A lot of the aluminium joinery around Wellington was made by fabricators who are long gone, and homeowners are regularly told a window cannot be repaired because the parts are unavailable. That is usually not true. Frames from the 1970s and 1980s are typically still sound, and the failed component is a stay, hinge, roller, catch or wedge.</p>
+      <p class="mt-3 text-slate-700">We carry common profiles and work with national suppliers to identify and match older hardware. Where an exact part no longer exists we fit the closest correct-fitting equivalent and adapt the installation. Getting that match right matters more than it sounds, because hardware that is close but not correct changes how the sash hangs and seats, and it wears out early.</p>
+    </section>
+
+    <section class="mt-10 rounded-lg bg-[var(--brand-surface)] p-6 ring-1 ring-slate-200">
       <h2 class="text-2xl font-bold">Problems this page covers</h2>
       <p class="mt-3 text-slate-700">Aluminium joinery repairs of every kind: aluminium window and door repairs, window and door handle replacement, window lock and Yale window lock repair, ranchslider repairs, awning stay replacement and leaking aluminium windows. If the joinery is worth keeping, we repair it rather than talk you into replacement.</p>
       <div class="mt-4 flex flex-wrap gap-3 text-sm">
@@ -90,6 +152,11 @@ const faqSchema = {
     </section>
 
     <section class="mt-8 space-y-3">
+      <h2 class="text-2xl font-bold">Rentals, property managers and pre-sale work</h2>
+      <p class="text-slate-700">A large share of this work is rental turnover and pre-sale tidy-ups. Windows that will not latch, doors that drag and failed catches turn up constantly on builder and pre-purchase reports, and they read worse on a report than they cost to fix. We can work through a property in one visit, quote and invoice per job or per property, and report what was done for owners and managers.</p>
+    </section>
+
+    <section class="mt-8 space-y-3">
       <h2 class="text-2xl font-bold">Where we work</h2>
       <p class="text-slate-700">We book aluminium joinery repairs across <a class="text-blue-600 underline" href="/areas/central-wellington/">Central Wellington</a>, <a class="text-blue-600 underline" href="/areas/porirua/">Porirua</a>, <a class="text-blue-600 underline" href="/areas/lower-hutt/">Lower Hutt</a>, <a class="text-blue-600 underline" href="/areas/upper-hutt/">Upper Hutt</a>, <a class="text-blue-600 underline" href="/areas/petone/">Petone</a> and <a class="text-blue-600 underline" href="/areas/kapiti/">Kapiti</a>.</p>
       <p class="text-slate-700">Related repair pages: <a class="text-blue-600 underline" href="/services/window-repairs/">Window repairs</a> • <a class="text-blue-600 underline" href="/services/sliding-door-repairs/">Sliding door repairs</a> • <a class="text-blue-600 underline" href="/services/lock-picking/">Lock picking</a> • <a class="text-blue-600 underline" href="/leaks/">Draught and leak repairs</a></p>
@@ -100,6 +167,7 @@ const faqSchema = {
       <ul class="list-disc space-y-2 pl-5 text-slate-700">
         <li><a class="text-blue-600 underline" href="/blog/sliding-door-repair-costs-wellington/">Sliding door repair costs in Wellington</a></li>
         <li><a class="text-blue-600 underline" href="/blog/window-stays-replacement-guide/">Do your window stays need replacing?</a></li>
+        <li><a class="text-blue-600 underline" href="/blog/rusted-corroded-hinges-wellington/">Rusted hinges on aluminium windows and doors</a></li>
         <li><a class="text-blue-600 underline" href="/blog/digital-locks-wellington-elok-yale-ydm-doric-de10/">Digital locks in Wellington: Elock, Yale YDM and Doric DE10</a></li>
       </ul>
     </section>
