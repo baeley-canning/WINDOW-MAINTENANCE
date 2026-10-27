@@ -39,25 +39,21 @@ The second is the glass itself. Wedge that's gone hard isn't holding the pane fi
 
 The third catches people out on double glazing. A double-glazed unit has an edge seal that keeps dry air sealed between the two panes. That seal is meant to sit covered and dry. Once the wedge shrinks back and leaves the edge open to sun and water, the seal breaks down faster, and the end result is a unit that fogs up between the panes. A new wedge costs very little. A new double-glazed unit costs a lot more.
 
-## Don't just silicone over it
+## Leave this one to us
 
-The quick fix people try is to run silicone along the gaps. It usually looks fine for a while, then lets go, because it's stuck to hard, shrinking vinyl that's still moving. It can also trap water in the channel instead of letting it drain, and the next person to work on the window has to cut it all out first.
+Silicone over the gaps is the fix most people reach for, and it doesn't last. It comes away from old wedge and can hold water in the frame, so the leak carries on out of sight.
+
+Wedge replacement isn't a DIY job either. The wedge is what holds the glass in, so taking it out of an old window puts the pane at risk of moving, cracking or coming out of the frame. There are also dozens of wedge profiles across the different joinery systems in Wellington. Fit the wrong one and the window leaks again or the glass gets stressed. We identify your joinery, carry the common profiles on the van and fit wedge suited to windows that sit in full sun.
 
 <figure>
   <picture>
     <source type="image/webp" srcset="/img/glazing-wedge.webp" />
     <img src="/img/glazing-wedge.jpg" alt="Glazing wedge profile used to hold and seal glass in aluminium joinery" width="1000" height="710" loading="lazy" decoding="async" />
   </picture>
-  <figcaption>Glazing wedge comes in a lot of different profiles. The new one has to match the channel in your joinery.</figcaption>
+  <figcaption>Glazing wedge comes in a lot of different profiles. The replacement has to match your joinery.</figcaption>
 </figure>
 
-## How we replace it
-
-The glass normally stays in. We pull out the old wedge, clean out the channel, and fit new wedge that matches the profile your joinery was built with. There are a lot of different profiles out there, so getting the right one is most of the job. Wedge that's too thin won't grip, and wedge that's too thick strains the glass and pops back out.
-
-We fit it with a bit of extra length and push it tight into the corners, so it stays closed at the mitres instead of pulling back again. Where the window is in full sun we use a UV-stable rubber wedge rather than going back to vinyl.
-
-Since the sun-facing side of the house usually wears out together, it often makes sense to do all the windows on that side at once. While we're there we check the stays, hinges and handles on the same windows, and the mitres if water has been getting in.
+The windows on the sunny side of a house usually wear out together, so it's often worth doing that whole side in one visit. While we're there we check the stays, hinges and handles, and the corners if water has been getting in.
 
 Wedge replacement is part of our [hardware and wedge replacement](/services/hardware-wedge-replacement/) work across Wellington, Porirua, the Hutt Valley, Petone and Kāpiti. If water is coming in at the corners as well, see [draughts and leaks](/leaks/) and [mitre and sill resealing](/services/mitre-reseal/). If your double glazing has already fogged up, we can replace the unit too, see [glass replacement](/services/glass-replacement/).
 
