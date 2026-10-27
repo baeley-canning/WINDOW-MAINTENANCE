@@ -1,0 +1,163 @@
+---
+import Layout from "../../layouts/WMBase.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import Picture from "../../components/Picture.astro";
+import QuoteInline from "../../components/QuoteInline.astro";
+import FAQ from "../../components/FAQ.astro";
+
+const title = "Glass Replacement & Broken Glass Repairs Wellington";
+const description = "Broken glass replaced in aluminium windows, doors and sliders. Clear, obscure and Stippolyte glass, safety glass, mirrors and double-glazed units across Wellington.";
+const canonical = "https://windowmaintenance.co.nz/services/glass-replacement/";
+
+const faqItems = [
+  {
+    q: "Can you replace a single broken pane without replacing the window?",
+    a: "Yes. In aluminium joinery the glass sits in the frame on gaskets and wedges, so a broken pane can be taken out and a new one fitted without touching the rest of the window or door."
+  },
+  {
+    q: "What is Stippolyte glass?",
+    a: "Stippolyte is a patterned obscure glass with a pebbled surface. It lets light through but blurs the view, which is why so many Wellington bathrooms, toilets and front door side panels have it. It comes in standard and toughened versions, and we can match it when one pane breaks."
+  },
+  {
+    q: "Does my replacement glass need to be safety glass?",
+    a: "If the glass is in a door, beside a door, low to the floor or in a bathroom, it should be safety glass (toughened or laminated). Older houses often have plain glass in those spots. When we replace a pane there, we fit safety glass even if the broken one was not."
+  },
+  {
+    q: "My double glazing has gone foggy between the panes. Can that be fixed?",
+    a: "Fogging between the panes means the unit's edge seal has failed and moist air has got in. The unit cannot be dried out, but it can be replaced on its own. We measure it, order a new unit to the same size and thickness, and fit it into your existing frame."
+  },
+  {
+    q: "Do you do mirrors?",
+    a: "Yes. We replace mirror glass, including mirror panels in aluminium-framed wardrobe sliders, and fit mirrors cut to size."
+  },
+  {
+    q: "How long does glass replacement take?",
+    a: "Most glass is cut to order, so it is usually two visits: one to measure and one to fit. Fitting itself is normally quick. If the glass is badly broken we can clear it and make the opening safe on the first visit."
+  },
+  {
+    q: "Can you fix the wedges and hardware while you are there?",
+    a: "Yes, and it is a good time to. With the glass out we can replace tired wedges and gaskets, and we check the rollers, stays, handles and locks on the same window or door."
+  }
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqItems.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.a
+    }
+  }))
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Glass Replacement Wellington",
+  serviceType: "Glass replacement and reglazing",
+  description: "Replacement of broken, cracked and fogged glass in aluminium windows, doors and sliders, including clear, obscure and Stippolyte glass, toughened and laminated safety glass, double-glazed units and mirror glass, across the Wellington region.",
+  url: canonical,
+  areaServed: [
+    { "@type": "Place", name: "Wellington" },
+    { "@type": "Place", name: "Porirua" },
+    { "@type": "Place", name: "Lower Hutt" },
+    { "@type": "Place", name: "Upper Hutt" },
+    { "@type": "Place", name: "Petone" },
+    { "@type": "Place", name: "Kāpiti" }
+  ],
+  provider: {
+    "@type": "LocalBusiness",
+    name: "Window Maintenance",
+    url: "https://windowmaintenance.co.nz",
+    telephone: "+6421638205"
+  }
+};
+
+const glassTypes = [
+  { title: "Broken and cracked glass", copy: "Panes broken by a ball, a storm, a slammed door or a break-in. We clear the broken glass, measure up and fit the new pane." },
+  { title: "Clear glass", copy: "Standard clear glass for windows and sliders, matched to the thickness the frame was built for." },
+  { title: "Obscure and Stippolyte glass", copy: "Stippolyte and other patterned or frosted glass for bathrooms, toilets and entry panels, so one broken pane matches the rest." },
+  { title: "Safety glass", copy: "Toughened and laminated glass for doors, ranchsliders, low windows and bathrooms, where the Building Code expects it." },
+  { title: "Double-glazed units", copy: "Fogged, cracked or failed double-glazed units replaced in the existing aluminium frame." },
+  { title: "Mirror glass", copy: "Mirror panels in wardrobe sliders replaced, and mirrors cut to size and fitted." }
+];
+---
+
+<Layout title={title} description={description} canonical={canonical} schema={[faqSchema, serviceSchema]}>
+  <Breadcrumbs />
+
+  <main class="mx-auto max-w-4xl px-6 py-12">
+    <h1 class="text-3xl font-extrabold">Glass Replacement & Broken Glass Repairs</h1>
+    <p class="mt-4 text-slate-700">Broken, cracked or fogged glass replaced in aluminium windows, doors and ranchsliders across Wellington. Clear glass, obscure and Stippolyte glass, toughened and laminated safety glass, double-glazed units and mirror glass. The frame stays where it is and only the glass is changed.</p>
+
+    <section class="mt-8 grid gap-4 sm:grid-cols-3">
+      <div class="rounded-xl bg-[var(--brand-surface)] p-5 ring-1 ring-slate-200">
+        <h2 class="text-lg font-bold">Common jobs</h2>
+        <p class="mt-2 text-sm text-slate-700">A cracked bathroom pane, a smashed slider after a break-in, a foggy double-glazed unit, a broken wardrobe mirror.</p>
+      </div>
+      <div class="rounded-xl bg-[var(--brand-surface)] p-5 ring-1 ring-slate-200">
+        <h2 class="text-lg font-bold">What we do</h2>
+        <p class="mt-2 text-sm text-slate-700">Clear the broken glass, measure, order the right glass, fit it on new wedges and gaskets, and check the window or door works properly.</p>
+      </div>
+      <div class="rounded-xl bg-[var(--brand-surface)] p-5 ring-1 ring-slate-200">
+        <h2 class="text-lg font-bold">Why repair</h2>
+        <p class="mt-2 text-sm text-slate-700">A new pane in a sound aluminium frame costs far less than new joinery, and the window looks and works the same as before.</p>
+      </div>
+    </section>
+
+    <section class="mt-10">
+      <h2 class="text-2xl font-bold">Glass we replace</h2>
+      <div class="mt-4 grid gap-4 sm:grid-cols-2">
+        {glassTypes.map((item) => (
+          <div class="rounded-xl bg-[var(--brand-surface)] p-5 ring-1 ring-slate-200">
+            <h3 class="font-bold text-slate-900">{item.title}</h3>
+            <p class="mt-2 text-sm text-slate-700">{item.copy}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <QuoteInline
+      title="Get a quote for glass replacement"
+      subtitle="Tell us which window or door, roughly how big the pane is and what type of glass it is. A photo helps, and you can send it after we reply."
+      buttonLabel="Get my glass quote"
+      source="glass_page"
+    />
+
+    <section class="mt-10 space-y-3">
+      <h2 class="text-2xl font-bold">How a glass replacement works</h2>
+      <p class="text-slate-700">Almost all glass is cut to size, so the first visit is to measure. We check the size, the thickness and the type of glass, and whether that spot needs safety glass. If the pane is badly broken we take the loose glass out on that visit so the opening is safe.</p>
+      <p class="text-slate-700">On the second visit we strip out the old wedges and gaskets, fit the new glass and wedge it back in with new rubber. Old wedge has usually shrunk or gone hard by the time glass needs replacing, and refitting it is how leaks start. Then we check the sash or door opens, closes and locks the way it should.</p>
+    </section>
+
+    <section class="mt-8 space-y-3">
+      <h2 class="text-2xl font-bold">Stippolyte and obscure glass</h2>
+      <p class="text-slate-700">A lot of houses around Wellington have Stippolyte in the bathroom, the toilet and beside the front door. When one pane breaks, the replacement needs to match the others or it stands out from the street. We match the pattern where it is still made, and use toughened Stippolyte in places that need safety glass.</p>
+    </section>
+
+    <section class="mt-8 space-y-3">
+      <h2 class="text-2xl font-bold">Foggy double glazing</h2>
+      <p class="text-slate-700">If you can see condensation or a milky haze between the two panes, the edge seal has failed. Cleaning will not fix it, because the moisture is inside the unit. We replace just the unit, at the same size and thickness, in your existing frame. Failed units are often next to perished wedges, because the wedge is what keeps sun and water off the edge seal. See <a class="text-blue-600 underline" href="/blog/uv-damaged-glazing-wedges-wellington/">how sun damages glazing wedges</a>.</p>
+    </section>
+
+    <section class="mt-10">
+      <figure class="rounded-xl bg-[var(--brand-surface)] p-4 ring-1 ring-slate-200 sm:max-w-md">
+        <div class="ratio-4-3 card-frame">
+          <Picture base="glazing-wedge" alt="Glazing wedge used to hold and seal glass in aluminium joinery" className="h-full w-full object-contain bg-slate-100 p-2" />
+        </div>
+        <figcaption>New glass goes in on new wedge, matched to the joinery system.</figcaption>
+      </figure>
+    </section>
+
+    <section class="mt-8 space-y-3">
+      <h2 class="text-2xl font-bold">Where we work</h2>
+      <p class="text-slate-700">We replace glass across <a class="text-blue-600 underline" href="/areas/central-wellington/">Central Wellington</a>, <a class="text-blue-600 underline" href="/areas/porirua/">Porirua</a>, <a class="text-blue-600 underline" href="/areas/lower-hutt/">Lower Hutt</a>, <a class="text-blue-600 underline" href="/areas/upper-hutt/">Upper Hutt</a>, <a class="text-blue-600 underline" href="/areas/petone/">Petone</a> and <a class="text-blue-600 underline" href="/areas/kapiti/">Kāpiti</a>.</p>
+      <p class="text-slate-700">Related pages: <a class="text-blue-600 underline" href="/services/hardware-wedge-replacement/">Wedges, handles and hardware</a> • <a class="text-blue-600 underline" href="/services/window-repairs/">Aluminium window repairs</a> • <a class="text-blue-600 underline" href="/services/sliding-door-repairs/">Sliding door repairs</a></p>
+    </section>
+  </main>
+
+  <FAQ heading="Glass replacement FAQs" items={faqItems} />
+</Layout>
